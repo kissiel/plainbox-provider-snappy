@@ -1,0 +1,38 @@
+name: plainbox-provider-snappy
+summary: Snappy Plainbox Provider
+description: >
+  The provider is a collection of tests to be run on Snappy devices.
+version: 1
+vendor: Sylvain Pineau <sylvain.pineau@canonical.com>
+icon: icon.png
+binaries:
+ plainbox:
+   exec: bin/plainbox-wrapper
+   security-template: unconfined
+ checkbox:
+   exec: bin/checkbox-wrapper
+   security-template: unconfined
+ python3:
+   exec: python3
+   security-template: unconfined
+parts:
+    # This requires a custom version of snapcraft
+    plainbox-provider-snappy:
+        type: plainbox-provider
+        source: ./plainbox-provider-snappy
+        stage-packages:
+            - plainbox
+            - checkbox-ng
+            - python3-yaml
+            - pciutils
+            - dmidecode
+            - python3-checkbox-support
+    plainbox-provider-snappy-resource:
+        type: plainbox-provider
+        source: ./plainbox-provider-snappy-resource
+    launchers:
+        type: copy
+        files:
+            plainbox-wrapper: bin/plainbox-wrapper
+            checkbox-wrapper: bin/checkbox-wrapper
+            checkbox-launcher-wrapper: bin/checkbox-launcher-wrapper

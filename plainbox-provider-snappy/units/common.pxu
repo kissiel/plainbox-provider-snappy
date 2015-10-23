@@ -1,0 +1,49 @@
+unit: category
+id: snappy
+_name: Snappy Ubuntu Core
+
+id: snappy/test-list
+_summary: Test that the snappy list command is working.
+_purpose: If snappy list command is working then should at least find the 
+ ubuntu-core package.
+plugin: shell
+command: snappy_tests list
+category_id: snappy
+estimated_duration: 10s
+
+id: snappy/test-search
+_summary: Test that the snappy search command is working.
+_purpose: If snappy search command is working then should find hello-dbus-fwk
+ in the store.
+plugin: shell
+command: snappy_tests search
+category_id: snappy
+estimated_duration: 10s
+
+id: snappy/test-install
+_summary: Test the snappy install command is able to install hello-world snap.
+_purpose: The store should contain the basic hello-world snap makes sure this
+ can be downloaded and installed on the system.
+plugin: shell
+command: snappy_tests install
+category_id: snappy
+estimated_duration: 10s
+
+id: snappy/test-remove
+_summary: Test the snappy remove command is able to remove the hello-world snap.
+_purpose: After having installed the hello-world snap, check it can removed.
+plugin: shell
+command: snappy_tests remove
+category_id: snappy
+estimated_duration: 10s
+depends: snappy/test-install
+
+id: ethernet/eth0/ping
+_summary: Can ping another machine over first Ethernet port
+_purpose:
+ Check Ethernet works by pinging another machine
+command:
+  ping -I eth0 -c 4 -i 3 -w 20 ubuntu.com
+plugin: shell
+category_id: ethernet
+estimated_duration: 4

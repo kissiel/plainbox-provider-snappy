@@ -1,0 +1,9 @@
+*.pyc
+*.snap
+__pycache__
+build/mo/*
+dist/*.tar.gz
+image/
+parts/
+snap/
+stage/
