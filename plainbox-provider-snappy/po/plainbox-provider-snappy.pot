@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-23 17:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../manage.py:94
+msgid "Test Definitions (Jobs)"
+msgstr ""
+
+#. Create a section with static information
+#: ../manage.py:110
+msgid "Test Descriptions"
+msgstr ""
+
+#. Add columns: category, id and description
+#: ../manage.py:121
+msgid "Category"
+msgstr ""
+
+#. Add columns: id
+#: ../manage.py:122 ../manage.py:201
+msgid "Test Case ID"
+msgstr ""
+
+#: ../manage.py:123
+msgid "Description"
+msgstr ""
+
+#: ../manage.py:124
+msgid "Command"
+msgstr ""
+
+#: ../manage.py:125
+msgid "Duration"
+msgstr ""
+
+#: ../manage.py:167
+msgid "{}"
+msgstr ""
+
+#. Create a section with static information
+#: ../manage.py:183
+msgid "Test Plan Name"
+msgstr ""
+
+#: ../manage.py:185
+msgid "Test Plan ID"
+msgstr ""
+
+#: ../manage.py:202
+msgid "Summary"
+msgstr ""
+
+#: ../manage.py:223
+msgid "FILE"
+msgstr ""
+
+#: ../manage.py:224
+msgid "path of the .xlsx file to write"
+msgstr ""
+
+#: ../manage.py:231
+msgid "Plainbox Provider for Snappy devices"
+msgstr ""
+
+#. name
+#: ../units/common.pxu:3
+msgid "Snappy Ubuntu Core"
+msgstr ""
+
+#. summary
+#: ../units/common.pxu:6
+msgid "Test that the snappy list command is working."
+msgstr ""
+
+#. purpose
+#: ../units/common.pxu:7
+msgid "If snappy list command is working then should at least find the "
+msgstr ""
+
+#. purpose
+#: ../units/common.pxu:7
+msgid "ubuntu-core package."
+msgstr ""
+
+#. summary
+#: ../units/common.pxu:15
+msgid "Test that the snappy search command is working."
+msgstr ""
+
+#. purpose
+#: ../units/common.pxu:16
+msgid "If snappy search command is working then should find hello-dbus-fwk"
+msgstr ""
+
+#. purpose
+#: ../units/common.pxu:16
+msgid "in the store."
+msgstr ""
+
+#. summary
+#: ../units/common.pxu:24
+msgid "Test the snappy install command is able to install hello-world snap."
+msgstr ""
+
+#. purpose
+#: ../units/common.pxu:25
+msgid "The store should contain the basic hello-world snap makes sure this"
+msgstr ""
+
+#. purpose
+#: ../units/common.pxu:25
+msgid "can be downloaded and installed on the system."
+msgstr ""
+
+#. summary
+#: ../units/common.pxu:33
+msgid "Test the snappy remove command is able to remove the hello-world snap."
+msgstr ""
+
+#. purpose
+#: ../units/common.pxu:34
+msgid "After having installed the hello-world snap, check it can removed."
+msgstr ""
+
+#. summary
+#: ../units/common.pxu:42
+msgid "Can ping another machine over first Ethernet port"
+msgstr ""
+
+#. purpose
+#: ../units/common.pxu:43
+msgid "Check Ethernet works by pinging another machine"
+msgstr ""

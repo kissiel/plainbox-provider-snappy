@@ -1,0 +1,9 @@
+module: x_custom
+options:
+    source:
+        required: true
+    source-type:
+    source-tag:
+    source-branch:
+    custom-cmds:
+        required: true

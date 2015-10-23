@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+# Copyright 2015 Canonical Ltd.
+# All rights reserved.
+#
+# Written by:
+#    Authors: Jonathan Cave <jonathan.cave@canonical.com>
+
+
+import glob
+import subprocess
+
+from guacamole import Command
+import yaml
+
+
+class SnappyList(Command):
+
+    """snappy list sub-command."""
+
+    def invoked(self, ctx):
+        """Snappy list should show the ubuntu-core package is installed."""
+        cmd = ['snappy', 'list']
+        output = subprocess.check_output(cmd)
+        if 'ubuntu-core' not in str(output):
+            print("String not found")
+            return 1
+
+
+class SnappySearch(Command):
+
+    """snappy search sub-command."""
+
+    def invoked(self, ctx):
+        """Snappy search for 'hello' should find hello-dbus-fwk also."""
+        cmd = ['snappy', 'search', 'hello']
+        output = subprocess.check_output(cmd)
+        if 'hello-dbus-fwk' not in str(output):
+            print("String not found")
+            return 1
+
+
+class SnappyInstall(Command):
+
+    """snappy install sub-command."""
+
+    def invoked(self, ctx):
+        """Test install of hello snap."""
+        cmd = ['sudo', 'snappy', 'install', 'hello-world']
+        subprocess.check_call(cmd)
+        cmd = ['snappy', 'list']
+        output = subprocess.check_output(cmd)
+        if 'hello-world' not in str(output):
+            print("Did't find package name")
+            return 1
+
+
+class SnappyRemove(Command):
+
+    """snappy remove sub-command."""
+
+    def invoked(self, ctx):
+        """Test remove of hello snap."""
+        cmd = ['sudo', 'snappy', 'remove', 'hello-world']
+        subprocess.check_call(cmd)
+        cmd = ['snappy', 'list']
+        output = subprocess.check_output(cmd)
+        if 'hello-world' in str(output):
+            print("Found package name")
+            return 1
+
+
+class Snappy(Command):
+
+    """Fake snappy like command."""
+
+    sub_commands = (
+        ('list', SnappyList),
+        ('search', SnappySearch),
+        ('install', SnappyInstall),
+        ('remove', SnappyRemove),
+    )
+
+if __name__ == '__main__':
+    Snappy().main()

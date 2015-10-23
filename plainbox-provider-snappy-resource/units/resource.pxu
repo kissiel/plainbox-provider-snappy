@@ -1,0 +1,115 @@
+# Copyright 2015 Canonical Ltd.
+# All rights reserved.
+#
+# Written by:
+#   Jonathan Cave <jonathan.cave@canonical.com>
+
+
+id: package
+estimated_duration: 1.16
+plugin: resource
+command:
+    dpkg-query -W -f='name: ${Package}\nversion: ${Version}\nmodalias: ${Modaliases}\n\n' |\
+    awk 'BEGIN {RS = ""; FS = "\n"}{print $1; print $2; if ($3 ~ /^modalias: .+$/) {print $3}; print "" }'
+_description: Generates a list of packages
+_summary: Collect information about installed software packages
+
+id: snap
+estimated_duration: 1.1
+plugin: resource
+requires: package.name == "ubuntu-snappy-cli"
+command:
+    snappy list | awk 'NR>1 {print "name: "$1; print "date: "$2; print "version: "$3; print "developer: "$4; print ""}'
+_description: Generates a list of snap packages
+_summary: Collect information about installed snap packages
+
+id: uname
+estimated_duration: 0.09
+plugin: resource
+command: uname_resource
+_description: Creates resource info from uname output
+_summary: Collect information about the running kernel
+
+id: lsb
+estimated_duration: 1.63
+plugin: resource
+command: lsb_resource
+requires: package.name == "lsb-release"
+_description: Generates release info based on /etc/lsb-release
+_summary: Collect information about installed system (lsb-release)
+
+id: cpuinfo
+estimated_duration: 0.37
+plugin: resource
+command: cpuinfo_resource
+_summary: Collect information about the CPU
+_description: Gets CPU resource info from /proc/cpuinfo
+
+id: dpkg
+estimated_duration: 0.19
+plugin: resource
+command: dpkg_resource
+requires: package.name == "dpkg"
+_summary: Collect information about dpkg version
+_description: Gets info on the version of dpkg installed
+
+id: dmi_attachment
+plugin: attachment
+category_id: 2013.com.canonical.plainbox::info
+command: [ -d /sys/class/dmi/id/ ] && (grep -r . /sys/class/dmi/id/ 2>/dev/null || true) || false
+estimated_duration: 0.044
+_description: Attaches info on DMI
+_summary: Attach a copy of /sys/class/dmi/id/*
+
+id: sysfs_attachment
+plugin: attachment
+category_id: 2013.com.canonical.plainbox::info
+_description: Attaches a report of sysfs attributes.
+command:
+ for i in `udevadm info --export-db | sed -n 's/^P: //p'`; do
+  echo "P: $i"
+  udevadm info --attribute-walk --path=/sys$i 2>/dev/null | sed -n 's/    ATTR{\(.*\)}=="\(.*\)"/A: \1=\2/p'
+  echo
+ done
+estimated_duration: 6.344
+_summary: Attach detailed sysfs property output from udev
+
+id: udev_attachment
+plugin: attachment
+category_id: 2013.com.canonical.plainbox::info
+command: udevadm info --export-db | xml_sanitize
+estimated_duration: 1.465
+_description: Attaches a dump of the udev database showing system hardware information.
+_summary: Attach hardware database (udev)
+
+id: lspci_attachment
+plugin: attachment
+category_id: 2013.com.canonical.plainbox::info
+command: lspci -vvnn | iconv -t 'utf-8' -c
+estimated_duration: 0.042
+_description: Attaches very verbose lspci output.
+_summary: Attach a list of PCI devices
+
+id: dmi
+estimated_duration: 0.59
+plugin: resource
+user: root
+# can't check this package as not part of the core
+# requires: package.name == "dmidecode"
+command: dmi_resource
+_summary: Collect information about hardware devices (DMI)
+
+id: device
+estimated_duration: 0.48
+plugin: resource
+command: udev_resource
+requires: package.name == "udev"
+_description: Creates resource info from udev
+_summary: Collect information about hardware devices (udev)
+
+id: meminfo
+estimated_duration: 0.1
+plugin: resource
+command: meminfo_resource
+_description: Generates resource info based on /proc/meminfo
+_summary: Collect information about system memory (/proc/meminfo)
