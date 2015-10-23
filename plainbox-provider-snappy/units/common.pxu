@@ -45,5 +45,5 @@ _purpose:
 command:
   ping -I eth0 -c 4 -i 3 -w 20 ubuntu.com
 plugin: shell
-category_id: ethernet
+category_id: 2013.com.canonical.plainbox::ethernet
 estimated_duration: 4
