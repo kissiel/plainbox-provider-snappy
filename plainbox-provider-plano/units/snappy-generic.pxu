@@ -1,0 +1,35 @@
+# Copyright 2015 Canonical Ltd.V
+# All rights reserved.
+#
+# Written by:
+#   Paul Larson <paul.larson@canonical.com>
+
+# Test plan for automated tests that should work on any snappy device
+#
+# Jobs are described in common.pxu. This paragraph just focuses on the test
+# plan.  The most important thing is the id (as with most units) as this is how
+# you can refer to a test plan on command line. The next most important thing
+# is the include: field. It contains a list of regular expressions that are
+# matched against identifiers of all the known jobs. Feel free to use
+# multi-line values with one regular expression per line.
+#
+# More documentation is available on:
+# http://plainbox.readthedocs.org/en/latest/manpages/plainbox-test-plan-units.html
+# (make sure to see examples at the very bottom).
+
+id: snappy-generic
+unit: test plan
+_name: QA tests for basic snappy functionality
+_description:
+ QA test plan for automated, basic snappy commands. This can be used with any
+ system running snappy.
+estimated_duration: 3600
+include:
+    snappy/test-list
+    snappy/test-search
+    snappy/test-install
+    snappy/test-remove
+    ethernet/eth0/ping
+mandatory_include:
+    2013.com.canonical.certification::.*
+
