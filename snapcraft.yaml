@@ -2,7 +2,7 @@ name: plainbox-provider-snappy
 summary: Snappy Plainbox Provider
 description: >
   The provider is a collection of tests to be run on Snappy devices.
-version: 1
+version: 0.1
 vendor: Sylvain Pineau <sylvain.pineau@canonical.com>
 icon: icon.png
 binaries:
