@@ -18,7 +18,7 @@ binaries:
 parts:
     # This requires a custom version of snapcraft
     plainbox-provider-snappy:
-        type: plainbox-provider
+        plugin: x-plainbox-provider
         source: ./plainbox-provider-snappy
         stage-packages:
             - plainbox
@@ -28,10 +28,10 @@ parts:
             - dmidecode
             - python3-checkbox-support
     plainbox-provider-snappy-resource:
-        type: plainbox-provider
+        plugin: x-plainbox-provider
         source: ./plainbox-provider-snappy-resource
     launchers:
-        type: copy
+        plugin: copy
         files:
             plainbox-wrapper: bin/plainbox-wrapper
             checkbox-wrapper: bin/checkbox-wrapper
