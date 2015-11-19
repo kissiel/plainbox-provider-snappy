@@ -34,7 +34,6 @@ id: lsb
 estimated_duration: 1.63
 plugin: resource
 command: lsb_resource
-requires: package.name == "lsb-release"
 _description: Generates release info based on /etc/lsb-release
 _summary: Collect information about installed system (lsb-release)
 
@@ -49,7 +48,6 @@ id: dpkg
 estimated_duration: 0.19
 plugin: resource
 command: dpkg_resource
-requires: package.name == "dpkg"
 _summary: Collect information about dpkg version
 _description: Gets info on the version of dpkg installed
 
