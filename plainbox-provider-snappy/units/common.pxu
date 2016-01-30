@@ -2,6 +2,42 @@ unit: category
 id: snappy
 _name: Snappy Ubuntu Core
 
+unit: category
+id: wifi
+_name: Wi-Fi
+
+unit: category
+id: audio
+_name: Audio
+
+unit: category
+id: bluetooth
+_name: Bluetooth
+
+unit: category
+id: ethernet
+_name: Ethernet
+
+unit: category
+id: led
+_name: LEDs
+
+unit: category
+id: display
+_name: Display
+
+unit: category
+id: usb2
+_name: USB 2.0
+
+unit: category
+id: usb3
+_name: USB 3.0
+
+unit: category
+id: power
+_name: Power and Power Management
+
 id: snappy/test-list
 _summary: Test that the snappy list command is working.
 _purpose: If snappy list command is working then should at least find the 
@@ -10,6 +46,7 @@ plugin: shell
 command: snappy_tests list
 category_id: snappy
 estimated_duration: 10s
+flags: preserve-locale
 
 id: snappy/test-search
 _summary: Test that the snappy search command is working.
@@ -19,6 +56,7 @@ plugin: shell
 command: snappy_tests search
 category_id: snappy
 estimated_duration: 10s
+flags: preserve-locale
 
 id: snappy/test-install
 _summary: Test the snappy install command is able to install hello-world snap.
@@ -28,6 +66,7 @@ plugin: shell
 command: snappy_tests install
 category_id: snappy
 estimated_duration: 10s
+flags: preserve-locale
 
 id: snappy/test-remove
 _summary: Test the snappy remove command is able to remove the hello-world snap.
@@ -37,13 +76,1405 @@ command: snappy_tests remove
 category_id: snappy
 estimated_duration: 10s
 depends: snappy/test-install
+flags: preserve-locale
+
+id: snappy/rollback
+_summary: Rollback system update using the "snappy" tool
+_purpose:
+ Check ubuntu-core can be reverted by snappy rollback
+_steps:
+ 1. Follow the steps in case snappy/update to update ubuntu-core
+ 2. sudo snappy rollback ubuntu-core
+ 3. Reboot the system and log in
+ 4. snappy list -v
+_verification:
+ Check ubuntu-core version in the list
+ 1. System is currently boot the ubuntu-core version N-1 (With a ""*"" at the end of line)
+ 2. Another ubuntu-core version is N
+plugin: manual
+category_id: snappy
+estimated_duration: 600
+
+id: snappy/re-update
+_summary: Re-apply the update after rollback using the "snappy" tool
+_purpose:
+ Check ubuntu-core can be updated again by snappy update after rollback
+_steps:
+ 1. Follow the steps in case snappy/rollback to update ubuntu-core and rollback
+ 2. sudo snappy update
+ 3. Reboot the system and log in
+ 4. snappy list -v
+_verification:
+ Check ubuntu-core version in the list
+ 1. System is currently boot the ubuntu-core version N (With a ""*"" at the end of line)
+ 2. Another ubuntu-core version is N-1
+plugin: manual
+category_id: snappy
+estimated_duration: 1200
+
+id: snappy/fail-boot
+_summary: Automatically rollback after failed boot after upgrade
+_purpose:
+ Check system will rollback to original ubuntu-core if failed to boot the updated one
+_steps:
+ 1. Follow the steps in case snappy/update to update ubuntu-core
+ 2. Download following systemd unit and copy it to user home:
+     http://people.canonical.com/~jhunt/systemd/conf/deadlock.service
+ 3. sudo mount -o remount,rw /writable/cache/system
+ 4. sudo cp deadlock.service /writable/cache/system/lib/systemd/system/
+ 5. sudo mkdir -p /writable/cache/system/lib/systemd/system/sysinit.target.requires/
+ 6. sudo chroot /writable/cache/system
+ 7. ln -s /lib/systemd/system/deadlock.service /lib/systemd/system/sysinit.target.requires/deadlock.service
+ 8. exit
+ 9. sudo snappy rollback ubuntu-core
+ 10. sudo reboot
+ 11. The boot will hang before reaching a getty login prompt due to deadlock.service
+ 12. Power-cycle the device
+ 13. snappy list -v
+_verification:
+ 1. Check system can boot at step 12
+ 2. Check system is currently boot the ubuntu-core version N (With a ""*"" at the end of line)
+plugin: manual
+category_id: snappy
+estimated_duration: 1600
+
+id: snappy/sshd
+_summary: SSH is enabled and operational
+_purpose:
+ Check if user can access the system through ssh from other machine
+_steps:
+ 1. Execute following command on other machine in same network
+     ssh [user id]@[ip address of the testing system]
+ 2. Enter password to login
+_verification:
+ Can log into system through ssh from other machine
+plugin: manual
+category_id: snappy
+estimated_duration: 120
+
+id: snappy/webdm
+_summary: WebDM (Device Manager) is enabled and operational
+_purpose:
+ Check user can access webdm from other machine
+_steps:
+ 1. Connect Ethernet cable before boot
+ 2. Boot into system
+ 3. Browse following url with browser from other machine in same network
+     http://[ip address of the testing system]:4200
+_verification:
+ Can access webdm interface
+plugin: manual
+category_id: snappy
+estimated_duration: 300
+
+id: audio/external-microphone
+_summary: External microphone works
+_purpose:
+ Check that an external microphone works
+_steps:
+ 1. Plug headset to headset port
+ 2. Execute following command:
+  alsamixer
+ 3. Use arrow key to adjust volume, m key to mute/unmute
+ 4. Make sure all channels are not muted and have an appropriate volume
+ 5. Press q to exit alsamixer
+ 6. Execute following command:
+  arecord | aplay
+ 7. Speak in to microphone on headset
+_verification:
+ Verify that your voice is reproduced through the headphones clearly
+plugin: manual
+category_id: audio
+estimated_duration: 300
+
+id: audio/headphone
+_summary: Headphones work
+_purpose:
+ Check headphones work
+_steps:
+ 1. Plug headset to headset port
+ 2. Execute following command:
+  alsamixer
+ 3. Use arrow key to adjust volume, m key to mute/unmute
+ 4. Make sure all channels are not muted and have an appropriate volume
+ 5. Press q to exit alsamixer
+ 6. Execute following command:
+  arecord | aplay
+ 7. Speak in to microphone on headset
+_verification:
+ Verify that your voice is reproduced through the headphones clearly
+plugin: manual
+category_id: audio
+estimated_duration: 300
+
+id: bluetooth/hid
+_summary: Bluetooth input device works
+_purpose:
+ Check bluetooth input device work
+ Since there's only CLI with ubuntu-core, test keyboard only
+_steps:
+ 1. Run following command to start bluetoothctl console:
+  bluetoothctl -a
+ ***Following steps are run in bluetoothctl console***
+ 2. Power on the device:
+  power on
+ 3. Register agent for keyboard:
+  agent KeyboardOnly
+  default-agent
+ 4. Put controller in pairable mode:
+  pairable on
+ 5. Scan nearby bluetooth device:
+  scan on
+ 6. Stop Scanning after bluetooth keyboard is found:
+  scan off
+ 7. Pair bluetooth
+  pair [MAC address of bluetooth keyboard]
+ 8. Enter PIN Code on bluetooth keyboard if needed
+ 9. Trust the bluetooth keyboard
+  trust [MAC address of bluetooth keyboard]
+ 10. Connect to bluetooth keyboard:
+  connect [MAC address of bluetooth keyboard]
+ 11. Quit bluetoothctl console
+  quit
+ 12. Use bluetooth keyboard to input
+_verification:
+ Can input from bluetooth input device
+plugin: manual
+category_id: bluetooth
+estimated_duration: 5m
 
 id: ethernet/eth0/ping
 _summary: Can ping another machine over first Ethernet port
-_purpose:
- Check Ethernet works by pinging another machine
+_description: Check Ethernet works by pinging another machine
+plugin: shell
 command:
   ping -I eth0 -c 4 -i 3 -w 20 ubuntu.com
+category_id: ethernet
+estimated_duration: 4s
+flags: preserve-locale
+
+id: ethernet/eth1/ping
+_summary: Can ping another machine over second Ethernet port
+_description: Check Ethernet works by pinging another machine
 plugin: shell
-category_id: 2013.com.canonical.plainbox::ethernet
-estimated_duration: 4
+command:
+    ping -I eth1 -c 4 -i 3 -w 20 ubuntu.com
+category_id: ethernet
+estimated_duration: 4s
+flags: preserve-locale
+
+id: ethernet/eth0/hotplug-connect
+_summary: First ethernet port hotplug connect step
+_purpose:
+ Check first ethernet port connects when cable inserted
+_steps:
+  1. Ensure that there is no ethernet cable attached to the system.
+  2. Begin the test.
+  3. Insert the ethernet cable in to ethernet port 1.
+  4. This test will timeout and fail if the insertion and connection
+     establishment has not been detected within 60 seconds.
+plugin: user-interact
+command:
+  LOOP=0
+  CONNECTED=1
+  while [ $LOOP -lt 60 ] && [ $CONNECTED -ne 0 ]
+  do
+    ping -I eth0 -c 1 -i 3 -w 20 ubuntu.com
+    CONNECTED=$?
+    sleep 1
+    LOOP=$((LOOP=LOOP+1))
+  done
+  exit $CONNECTED
+category_id: ethernet
+estimated_duration: 1m
+
+id: ethernet/eth0/hotplug-disconnect
+_summary: First ethernet port hotplug disconnect step
+_purpose:
+ Detect when cable removed from first ethernet port
+_steps:
+  1. Ensure there is a an ethernet cable attached to port 1.
+  2. Begin the test.
+  3. Remove the ethernet cable from ethernet port 1.
+  4. This test will timeout and fail if the removal has not been detected
+     within 20 seconds.
+plugin: user-interact
+command:
+  LOOP=0
+  CONNECTED=0
+  while [ $LOOP -lt 20 ] && [ $CONNECTED -eq 0 ]
+  do
+    ping -I eth0 -c 1 -i 3 -w 20 ubuntu.com
+    CONNECTED=$?
+    sleep 1
+    LOOP=$((LOOP=LOOP+1))
+  done
+  [ $CONNECTED -ne 0 ]
+category_id: ethernet
+estimated_duration: 20s
+flags: preserve-locale
+
+id: ethernet/eth1/hotplug-connect
+_summary: Second ethernet port hotplug connect step
+_purpose:
+ Check second ethernet port connects when cable inserted
+_steps:
+  1. Ensure that there is no ethernet cable attached to the system.
+  2. Begin the test.
+  3. Insert the ethernet cable in to ethernet port 2.
+  4. This test will timeout and fail if the insertion and connection
+     establishment has not been detected within 60 seconds.
+plugin: user-interact
+command:
+  LOOP=0
+  CONNECTED=1
+  while [ $LOOP -lt 60 ] && [ $CONNECTED -ne 0 ]
+  do
+    ping -I eth1 -c 1 -i 3 -w 20 ubuntu.com
+    CONNECTED=$?
+    sleep 1
+    LOOP=$((LOOP=LOOP+1))
+  done
+  exit $CONNECTED
+category_id: ethernet
+estimated_duration: 1m
+flags: preserve-locale
+
+id: ethernet/eth1/hotplug-disconnect
+_summary: Second ethernet port hotplug disconnect step
+_purpose:
+ Detect when cable removed from second ethernet port
+_steps:
+  1. Ensure there is a an ethernet cable attached to port 2.
+  2. Begin the test.
+  3. Remove the ethernet cable from ethernet port 2.
+  4. This test will timeout and fail if the removal has not been detected
+     within 20 seconds.
+plugin: user-interact
+command:
+  LOOP=0
+  CONNECTED=0
+  while [ $LOOP -lt 20 ] && [ $CONNECTED -eq 0 ]
+  do
+    ping -I eth1 -c 1 -i 3 -w 20 ubuntu.com
+    CONNECTED=$?
+    sleep 1
+    LOOP=$((LOOP=LOOP+1))
+  done
+  [ $CONNECTED -eq 1 ]
+category_id: ethernet
+estimated_duration: 20s
+flags: preserve-locale
+
+id: led/power
+_summary: Power LED behavior when powered
+_purpose:
+ Check power led is on when system is powered on
+_steps:
+ 1. Check power led when system is powered on
+_verification:
+ Power led is on when system is powered on
+plugin: manual
+category_id: led
+estimated_duration: 30
+
+id: led/power-blink-suspend
+_summary: Power LED behavior when suspended
+_purpose:
+ Check power led is blinking when system is in suspend
+_steps:
+ 1. Suspend the system
+ 2. Check power led when system is in suspend
+_verification:
+ Power led is blinking when system is in suspend
+plugin: manual
+category_id: led
+estimated_duration: 180
+
+id: led/bluetooth
+_summary: Bluetooth LED behavior
+_purpose:
+ Check bluetooth LED behavior is correct
+_steps:
+ 1. Run following command to start bluetoothctl console:
+  bluetoothctl -a
+ ***Following steps are run in bluetoothctl console***
+ 2. Power on the device:
+  power on
+ 3. Power off the device:
+  power off
+ 4. Quit bluetoothctl console
+  quit
+_verification:
+ Bluetooth LED is turned on in step 2, and turned off in step 3.
+plugin: manual
+category_id: led
+estimated_duration: 3m
+
+id: monitor/dvi
+_summary: Monitor works (DVI)
+_purpose:
+ Check output to display through DVI port
+_steps:
+ 1. Connect display to DVI port
+ 2. Check the display
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 300
+
+id: monitor/hdmi
+_summary: Monitor works (HDMI)
+_purpose:
+ Check output to display through HDMI port
+_steps:
+ 1. Connect display to HDMI port
+ 2. Check the display
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 300
+
+id: monitor/dvi-to-vga
+_summary: Monitor works (DVI-to-VGA)
+_purpose:
+ Check output to display through VGA adaptor on DVI port
+_steps:
+ 1. Connect display to VGA adaptor on DVI port
+ 2. Check the display
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 300
+
+id: monitor/hdmi-to-vga
+_summary: Monitor works (HDMI-to-VGA)
+_purpose:
+ Check output to display through VGA adaptor on HDMI port
+_steps:
+ 1. Connect display to VGA adaptor on HDMI port
+ 2. Check the display
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 300
+
+id: serial/rs232-console
+_summary: Serial debugging console is enabled and operational
+_purpose:
+ Check user can log into system through serial port from another machine
+_steps:
+ 1. Connect USB to db9 null modem adapter cable to serial port of test machine
+ 2. Connect the cable to USB port of another ubuntu machine (client)
+ 3. Install screen on client (if not done in Prerequisite)
+ 4. Execute following command on client:
+  sudo screen /dev/ttyUSB0
+ 5. Start getty service on test machine:
+  sudo systemctl start getty@[rs232 device, ex. /dev/ttyS0].service
+ 6. Log into the test machine from terminal on client
+_verification:
+ 1. Output to client is fine after getty service started
+ 2. Log into test machine from terminal on client successfully
+plugin: manual
+category_id: serial
+estimated_duration: 600
+
+id: usb/hid
+_summary: USB keyboard works
+_purpose:
+ Check USB input device works
+_steps:
+ 1. Connect USB keyboard
+ 2. Input somethings with USB keyboard
+_verification:
+ What just input is displayed correctly
+plugin: manual
+category_id: usb2
+estimated_duration: 60
+
+id: usb/insert
+_summary: USB 2.0 storage device insertion detected
+_purpose:
+ Check system can detect USB 2.0 storage when inserted
+_steps:
+ 1. Press continue
+ 2. Connect USB 2.0 storage device
+_verification:
+ Can find new USB 2.0 storage device messages in /var/log/syslog
+plugin: user-interact
+user: root
+command: run_watcher.py insertion usb2
+category_id: usb2
+estimated_duration: 120
+
+id: usb/storage-automated
+_summary: USB 2.0 storage device read & write works
+_purpose:
+ Check system can read/write to USB 2.0 storage correctly
+_steps:
+ 1. This task is fully automatic and need USB 2.0 insertion test was applied first.
+_verification:
+ This task is fully automatic and will verify the result for you.
+plugin: shell
+depends: usb/insert
+user: root
+command: usb_read_write
+category_id: usb2
+estimated_duration: 300
+
+id: usb/remove
+_summary: USB 2.0 storage device removal detected
+_purpose:
+ Check system can detect removal of a USB 2.0 storage device
+_steps:
+ 1. Press continue
+ 2. Disconnect USB 2.0 storage device
+_verification:
+ Can find USB 2.0 storage device removed messages in /var/log/syslog
+plugin: user-interact
+after: usb/insert
+user: root
+command: run_watcher.py removal usb2
+category_id: usb2
+estimated_duration: 120
+
+id: usb3/insert
+_summary: USB 3.0 storage device insertion detected
+_purpose:
+ Check system can detect insertion of a USB 3.0 storage device
+_steps:
+ 1. Press continue
+ 2. Connect USB 3.0 storage device
+_verification:
+ Can find new USB 3.0 storage device messages in /var/log/syslog
+plugin: user-interact
+user: root
+command: run_watcher.py insertion usb3
+category_id: usb3
+estimated_duration: 120
+
+id: usb3/storage-automated
+_summary: USB 3.0 storage device read & write works
+_purpose:
+ Check system can read/write to USB 3.0 storage devices correctly
+_steps:
+ 1. This task is fully automatic and need USB 3.0 insertion test was applied first.
+_verification:
+ This task is fully automatic and will verify the result for you.
+plugin: shell
+depends: usb3/insert
+user: root
+command: usb_read_write
+category_id: usb3
+estimated_duration: 300
+
+id: usb3/remove
+_summary: USB 3.0 storage device removal detected
+_purpose:
+ Check system can detect removal of a USB 3.0 storage device
+_steps:
+ 1. Press continue
+ 2. Disconnect USB 3.0 storage device
+_verification:
+ Can find USB 3.0 storage device removed messages in /var/log/syslog
+plugin: user-interact
+after: usb3/insert
+user: root
+command: run_watcher.py removal usb3
+category_id: usb3
+estimated_duration: 120
+
+id: power-management/poweroff
+_summary: System can be powered off
+_purpose:
+ Check system can poweroff successfully
+_steps:
+ 1. Execute following command:
+  sudo poweroff
+_verification:
+ System poweroff successfully
+plugin: manual
+category_id: power
+estimated_duration: 300
+
+id: power-management/reboot
+_summary: System can be rebooted
+_purpose:
+ Check system can reboot
+_steps:
+ 1. Execute following command:
+  sudo reboot
+_verification:
+     System reboot into system successfully
+plugin: manual
+category_id: power
+estimated_duration: 300
+
+id: wireless_resource
+plugin: resource
+category_id: wifi
+_summary: Resource job to identify Wi-Fi devices
+_description: Job to scan for the presence of Wi-Fi network adapters which
+ should then have the following collection of tests run against them.
+command: wifi_resources
+estimated_duration: 0.5
+flags: preserve-locale
+
+id: wireless/wireless_scanning
+_summary: System can discover Wi-Fi networks
+command:
+ nmcli dev wifi rescan
+ AP_COUNT=$(nmcli dev wifi list ifname $WIFI_INTERFACE | wc -l)
+ if [ $AP_COUNT -gt 1 ]; then
+   echo "Wireless access points discovered: $AP_COUNT"
+   exit 0
+ fi
+ echo "No wireless access points discovered."
+ exit 1
+user: root
+environ: WIFI_INTERFACE LD_LIBRARY_PATH
+plugin: shell
+category_id: wifi
+estimated_duration: 6
+_description:
+ Check system can find a wireless network AP nearby
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_ac
+_summary: System can connect to unencrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11ac AP
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_AC_SSID
+environ: WIFI_INTERFACE OPEN_AC_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_bg
+_summary: System can connect to unencrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11b/g AP
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_BG_SSID
+environ: WIFI_INTERFACE OPEN_BG_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_n
+_summary: System can connect to unencrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11n AP
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_N_SSID
+environ: WIFI_INTERFACE OPEN_N_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_ac
+_summary: System can connect to WPA-encrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to 802.11ac AP with wpa security
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_AC_SSID -k $WPA_AC_PSK
+environ: WIFI_INTERFACE WPA_AC_SSID WPA_AC_PSK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_bg
+_summary: System can connect to WPA-encrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to 802.11b/g AP with wpa security
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_BG_SSID -k $WPA_BG_PSK
+environ: WIFI_INTERFACE WPA_BG_SSID WPA_BG_PSK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_n
+_summary: System can connect to WPA-encrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to 802.11n AP with wpa security
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_N_SSID -k $WPA_N_PSK
+environ: WIFI_INTERFACE WPA_N_SSID WPA_N_PSK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_ac_nm
+_summary: System can connect to unencrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11ac AP
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $OPEN_AC_SSID ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_AC_SSID
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_bg_nm
+_summary: System can connect to unencrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11b/g AP
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $OPEN_BG_SSID ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_BG_SSID
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_n_nm
+_summary: System can connect to unencrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11n AP
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $OPEN_N_SSID ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_N_SSID
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_ac_nm
+_summary: System can connect to WPA-encrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to 802.11ac AP with wpa security
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $WPA_AC_SSID password $WPA_AC_PSK ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_AC_SSID WPA_AC_PSK
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_bg_nm
+_summary: System can connect to WPA-encrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to 802.11b/g AP with wpa security
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $WPA_BG_SSID password $WPA_BG_PSK ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_BG_SSID WPA_BG_PSK
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_n_nm
+_summary: System can connect to WPA-encrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to 802.11n AP with wpa security
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $WPA_N_SSID password $WPA_N_PSK ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_N_SSID WPA_N_PSK
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_a
+_summary: System can act as an 802.11a Wi-Fi Access Point
+plugin: user-interact-verify
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol a
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11a Access Point
+_steps:
+  1. Using a suitable Wi-Fi client try to detect the presence of the AP
+   called "UbuntuCoreTest"
+  2. Attempt to connect to the AP using password "snappyubuntucore"
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_b
+_summary: System can act as an 802.11b Wi-Fi Access Point
+plugin: user-interact-verify
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol b
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11b Access Point
+_steps:
+  1. Using a suitable Wi-Fi client try to detect the presence of the AP
+   called "UbuntuCoreTest"
+  2. Attempt to connect to the AP using password "snappyubuntucore"
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_g
+_summary: System can act as an 802.11g Wi-Fi Access Point
+plugin: user-interact-verify
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol g
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11g Access Point
+_steps:
+  1. Using a suitable Wi-Fi client try to detect the presence of the AP
+   called "UbuntuCoreTest"
+  2. Attempt to connect to the AP using password "snappyubuntucore"
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_ad
+_summary: System can act as an 802.11ad Wi-Fi Access Point
+plugin: user-interact-verify
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol ad
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11ad Access Point
+_steps:
+  1. Using a suitable Wi-Fi client try to detect the presence of the AP
+   called "UbuntuCoreTest"
+  2. Attempt to connect to the AP using password "snappyubuntucore"
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+
+id: wireless/wifi_master_mode_auto_a
+_summary: System can act as an 802.11a Wi-Fi Access Point (automated test)
+plugin: shell
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol a --auto
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11a Access Point (automated test)
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_auto_b
+_summary: System can act as an 802.11b Wi-Fi Access Point (automated test)
+plugin: shell
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol b --auto
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11b Access Point (automated test)
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_auto_g
+_summary: System can act as an 802.11g Wi-Fi Access Point (automated test)
+plugin: shell
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol g --auto
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11g Access Point (automated test)
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_auto_ad
+_summary: System can act as an 802.11ad Wi-Fi Access Point (automated test)
+plugin: shell
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol ad --auto
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11ad Access Point (automated test)
+flags: preserve-locale
+
+id: suspend/suspend-manual
+_summary: System can be suspended
+_purpose:
+ Check the system can suspend successfully
+_steps:
+ 1. Execute the following command:
+  sudo systemctl suspend
+_verification:
+ System suspends successfully
+plugin: manual
+category_id: power
+estimated_duration: 300
+
+id: suspend/audio-after-suspend/headphone
+_summary: Headphones work (after suspend)
+_purpose:
+ Check that headphones work after suspend
+_steps:
+ 1. Plug in headset to headset port
+ 2. Execute the following command:
+  alsamixer
+ 3. Use arrow key to adjust volume, m key to mute/unmute
+ 4. Make sure all channels are not muted and have an appropriate volume
+ 5. Press q to exit alsamixer
+ 6. Suspend the device
+ 7. Resume the device
+ 6. Execute following command:
+  arecord | aplay
+ 7. Speak in to microphone on headset
+_verification:
+ Verify that your voice is reproduced through the headphones clearly
+plugin: manual
+category_id: audio
+estimated_duration: 10
+
+id: suspend/audio-after-suspend/microphone
+_summary: External microphone works (after suspend)
+_purpose:
+ Check that an external microphone works after suspend
+_steps:
+ 1. Plug headset to headset port
+ 2. Execute following command:
+  alsamixer
+ 3. Use arrow key to adjust volume, m key to mute/unmute
+ 4. Make sure all channels are not muted and have an appropriate volume
+ 5. Press q to exit alsamixer
+ 6. Suspend the device
+ 7. Resume the device
+ 8. Execute following command:
+  arecord | aplay
+ 9. Speak in to microphone on headset
+_verification:
+ Verify that your voice is reproduced through the headphones clearly
+plugin: manual
+category_id: audio
+estimated_duration: 10
+
+id: suspend/bluetooth-after-suspend/hid
+_summary: After suspend, bluetooth keyboard works
+_purpose:
+ Check a bluetooth input device works after suspending the system. Given Ubuntu
+ is CLI only, this implies a keyboard test.
+_steps:
+ 1. Scan nearby devices:
+     hcitool scan
+ 2. Pair a bluetooth input device
+     bluez-simple-agent hci0 [MAC address of bluetooth input device]
+ 3. Set paired input device workable
+     sudo bluez-test-input connect [MAC address of bluetooth input device]
+ 4. Suspend the device
+ 5. Resume the device
+_verification:
+ Can input from input device
+plugin: manual
+category_id: bluetooth
+estimated_duration: 10
+
+id: suspend/ethernet/eth0/after-suspend/ping
+_summary: After suspend, can ping another machine over first Ethernet port
+_purpose:
+ Check Ethernet works after suspend by pinging another machine
+_steps:
+ 1. Make sure Ethernet cable is connected and can access internet
+ 2. Suspend the device
+ 3. Resume the device
+ 4. ping -I eth0 google.com
+_verification:
+ Can successfully get ping responses from google.com
+plugin: manual
+category_id: ethernet
+estimated_duration: 10
+
+id: suspend/ethernet/eth1/after-suspend/ping
+_summary: After suspend, can ping another machine over second Ethernet port
+_purpose:
+ Check Ethernet works after suspend by pinging another machine
+_steps:
+ 1. Make sure Ethernet cable is connected and can access internet
+ 2. Suspend the device
+ 3. Resume the device
+ 4. ping -I eth1 google.com
+_verification:
+ Can successfully get ping responses from google.com
+plugin: manual
+category_id: ethernet
+estimated_duration: 10
+
+id: suspend/led-after-suspend/power
+_summary: After suspend, Power LED behaves correctly
+_purpose:
+ Check power LED is on when system is powered on after suspend
+_steps:
+ 1. Suspend the device
+ 2. Resume the device
+ 3. Check power led when system is powered on
+_verification:
+ Power led is on when system is powered on
+plugin: manual
+category_id: led
+estimated_duration: 10
+
+id: suspend/monitor-after-suspend/dvi
+_summary: After suspend, a Monitor works when connected by DVI
+_purpose:
+ Check output to display through DVI port after suspend
+_steps:
+ 1. Connect display to DVI port
+ 2. Check the display
+ 3. Suspend the device
+ 4. Resume the device
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 10
+
+id: suspend/monitor-after-suspend/hdmi
+_summary: After suspend , a Monitor works when connected by HDMI
+_purpose:
+ Check output to display through HDMI port after suspend
+_steps:
+ 1. Connect display to HDMI port
+ 2. Check the display
+ 3. Suspend the device
+ 4. Resume the device
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 10
+
+id: suspend/monitor-after-suspend/dvi-to-vga
+_summary: After suspend, a Monitor works when connected by DVI-to-VGA
+_purpose:
+ Check output to display through VGA adaptor on DVI port after suspend
+_steps:
+ 1. Connect display to VGA adaptor on DVI port
+ 2. Check the display
+ 3. Suspend the device
+ 4. Resume the device
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 10
+
+id: suspend/monitor-after-suspend/hdmi-to-vga
+_summary: After suspend, a Monitor works when connected by HDMI-to-VGA
+_purpose:
+ Check output to display through VGA adaptor on HDMI port after suspend
+_steps:
+ 1. Connect display to VGA adaptor on HDMI port
+ 2. Check the display
+ 3. Suspend the device
+ 4. Resume the device
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 10
+
+id: suspend/serial-after-suspend/rs232-console
+_summary: After suspend, the serial debugging console is enabled and operational
+_purpose:
+ Check user can still access the test machine through serial port from another
+ machine
+_steps:
+ 1. Connect USB to db9 null modem adapter cable to serial port of test machine
+ 2. Connect the cable to USB port of another ubuntu machine (client)
+ 3. Install screen on client (if not done in Prerequisite)
+ 4. Execute following command on client:
+  sudo screen /dev/ttyUSB0
+ 5. Start getty service on test machine:
+  sudo systemctl start getty@[rs232 device, ex. /dev/ttyS0].service
+ 6. Log into the test machine from terminal on client
+ 7. Execute following command in screen on client:
+  sudo systemctl suspend
+ 8. Resume the test machine
+ 9. Try to run some commands in terminal on client
+_verification:
+ Can still run commands in terminal on client after suspend
+plugin: manual
+category_id: serial
+estimated_duration: 600
+
+id: suspend/usb-after-suspend/hid
+_summary: After suspend, USB keyboard works
+_purpose:
+ Check USB input device works after suspend
+_steps:
+ 1. Connect USB keyboard
+ 2. Input some characters with the USB keyboard
+ 3. Suspend the device
+ 4. Wake the device
+ 5. Input some characters with the USB keyboard
+_verification:
+ Confirm the characters are displayed correctly
+plugin: manual
+category_id: usb2
+estimated_duration: 10
+
+id: suspend/usb-after-suspend/insert
+_summary: After suspend, USB storage device insertion detected
+_purpose:
+ Check system can detect USB storage when inserted after suspend
+_steps:
+ 1. Press continue
+ 2. Connect USB storage device
+_verification:
+ Can find new USB storage device messages in /var/log/syslog
+plugin: user-interact
+user: root
+command: run_watcher.py insertion usb2
+category_id: usb2
+estimated_duration: 10
+
+id: suspend/usb-after-suspend/storage-automated
+_summary: After suspend, USB storage device read & write works
+_purpose:
+ Check system can read/write to USB storage correctly after suspend
+_steps:
+ 1. This task is fully automatic and need USB insertion test was applied first.
+_verification:
+ This task is fully automatic and will verify the result for you.
+plugin: shell
+user: root
+command: usb_read_write
+category_id: usb2
+estimated_duration: 10
+
+id: suspend/usb-after-suspend/remove
+_summary: After suspend, USB storage removal works
+_purpose:
+ Check system can detect removal of a USB storage device after suspend
+_steps:
+ 1. Press continue
+ 2. Disconnect USB storage device
+_verification:
+ Can find USB storage device removed messages in /var/log/syslog
+plugin: user-interact
+user: root
+command: run_watcher.py removal usb2
+category_id: usb2
+estimated_duration: 10
+
+id: suspend/usb3-after-suspend/insert
+_summary: After suspend, USB3 storage device insertion detected
+_purpose:
+ Check system can detect insertion of a USB3 storage device after suspend
+_steps:
+ 1. Press continue
+ 2. Connect USB3 storage device
+_verification:
+ Can find new USB3 storage device messages in /var/log/syslog
+plugin: user-interact
+user: root
+command: run_watcher.py insertion usb3
+category_id: usb3
+estimated_duration: 10
+
+id: suspend/usb3-after-suspend/storage-automated
+_summary: After suspend, USB3 storage device read & write works
+_purpose:
+ Check system can read/write to USB3 storage devices correctly after suspend
+_steps:
+ 1. This task is fully automatic and need USB3 insertion test was applied first.
+_verification:
+ This task is fully automatic and will verify the result for you.
+plugin: shell
+user: root
+command: usb_read_write
+category_id: usb3
+estimated_duration: 10
+
+id: suspend/usb3-after-suspend/remove
+_summary: After suspend, USB3 storage removal works
+_purpose:
+ Check system can detect USB3 storage removal after suspend
+_steps:
+ 1. Press continue
+ 2. Disconnect USB3 storage device
+_verification:
+ Can find USB3 storage device removed messages in /var/log/syslog
+plugin: user-interact
+user: root
+command: run_watcher.py removal usb3
+category_id: usb3
+estimated_duration: 10
+
+id: suspend/wireless-after-suspend/wireless_scanning
+_summary: After suspend, System can discover Wi-Fi networks
+_purpose:
+ Check system can find a wireless network AP nearby after suspend
+_steps:
+ 1. sudo iw dev mlan0 scan
+ 2. Suspend the device
+ 3. Resume the device
+ 4. sudo iw dev mlan0 scan
+_verification:
+ In step 4, can see nearby wireless network AP
+plugin: manual
+category_id: wifi
+estimated_duration: 10
+
+id: suspend/wireless-after-suspend/wireless_connection_open_ac
+_summary: After suspend, system can connect to unencrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11ac AP after suspend
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_AC_SSID
+environ: WIFI_INTERFACE OPEN_AC_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: suspend/wireless-after-suspend/wireless_connection_open_bg
+_summary: After suspend, system can connect to unencrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11b/g AP after suspend
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_BG_SSID
+environ: WIFI_INTERFACE OPEN_BG_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: suspend/wireless-after-suspend/wireless_connection_open_n
+_summary: After suspend, system can connect to unencrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11n AP after suspend
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_N_SSID
+environ: WIFI_INTERFACE OPEN_N_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: suspend/wireless-after-suspend/wireless_connection_wpa_ac
+_summary: After suspend, system can connect to WPA-encrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to 802.11ac AP with wpa security after suspend
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_AC_SSID -k $WPA_AC_PSK
+environ: WIFI_INTERFACE WPA_AC_SSID WPA_AC_PASK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: suspend/wireless-after-suspend/wireless_connection_wpa_bg
+_summary: After suspend, system can connect to WPA-encrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to 802.11b/g AP with wpa security after suspend
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_BG_SSID -k $WPA_BG_PSK
+environ: WIFI_INTERFACE WPA_BG_SSID WPA_BG_PASK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: suspend/wireless-after-suspend/wireless_connection_wpa_n
+_summary: After suspend, system can connect to WPA-encrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to 802.11n AP with wpa security after suspend
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_N_SSID -k $WPA_N_PSK
+environ: WIFI_INTERFACE WPA_N_SSID WPA_N_PASK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: stress/suspend-30-times
+_summary: System can be suspended 30 times
+_purpose:
+ Check system can suspend 30 times successfully
+_steps:
+ 1. Execute following command:
+     sudo systemctl suspend
+ 2. Resume the system
+ 3. Repeat steps 1~2 30 times.
+_verification:
+ System suspend and resume successfully each time
+plugin: manual
+category_id: power
+estimated_duration: 10
+
+id: stress/reboot-30-times
+_summary: System can be rebooted 30 times
+_purpose:
+ Check system can reboot 30 times successfully
+_steps:
+ 1. Log into system
+ 2. Execute following command:
+     sudo reboot
+ 3. Repeat steps 1~2 30 times.
+_verification:
+ System reboot successfully each time
+plugin: manual
+category_id: power
+estimated_duration: 10
+
+id: stress/poweroff-30-times
+_summary: System can be powered off (and on) 30 times
+_purpose:
+ Check system can poweroff 30 times successfully
+_steps:
+ 1. Log into system
+ 2. Execute following command:
+     sudo poweroff
+ 3. Boot the system
+ 4. Repeat steps 1~3 30 times.
+_verification:
+ System poweroff successfully each time
+plugin: manual
+category_id: power
+estimated_duration: 10

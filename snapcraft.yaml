@@ -36,3 +36,17 @@ parts:
             plainbox-wrapper: bin/plainbox-wrapper
             checkbox-wrapper: bin/checkbox-wrapper
             checkbox-launcher-wrapper: bin/checkbox-launcher-wrapper
+    network-tools:
+        plugin: nil
+        stage-packages:
+            - network-manager
+            - modemmanager
+            - hostapd
+        snap:
+            - usr/bin/mmcli
+            - usr/lib/*/libmm-glib.so*
+            - usr/bin/nmcli
+            - usr/lib/*/libnm*
+            - usr/sbin/hostapd
+
+

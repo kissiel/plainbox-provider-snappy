@@ -226,7 +226,7 @@ class TestPlanReport(ManageCommand):
 
 setup(
     name='plainbox-provider-snappy',
-    namespace='2013.com.canonical.certification',
+    namespace='2013.com.canonical.certification.snappy',
     version="0.1",
     description=N_("Plainbox Provider for Snappy devices"),
     gettext_domain='plainbox-provider-snappy',
