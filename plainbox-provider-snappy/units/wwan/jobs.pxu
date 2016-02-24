@@ -1,0 +1,44 @@
+# Copyright 2015 Canonical Ltd.
+# All rights reserved.
+#
+# Written by:
+#   Jonathan Cave <jonathan.cave@canonical.com>
+#   Po-Hsu Lin <po-hsu.lin@canonical.com>
+
+unit: job
+id: wwan/detect
+_summary: Identify if WWAN module is missing
+_purpose:
+ Tests that there is a WWAN module present and indicates that testing of it
+ should follow.
+plugin: shell
+command:
+  COUNT=$(wwan_tests count)
+  if [ $COUNT -eq 0 ]; then
+    exit 1
+  fi
+estimated_duration: 2.0
+flags: preserve-locale
+imports: from 2013.com.canonical.plainbox import manifest
+requires:
+  manifest.has_wwan_module
+
+unit: template
+template-resource: wwan_resource
+template-unit: job
+id: wwan/gsm-connection-{manufacturer}-{model}-{hw_id}
+_summary:  Verify a GSM broadband modem can create a data connection
+_description:
+ Any modems discovered by the resource job that list GSM support
+ will be tested to ensure a data connection can be made.
+plugin: shell
+command: wwan_tests 3gpp-connection $WWAN_CONTROL_IF $WWAN_NET_IF $WWAN_APN
+environ: LD_LIBRARY_PATH WWAN_CONTROL_IF WWAN_NET_IF WWAN_APN
+user: root
+estimated_duration: 10.0
+category_id: wwan
+flags: preserve-locale
+imports: from 2013.com.canonical.plainbox import manifest
+requires:
+  manifest.has_wwan_module
+  wwan_resource.gsm_umts == 'supported'
