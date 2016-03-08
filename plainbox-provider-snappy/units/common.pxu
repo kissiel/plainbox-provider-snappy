@@ -879,6 +879,7 @@ estimated_duration: 1m
 flags: preserve-locale
 
 id: wireless/wifi_master_mode_a
+category_id: wifi
 _summary: System can act as an 802.11a Wi-Fi Access Point
 plugin: user-interact-verify
 estimated_duration: 30.0
@@ -898,6 +899,7 @@ _verification:
 flags: preserve-locale
 
 id: wireless/wifi_master_mode_b
+category_id: wifi
 _summary: System can act as an 802.11b Wi-Fi Access Point
 plugin: user-interact-verify
 estimated_duration: 30.0
@@ -917,6 +919,7 @@ _verification:
 flags: preserve-locale
 
 id: wireless/wifi_master_mode_g
+category_id: wifi
 _summary: System can act as an 802.11g Wi-Fi Access Point
 plugin: user-interact-verify
 estimated_duration: 30.0
@@ -936,6 +939,7 @@ _verification:
 flags: preserve-locale
 
 id: wireless/wifi_master_mode_ad
+category_id: wifi
 _summary: System can act as an 802.11ad Wi-Fi Access Point
 plugin: user-interact-verify
 estimated_duration: 30.0
@@ -956,6 +960,7 @@ flags: preserve-locale
 
 
 id: wireless/wifi_master_mode_auto_a
+category_id: wifi
 _summary: System can act as an 802.11a Wi-Fi Access Point (automated test)
 plugin: shell
 estimated_duration: 30.0
@@ -969,6 +974,7 @@ _purpose:
 flags: preserve-locale
 
 id: wireless/wifi_master_mode_auto_b
+category_id: wifi
 _summary: System can act as an 802.11b Wi-Fi Access Point (automated test)
 plugin: shell
 estimated_duration: 30.0
@@ -982,6 +988,7 @@ _purpose:
 flags: preserve-locale
 
 id: wireless/wifi_master_mode_auto_g
+category_id: wifi
 _summary: System can act as an 802.11g Wi-Fi Access Point (automated test)
 plugin: shell
 estimated_duration: 30.0
@@ -995,6 +1002,7 @@ _purpose:
 flags: preserve-locale
 
 id: wireless/wifi_master_mode_auto_ad
+category_id: wifi
 _summary: System can act as an 802.11ad Wi-Fi Access Point (automated test)
 plugin: shell
 estimated_duration: 30.0

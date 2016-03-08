@@ -7,6 +7,7 @@
 
 unit: job
 id: wwan/detect
+category_id: wwan
 _summary: Identify if WWAN module is missing
 _purpose:
  Tests that there is a WWAN module present and indicates that testing of it
