@@ -38,6 +38,14 @@ unit: category
 id: power
 _name: Power and Power Management
 
+unit: category
+id: rtc
+_name: Real Time Clock (RTC)
+
+unit: category
+id: serial
+_name: Serial Port
+
 id: snappy/test-list
 _summary: Test that the snappy list command is working.
 _purpose: If snappy list command is working then should at least find the 
@@ -77,6 +85,27 @@ category_id: snappy
 estimated_duration: 10s
 depends: snappy/test-install
 flags: preserve-locale
+
+id: snappy/update
+_summary: Update the system using the "snappy" tool
+_purpose:
+ Check ubuntu-core can be updated by snappy update
+_steps:
+ 1. sudo mount -o remount,rw /
+ 2. sudo vi /etc/system-image/channel.ini
+ 3. Check version number in both build_number and version_detail, assume it's N
+ 4. Modify version number in both build_number and version_detail to N-1
+ 5. Reboot the system and log in
+ 6. sudo snappy update
+ 7. Reboot the system and log in
+ 8. snappy list -v
+_verification:
+ Check ubuntu-core version in the list
+ 1. System is currently boot the ubuntu-core version N (With a ""*"" at the end of line)
+ 2. Another ubuntu-core version is N-1
+plugin: manual
+category_id: snappy
+estimated_duration: 600
 
 id: snappy/rollback
 _summary: Rollback system update using the "snappy" tool
@@ -411,6 +440,20 @@ plugin: manual
 category_id: led
 estimated_duration: 3m
 
+id: led/serial
+_summary: Serial ports LED behavior
+_purpose:
+ Check serial ports LED behavior is correct
+_steps:
+ 1. Start the test to send data to all serial ports (/dev/ttyS*)
+_verification:
+ All serial ports LED are on for a few seconds (3-4s)
+plugin: user-interact-verify
+command: echo {0..1024} | tee /dev/ttyS{0..100} &> /dev/null
+user: root
+category_id: led
+estimated_duration: 15
+
 id: monitor/dvi
 _summary: Monitor works (DVI)
 _purpose:
@@ -613,6 +656,86 @@ _verification:
 plugin: manual
 category_id: power
 estimated_duration: 300
+
+id: rtc/battery
+_summary: RTC battery tracks the time
+_purpose:
+ RTC battery backup power can send system wakeup event
+_steps:
+ 1. Start the test to poweroff the system (wakeup scheduled in 30s)
+_verification:
+ RTC can wake up the system successfully
+command:
+ rtcwake -v -m disable
+ rtcwake -v -m off -s 30
+plugin: user-interact
+user: root
+category_id: rtc
+estimated_duration: 40
+flags: noreturn
+
+id: watchdog/kernel_module_boot
+_summary: Load watchdog kernel module when boot
+_purpose: Verify watchdog kernel module is loaded when boot
+_steps:
+ 1. Make sure you didn't load watchdog kernel module manually after boot, if you did, reboot the system and then run this test.
+ 2. Commence the test
+command:
+    if [ -n "$(lsmod | grep iTCO_wdt)" ] ; then
+        exit 0
+    fi
+    exit 1
+plugin: user-interact
+estimated_duration: 3m
+category_id: power
+flags: preserve-locale
+
+id: watchdog/daemon_boot
+depends: watchdog/kernel_module_boot
+_summary: Verify watchdog daemon is started during boot
+_description:
+ The watchdog deamon should be started by the init process during
+ boot to ensure the system resets in extreme circumstances.
+plugin: shell
+command:
+  ps -C watchdog -o pid=
+estimated_duration: 1s
+category_id: power
+flags: preserve-locale
+
+id: watchdog/daemon_keepalive
+depends: watchdog/daemon_boot
+_summary: Verify the watchdog keepalive daemon is up once watchdog daemon is killed
+_description:
+ If the system is in a responsive state the keepalive daemon will provide
+ time for a the init process to do a managed reboot rather than allowing a hard reset
+ to occur.
+plugin: shell
+command:
+  kill -9 $(ps -C watchdog -o pid=) && sleep 5 && ps -C wd_keepalive -o pid=
+user: root
+estimated_duration: 1s
+category_id: power
+flags: preserve-locale
+
+id: watchdog/trigger-system-reset
+depends: watchdog/daemon_keepalive
+_summary: Test that the watchdog module can trigger a system reset
+_purpose:
+ The watchdog module should be capable of issuing a hard reset of the SUT.
+_steps:
+ 1. Commence the test to kill (SIGKILL) the watchdog daemon.
+ 2. Once the watchdog timeout has expired the SUT should reset itself.
+ 3. The board will reboot and the user should resume the test session.
+_verification:
+ Did the board reset itself?
+command:
+  kill -9 $(ps -C wd_keepalive -o pid=)
+flags: noreturn preserve-locale
+user: root
+plugin: user-interact-verify
+category_id: power
+estimated_duration: 60
 
 id: wireless_resource
 plugin: resource
