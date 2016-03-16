@@ -1,60 +1,45 @@
-id: generic
+# Copyright 2015 Canonical Ltd.
+# All rights reserved.
+#
+# Written by:
+#   Jonathan Cave <jonathan.cave@canonical.com>
+
+id: snappy-generic
 unit: test plan
-_name: QA tests for Generic Snappy Images
+_name: QA tests for Snappy Ubuntu Core devices
 _description:
- QA test plan for generic Snappy hardware. This test plan contains
- all of the tests used to validate Snappy devices.
+ QA test plan that includes all generic, resuable tests for Snappy Ubuntu Core
+ devices.
 estimated_duration: 3600
 include:
-    installation/live-system-dd-factory
-    factory/package-list
-    factory/report
-    factory/factory-reset-report
-    recovery/factory-restore-bios
-    snappy/update
-    snappy/rollback
-    snappy/re-update
-    snappy/fail-boot
-    snappy/sshd
-    snappy/webdm
-    snappy/test-list
-    snappy/test-store-config
-    snappy/test-store-install-beta
-    snappy/test-store-install-edge
-    snappy/generic-store-oem-package
-    bluetooth/hid
-    ethernet/eth0/hotplug-connect
-    ethernet/eth0/hotplug-disconnect
-    ethernet/eth1/hotplug-connect
-    ethernet/eth1/hotplug-disconnect
-    led/power
-    led/bluetooth
-    led/serial
-    power-management/poweroff
-    power-management/reboot
-    rtc/battery
-    monitor/hdmi
-    wireless/wireless_scanning
-    wireless/wireless_connection_open_ac_nm
-    wireless/wireless_connection_open_bg_nm
-    wireless/wireless_connection_open_n_nm
-    wireless/wireless_connection_wpa_ac_nm
-    wireless/wireless_connection_wpa_bg_nm
-    wireless/wireless_connection_wpa_n_nm
-    wireless/wifi_master_mode_auto_a
-    wireless/wifi_master_mode_auto_b
-    wireless/wifi_master_mode_auto_g
-    wireless/wifi_master_mode_auto_ad
-    wireless/wifi_master_mode_g
-    watchdog/kernel_module_boot
-    watchdog/daemon_boot
-    watchdog/daemon_keepalive
-    watchdog/trigger-system-reset
+    snappy/.*
+    wifi/.*
+    audio/.*
+    bluetooth/.*
+    ethernet/.*
+    led/.*
+    display/.*
+    usb2/.*
+    usb3/.*
+    power/.*
+    rtc/.*
+    serial/.*
     wwan/.*
-    stress/reboot-30-times
-    stress/poweroff-30-times
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
-    2013.com.canonical.certification::.*
+    package
+    snap
+    uname
+    lsb
+    cpuinfo
+    dpkg
+    dmi_attachment
+    sysfs_attachment
+    udev_attachment
+    lspci_attachment
+    dmi
+    meminfo
+bootstrap_include:
+    device
     wwan_resource
