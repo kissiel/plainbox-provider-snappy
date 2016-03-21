@@ -1,0 +1,40 @@
+unit: category
+id: bluetooth
+_name: Bluetooth
+
+
+id: bluetooth/hid
+_summary: Bluetooth input device works
+_purpose:
+ Check bluetooth input device work
+ Since there's only CLI with ubuntu-core, test keyboard only
+_steps:
+ 1. Run following command to start bluetoothctl console:
+  bluetoothctl -a
+ ***Following steps are run in bluetoothctl console***
+ 2. Power on the device:
+  power on
+ 3. Register agent for keyboard:
+  agent KeyboardOnly
+  default-agent
+ 4. Put controller in pairable mode:
+  pairable on
+ 5. Scan nearby bluetooth device:
+  scan on
+ 6. Stop Scanning after bluetooth keyboard is found:
+  scan off
+ 7. Pair bluetooth
+  pair [MAC address of bluetooth keyboard]
+ 8. Enter PIN Code on bluetooth keyboard if needed
+ 9. Trust the bluetooth keyboard
+  trust [MAC address of bluetooth keyboard]
+ 10. Connect to bluetooth keyboard:
+  connect [MAC address of bluetooth keyboard]
+ 11. Quit bluetoothctl console
+  quit
+ 12. Use bluetooth keyboard to input
+_verification:
+ Can input from bluetooth input device
+plugin: manual
+category_id: bluetooth
+estimated_duration: 5m

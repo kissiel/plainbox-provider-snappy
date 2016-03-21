@@ -1,0 +1,405 @@
+unit: category
+id: wifi
+_name: Wi-Fi
+
+
+id: wireless_resource
+plugin: resource
+category_id: wifi
+_summary: Resource job to identify Wi-Fi devices
+_description: Job to scan for the presence of Wi-Fi network adapters which
+ should then have the following collection of tests run against them.
+command: wifi_resources
+estimated_duration: 0.5
+flags: preserve-locale
+
+id: wireless/wireless_scanning
+_summary: System can discover Wi-Fi networks
+command:
+ nmcli dev wifi rescan
+ AP_COUNT=$(nmcli dev wifi list ifname $WIFI_INTERFACE | wc -l)
+ if [ $AP_COUNT -gt 1 ]; then
+   echo "Wireless access points discovered: $AP_COUNT"
+   exit 0
+ fi
+ echo "No wireless access points discovered."
+ exit 1
+user: root
+environ: WIFI_INTERFACE LD_LIBRARY_PATH
+plugin: shell
+category_id: wifi
+estimated_duration: 6
+_description:
+ Check system can find a wireless network AP nearby
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_ac
+_summary: System can connect to unencrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11ac AP
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_AC_SSID
+environ: WIFI_INTERFACE OPEN_AC_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_bg
+_summary: System can connect to unencrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11b/g AP
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_BG_SSID
+environ: WIFI_INTERFACE OPEN_BG_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_n
+_summary: System can connect to unencrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11n AP
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_N_SSID
+environ: WIFI_INTERFACE OPEN_N_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_ac
+_summary: System can connect to WPA-encrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to 802.11ac AP with wpa security
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_AC_SSID -k $WPA_AC_PSK
+environ: WIFI_INTERFACE WPA_AC_SSID WPA_AC_PSK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_bg
+_summary: System can connect to WPA-encrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to 802.11b/g AP with wpa security
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_BG_SSID -k $WPA_BG_PSK
+environ: WIFI_INTERFACE WPA_BG_SSID WPA_BG_PSK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_n
+_summary: System can connect to WPA-encrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to 802.11n AP with wpa security
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_N_SSID -k $WPA_N_PSK
+environ: WIFI_INTERFACE WPA_N_SSID WPA_N_PSK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_ac_nm
+_summary: System can connect to unencrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11ac AP
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $OPEN_AC_SSID ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_AC_SSID
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_bg_nm
+_summary: System can connect to unencrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11b/g AP
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $OPEN_BG_SSID ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_BG_SSID
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_open_n_nm
+_summary: System can connect to unencrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to insecure 802.11n AP
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $OPEN_N_SSID ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_N_SSID
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_ac_nm
+_summary: System can connect to WPA-encrypted 802.11ac Wi-Fi network
+_purpose:
+ Check system can connect to 802.11ac AP with wpa security
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $WPA_AC_SSID password $WPA_AC_PSK ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_AC_SSID WPA_AC_PSK
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_bg_nm
+_summary: System can connect to WPA-encrypted 802.11b/g Wi-Fi network
+_purpose:
+ Check system can connect to 802.11b/g AP with wpa security
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $WPA_BG_SSID password $WPA_BG_PSK ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_BG_SSID WPA_BG_PSK
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wireless_connection_wpa_n_nm
+_summary: System can connect to WPA-encrypted 802.11n Wi-Fi network
+_purpose:
+ Check system can connect to 802.11n AP with wpa security
+plugin: shell
+command:
+    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $WPA_N_SSID password $WPA_N_PSK ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev $WIFI_INTERFACE link
+    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_N_SSID WPA_N_PSK
+user: root
+category_id: wifi
+estimated_duration: 1m
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_a
+category_id: wifi
+_summary: System can act as an 802.11a Wi-Fi Access Point
+plugin: user-interact-verify
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol a
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11a Access Point
+_steps:
+  1. Using a suitable Wi-Fi client try to detect the presence of the AP
+   called "UbuntuCoreTest"
+  2. Attempt to connect to the AP using password "snappyubuntucore"
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_b
+category_id: wifi
+_summary: System can act as an 802.11b Wi-Fi Access Point
+plugin: user-interact-verify
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol b
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11b Access Point
+_steps:
+  1. Using a suitable Wi-Fi client try to detect the presence of the AP
+   called "UbuntuCoreTest"
+  2. Attempt to connect to the AP using password "snappyubuntucore"
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_g
+category_id: wifi
+_summary: System can act as an 802.11g Wi-Fi Access Point
+plugin: user-interact-verify
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol g
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11g Access Point
+_steps:
+  1. Using a suitable Wi-Fi client try to detect the presence of the AP
+   called "UbuntuCoreTest"
+  2. Attempt to connect to the AP using password "snappyubuntucore"
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_ad
+category_id: wifi
+_summary: System can act as an 802.11ad Wi-Fi Access Point
+plugin: user-interact-verify
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol ad
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11ad Access Point
+_steps:
+  1. Using a suitable Wi-Fi client try to detect the presence of the AP
+   called "UbuntuCoreTest"
+  2. Attempt to connect to the AP using password "snappyubuntucore"
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+
+id: wireless/wifi_master_mode_auto_a
+category_id: wifi
+_summary: System can act as an 802.11a Wi-Fi Access Point (automated test)
+plugin: shell
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol a --auto
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11a Access Point (automated test)
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_auto_b
+category_id: wifi
+_summary: System can act as an 802.11b Wi-Fi Access Point (automated test)
+plugin: shell
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol b --auto
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11b Access Point (automated test)
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_auto_g
+category_id: wifi
+_summary: System can act as an 802.11g Wi-Fi Access Point (automated test)
+plugin: shell
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol g --auto
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11g Access Point (automated test)
+flags: preserve-locale
+
+id: wireless/wifi_master_mode_auto_ad
+category_id: wifi
+_summary: System can act as an 802.11ad Wi-Fi Access Point (automated test)
+plugin: shell
+estimated_duration: 30.0
+command:
+ iw dev mlan0 interface add uap0 type __ap
+ WIFI_AP_DEV=uap0 wifi_master_mode --protocol ad --auto
+ iw dev uap0 del
+user: root
+_purpose:
+  Check that the system can create an 802.11ad Access Point (automated test)
+flags: preserve-locale

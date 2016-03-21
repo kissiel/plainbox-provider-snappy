@@ -1,0 +1,154 @@
+unit: category
+id: snappy
+_name: Snappy Ubuntu Core
+
+
+id: snappy/test-list
+_summary: Test that the snappy list command is working.
+_purpose: If snappy list command is working then should at least find the
+ ubuntu-core package.
+plugin: shell
+command: snappy_tests list
+category_id: snappy
+estimated_duration: 10s
+flags: preserve-locale
+
+id: snappy/test-search
+_summary: Test that the snappy search command is working.
+_purpose: If snappy search command is working then should find hello-dbus-fwk
+ in the store.
+plugin: shell
+command: snappy_tests search
+category_id: snappy
+estimated_duration: 10s
+flags: preserve-locale
+
+id: snappy/test-install
+_summary: Test the snappy install command is able to install hello-world snap.
+_purpose: The store should contain the basic hello-world snap makes sure this
+ can be downloaded and installed on the system.
+plugin: shell
+command: snappy_tests install
+category_id: snappy
+estimated_duration: 10s
+flags: preserve-locale
+
+id: snappy/test-remove
+_summary: Test the snappy remove command is able to remove the hello-world snap.
+_purpose: After having installed the hello-world snap, check it can removed.
+plugin: shell
+command: snappy_tests remove
+category_id: snappy
+estimated_duration: 10s
+depends: snappy/test-install
+flags: preserve-locale
+
+id: snappy/update
+_summary: Update the system using the "snappy" tool
+_purpose:
+ Check ubuntu-core can be updated by snappy update
+_steps:
+ 1. sudo mount -o remount,rw /
+ 2. sudo vi /etc/system-image/channel.ini
+ 3. Check version number in both build_number and version_detail, assume it's N
+ 4. Modify version number in both build_number and version_detail to N-1
+ 5. Reboot the system and log in
+ 6. sudo snappy update
+ 7. Reboot the system and log in
+ 8. snappy list -v
+_verification:
+ Check ubuntu-core version in the list
+ 1. System is currently boot the ubuntu-core version N (With a ""*"" at the end of line)
+ 2. Another ubuntu-core version is N-1
+plugin: manual
+category_id: snappy
+estimated_duration: 600
+
+id: snappy/rollback
+_summary: Rollback system update using the "snappy" tool
+_purpose:
+ Check ubuntu-core can be reverted by snappy rollback
+_steps:
+ 1. Follow the steps in case snappy/update to update ubuntu-core
+ 2. sudo snappy rollback ubuntu-core
+ 3. Reboot the system and log in
+ 4. snappy list -v
+_verification:
+ Check ubuntu-core version in the list
+ 1. System is currently boot the ubuntu-core version N-1 (With a ""*"" at the end of line)
+ 2. Another ubuntu-core version is N
+plugin: manual
+category_id: snappy
+estimated_duration: 600
+
+id: snappy/re-update
+_summary: Re-apply the update after rollback using the "snappy" tool
+_purpose:
+ Check ubuntu-core can be updated again by snappy update after rollback
+_steps:
+ 1. Follow the steps in case snappy/rollback to update ubuntu-core and rollback
+ 2. sudo snappy update
+ 3. Reboot the system and log in
+ 4. snappy list -v
+_verification:
+ Check ubuntu-core version in the list
+ 1. System is currently boot the ubuntu-core version N (With a ""*"" at the end of line)
+ 2. Another ubuntu-core version is N-1
+plugin: manual
+category_id: snappy
+estimated_duration: 1200
+
+id: snappy/fail-boot
+_summary: Automatically rollback after failed boot after upgrade
+_purpose:
+ Check system will rollback to original ubuntu-core if failed to boot the updated one
+_steps:
+ 1. Follow the steps in case snappy/update to update ubuntu-core
+ 2. Download following systemd unit and copy it to user home:
+     http://people.canonical.com/~jhunt/systemd/conf/deadlock.service
+ 3. sudo mount -o remount,rw /writable/cache/system
+ 4. sudo cp deadlock.service /writable/cache/system/lib/systemd/system/
+ 5. sudo mkdir -p /writable/cache/system/lib/systemd/system/sysinit.target.requires/
+ 6. sudo chroot /writable/cache/system
+ 7. ln -s /lib/systemd/system/deadlock.service /lib/systemd/system/sysinit.target.requires/deadlock.service
+ 8. exit
+ 9. sudo snappy rollback ubuntu-core
+ 10. sudo reboot
+ 11. The boot will hang before reaching a getty login prompt due to deadlock.service
+ 12. Power-cycle the device
+ 13. snappy list -v
+_verification:
+ 1. Check system can boot at step 12
+ 2. Check system is currently boot the ubuntu-core version N (With a ""*"" at the end of line)
+plugin: manual
+category_id: snappy
+estimated_duration: 1600
+
+id: snappy/sshd
+_summary: SSH is enabled and operational
+_purpose:
+ Check if user can access the system through ssh from other machine
+_steps:
+ 1. Execute following command on other machine in same network
+     ssh [user id]@[ip address of the testing system]
+ 2. Enter password to login
+_verification:
+ Can log into system through ssh from other machine
+plugin: manual
+category_id: snappy
+estimated_duration: 120
+
+id: snappy/webdm
+_summary: WebDM (Device Manager) is enabled and operational
+_purpose:
+ Check user can access webdm from other machine
+_steps:
+ 1. Connect Ethernet cable before boot
+ 2. Boot into system
+ 3. Browse following url with browser from other machine in same network
+     http://[ip address of the testing system]:4200
+_verification:
+ Can access webdm interface
+plugin: manual
+category_id: snappy
+estimated_duration: 300

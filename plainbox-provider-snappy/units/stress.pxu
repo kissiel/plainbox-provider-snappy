@@ -1,0 +1,46 @@
+
+id: stress/suspend-30-times
+_summary: System can be suspended 30 times
+_purpose:
+ Check system can suspend 30 times successfully
+_steps:
+ 1. Execute following command:
+     sudo systemctl suspend
+ 2. Resume the system
+ 3. Repeat steps 1~2 30 times.
+_verification:
+ System suspend and resume successfully each time
+plugin: manual
+category_id: power
+estimated_duration: 10
+
+id: stress/reboot-30-times
+_summary: System can be rebooted 30 times
+_purpose:
+ Check system can reboot 30 times successfully
+_steps:
+ 1. Log into system
+ 2. Execute following command:
+     sudo reboot
+ 3. Repeat steps 1~2 30 times.
+_verification:
+ System reboot successfully each time
+plugin: manual
+category_id: power
+estimated_duration: 10
+
+id: stress/poweroff-30-times
+_summary: System can be powered off (and on) 30 times
+_purpose:
+ Check system can poweroff 30 times successfully
+_steps:
+ 1. Log into system
+ 2. Execute following command:
+     sudo poweroff
+ 3. Boot the system
+ 4. Repeat steps 1~3 30 times.
+_verification:
+ System poweroff successfully each time
+plugin: manual
+category_id: power
+estimated_duration: 10

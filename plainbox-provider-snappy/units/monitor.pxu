@@ -1,0 +1,56 @@
+unit: category
+id: display
+_name: Display
+
+
+id: monitor/dvi
+_summary: Monitor works (DVI)
+_purpose:
+ Check output to display through DVI port
+_steps:
+ 1. Connect display to DVI port
+ 2. Check the display
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 300
+
+id: monitor/hdmi
+_summary: Monitor works (HDMI)
+_purpose:
+ Check output to display through HDMI port
+_steps:
+ 1. Connect display to HDMI port
+ 2. Check the display
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 300
+
+id: monitor/dvi-to-vga
+_summary: Monitor works (DVI-to-VGA)
+_purpose:
+ Check output to display through VGA adaptor on DVI port
+_steps:
+ 1. Connect display to VGA adaptor on DVI port
+ 2. Check the display
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 300
+
+id: monitor/hdmi-to-vga
+_summary: Monitor works (HDMI-to-VGA)
+_purpose:
+ Check output to display through VGA adaptor on HDMI port
+_steps:
+ 1. Connect display to VGA adaptor on HDMI port
+ 2. Check the display
+_verification:
+ Output to display works
+plugin: manual
+category_id: display
+estimated_duration: 300

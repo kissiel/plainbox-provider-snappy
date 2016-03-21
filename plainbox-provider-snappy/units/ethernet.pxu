@@ -1,0 +1,127 @@
+unit: category
+id: ethernet
+_name: Ethernet
+
+
+id: ethernet/eth0/ping
+_summary: Can ping another machine over first Ethernet port
+_description: Check Ethernet works by pinging another machine
+plugin: shell
+command:
+  ping -I eth0 -c 4 -i 3 -w 20 ubuntu.com
+category_id: ethernet
+estimated_duration: 4s
+flags: preserve-locale
+
+id: ethernet/eth1/ping
+_summary: Can ping another machine over second Ethernet port
+_description: Check Ethernet works by pinging another machine
+plugin: shell
+command:
+    ping -I eth1 -c 4 -i 3 -w 20 ubuntu.com
+category_id: ethernet
+estimated_duration: 4s
+flags: preserve-locale
+
+id: ethernet/eth0/hotplug-connect
+_summary: First ethernet port hotplug connect step
+_purpose:
+ Check first ethernet port connects when cable inserted
+_steps:
+  1. Ensure that there is no ethernet cable attached to the system.
+  2. Begin the test.
+  3. Insert the ethernet cable in to ethernet port 1.
+  4. This test will timeout and fail if the insertion and connection
+     establishment has not been detected within 60 seconds.
+plugin: user-interact
+command:
+  LOOP=0
+  CONNECTED=1
+  while [ $LOOP -lt 60 ] && [ $CONNECTED -ne 0 ]
+  do
+    ping -I eth0 -c 1 -i 3 -w 20 ubuntu.com
+    CONNECTED=$?
+    sleep 1
+    LOOP=$((LOOP=LOOP+1))
+  done
+  exit $CONNECTED
+category_id: ethernet
+estimated_duration: 1m
+
+id: ethernet/eth0/hotplug-disconnect
+_summary: First ethernet port hotplug disconnect step
+_purpose:
+ Detect when cable removed from first ethernet port
+_steps:
+  1. Ensure there is a an ethernet cable attached to port 1.
+  2. Begin the test.
+  3. Remove the ethernet cable from ethernet port 1.
+  4. This test will timeout and fail if the removal has not been detected
+     within 20 seconds.
+plugin: user-interact
+command:
+  LOOP=0
+  CONNECTED=0
+  while [ $LOOP -lt 20 ] && [ $CONNECTED -eq 0 ]
+  do
+    ping -I eth0 -c 1 -i 3 -w 20 ubuntu.com
+    CONNECTED=$?
+    sleep 1
+    LOOP=$((LOOP=LOOP+1))
+  done
+  [ $CONNECTED -ne 0 ]
+category_id: ethernet
+estimated_duration: 20s
+flags: preserve-locale
+
+id: ethernet/eth1/hotplug-connect
+_summary: Second ethernet port hotplug connect step
+_purpose:
+ Check second ethernet port connects when cable inserted
+_steps:
+  1. Ensure that there is no ethernet cable attached to the system.
+  2. Begin the test.
+  3. Insert the ethernet cable in to ethernet port 2.
+  4. This test will timeout and fail if the insertion and connection
+     establishment has not been detected within 60 seconds.
+plugin: user-interact
+command:
+  LOOP=0
+  CONNECTED=1
+  while [ $LOOP -lt 60 ] && [ $CONNECTED -ne 0 ]
+  do
+    ping -I eth1 -c 1 -i 3 -w 20 ubuntu.com
+    CONNECTED=$?
+    sleep 1
+    LOOP=$((LOOP=LOOP+1))
+  done
+  exit $CONNECTED
+category_id: ethernet
+estimated_duration: 1m
+flags: preserve-locale
+
+id: ethernet/eth1/hotplug-disconnect
+_summary: Second ethernet port hotplug disconnect step
+_purpose:
+ Detect when cable removed from second ethernet port
+_steps:
+  1. Ensure there is a an ethernet cable attached to port 2.
+  2. Begin the test.
+  3. Remove the ethernet cable from ethernet port 2.
+  4. This test will timeout and fail if the removal has not been detected
+     within 20 seconds.
+plugin: user-interact
+command:
+  LOOP=0
+  CONNECTED=0
+  while [ $LOOP -lt 20 ] && [ $CONNECTED -eq 0 ]
+  do
+    ping -I eth1 -c 1 -i 3 -w 20 ubuntu.com
+    CONNECTED=$?
+    sleep 1
+    LOOP=$((LOOP=LOOP+1))
+  done
+  [ $CONNECTED -eq 1 ]
+category_id: ethernet
+estimated_duration: 20s
+flags: preserve-locale
