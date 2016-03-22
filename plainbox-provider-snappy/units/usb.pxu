@@ -1,0 +1,113 @@
+unit: category
+id: usb2
+_name: USB 2.0
+
+unit: category
+id: usb3
+_name: USB 3.0
+
+
+id: usb/hid
+_summary: USB keyboard works
+_purpose:
+ Check USB input device works
+_steps:
+ 1. Connect USB keyboard
+ 2. Input somethings with USB keyboard
+_verification:
+ What just input is displayed correctly
+plugin: manual
+category_id: usb2
+estimated_duration: 60
+
+id: usb/insert
+_summary: USB 2.0 storage device insertion detected
+_purpose:
+ Check system can detect USB 2.0 storage when inserted
+_steps:
+ 1. Press continue
+ 2. Connect USB 2.0 storage device
+_verification:
+ Can find new USB 2.0 storage device messages in /var/log/syslog
+plugin: user-interact
+user: root
+command: run_watcher.py insertion usb2
+category_id: usb2
+estimated_duration: 120
+
+id: usb/storage-automated
+_summary: USB 2.0 storage device read & write works
+_purpose:
+ Check system can read/write to USB 2.0 storage correctly
+_steps:
+ 1. This task is fully automatic and need USB 2.0 insertion test was applied first.
+_verification:
+ This task is fully automatic and will verify the result for you.
+plugin: shell
+depends: usb/insert
+user: root
+command: usb_read_write
+category_id: usb2
+estimated_duration: 300
+
+id: usb/remove
+_summary: USB 2.0 storage device removal detected
+_purpose:
+ Check system can detect removal of a USB 2.0 storage device
+_steps:
+ 1. Press continue
+ 2. Disconnect USB 2.0 storage device
+_verification:
+ Can find USB 2.0 storage device removed messages in /var/log/syslog
+plugin: user-interact
+after: usb/insert
+user: root
+command: run_watcher.py removal usb2
+category_id: usb2
+estimated_duration: 120
+
+id: usb3/insert
+_summary: USB 3.0 storage device insertion detected
+_purpose:
+ Check system can detect insertion of a USB 3.0 storage device
+_steps:
+ 1. Press continue
+ 2. Connect USB 3.0 storage device
+_verification:
+ Can find new USB 3.0 storage device messages in /var/log/syslog
+plugin: user-interact
+user: root
+command: run_watcher.py insertion usb3
+category_id: usb3
+estimated_duration: 120
+
+id: usb3/storage-automated
+_summary: USB 3.0 storage device read & write works
+_purpose:
+ Check system can read/write to USB 3.0 storage devices correctly
+_steps:
+ 1. This task is fully automatic and need USB 3.0 insertion test was applied first.
+_verification:
+ This task is fully automatic and will verify the result for you.
+plugin: shell
+depends: usb3/insert
+user: root
+command: usb_read_write
+category_id: usb3
+estimated_duration: 300
+
+id: usb3/remove
+_summary: USB 3.0 storage device removal detected
+_purpose:
+ Check system can detect removal of a USB 3.0 storage device
+_steps:
+ 1. Press continue
+ 2. Disconnect USB 3.0 storage device
+_verification:
+ Can find USB 3.0 storage device removed messages in /var/log/syslog
+plugin: user-interact
+after: usb3/insert
+user: root
+command: run_watcher.py removal usb3
+category_id: usb3
+estimated_duration: 120
