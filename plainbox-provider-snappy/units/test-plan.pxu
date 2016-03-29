@@ -38,6 +38,7 @@ mandatory_include:
     sysfs_attachment
     udev_attachment
     lspci_attachment
+    lsusb_attachment
     dmi
     meminfo
 bootstrap_include:

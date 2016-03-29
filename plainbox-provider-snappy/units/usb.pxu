@@ -111,3 +111,12 @@ user: root
 command: run_watcher.py removal usb3
 category_id: usb3
 estimated_duration: 120
+
+id: lsusb_attachment
+plugin: attachment
+category_id: 2013.com.canonical.plainbox::info
+user: root
+command: lsusb -vv | iconv -t 'utf-8' -c
+estimated_duration: 0.700
+_summary: Attach output of lsusb
+_description: Attaches a list of detected USB devices.
