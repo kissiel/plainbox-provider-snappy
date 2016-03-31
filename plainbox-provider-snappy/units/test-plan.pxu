@@ -16,6 +16,7 @@ include:
     wifi/.*
     audio/.*
     bluetooth/.*
+    cpu/.*
     ethernet/.*
     led/.*
     display/.*
