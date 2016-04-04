@@ -26,6 +26,7 @@ include:
     rtc/.*
     serial/.*
     wwan/.*
+    memory/.*
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
