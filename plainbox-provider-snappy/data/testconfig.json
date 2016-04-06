@@ -1,0 +1,10 @@
+{
+	"FileName":"integration-tests/data/output/testconfig.json",
+	"Release":"rolling",
+	"Channel":"edge",
+	"TargetRelease":"",
+	"TargetChannel":"",
+	"RemoteTestbed":false,
+	"Update":false,
+	"Rollback":false
+}
