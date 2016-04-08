@@ -8,9 +8,9 @@ id: snappy-generic
 unit: test plan
 _name: QA tests for Snappy Ubuntu Core devices
 _description:
- QA test plan that includes all generic, resuable tests for Snappy Ubuntu Core
+ QA test plan that includes all generic, reusable tests for Snappy Ubuntu Core
  devices.
-estimated_duration: 3600
+estimated_duration: 1h
 include:
     snappy/.*
     wifi/.*
@@ -27,6 +27,7 @@ include:
     serial/.*
     wwan/.*
     memory/.*
+    disk/.*
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
