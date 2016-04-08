@@ -8,7 +8,7 @@ _summary: Can ping another machine over first Ethernet port
 _description: Check Ethernet works by pinging another machine
 plugin: shell
 command:
-  ping -I eth0 -c 4 -i 3 -w 20 ubuntu.com
+  gateway_ping_test -v --interface eth0
 category_id: ethernet
 estimated_duration: 4s
 flags: preserve-locale
@@ -18,110 +18,235 @@ _summary: Can ping another machine over second Ethernet port
 _description: Check Ethernet works by pinging another machine
 plugin: shell
 command:
-    ping -I eth1 -c 4 -i 3 -w 20 ubuntu.com
+    gateway_ping_test -v --interface eth1
 category_id: ethernet
 estimated_duration: 4s
 flags: preserve-locale
 
-id: ethernet/eth0/hotplug-connect
-_summary: First ethernet port hotplug connect step
+id: ethernet/eth0/check-disconnected
+_summary: Ensure ethernet port 1 is physically disconnected
 _purpose:
- Check first ethernet port connects when cable inserted
+ Check that ethernet port 1 is detected as being in the correct state to begin
+ a hotplug connection test.
 _steps:
-  1. Ensure that there is no ethernet cable attached to the system.
-  2. Begin the test.
-  3. Insert the ethernet cable in to ethernet port 1.
-  4. This test will timeout and fail if the insertion and connection
-     establishment has not been detected within 60 seconds.
+ 1. Ensure there is no ethernet cable attached to port 1.
+ 2. Begin test.
 plugin: user-interact
 command:
-  LOOP=0
-  CONNECTED=1
-  while [ $LOOP -lt 60 ] && [ $CONNECTED -ne 0 ]
-  do
-    ping -I eth0 -c 1 -i 3 -w 20 ubuntu.com
-    CONNECTED=$?
-    sleep 1
-    LOOP=$((LOOP=LOOP+1))
-  done
-  exit $CONNECTED
+  if [ $(cat /sys/class/net/eth0/carrier) -ne 0 ]; then
+    # carrier indicating cable present
+    exit 1
+  fi
+  exit 0
+category_id: ethernet
+estimated_duration: 1s
+flags: preserve-locale
+
+id: ethernet/eth0/hotplug-connect
+_summary: Ethernet port 1 hotplug detection test
+_purpose:
+ Check ethernet port 1 connects when cable inserted. Assumes an IP address
+ will be assigned by DHCP. Connection asserted by pinging the network defined
+ gateway.
+_steps:
+ 1. Begin the test.
+ 2. Insert the ethernet cable in to ethernet port 1.
+ 3. This test will timeout and fail if the insertion and connection
+    establishment has not been detected (10 second timeout for each check).
+plugin: user-interact
+command:
+ LOOP=0
+ CABLE_DETECT=0
+ while [ $LOOP -lt 10 ] && [ $CABLE_DETECT -eq 0 ]
+ do
+  sleep 1
+  CABLE_DETECT=$(cat /sys/class/net/eth0/carrier)
+  LOOP=$((LOOP=LOOP+1))
+ done
+ if [ $CABLE_DETECT -eq 0 ]; then
+  echo "Didn't detect a cable insertion"
+  exit 1
+ fi
+ echo "Detected a cable insertion"
+ LOOP=0
+ OPSTATE="unknown"
+ while [ $LOOP -lt 10 ] && [ "$OPSTATE" != "up" ]
+ do
+  sleep 1
+  OPSTATE=$(cat /sys/class/net/eth0/operstate)
+  LOOP=$((LOOP=LOOP+1))
+ done
+ if [ "$OPSTATE" != "up" ]; then
+  echo "Interface did not up"
+  exit 1
+ fi
+ echo "Interface up"
+ gateway_ping_test -v --interface eth0
+ PING_TEST=$?
+ if [ $PING_TEST -ne 0 ]; then
+  echo "Ping test failed"
+  exit 1
+ fi
+ exit 0
 category_id: ethernet
 estimated_duration: 1m
+depends: ethernet/eth0/check-disconnected
 
 id: ethernet/eth0/hotplug-disconnect
-_summary: First ethernet port hotplug disconnect step
+_summary: Ethernet port 1 hotplug disconnect step
 _purpose:
- Detect when cable removed from first ethernet port
+ Check that when cable removed from ethernet port 1 the system detects this
+ correctly.
 _steps:
-  1. Ensure there is a an ethernet cable attached to port 1.
-  2. Begin the test.
-  3. Remove the ethernet cable from ethernet port 1.
-  4. This test will timeout and fail if the removal has not been detected
-     within 20 seconds.
+ 1. Depends on previous hotplug connection test passing. We will now test
+  cable disconnection.
+ 2. Begin the test.
+ 3. Remove the ethernet cable from ethernet port 1.
+ 4. This test will timeout and fail if the removal has not been detected and
+  interface marked as down (10 second timeout for each check).
 plugin: user-interact
 command:
-  LOOP=0
-  CONNECTED=0
-  while [ $LOOP -lt 20 ] && [ $CONNECTED -eq 0 ]
-  do
-    ping -I eth0 -c 1 -i 3 -w 20 ubuntu.com
-    CONNECTED=$?
-    sleep 1
-    LOOP=$((LOOP=LOOP+1))
-  done
-  [ $CONNECTED -ne 0 ]
+ LOOP=0
+ CABLE_DETECT=1
+ while [ $LOOP -lt 10 ] && [ $CABLE_DETECT -ne 0 ]
+ do
+  sleep 1
+  CABLE_DETECT=$(cat /sys/class/net/eth0/carrier)
+  LOOP=$((LOOP=LOOP+1))
+ done
+ if [ $CABLE_DETECT -ne 0 ]; then
+  echo "Didn't detect a cable removal"
+  exit 1
+ fi
+ echo "Detected a cable removal"
+ LOOP=0
+ OPSTATE="up"
+ while [ $LOOP -lt 10 ] && [ "$OPSTATE" == "up" ]
+ do
+  sleep 1
+  OPSTATE=$(cat /sys/class/net/eth0/operstate)
+  LOOP=$((LOOP=LOOP+1))
+ done
+ if [ "$OPSTATE" == "up" ]; then
+  echo "Interface did not go down"
+  exit 1
+ fi
+ echo "Interface went down"
+ exit 0
 category_id: ethernet
 estimated_duration: 20s
+depends: ethernet/eth0/hotplug-connect
+
+id: ethernet/eth1/check-disconnected
+_summary: Ensure ethernet port 2 is physically disconnected
+_purpose:
+ Check that ethernet port 2 is detected as being in the correct state to begin
+ a hotplug connection test.
+_steps:
+ 1. Ensure there is no ethernet cable attached to port 2.
+ 2. Begin test.
+plugin: user-interact
+command:
+  if [ $(cat /sys/class/net/eth1/carrier) -ne 0 ]; then
+    # carrier indicating cable present
+    exit 1
+  fi
+  exit 0
+category_id: ethernet
+estimated_duration: 1s
 flags: preserve-locale
 
 id: ethernet/eth1/hotplug-connect
-_summary: Second ethernet port hotplug connect step
+_summary: Ethernet port 2 hotplug detection test
 _purpose:
- Check second ethernet port connects when cable inserted
+ Check ethernet port 2 connects when cable inserted. Assumes an IP address
+ will be assigned by DHCP. Connection asserted by pinging the network defined
+ gateway.
 _steps:
-  1. Ensure that there is no ethernet cable attached to the system.
-  2. Begin the test.
-  3. Insert the ethernet cable in to ethernet port 2.
-  4. This test will timeout and fail if the insertion and connection
-     establishment has not been detected within 60 seconds.
+ 1. Begin the test.
+ 2. Insert the ethernet cable in to ethernet port 2.
+ 3. This test will timeout and fail if the insertion and connection
+    establishment has not been detected (10 second timeout for each check).
 plugin: user-interact
 command:
-  LOOP=0
-  CONNECTED=1
-  while [ $LOOP -lt 60 ] && [ $CONNECTED -ne 0 ]
-  do
-    ping -I eth1 -c 1 -i 3 -w 20 ubuntu.com
-    CONNECTED=$?
-    sleep 1
-    LOOP=$((LOOP=LOOP+1))
-  done
-  exit $CONNECTED
+ LOOP=0
+ CABLE_DETECT=0
+ while [ $LOOP -lt 10 ] && [ $CABLE_DETECT -eq 0 ]
+ do
+  sleep 1
+  CABLE_DETECT=$(cat /sys/class/net/eth1/carrier)
+  LOOP=$((LOOP=LOOP+1))
+ done
+ if [ $CABLE_DETECT -eq 0 ]; then
+  echo "Didn't detect a cable insertion"
+  exit 1
+ fi
+ echo "Detected a cable insertion"
+ LOOP=0
+ OPSTATE="unknown"
+ while [ $LOOP -lt 10 ] && [ "$OPSTATE" != "up" ]
+ do
+  sleep 1
+  OPSTATE=$(cat /sys/class/net/eth1/operstate)
+  LOOP=$((LOOP=LOOP+1))
+ done
+ if [ "$OPSTATE" != "up" ]; then
+  echo "Interface did not up"
+  exit 1
+ fi
+ echo "Interface up"
+ gateway_ping_test -v --interface eth1
+ PING_TEST=$?
+ if [ $PING_TEST -ne 0 ]; then
+  echo "Ping test failed"
+  exit 1
+ fi
+ exit 0
 category_id: ethernet
 estimated_duration: 1m
-flags: preserve-locale
+depends: ethernet/eth1/check-disconnected
 
 id: ethernet/eth1/hotplug-disconnect
-_summary: Second ethernet port hotplug disconnect step
+_summary: Ethernet port 2 hotplug disconnect step
 _purpose:
- Detect when cable removed from second ethernet port
+ Check that when cable removed from ethernet port 2 the system detects this
+ correctly.
 _steps:
-  1. Ensure there is a an ethernet cable attached to port 2.
-  2. Begin the test.
-  3. Remove the ethernet cable from ethernet port 2.
-  4. This test will timeout and fail if the removal has not been detected
-     within 20 seconds.
+ 1. Depends on previous hotplug connection test passing. We will now test
+  cable disconnection.
+ 2. Begin the test.
+ 3. Remove the ethernet cable from ethernet port 2.
+ 4. This test will timeout and fail if the removal has not been detected and
+  interface marked as down (10 second timeout for each check).
 plugin: user-interact
 command:
-  LOOP=0
-  CONNECTED=0
-  while [ $LOOP -lt 20 ] && [ $CONNECTED -eq 0 ]
-  do
-    ping -I eth1 -c 1 -i 3 -w 20 ubuntu.com
-    CONNECTED=$?
-    sleep 1
-    LOOP=$((LOOP=LOOP+1))
-  done
-  [ $CONNECTED -eq 1 ]
+ LOOP=0
+ CABLE_DETECT=1
+ while [ $LOOP -lt 10 ] && [ $CABLE_DETECT -ne 0 ]
+ do
+  sleep 1
+  CABLE_DETECT=$(cat /sys/class/net/eth1/carrier)
+  LOOP=$((LOOP=LOOP+1))
+ done
+ if [ $CABLE_DETECT -ne 0 ]; then
+  echo "Didn't detect a cable removal"
+  exit 1
+ fi
+ echo "Detected a cable removal"
+ LOOP=0
+ OPSTATE="up"
+ while [ $LOOP -lt 10 ] && [ "$OPSTATE" == "up" ]
+ do
+  sleep 1
+  OPSTATE=$(cat /sys/class/net/eth1/operstate)
+  LOOP=$((LOOP=LOOP+1))
+ done
+ if [ "$OPSTATE" == "up" ]; then
+  echo "Interface did not go down"
+  exit 1
+ fi
+ echo "Interface went down"
+ exit 0
 category_id: ethernet
 estimated_duration: 20s
-flags: preserve-locale
+depends: ethernet/eth1/hotplug-connect
