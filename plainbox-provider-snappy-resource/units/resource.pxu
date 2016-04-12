@@ -100,7 +100,7 @@ id: device
 estimated_duration: 0.48
 plugin: resource
 command: udev_resource
-requires: package.name == "udev"
+# requires: package.name == "udev"
 _description: Creates resource info from udev
 _summary: Collect information about hardware devices (udev)
 
