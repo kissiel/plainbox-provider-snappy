@@ -17,7 +17,6 @@ _summary: Collect information about installed software packages
 id: snap
 estimated_duration: 1.1
 plugin: resource
-requires: package.name == "ubuntu-snappy-cli"
 command:
     snappy list | awk 'NR>1 {print "name: "$1; print "date: "$2; print "version: "$3; print "developer: "$4; print ""}'
 _description: Generates a list of snap packages
