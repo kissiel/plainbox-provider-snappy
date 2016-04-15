@@ -46,4 +46,8 @@ mandatory_include:
 bootstrap_include:
     device
     bluez-internal-rfcomm-tests
+    bluez-internal-hci-tests
+    bluez-internal-mgmt-tests
+    bluez-internal-uc-tests
+    bluez-internal-bnep-tests
     wwan_resource

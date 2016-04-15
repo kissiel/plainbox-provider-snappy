@@ -69,3 +69,123 @@ user: root
 command:
  rfcomm-tester -p "{bluez-internal-rfcomm-test}"
 estimated_duration: 2.0
+
+unit: job
+id: bluez-internal-hci-tests
+plugin: resource
+_summary: Gather list of tests provided by bluez hci test binary
+_description:
+ Bluez includes some internal test that exercise the stack. This resource
+ collects a list of the provided hci tests.
+command:
+ hci-tester -l | while read i
+ do
+   echo "bluez-internal-hci-test: $i"
+   echo
+ done
+estimated_duration: 2s
+flags: preserve-locale
+
+unit: template
+template-resource: bluez-internal-hci-tests
+template-unit: job
+id: bluetooth/bluez-internal-hci-tests_{bluez-internal-hci-test}
+category_id: bluetooth
+_summary: {bluez-internal-hci-test}
+_description:
+ Runs a specific test from the hci test suite
+plugin: shell
+user: root
+command:
+ hci-tester -p "{bluez-internal-hci-test}"
+estimated_duration: 2.0
+
+unit: job
+id: bluez-internal-mgmt-tests
+plugin: resource
+_summary: Gather list of tests provided by bluez mgmt test binary
+_description:
+ Bluez includes some internal test that exercise the stack. This resource
+ collects a list of the provided mgmt tests.
+command:
+ mgmt-tester -l | while read i
+ do
+   echo "bluez-internal-mgmt-test: $i"
+   echo
+ done
+estimated_duration: 2s
+flags: preserve-locale
+
+unit: template
+template-resource: bluez-internal-mgmt-tests
+template-unit: job
+id: bluetooth/bluez-internal-mgmt-tests_{bluez-internal-mgmt-test}
+category_id: bluetooth
+_summary: {bluez-internal-mgmt-test}
+_description:
+ Runs a specific test from the mgmt test suite
+plugin: shell
+user: root
+command:
+ mgmt-tester -p "{bluez-internal-mgmt-test}"
+estimated_duration: 2.0
+
+unit: job
+id: bluez-internal-uc-tests
+plugin: resource
+_summary: Gather list of tests provided by bluez user channel test binary
+_description:
+ Bluez includes some internal test that exercise the stack. This resource
+ collects a list of the provided user channel tests.
+command:
+ userchan-tester -l | while read i
+ do
+   echo "bluez-internal-uc-test: $i"
+   echo
+ done
+estimated_duration: 2s
+flags: preserve-locale
+
+unit: template
+template-resource: bluez-internal-uc-tests
+template-unit: job
+id: bluetooth/bluez-internal-uc-tests_{bluez-internal-uc-test}
+category_id: bluetooth
+_summary: {bluez-internal-uc-test}
+_description:
+ Runs a specific test from the user channel test suite
+plugin: shell
+user: root
+command:
+ userchan-tester -p "{bluez-internal-uc-test}"
+estimated_duration: 2.0
+
+unit: job
+id: bluez-internal-bnep-tests
+plugin: resource
+_summary: Gather list of tests provided by bluez bnep test binary
+_description:
+ Bluez includes some internal test that exercise the stack. This resource
+ collects a list of the provided bnep tests.
+command:
+ bnep-tester -l | while read i
+ do
+   echo "bluez-internal-bnep-test: $i"
+   echo
+ done
+estimated_duration: 2s
+flags: preserve-locale
+
+unit: template
+template-resource: bluez-internal-bnep-tests
+template-unit: job
+id: bluetooth/bluez-internal-bnep-tests_{bluez-internal-bnep-test}
+category_id: bluetooth
+_summary: {bluez-internal-bnep-test}
+_description:
+ Runs a specific test from the bnep test suite
+plugin: shell
+user: root
+command:
+ bnep-tester -p "{bluez-internal-bnep-test}"
+estimated_duration: 2.0
