@@ -45,4 +45,5 @@ mandatory_include:
     meminfo
 bootstrap_include:
     device
+    bluez-internal-rfcomm-tests
     wwan_resource

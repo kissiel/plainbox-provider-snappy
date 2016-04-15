@@ -38,3 +38,34 @@ _verification:
 plugin: manual
 category_id: bluetooth
 estimated_duration: 5m
+
+
+unit: job
+id: bluez-internal-rfcomm-tests
+plugin: resource
+_summary: Gather list of tests provided by bluez rfcomm test binary
+_description:
+ Bluez includes some internal test that exercise the stack. This resource
+ collects a list of the provided rfcomm tests.
+command:
+ rfcomm-tester -l | while read i
+ do
+   echo "bluez-internal-rfcomm-test: $i"
+   echo
+ done
+estimated_duration: 2s
+flags: preserve-locale
+
+unit: template
+template-resource: bluez-internal-rfcomm-tests
+template-unit: job
+id: bluetooth/bluez-internal-rfcomm-tests_{bluez-internal-rfcomm-test}
+category_id: bluetooth
+_summary: {bluez-internal-rfcomm-test}
+_description:
+ Runs a specific test from the rfcomm test suite
+plugin: shell
+user: root
+command:
+ rfcomm-tester -p "{bluez-internal-rfcomm-test}"
+estimated_duration: 2.0
