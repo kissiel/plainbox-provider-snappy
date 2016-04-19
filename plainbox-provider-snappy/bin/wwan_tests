@@ -6,7 +6,7 @@
 #   Jonathan Cave <jonathan.cave@canonical.com>
 #   Po-Hsu Lin <po-hsu.lin@canonical.com>
 
-
+import logging
 import os
 import subprocess
 import time
@@ -44,6 +44,7 @@ MMModemCapability = {
 class MMDbus():
     def __init__(self):
         self._bus = dbus.SystemBus()
+        self._modems = []
         try:
             manager_proxy = self._bus.get_object(DBUS_MM1_SERVICE,
                                                  DBUS_MM1_PATH)
@@ -52,11 +53,10 @@ class MMDbus():
         except dbus.exceptions.DBusException as excp:
             if (excp.get_dbus_name() ==
                     "org.freedesktop.DBus.Error.ServiceUnknown"):
-                print("ERROR: " +
-                      "mm-test doesn't work on ModemManager <1.0: " +
-                      "{}".format(excp.get_dbus_message()))
+                logging.error(excp.get_dbus_message())
+                logging.error("Note: wwan_tests requires ModemManager >=1.0")
             else:
-                print("ERROR: {}".format(excp.get_dbus_message()))
+                logging.error(excp.get_dbus_message())
             return
 
     def _modem_by_id(self, id):
