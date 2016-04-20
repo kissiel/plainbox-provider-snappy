@@ -2,6 +2,10 @@ unit: category
 id: bluetooth
 _name: Bluetooth
 
+unit: category
+id: bluetooth_bluez5_selftests
+_name: Bluetooth - BlueZ Self Tests
+
 
 id: bluetooth/hid
 _summary: Bluetooth input device works
@@ -60,7 +64,7 @@ unit: template
 template-resource: bluez-internal-rfcomm-tests
 template-unit: job
 id: bluetooth/bluez-internal-rfcomm-tests_{bluez-internal-rfcomm-test}
-category_id: bluetooth
+category_id: bluetooth_bluez5_selftests
 _summary: {bluez-internal-rfcomm-test}
 _description:
  Runs a specific test from the rfcomm test suite
@@ -90,7 +94,7 @@ unit: template
 template-resource: bluez-internal-hci-tests
 template-unit: job
 id: bluetooth/bluez-internal-hci-tests_{bluez-internal-hci-test}
-category_id: bluetooth
+category_id: bluetooth_bluez5_selftests
 _summary: {bluez-internal-hci-test}
 _description:
  Runs a specific test from the hci test suite
@@ -120,7 +124,7 @@ unit: template
 template-resource: bluez-internal-mgmt-tests
 template-unit: job
 id: bluetooth/bluez-internal-mgmt-tests_{bluez-internal-mgmt-test}
-category_id: bluetooth
+category_id: bluetooth_bluez5_selftests
 _summary: {bluez-internal-mgmt-test}
 _description:
  Runs a specific test from the mgmt test suite
@@ -150,7 +154,7 @@ unit: template
 template-resource: bluez-internal-uc-tests
 template-unit: job
 id: bluetooth/bluez-internal-uc-tests_{bluez-internal-uc-test}
-category_id: bluetooth
+category_id: bluetooth_bluez5_selftests
 _summary: {bluez-internal-uc-test}
 _description:
  Runs a specific test from the user channel test suite
