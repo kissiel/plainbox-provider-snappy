@@ -60,7 +60,7 @@ _steps:
 _verification:
  Can find USB 2.0 storage device removed messages in /var/log/syslog
 plugin: user-interact
-after: usb/insert
+depends: usb/insert
 user: root
 command: run_watcher.py removal usb2
 category_id: usb2
@@ -106,7 +106,7 @@ _steps:
 _verification:
  Can find USB 3.0 storage device removed messages in /var/log/syslog
 plugin: user-interact
-after: usb3/insert
+depends: usb3/insert
 user: root
 command: run_watcher.py removal usb3
 category_id: usb3
