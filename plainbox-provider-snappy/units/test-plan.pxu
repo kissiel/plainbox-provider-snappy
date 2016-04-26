@@ -1,8 +1,9 @@
-# Copyright 2015 Canonical Ltd.
+# Copyright 2015-2016 Canonical Ltd.
 # All rights reserved.
 #
 # Written by:
 #   Jonathan Cave <jonathan.cave@canonical.com>
+#   Pierre Equoy <pierre.equoy@canonical.com>
 
 id: snappy-generic
 unit: test plan
@@ -13,16 +14,16 @@ _description:
 estimated_duration: 1h
 include:
     snappy/.*
-    wifi/.*
+    wireless/.*
     audio/.*
     bluetooth/.*
     cpu/.*
     ethernet/.*
     led/.*
-    display/.*
+    monitor/.*
     usb2/.*
     usb3/.*
-    power/.*
+    watchdog/.*
     rtc/.*
     serial/.*
     wwan/.*
@@ -52,3 +53,67 @@ bootstrap_include:
     bluez-internal-uc-tests
     bluez-internal-bnep-tests
     wwan_resource
+    wireless_resource
+
+id: snappy-generic-automated
+unit: test plan
+_name: Automated QA tests for Snappy Ubuntu Core devices
+_description:
+ QA test plan that includes all generic, reusable and automated tests for
+ Snappy Ubuntu Core devices.
+estimated_duration: 1h
+include:
+    snappy/test-list
+    snappy/test-search
+    snappy/test-install
+    snappy/test-remove
+    wireless/wireless_scanning
+    wireless/wireless_connection_open_ac_nm
+    wireless/wireless_connection_open_bg_nm
+    wireless/wireless_connection_open_n_nm
+    wireless/wireless_connection_wpa_ac_nm
+    wireless/wireless_connection_wpa_bg_nm
+    wireless/wireless_connection_wpa_n_nm
+    wireless/wifi_master_mode_auto_a
+    wireless/wifi_master_mode_auto_b
+    wireless/wifi_master_mode_auto_g
+    wireless/wifi_master_mode_auto_ad
+    bluetooth/bluez-internal-rfcomm-tests_.*
+    bluetooth/bluez-internal-hci-tests_.*
+    bluetooth/bluez-internal-mgmt-tests_.*
+    bluetooth/bluez-internal-uc-tests_.*
+    bluetooth/bluez-internal-bnep-tests_.*
+    cpu/.*
+    ethernet/detect
+    ethernet/ping_.*
+    watchdog/daemon_boot
+    watchdog/daemon_keepalive
+    wwan/detect
+    wwan/gsm-connection-.*
+    memory/info
+    memory/check
+    disk/.*
+mandatory_include:
+    2013.com.canonical.plainbox::manifest
+    package
+    snap
+    uname
+    lsb
+    cpuinfo
+    dpkg
+    dmi_attachment
+    sysfs_attachment
+    udev_attachment
+    lspci_attachment
+    lsusb_attachment
+    dmi
+    meminfo
+bootstrap_include:
+    device
+    bluez-internal-rfcomm-tests
+    bluez-internal-hci-tests
+    bluez-internal-mgmt-tests
+    bluez-internal-uc-tests
+    bluez-internal-bnep-tests
+    wwan_resource
+    wireless_resource
