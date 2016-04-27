@@ -28,6 +28,7 @@ user: root
 environ: WIFI_INTERFACE LD_LIBRARY_PATH
 plugin: shell
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 6
 _description:
  Check system can find a wireless network AP nearby
@@ -46,6 +47,7 @@ plugin: user-interact
 command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_AC_SSID
 environ: WIFI_INTERFACE OPEN_AC_SSID
 user: root
+requires: device.category == 'WIRELESS'
 category_id: wifi
 estimated_duration: 90
 flags: preserve-locale
@@ -60,6 +62,7 @@ _steps:
 _verification:
  If there's "Connection test passed" message in result, mark the test as passed.
 plugin: user-interact
+requires: device.category == 'WIRELESS'
 command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_BG_SSID
 environ: WIFI_INTERFACE OPEN_BG_SSID
 user: root
@@ -81,6 +84,7 @@ command: wifi_client_test -i $WIFI_INTERFACE -s $OPEN_N_SSID
 environ: WIFI_INTERFACE OPEN_N_SSID
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 90
 flags: preserve-locale
 
@@ -98,6 +102,7 @@ command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_AC_SSID -k $WPA_AC_PSK
 environ: WIFI_INTERFACE WPA_AC_SSID WPA_AC_PSK
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 90
 flags: preserve-locale
 
@@ -115,6 +120,7 @@ command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_BG_SSID -k $WPA_BG_PSK
 environ: WIFI_INTERFACE WPA_BG_SSID WPA_BG_PSK
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 90
 flags: preserve-locale
 
@@ -132,6 +138,7 @@ command: wifi_client_test -i $WIFI_INTERFACE -s $WPA_N_SSID -k $WPA_N_PSK
 environ: WIFI_INTERFACE WPA_N_SSID WPA_N_PSK
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 90
 flags: preserve-locale
 
@@ -154,6 +161,7 @@ command:
 environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_AC_SSID
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 1m
 flags: preserve-locale
 
@@ -176,6 +184,7 @@ command:
 environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_BG_SSID
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 1m
 flags: preserve-locale
 
@@ -198,6 +207,7 @@ command:
 environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_N_SSID
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 1m
 flags: preserve-locale
 
@@ -220,6 +230,7 @@ command:
 environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_AC_SSID WPA_AC_PSK
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 1m
 flags: preserve-locale
 
@@ -242,6 +253,7 @@ command:
 environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_BG_SSID WPA_BG_PSK
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 1m
 flags: preserve-locale
 
@@ -264,11 +276,13 @@ command:
 environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_N_SSID WPA_N_PSK
 user: root
 category_id: wifi
+requires: device.category == 'WIRELESS'
 estimated_duration: 1m
 flags: preserve-locale
 
 id: wireless/wifi_master_mode_a
 category_id: wifi
+requires: device.category == 'WIRELESS'
 _summary: System can act as an 802.11a Wi-Fi Access Point
 plugin: user-interact-verify
 estimated_duration: 30.0
@@ -289,6 +303,7 @@ flags: preserve-locale
 
 id: wireless/wifi_master_mode_b
 category_id: wifi
+requires: device.category == 'WIRELESS'
 _summary: System can act as an 802.11b Wi-Fi Access Point
 plugin: user-interact-verify
 estimated_duration: 30.0
@@ -309,6 +324,7 @@ flags: preserve-locale
 
 id: wireless/wifi_master_mode_g
 category_id: wifi
+requires: device.category == 'WIRELESS'
 _summary: System can act as an 802.11g Wi-Fi Access Point
 plugin: user-interact-verify
 estimated_duration: 30.0
@@ -329,6 +345,7 @@ flags: preserve-locale
 
 id: wireless/wifi_master_mode_ad
 category_id: wifi
+requires: device.category == 'WIRELESS'
 _summary: System can act as an 802.11ad Wi-Fi Access Point
 plugin: user-interact-verify
 estimated_duration: 30.0
@@ -350,6 +367,7 @@ flags: preserve-locale
 
 id: wireless/wifi_master_mode_auto_a
 category_id: wifi
+requires: device.category == 'WIRELESS'
 _summary: System can act as an 802.11a Wi-Fi Access Point (automated test)
 plugin: shell
 estimated_duration: 30.0
@@ -364,6 +382,7 @@ flags: preserve-locale
 
 id: wireless/wifi_master_mode_auto_b
 category_id: wifi
+requires: device.category == 'WIRELESS'
 _summary: System can act as an 802.11b Wi-Fi Access Point (automated test)
 plugin: shell
 estimated_duration: 30.0
@@ -378,6 +397,7 @@ flags: preserve-locale
 
 id: wireless/wifi_master_mode_auto_g
 category_id: wifi
+requires: device.category == 'WIRELESS'
 _summary: System can act as an 802.11g Wi-Fi Access Point (automated test)
 plugin: shell
 estimated_duration: 30.0
@@ -392,6 +412,7 @@ flags: preserve-locale
 
 id: wireless/wifi_master_mode_auto_ad
 category_id: wifi
+requires: device.category == 'WIRELESS'
 _summary: System can act as an 802.11ad Wi-Fi Access Point (automated test)
 plugin: shell
 estimated_duration: 30.0
