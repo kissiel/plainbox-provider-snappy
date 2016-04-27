@@ -25,7 +25,8 @@ flags: preserve-locale
 
 id: snappy/test-install
 _summary: Test the snappy install command is able to install hello-world snap.
-_purpose: The store should contain the basic hello-world snap makes sure this
+_purpose:
+ The store should contain the basic hello-world snap makes sure this
  can be downloaded and installed on the system.
 plugin: shell
 command: snappy_tests install
