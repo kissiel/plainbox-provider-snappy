@@ -13,9 +13,9 @@ estimated_duration: 150s
 # requires:
 #  package.name == 'fwts'
 user: root
-environ: PLAINBOX_SESSION_SHARE LD_LIBRARY_PATH SNAP_APP_PATH
+environ: PLAINBOX_SESSION_SHARE LD_LIBRARY_PATH SNAP
 command:
- export LD_LIBRARY_PATH=$SNAP_APP_PATH/usr/lib/fwts:$LD_LIBRARY_PATH
+ export LD_LIBRARY_PATH=$SNAP/usr/lib/fwts:$LD_LIBRARY_PATH
  fwts_test -t cpufreq -l ${PLAINBOX_SESSION_SHARE}/scaling_test.log
 _summary:
  Test the CPU scaling capabilities
@@ -42,9 +42,9 @@ estimated_duration: 1s
 # requires:
 #  package.name == 'fwts'
 user: root
-environ: LD_LIBRARY_PATH SNAP_APP_PATH
+environ: LD_LIBRARY_PATH SNAP
 command:
- export LD_LIBRARY_PATH=$SNAP_APP_PATH/usr/lib/fwts:$LD_LIBRARY_PATH
+ export LD_LIBRARY_PATH=$SNAP/usr/lib/fwts:$LD_LIBRARY_PATH
  fwts_test -t maxfreq -l $PLAINBOX_SESSION_SHARE/maxfreq_test.log
 _summary:
  Test that the CPU can run at its max frequency
@@ -120,9 +120,9 @@ _summary:
  Run C-States tests
 _description:
  Uses the Firmware Test Suite (fwts) to test the power saving states of the CPU.
-environ: PLAINBOX_SESSION_SHARE LD_LIBRARY_PATH SNAP_APP_PATH
+environ: PLAINBOX_SESSION_SHARE LD_LIBRARY_PATH SNAP
 command:
- export LD_LIBRARY_PATH=$SNAP_APP_PATH/usr/lib/fwts:$LD_LIBRARY_PATH
+ export LD_LIBRARY_PATH=$SNAP/usr/lib/fwts:$LD_LIBRARY_PATH
  fwts_test -l $PLAINBOX_SESSION_SHARE/fwts_cstates_results.log -t cstates
 
 plugin: attachment
