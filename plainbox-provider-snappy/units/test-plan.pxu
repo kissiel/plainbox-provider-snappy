@@ -53,7 +53,6 @@ bootstrap_include:
     bluez-internal-uc-tests
     bluez-internal-bnep-tests
     wwan_resource
-    wireless_resource
 
 id: snappy-generic-automated
 unit: test plan
@@ -68,12 +67,12 @@ include:
     snappy/test-install
     snappy/test-remove
     wireless/wireless_scanning
-    wireless/wireless_connection_open_ac_nm
-    wireless/wireless_connection_open_bg_nm
-    wireless/wireless_connection_open_n_nm
-    wireless/wireless_connection_wpa_ac_nm
-    wireless/wireless_connection_wpa_bg_nm
-    wireless/wireless_connection_wpa_n_nm
+    wireless/wireless_connection_open_ac_nm_.*
+    wireless/wireless_connection_open_bg_nm_.*
+    wireless/wireless_connection_open_n_nm_.*
+    wireless/wireless_connection_wpa_ac_nm_.*
+    wireless/wireless_connection_wpa_bg_nm_.*
+    wireless/wireless_connection_wpa_n_nm_.*
     wireless/wifi_master_mode_auto_a
     wireless/wifi_master_mode_auto_b
     wireless/wifi_master_mode_auto_g
@@ -116,4 +115,3 @@ bootstrap_include:
     bluez-internal-uc-tests
     bluez-internal-bnep-tests
     wwan_resource
-    wireless_resource
