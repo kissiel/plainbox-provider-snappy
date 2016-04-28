@@ -41,6 +41,7 @@ _verification:
  Can input from bluetooth input device
 plugin: manual
 category_id: bluetooth
+requires: device.category == 'BLUETOOTH'
 estimated_duration: 5m
 
 
@@ -72,6 +73,7 @@ plugin: shell
 user: root
 command:
  rfcomm-tester -p "{bluez-internal-rfcomm-test}"
+requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
 
 unit: job
@@ -102,6 +104,7 @@ plugin: shell
 user: root
 command:
  hci-tester -p "{bluez-internal-hci-test}"
+requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
 
 unit: job
@@ -132,6 +135,7 @@ plugin: shell
 user: root
 command:
  mgmt-tester -p "{bluez-internal-mgmt-test}"
+requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
 
 unit: job
@@ -162,6 +166,7 @@ plugin: shell
 user: root
 command:
  userchan-tester -p "{bluez-internal-uc-test}"
+requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
 
 unit: job
@@ -192,4 +197,5 @@ plugin: shell
 user: root
 command:
  bnep-tester -p "{bluez-internal-bnep-test}"
+requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
