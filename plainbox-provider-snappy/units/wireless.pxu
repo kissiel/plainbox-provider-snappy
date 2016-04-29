@@ -142,18 +142,25 @@ requires: device.category == 'WIRELESS'
 estimated_duration: 90
 flags: preserve-locale
 
-id: wireless/wireless_connection_open_ac_nm
-_summary: System can connect to unencrypted 802.11ac Wi-Fi network
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_open_ac_nm_{interface}
+_summary: Connect to unencrypted 802.11ac Wi-Fi network on {interface}
 _purpose:
  Check system can connect to insecure 802.11ac AP
 plugin: shell
 command:
-    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
-    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
     nmcli dev wifi rescan
-    nmcli dev wifi connect $OPEN_AC_SSID ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
-    iw dev $WIFI_INTERFACE link
-    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    nmcli dev wifi connect $OPEN_AC_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
     if [ $COUNT -gt 1 ]; then
         exit 0
     fi
@@ -162,21 +169,28 @@ environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_AC_SSID
 user: root
 category_id: wifi
 requires: device.category == 'WIRELESS'
-estimated_duration: 1m
+estimated_duration: 5.0
 flags: preserve-locale
 
-id: wireless/wireless_connection_open_bg_nm
-_summary: System can connect to unencrypted 802.11b/g Wi-Fi network
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_open_bg_nm_{interface}
+_summary: Connect to unencrypted 802.11b/g Wi-Fi network on {interface}
 _purpose:
  Check system can connect to insecure 802.11b/g AP
 plugin: shell
 command:
-    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
-    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
     nmcli dev wifi rescan
-    nmcli dev wifi connect $OPEN_BG_SSID ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
-    iw dev $WIFI_INTERFACE link
-    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    nmcli dev wifi connect $OPEN_BG_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
     if [ $COUNT -gt 1 ]; then
         exit 0
     fi
@@ -185,21 +199,28 @@ environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_BG_SSID
 user: root
 category_id: wifi
 requires: device.category == 'WIRELESS'
-estimated_duration: 1m
+estimated_duration: 5.0
 flags: preserve-locale
 
-id: wireless/wireless_connection_open_n_nm
-_summary: System can connect to unencrypted 802.11n Wi-Fi network
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_open_n_nm_{interface}
+_summary: Connect to unencrypted 802.11n Wi-Fi network on {interface}
 _purpose:
  Check system can connect to insecure 802.11n AP
 plugin: shell
 command:
-    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
-    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
     nmcli dev wifi rescan
-    nmcli dev wifi connect $OPEN_N_SSID ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
-    iw dev $WIFI_INTERFACE link
-    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    nmcli dev wifi connect $OPEN_N_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
     if [ $COUNT -gt 1 ]; then
         exit 0
     fi
@@ -208,21 +229,28 @@ environ: LD_LIBRARY_PATH WIFI_INTERFACE OPEN_N_SSID
 user: root
 category_id: wifi
 requires: device.category == 'WIRELESS'
-estimated_duration: 1m
+estimated_duration: 5.0
 flags: preserve-locale
 
-id: wireless/wireless_connection_wpa_ac_nm
-_summary: System can connect to WPA-encrypted 802.11ac Wi-Fi network
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_wpa_ac_nm_{interface}
+_summary: Connect to WPA-encrypted 802.11ac Wi-Fi network on {interface}
 _purpose:
  Check system can connect to 802.11ac AP with wpa security
 plugin: shell
 command:
-    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
-    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
     nmcli dev wifi rescan
-    nmcli dev wifi connect $WPA_AC_SSID password $WPA_AC_PSK ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
-    iw dev $WIFI_INTERFACE link
-    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    nmcli dev wifi connect $WPA_AC_SSID password $WPA_AC_PSK ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
     if [ $COUNT -gt 1 ]; then
         exit 0
     fi
@@ -231,21 +259,28 @@ environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_AC_SSID WPA_AC_PSK
 user: root
 category_id: wifi
 requires: device.category == 'WIRELESS'
-estimated_duration: 1m
+estimated_duration: 5.0
 flags: preserve-locale
 
-id: wireless/wireless_connection_wpa_bg_nm
-_summary: System can connect to WPA-encrypted 802.11b/g Wi-Fi network
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_wpa_bg_nm_{interface}
+_summary: Connect to WPA-encrypted 802.11b/g Wi-Fi network on {interface}
 _purpose:
  Check system can connect to 802.11b/g AP with wpa security
 plugin: shell
 command:
-    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
-    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
     nmcli dev wifi rescan
-    nmcli dev wifi connect $WPA_BG_SSID password $WPA_BG_PSK ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
-    iw dev $WIFI_INTERFACE link
-    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    nmcli dev wifi connect $WPA_BG_SSID password $WPA_BG_PSK ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
     if [ $COUNT -gt 1 ]; then
         exit 0
     fi
@@ -254,21 +289,28 @@ environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_BG_SSID WPA_BG_PSK
 user: root
 category_id: wifi
 requires: device.category == 'WIRELESS'
-estimated_duration: 1m
+estimated_duration: 5.0
 flags: preserve-locale
 
-id: wireless/wireless_connection_wpa_n_nm
-_summary: System can connect to WPA-encrypted 802.11n Wi-Fi network
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_wpa_n_nm_{interface}
+_summary: Connect to WPA-encrypted 802.11n Wi-Fi network on {interface}
 _purpose:
  Check system can connect to 802.11n AP with wpa security
 plugin: shell
 command:
-    trap "nmcli dev disconnect $WIFI_INTERFACE; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
-    nmcli dev disconnect $WIFI_INTERFACE
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
     nmcli dev wifi rescan
-    nmcli dev wifi connect $WPA_N_SSID password $WPA_N_PSK ifname $WIFI_INTERFACE name WIFI_TEST_CREATED_BY_CHECKBOX
-    iw dev $WIFI_INTERFACE link
-    COUNT=$(iw dev $WIFI_INTERFACE link | wc -l)
+    nmcli dev wifi connect $WPA_N_SSID password $WPA_N_PSK ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
     if [ $COUNT -gt 1 ]; then
         exit 0
     fi
@@ -277,7 +319,7 @@ environ: LD_LIBRARY_PATH WIFI_INTERFACE WPA_N_SSID WPA_N_PSK
 user: root
 category_id: wifi
 requires: device.category == 'WIRELESS'
-estimated_duration: 1m
+estimated_duration: 5.0
 flags: preserve-locale
 
 id: wireless/wifi_master_mode_a
