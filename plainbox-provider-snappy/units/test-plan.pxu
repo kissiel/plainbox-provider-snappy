@@ -92,6 +92,8 @@ include:
     memory/info
     memory/check
     disk/.*
+    audio/detect-capture-devices
+    audio/detect-playback-devices
 mandatory_include:
     2013.com.canonical.plainbox::manifest
     package
@@ -107,6 +109,7 @@ mandatory_include:
     lsusb_attachment
     dmi
     meminfo
+    alsa_resource
 bootstrap_include:
     device
     bluez-internal-rfcomm-tests
