@@ -33,8 +33,8 @@ _description:
 command:
  # this could/should be modified to insert the correct values
  # at runtime
- cp $PLAINBOX_PROVIDER_DATA/testconfig.json $SNAP_APP_TMPDIR/testconfig.json
-environ: SNAP_APP_TMPDIR
+ cp $PLAINBOX_PROVIDER_DATA/testconfig.json $SNAP_USER_DATA/testconfig.json
+environ: SNAP_USER_DATA
 estimated_duration: 1s
 
 unit: template
@@ -50,10 +50,10 @@ command:
  # copy data to PWD
  cp -r $PLAINBOX_PROVIDER_DATA/snaps integration-tests/data/
  # copy config to PWD
- cp $SNAP_APP_TMPDIR/testconfig.json integration-tests/data/output/
+ cp $SNAP_USER_DATA/testconfig.json integration-tests/data/output/
  # run the test
  snappy-tests -check.f {snappy-test}
-environ: SNAP_APP_TMPDIR
+environ: SNAP_USER_DATA
 estimated_duration: 2.0
 depends: snappy_core_test/generate-json-config
 
