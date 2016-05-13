@@ -6,11 +6,9 @@
 #    Authors: Jonathan Cave <jonathan.cave@canonical.com>
 
 
-import glob
 import subprocess
 
 from guacamole import Command
-import yaml
 
 
 class SnappyList(Command):
@@ -19,7 +17,7 @@ class SnappyList(Command):
 
     def invoked(self, ctx):
         """Snappy list should show the ubuntu-core package is installed."""
-        cmd = ['snappy', 'list']
+        cmd = ['snap', 'list']
         output = subprocess.check_output(cmd)
         if 'ubuntu-core' not in str(output):
             print("String not found")
@@ -31,10 +29,10 @@ class SnappySearch(Command):
     """snappy search sub-command."""
 
     def invoked(self, ctx):
-        """Snappy search for 'hello' should find hello-dbus-fwk also."""
-        cmd = ['snappy', 'search', 'hello']
+        """Snappy search for 'hello'."""
+        cmd = ['snap', 'find', 'hello']
         output = subprocess.check_output(cmd)
-        if 'hello-dbus-fwk' not in str(output):
+        if 'hello-world' not in str(output):
             print("String not found")
             return 1
 
@@ -45,9 +43,9 @@ class SnappyInstall(Command):
 
     def invoked(self, ctx):
         """Test install of hello snap."""
-        cmd = ['sudo', 'snappy', 'install', 'hello-world']
+        cmd = ['sudo', 'snap', 'install', 'hello-world']
         subprocess.check_call(cmd)
-        cmd = ['snappy', 'list']
+        cmd = ['snap', 'list']
         output = subprocess.check_output(cmd)
         if 'hello-world' not in str(output):
             print("Did't find package name")
@@ -60,9 +58,9 @@ class SnappyRemove(Command):
 
     def invoked(self, ctx):
         """Test remove of hello snap."""
-        cmd = ['sudo', 'snappy', 'remove', 'hello-world']
+        cmd = ['sudo', 'snap', 'remove', 'hello-world']
         subprocess.check_call(cmd)
-        cmd = ['snappy', 'list']
+        cmd = ['snap', 'list']
         output = subprocess.check_output(cmd)
         if 'hello-world' in str(output):
             print("Found package name")

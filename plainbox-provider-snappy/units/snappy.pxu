@@ -4,8 +4,8 @@ _name: Snappy Ubuntu Core
 
 
 id: snappy/test-list
-_summary: Test that the snappy list command is working.
-_purpose: If snappy list command is working then should at least find the
+_summary: Test that the snap list command is working.
+_purpose: If snap list command is working then should at least find the
  ubuntu-core package.
 plugin: shell
 command: snappy_tests list
@@ -14,8 +14,8 @@ estimated_duration: 10s
 flags: preserve-locale
 
 id: snappy/test-search
-_summary: Test that the snappy search command is working.
-_purpose: If snappy search command is working then should find hello-dbus-fwk
+_summary: Test that the snap find command is working.
+_purpose: If snap find command is working then should find hello-world
  in the store.
 plugin: shell
 command: snappy_tests search
@@ -24,7 +24,7 @@ estimated_duration: 10s
 flags: preserve-locale
 
 id: snappy/test-install
-_summary: Test the snappy install command is able to install hello-world snap.
+_summary: Test the snap install command is able to install hello-world snap.
 _purpose:
  The store should contain the basic hello-world snap makes sure this
  can be downloaded and installed on the system.
@@ -35,7 +35,7 @@ estimated_duration: 10s
 flags: preserve-locale
 
 id: snappy/test-remove
-_summary: Test the snappy remove command is able to remove the hello-world snap.
+_summary: Test the snap remove command is able to remove the hello-world snap.
 _purpose: After having installed the hello-world snap, check it can removed.
 plugin: shell
 command: snappy_tests remove
