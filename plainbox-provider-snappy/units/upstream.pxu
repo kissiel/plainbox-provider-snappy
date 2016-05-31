@@ -13,7 +13,7 @@ _description:
  This will allow us to make individual Checkbox jobs using the template job
  below.
 command:
- snappy-tests.snappy-tests-list | while read i
+ snappy-tests.snappy-tests-list |grep -v TestRemoveBusyRetries | while read i
  do
    if [ "$i" = "PASS" ] || [ "$i" = "FAIL" ]; then
      continue
