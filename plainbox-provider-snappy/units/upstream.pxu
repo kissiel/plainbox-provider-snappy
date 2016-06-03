@@ -46,11 +46,6 @@ _description:
  Runs a specific tests from the upstream Snappy test suite
 plugin: shell
 command:
- mkdir -p integration-tests/data/output
- # copy data to PWD
- cp -r $PLAINBOX_PROVIDER_DATA/snaps integration-tests/data/
- # copy config to PWD
- cp $SNAP_USER_DATA/testconfig.json integration-tests/data/output/
  # run the test
  snappy-tests -check.f {snappy-test}
 environ: SNAP_USER_DATA
