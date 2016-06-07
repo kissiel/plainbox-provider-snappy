@@ -24,19 +24,6 @@ command:
 estimated_duration: 2s
 flags: preserve-locale
 
-id: snappy_core_test/generate-json-config
-plugin: shell
-_summary: Create the json config required to run the tests
-_description:
- The json file is required for certain tests and needs the correct values.
- Need to work on generating this intelligently.
-command:
- # this could/should be modified to insert the correct values
- # at runtime
- cp $PLAINBOX_PROVIDER_DATA/testconfig.json $SNAP_USER_DATA/testconfig.json
-environ: SNAP_USER_DATA
-estimated_duration: 1s
-
 unit: template
 template-resource: snappy_core_tests
 template-unit: job
@@ -50,7 +37,6 @@ command:
  checkbox-snappy.snappy-tests -check.f {snappy-test}
 environ: SNAP_USER_DATA
 estimated_duration: 2.0
-depends: snappy_core_test/generate-json-config
 
 id: snappy-core-upstream
 unit: test plan
