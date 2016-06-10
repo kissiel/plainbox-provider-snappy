@@ -4,8 +4,13 @@
 # Written by:
 #   Paul Larson <paul.larson@canonical.com>
 
+unit: category
+id: snappy_upstream
+_name: Upstream tests from Snappy Ubuntu Core
+
 unit: job
 id: snappy_core_tests
+category_id: snappy_upstream
 plugin: resource
 _summary: Gather list of tests provided by upstream test binary
 _description:
@@ -13,7 +18,7 @@ _description:
  This will allow us to make individual Checkbox jobs using the template job
  below.
 command:
- $SNAP/bin/snappy-tests -check.list |grep -v TestRemoveBusyRetries | while read i
+ snappy-tests -check.list | grep -v TestRemoveBusyRetries | while read i
  do
    if [ "$i" = "PASS" ] || [ "$i" = "FAIL" ]; then
      continue
@@ -25,6 +30,7 @@ estimated_duration: 2s
 flags: preserve-locale
 
 unit: template
+category_id: snappy_upstream
 template-resource: snappy_core_tests
 template-unit: job
 id: snappy_core_test/{snappy-test}
@@ -34,10 +40,9 @@ _description:
 plugin: shell
 command:
  # run the test
- cp -a $SNAP/integration-tests $SNAP_USER_DATA
- cd $SNAP_USER_DATA
- $SNAP/bin/snappy-tests -check.f {snappy-test}
-environ: SNAP_USER_DATA, SNAP
+ [ ! -d "$PLAINBOX_SESSION_SHARE/integration-tests" ] && cp -a $SNAP/integration-tests $PLAINBOX_SESSION_SHARE
+ cd $PLAINBOX_SESSION_SHARE
+ snappy-tests -check.f {snappy-test}
 estimated_duration: 2.0
 
 id: snappy-core-upstream
@@ -48,7 +53,7 @@ _description:
  system running snappy.
 estimated_duration: 3600
 include:
-    2013.com.canonical.certification::snappy_core_test/.*
+    snappy_core_test/.*
 mandatory_include:
     2013.com.canonical.plainbox::manifest
     package
@@ -64,5 +69,6 @@ mandatory_include:
     lsusb_attachment
     dmi
     meminfo
-    2013.com.canonical.certification::snappy_core_tests
+bootstrap_include:
+    snappy_core_tests
 
