@@ -29,6 +29,7 @@ include:
     wwan/.*
     memory/.*
     disk/.*
+    stress/stress-ng.*
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
@@ -53,6 +54,7 @@ bootstrap_include:
     bluez-internal-uc-tests
     bluez-internal-bnep-tests
     wwan_resource
+    stress-ng-classes
 
 id: snappy-generic-automated
 unit: test plan

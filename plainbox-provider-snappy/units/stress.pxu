@@ -1,4 +1,39 @@
 
+unit: category
+id: stress
+_name: Snappy stress tests
+
+unit: job
+id: stress-ng-classes
+plugin: resource
+_summary: Gather list of test classes from stress-ng
+_description:
+ stress-ng divides tests in to classes. Get a list of classes so can divide
+ up tests.
+command:
+ command -v stress-ng >/dev/null 2>&1 || { >&2 echo "stress-ng command not found"; exit 1; }
+ # CLASSES=$(stress-ng --class which 2>&1 | cut -d':' -f 3)
+ CLASSES="cpu-cache io"
+ for c in $CLASSES; do
+  echo "stress-ng-class: $c"
+  echo
+ done
+estimated_duration: 1s
+flags: preserve-locale
+
+unit: template
+template-resource: stress-ng-classes
+template-unit: job
+id: stress/stress-ng-test-for-class-{stress-ng-class}
+category_id: stress
+_summary: Run the stress-ng stressors for class {stress-ng-class}
+_description:
+ Runs the stressors for the class defined. Tests run sequentially using the
+ same number of proccesses as online processors.
+plugin: shell
+command:
+ stress-ng --class {stress-ng-class} --sequential 0
+
 id: stress/suspend-30-times
 _summary: System can be suspended 30 times
 _purpose:
