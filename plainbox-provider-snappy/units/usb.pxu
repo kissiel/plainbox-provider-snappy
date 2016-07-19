@@ -116,7 +116,7 @@ id: lsusb_attachment
 plugin: attachment
 category_id: 2013.com.canonical.plainbox::info
 user: root
-command: lsusb -vv | iconv -t 'utf-8' -c
+command: lsusb.py -f $SNAP/var/lib/usbutils/usb.ids
 estimated_duration: 0.700
 _summary: Attach output of lsusb
 _description: Attaches a list of detected USB devices.
