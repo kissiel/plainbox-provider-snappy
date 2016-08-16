@@ -511,6 +511,9 @@ class KernelSecurityTest(testlib.TestlibCase):
                      "/boot/config"]:
             if os.path.exists(name):
                 return open(name, "r")
+        path = os.path.expandvars('$PLAINBOX_PROVIDER_DATA/kernel_config')
+        if os.path.exists(path):
+            return open(path, 'r')
         self.assertTrue(False, "Could not locate kernel configuration")
 
     def _config_lines(self):
