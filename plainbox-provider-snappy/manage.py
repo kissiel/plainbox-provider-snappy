@@ -7,8 +7,12 @@
 
 """Management script for the snappy provider."""
 
+import os
+import shutil
+
 from plainbox.impl.secure.qualifiers import select_jobs
 from plainbox.impl.session import SessionState
+from plainbox.provider_manager import InstallCommand
 from plainbox.provider_manager import ManageCommand
 from plainbox.provider_manager import manage_py_extension
 from plainbox.provider_manager import setup, N_, _
@@ -222,6 +226,50 @@ class TestPlanReport(ManageCommand):
         parser.add_argument(
             'output', metavar=_("FILE"),
             help=_("path of the .xlsx file to write"))
+
+
+@manage_py_extension
+class InstallKernSec(InstallCommand):
+    """
+    Extension that copies over required files for kernel-security-tests.
+    
+    @EPILOG@
+    -
+    """
+    
+    name = 'install'
+
+    def invoked(self, ns):
+        super().invoked(ns)
+        dest_map = self._get_dest_map(ns.layout, ns.prefix)
+        provider = self.get_provider()
+        kern_sec_path = os.path.join(
+            provider.build_bin_dir, 'kernel-security')
+        dest = ns.root + os.path.join(dest_map['data'], 'kernel-security')
+        _copytree(kern_sec_path, dest)
+        shutil.copy(
+            os.path.join(provider.bin_dir, 'testlib.py'),
+            ns.root + dest_map['bin'])
+        shutil.copy(
+            os.path.join(provider.bin_dir, 'testlib.py'),
+            ns.root + os.path.join(dest_map['data'], 'testlib.py'))
+        shutil.copy(
+            os.path.join(provider.bin_dir, 'test_kernel_security.py'),
+            ns.root + os.path.join(dest_map['data'], 'test_kernel_security.py'))
+
+
+def _copytree(src, dst):
+	"""Simple copytree that always overwrites."""
+	for name in os.listdir(src):
+		srcname = os.path.join(src, name)
+		dstname = os.path.join(dst, name)
+		if os.path.isdir(srcname):
+			if not os.path.exists(dstname):
+				os.mkdir(dstname)
+			_copytree(srcname, dstname)
+		else:
+			shutil.copy2(srcname, dstname)
+
 
 
 setup(
