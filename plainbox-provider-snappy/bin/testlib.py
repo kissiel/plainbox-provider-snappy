@@ -921,6 +921,15 @@ class TestlibManager(object):
                 pass
             self.lsb_release.setdefault(field, value)
 
+        if not self.lsb_release:
+            # lsb_released crashed
+            self.lsb_release = {
+                'Distributor ID': 'Ubuntu',
+                'Description': 'Ubuntu 16.04.1 LTS',
+                'Release': 16.04,
+                'Codename': 'xenial',
+            }
+
         # FIXME: hack OEM releases into known-Ubuntu versions
         if self.lsb_release['Distributor ID'] == "HP MIE (Mobile Internet Experience)":
             if self.lsb_release['Release'] == 1.0:
