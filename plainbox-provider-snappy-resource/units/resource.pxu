@@ -18,7 +18,7 @@ id: snap
 estimated_duration: 1.1
 plugin: resource
 command:
-    snap list | awk 'NR>1 {print "name: "$1; print "version: "$2; print "developer: "$3; print ""}'
+    snap_resource
 _description: Generates a list of snap packages
 _summary: Collect information about installed snap packages
 

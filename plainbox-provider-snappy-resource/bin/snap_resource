@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import logging
+import requests
+import requests_unixsocket
+import sys
+
+SNAPD_BASE_URL = 'http+unix://%2Frun%2Fsnapd.socket'
+
+session = requests_unixsocket.Session()
+
+
+def get(path):
+    r = session.get(SNAPD_BASE_URL + path)
+    if r.status_code != requests.codes.ok:
+        logging.error("Got error %i attempting to access %s",
+                      r.status_code, path)
+        sys.exit(1)
+    return r
+
+
+data = get('/v2/snaps').json()
+
+for snap in data['result']:
+    def print_field(key):
+        val = snap[key]
+        if val != "":
+            print("%s: %s" % (key, val))
+    # Could just print out all contents, but gone for just this whitelist
+    keys = ['name', 'type', 'channel', 'version', 'revision', 'developer',
+            'install-date', 'confinement', 'devmode']
+    for f in keys:
+        print_field(f)
+    print()
