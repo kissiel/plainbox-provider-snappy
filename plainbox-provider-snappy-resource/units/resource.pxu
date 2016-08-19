@@ -82,7 +82,7 @@ _summary: Attach hardware database (udev)
 id: lspci_attachment
 plugin: attachment
 category_id: 2013.com.canonical.plainbox::info
-command: lspci -vvnn | iconv -t 'utf-8' -c
+command: lspci -i $SNAP/usr/share/misc/pci.ids -vvnn
 estimated_duration: 0.042
 _description: Attaches very verbose lspci output.
 _summary: Attach a list of PCI devices
