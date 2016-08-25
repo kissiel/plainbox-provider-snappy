@@ -1,0 +1,4 @@
+echo Distributor ID: Ubuntu
+echo Description:    Ubuntu 16.04.1 LTS
+echo Release:        16.04
+echo Codename:       xenial

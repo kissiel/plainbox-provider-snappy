@@ -1,0 +1,48 @@
+# Copyright 2016 Canonical Ltd.
+# All rights reserved.
+#
+# Written by:
+#   Maciej Kisielewski <maciej.kisielewski@canonical.com>
+
+id: kernel-security
+unit: test plan
+_name: Kernel Security Tests
+_description:
+ Collection of tests from QA Regression Testing repository
+estimated_duration: 900s
+bootstrap_include:
+ security_resource
+mandatory_include:
+ security/setup
+include:
+ security/.*
+
+unit: category
+id: security
+_name: Security
+
+id: security_resource
+plugin: resource
+_summary: Gather all kernel-security-tests
+_description: Generate list of test cases from test_security_kernel module
+command: kernel_security_resource.py
+flags: preserve-locale
+
+id: security/setup
+plugin: shell
+command:
+ cp -r $PLAINBOX_PROVIDER_DATA/kernel-security $PLAINBOX_SESSION_SHARE/
+ cp -r $PLAINBOX_PROVIDER_DATA/test_kernel_security.py $PLAINBOX_SESSION_SHARE/
+ cp -r $PLAINBOX_PROVIDER_DATA/testlib.py $PLAINBOX_SESSION_SHARE/
+ chown -R root:root $PLAINBOX_SESSION_SHARE/kernel-security/proc-maps/*
+user: root
+
+unit: template
+template-resource: security_resource
+template-unit: job
+id: security/{name}
+command: export PATH=$PLAINBOX_PROVIDER_DATA/kernel-security/_mocks:$PATH && cd $PLAINBOX_SESSION_SHARE && python3 -m unittest {pyobj}
+plugin: shell
+user: root
+category_id: security
+_description: {name}
