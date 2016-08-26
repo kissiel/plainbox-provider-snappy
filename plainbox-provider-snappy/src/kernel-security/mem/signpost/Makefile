@@ -1,7 +1,7 @@
 obj-m += signpost.o
 
 all:
-	make -C /usr/src/linux-headers-$(shell uname -r) SUBDIRS=$$PWD modules
+	make -C /usr/src/linux-headers-$(shell dpkg-query --showformat='${Version}' --show linux-headers-generic) SUBDIRS=$$PWD modules
 
 clean:
-	make -C /usr/src/linux-headers-$(shell uname -r) SUBDIRS=$$PWD clean
+	make -C /usr/src/linux-headers-$(shell dpkg-query --showformat='${Version}' --show linux-headers-generic) SUBDIRS=$$PWD clean
