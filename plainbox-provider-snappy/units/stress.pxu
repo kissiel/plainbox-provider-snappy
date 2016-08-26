@@ -1,7 +1,7 @@
 
 unit: category
 id: stress
-_name: Snappy stress tests
+_name: Snappy Stress Tests
 
 unit: job
 id: stress-ng-classes
@@ -9,11 +9,11 @@ plugin: resource
 _summary: Gather list of test classes from stress-ng
 _description:
  stress-ng divides tests in to classes. Get a list of classes so can divide
- up tests.
+ up tests. Complete class list: cpu, cpu-cache, device, io, interrupt,
+ filesystem, memory, network, os, pipe, scheduler, vm.
 command:
  command -v stress-ng >/dev/null 2>&1 || { >&2 echo "stress-ng command not found"; exit 1; }
- # CLASSES=$(stress-ng --class which 2>&1 | cut -d':' -f 3)
- CLASSES="cpu-cache io"
+ CLASSES="cpu cpu-cache memory os pipe scheduler vm"
  for c in $CLASSES; do
   echo "stress-ng-class: $c"
   echo
@@ -31,6 +31,7 @@ _description:
  Runs the stressors for the class defined. Tests run sequentially using the
  same number of proccesses as online processors.
 plugin: shell
+estimated_duration: 1200.0
 command:
  stress-ng --class {stress-ng-class} --sequential 0
 
