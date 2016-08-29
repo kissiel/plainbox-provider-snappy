@@ -4,7 +4,7 @@
    Author: Kees Cook <keescook@chromium.org>
    Copyright 2012 ChromeOS Authors
 
-   make -C /usr/src/linux-headers-$(dpkg-query --showformat='${Version}' --show linux-headers-generic) SUBDIRS=$PWD modules
+   make -C /usr/src/linux-headers-$(dpkg-query --showformat='${Version}' --show linux-headers-generic| awk -F '.' '{ print $$1"."$$2"."$$3"-"$$4"-generic" }') SUBDIRS=$PWD modules
 */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
