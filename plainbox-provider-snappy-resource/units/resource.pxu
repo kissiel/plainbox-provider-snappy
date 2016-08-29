@@ -110,3 +110,21 @@ plugin: resource
 command: meminfo_resource
 _description: Generates resource info based on /proc/meminfo
 _summary: Collect information about system memory (/proc/meminfo)
+
+id: sleep
+estimated_duration: 0.03
+plugin: resource
+command: for state in `cat /sys/power/state`; do echo "$state: supported"; done
+_description: Create resource info for supported sleep states
+
+id: rtc
+estimated_duration: 0.02
+plugin: resource
+command: 
+  if [ -e /sys/class/rtc ]
+  then
+      echo "state: supported"
+  else
+      echo "state: unsupported"
+  fi
+_description: Creates resource info for RTC
