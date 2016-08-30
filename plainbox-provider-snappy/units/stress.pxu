@@ -31,6 +31,7 @@ _description:
  Runs the stressors for the class defined. Tests run sequentially using the
  same number of proccesses as online processors.
 plugin: shell
+user: root
 estimated_duration: 1200.0
 command:
  stress-ng --class {stress-ng-class} --sequential 0
