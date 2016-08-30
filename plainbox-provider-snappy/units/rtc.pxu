@@ -1,5 +1,5 @@
 unit: category
-id: rtc
+id: rtc_category
 _name: Real Time Clock (RTC)
 
 
@@ -16,6 +16,6 @@ command:
  rtcwake -v -m off -s 30
 plugin: user-interact
 user: root
-category_id: rtc
+category_id: rtc_category
 estimated_duration: 40
 flags: noreturn
