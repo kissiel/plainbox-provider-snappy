@@ -30,6 +30,7 @@ include:
     memory/.*
     disk/.*
     stress/stress-ng.*
+    2016.com.intel.ipdt::ipdt/.*
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
@@ -55,6 +56,8 @@ bootstrap_include:
     bluez-internal-bnep-tests
     wwan_resource
     stress-ng-classes
+nested_part:
+    docker-full
 
 id: snappy-generic-automated
 unit: test plan
@@ -94,6 +97,7 @@ include:
     memory/info
     memory/check
     disk/.*
+    2016.com.intel.ipdt::ipdt/.*
     audio/detect-capture-devices
     audio/detect-playback-devices
 mandatory_include:
@@ -120,3 +124,5 @@ bootstrap_include:
     bluez-internal-uc-tests
     bluez-internal-bnep-tests
     wwan_resource
+nested_part:
+    docker-full
