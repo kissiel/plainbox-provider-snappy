@@ -43,6 +43,7 @@ template-unit: job
 id: security/{name}
 command: export PATH=$PLAINBOX_PROVIDER_DATA/kernel-security/_mocks:$PATH && cd $PLAINBOX_SESSION_SHARE && python3 -m unittest {pyobj}
 plugin: shell
+requires: cpuinfo.platform == 'i386' or cpuinfo.platform == 'x86_64'
 user: root
 category_id: security
 _description: {name}
