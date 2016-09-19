@@ -139,17 +139,48 @@ plugin: manual
 category_id: snappy
 estimated_duration: 120
 
-id: snappy/webdm
-_summary: WebDM (Device Manager) is enabled and operational
+id: snappy/snapweb
+_summary: snapweb is enabled
 _purpose:
- Check user can access webdm from other machine
+ Check user can access snapweb from other machine
 _steps:
  1. Connect Ethernet cable before boot
  2. Boot into system
  3. Browse following url with browser from other machine in same network
      http://[ip address of the testing system]:4200
 _verification:
- Can access webdm interface
+ Can access snapweb interface
 plugin: manual
 category_id: snappy
-estimated_duration: 300
+estimated_duration: 60
+
+id: snappy/snapweb-search
+_summary: User is able to search the store from snapweb interface
+_purpose:
+ Check that the user is able to search the store for snaps to install from the
+ snapweb interface
+_steps:
+ 1. Browse following url with browser from other machine in same network
+     http://[ip address of the testing system]:4200
+ 2. Click on the store link
+ 3. Use the search box to find snaps
+_verification:
+ A list of snaps available for install is presented.
+plugin: manual
+category_id: snappy
+estimated_duration: 30
+depends: snappy/snapweb
+
+id: snappy/snapweb-install
+_summary: User is able to install a snap using snapweb interface
+_purpose:
+ Check that the user is able to install a snap from the snapweb interface
+_steps:
+ 1. Click on the "Install" button for a snap in the search ouput.
+ 2. Check the button changes to "Remove"
+_verification:
+ Use the command line to list installed snaps. Verify the new snap is installed.
+plugin: manual
+category_id: snappy
+estimated_duration: 30
+depends: snappy/snapweb-search
