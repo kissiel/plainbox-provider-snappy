@@ -34,7 +34,7 @@ estimated_duration: 3m
 flags: preserve-locale noreturn
 # NOTE: This job will only run if we know we have a TPM chip (according to the
 # manifest) but we don't see one in sysfs (because it's disabled).
-requires: sysfs_tpm_count.count == "0" and manifest.has_tpm_chip
+requires: sysfs_tpm_count.count == "0" and manifest.has_tpm_chip == 'True'
 imports: from 2013.com.canonical.plainbox import manifest
 
 unit: job

@@ -30,7 +30,7 @@ flags: preserve-locale
 # Tie this resource with the has_tpm_chip manifest entry. This way it will
 # automatically get skipped (and everything along with it) when according to
 # the manifest, there is no TPM chip on the DUT.
-requires: manifest.has_tpm_chip
+requires: manifest.has_tpm_chip == 'True'
 imports: from 2013.com.canonical.plainbox import manifest
 
 unit: job
@@ -47,7 +47,7 @@ command: tpm-sysfs-resource
 estimated_duration: 2s
 flags: preserve-locale
 # See note about manifest on the sysfs_tpm job above.
-requires: manifest.has_tpm_chip
+requires: manifest.has_tpm_chip == 'True'
 imports: from 2013.com.canonical.plainbox import manifest
 
 unit: job
@@ -64,7 +64,7 @@ command: tpm-sysfs-resource
 estimated_duration: 2s
 flags: preserve-locale
 # See note about manifest on the sysfs_tpm job above.
-requires: manifest.has_tpm_chip
+requires: manifest.has_tpm_chip == 'True'
 imports: from 2013.com.canonical.plainbox import manifest
 
 unit: job
