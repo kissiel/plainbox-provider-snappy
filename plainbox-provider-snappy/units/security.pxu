@@ -13,7 +13,7 @@ estimated_duration: 900s
 bootstrap_include:
  security_resource
 mandatory_include:
- security/setup
+ security_setup
 include:
  security/.*
 
@@ -28,7 +28,7 @@ _description: Generate list of test cases from test_security_kernel module
 command: kernel_security_resource.py
 flags: preserve-locale
 
-id: security/setup
+id: security_setup
 plugin: shell
 command:
  cp -r $PLAINBOX_PROVIDER_DATA/kernel-security $PLAINBOX_SESSION_SHARE/
