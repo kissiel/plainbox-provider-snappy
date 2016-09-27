@@ -20,6 +20,8 @@ from plainbox.provider_manager import setup, N_, _
 
 def nr_rows_of(text):
     """Get the number of rows / lines in some text."""
+    if not text:
+        return 1
     return text.count("\n") + 1
 
 assert nr_rows_of("foo") == 1
@@ -28,6 +30,8 @@ assert nr_rows_of("foo\nbar") == 2
 
 def nr_cols_of(text):
     """Get the number of columns in some text."""
+    if not text:
+        return 0
     return max((len(line) for line in text.splitlines()), default=0)
 
 assert nr_cols_of("foo") == 3
@@ -159,8 +163,9 @@ class TestPlanReport(ManageCommand):
             sheet.write(index, COL_ID, job.partial_id, fmt_code)
             sheet.write(index, COL_DESC, job.tr_description())
             sheet.write(index, COL_COMMAND, job.command, fmt_code)
-            sheet.write(index, COL_DURATION, '{:.0f}m {:.0f}s'.format(*divmod(
-                job.estimated_duration, 60)))
+            if job.estimated_duration:
+                sheet.write(index, COL_DURATION, '{:.0f}m {:.0f}s'.format(
+                    *divmod(job.estimated_duration, 60)))
         # Make sure the sheet is read only
         sheet.protect()
 
@@ -168,7 +173,7 @@ class TestPlanReport(ManageCommand):
         """A sheet for a given test plan."""
         # Create a sheet for this test plan
         sheet = workbook.add_worksheet(
-            _('{}').format(plan.tr_name()))
+            _('{}').format(plan.tr_name()[0:30]))
         # Define cell formatting
         fmt_header = workbook.add_format({
             'bold': True,
