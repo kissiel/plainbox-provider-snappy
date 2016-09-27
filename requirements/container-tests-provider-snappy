@@ -1,0 +1,20 @@
+#!/bin/bash
+
+function finish {
+  rm -rf ./plainbox-provider-ipdt
+  rm -rf ./plainbox-provider-docker
+}
+trap finish EXIT
+
+set -e
+
+git clone git://git.launchpad.net/plainbox-provider-ipdt
+python3 ./plainbox-provider-ipdt/plainbox-provider-ipdt/manage.py develop --force
+python3 ./plainbox-provider-ipdt/plainbox-provider-ipdt-gpu/manage.py develop --force
+
+git clone git://git.launchpad.net/plainbox-provider-docker
+python3 ./plainbox-provider-docker/manage.py develop --force
+
+./plainbox-provider-snappy-resource/manage.py validate
+./plainbox-provider-snappy-resource/manage.py develop --force
+./plainbox-provider-snappy/manage.py validate
