@@ -29,6 +29,7 @@ include:
     wwan/.*
     memory/.*
     disk/.*
+    i2c/.*
     stress/stress-ng.*
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
