@@ -69,7 +69,7 @@ class Device(Command):
         exit_code = 1
         for i in range(bus_number):
             print('Checking I2C bus {}'.format(i))
-            result = subprocess.check_output(['i2cdetect', '-y', str(i)],
+            result = subprocess.check_output(['i2cdetect', '-y', '-r', str(i)],
                                              universal_newlines=True)
             print(result)
             result_line = result.splitlines()[1:]
