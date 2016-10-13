@@ -54,3 +54,15 @@ _verification:
 plugin: manual
 category_id: display
 estimated_duration: 300
+
+id: monitor/displayport_hotplug
+plugin: manual
+category_id: display
+_purpose:
+     This test will check the DisplayPort port and the ability to do hotplugging.
+_steps:
+     Skip this test if your system does not have a DisplayPort port.
+     1. If a display is already connected, unplug it.
+     2. (Re-)Connect a display to the DisplayPort port on your system
+_verification:
+     Was the interface displayed correctly on the screen?
