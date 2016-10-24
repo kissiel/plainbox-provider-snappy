@@ -34,7 +34,7 @@ flags: preserve-locale
 unit: template
 template-resource: device
 template-filter: device.category == 'NETWORK'
-id: ethernet/check-disconnected_{interface}
+id: ethernet/hotplug-{interface}-check-disconnected
 _summary: Ensure ethernet port {interface} is physically disconnected
 _purpose:
  Check that ethernet port {interface} is detected as being in the correct state
@@ -56,7 +56,7 @@ flags: preserve-locale
 unit: template
 template-resource: device
 template-filter: device.category == 'NETWORK'
-id: ethernet/hotplug-connect_{interface}
+id: ethernet/hotplug-{interface}-connect
 _summary: Ethernet port {interface} hotplug detection test
 _purpose:
  Check ethernet port {interface} connects when cable inserted. Assumes an IP
@@ -104,12 +104,12 @@ command:
  exit 0
 category_id: ethernet
 estimated_duration: 60.0
-depends: ethernet/check-disconnected_{interface}
+depends: ethernet/hotplug-{interface}-check-disconnected
 
 unit: template
 template-resource: device
 template-filter: device.category == 'NETWORK'
-id: ethernet/hotplug-disconnect_{interface}
+id: ethernet/hotplug-{interface}-disconnect
 _summary: Ethernet port {interface} hotplug disconnect step
 _purpose:
  Check that when cable removed from ethernet port {interface} the system
@@ -152,4 +152,4 @@ command:
  exit 0
 category_id: ethernet
 estimated_duration: 20.0
-depends: ethernet/hotplug-connect_{interface}
+depends: ethernet/hotplug-{interface}-connect
