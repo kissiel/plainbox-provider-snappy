@@ -34,17 +34,18 @@ flags: preserve-locale
 unit: template
 template-resource: device
 template-filter: device.category == 'NETWORK'
-id: ethernet/hotplug-{interface}-check-disconnected
-_summary: Ensure ethernet port {interface} is physically disconnected
+template-engine: jinja2
+id: ethernet/hotplug-{{ interface }}-check-disconnected
+_summary: Ensure ethernet port {{ interface }} is physically disconnected
 _purpose:
- Check that ethernet port {interface} is detected as being in the correct state
+ Check that ethernet port {{ interface }} is detected as being in the correct state
  to begin a hotplug connection test.
 _steps:
- 1. Ensure there is no ethernet cable attached to port {interface}.
+ 1. Ensure there is no ethernet cable attached to port {{ interface }}.
  2. Begin test.
 plugin: user-interact
 command:
-  if [ $(cat /sys/class/net/{interface}/carrier) -ne 0 ]; then
+  if [ $(cat /sys/class/net/{{ interface }}/carrier) -ne 0 ]; then
     # carrier indicating cable present
     exit 1
   fi
@@ -52,6 +53,8 @@ command:
 category_id: ethernet
 estimated_duration: 1.0
 flags: preserve-locale
+after:
+ {%- if __index__ > 1 %}ethernet/hotplug-{{ __index__ - 1 }}-end-cycle{%- endif %}
 
 unit: template
 template-resource: device
@@ -153,3 +156,11 @@ command:
 category_id: ethernet
 estimated_duration: 20.0
 depends: ethernet/hotplug-{interface}-connect
+
+unit: template
+template-resource: device
+template-filter: device.category == 'NETWORK'
+id: ethernet/hotplug-{__index__}-end-cycle
+after: ethernet/hotplug-{interface}-disconnect
+command: true
+flags: simple
