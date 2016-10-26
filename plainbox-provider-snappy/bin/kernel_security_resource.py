@@ -9,9 +9,12 @@ module = __import__(module_name)
 BLACKLIST = [
     'test_000_make', # binaries are prebuilt, no need to check for make
     'test_010_proc_maps', # because we're not building binaries ad hoc
+    'test_030_mmap_min', # suid binaries not allowed in snaps
     'test_091_symlink_following_in_sticky_directories', # requires useradd
     'test_093_ptrace_restriction', # requires gdb
     'test_094_rare_net_autoload', # fails on snappy
+    'test_082_stack_guard_kernel', # snappy kernel apparently don't have
+    # __stack_chk_fail function
 
 ]
 

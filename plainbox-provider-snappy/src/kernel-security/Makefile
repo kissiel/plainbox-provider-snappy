@@ -1,4 +1,4 @@
-SUBDIRS=aslr guard-page mem min-addr nx proc-maps ptrace seccomp seccomp_filter userns
+SUBDIRS=aslr guard-page mem min-addr nx proc-maps ptrace seccomp seccomp_filter userns smep
 
 all:
 	set -e && for dir in $(SUBDIRS) ; do \
