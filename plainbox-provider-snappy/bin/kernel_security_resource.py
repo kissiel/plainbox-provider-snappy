@@ -12,6 +12,8 @@ BLACKLIST = [
     'test_091_symlink_following_in_sticky_directories', # requires useradd
     'test_093_ptrace_restriction', # requires gdb
     'test_094_rare_net_autoload', # fails on snappy
+    'test_082_stack_guard_kernel', # snappy kernel apparently don't have
+    # __stack_chk_fail function
 
 ]
 
