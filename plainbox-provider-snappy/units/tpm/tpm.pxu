@@ -195,6 +195,7 @@ flags: preserve-locale preserve-cwd
 
 unit: job
 id: query/tpm_restrictpubek-status
+category_id: tpm
 _summary: Collect the output of tpm_restrictpubek --status --well-known
 _description:
  This simply collects the output of "tpm_restrictpubek --status --well-known"
@@ -207,6 +208,7 @@ flags: preserve-locale preserve-cwd
 
 unit: job
 id: query/tpm_restrictsrk-status
+category_id: tpm
 _summary: Collect the output of tpm_restrictsrk --status --well-known
 _description:
  This simply collects the output of "tpm_restrictsrk --status --well-known"
@@ -219,6 +221,7 @@ flags: preserve-locale preserve-cwd
 
 unit: job
 id: query/tpm_setclearable-status
+category_id: tpm
 _summary: Collect the output of tpm_setclearable--status --well-known
 _description:
  This simply collects the output of "tpm_setclearable --status --well-known"
@@ -231,6 +234,7 @@ flags: preserve-locale preserve-cwd
 
 unit: job
 id: query/tpm_setenable-status
+category_id: tpm
 _summary: Collect the output of tpm_setenable --status --well-known
 _description:
  This simply collects the output of "tpm_setenable --status --well-known"
@@ -243,6 +247,7 @@ flags: preserve-locale preserve-cwd
 
 unit: job
 id: query/tpm_setownable-status
+category_id: tpm
 _summary: Collect the output of tpm_setownable --status --well-known
 _description:
  This simply collects the output of "tpm_setownable --status --well-known"
@@ -255,6 +260,7 @@ flags: preserve-locale preserve-cwd
 
 unit: job
 id: query/tpm_setpresence -status
+category_id: tpm
 _summary: Collect the output of tpm_setpresence --status --well-known
 _description:
  This simply collects the output of "tpm_setpresence --status --well-known"
@@ -267,6 +273,7 @@ flags: preserve-locale preserve-cwd
 
 unit: job
 id: query/tpm_getpubek
+category_id: tpm
 _summary: Collect the output of tpm_getpubek --well-known
 _description:
  This simply collects the output of "tpm_getpubek --well-known"
