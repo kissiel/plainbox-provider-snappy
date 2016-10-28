@@ -1,60 +1,24 @@
-id: watchdog/kernel_module_boot
-_summary: Load watchdog kernel module when boot
-_purpose: Verify watchdog kernel module is loaded when boot
-_steps:
- 1. Make sure you didn't load watchdog kernel module manually after boot, if you did, reboot the system and then run this test.
- 2. Commence the test
-command:
-    if [ -n "$(lsmod | grep iTCO_wdt)" ] ; then
-        exit 0
-    fi
-    exit 1
-plugin: user-interact
-estimated_duration: 3m
-category_id: power
-flags: preserve-locale
-
-id: watchdog/daemon_boot
-depends: watchdog/kernel_module_boot
-_summary: Verify watchdog daemon is started during boot
-_description:
- The watchdog deamon should be started by the init process during
- boot to ensure the system resets in extreme circumstances.
-plugin: shell
-command:
-  ps -C watchdog -o pid=
-estimated_duration: 1s
-category_id: power
-flags: preserve-locale
-
-id: watchdog/daemon_keepalive
-depends: watchdog/daemon_boot
-_summary: Verify the watchdog keepalive daemon is up once watchdog daemon is killed
-_description:
- If the system is in a responsive state the keepalive daemon will provide
- time for a the init process to do a managed reboot rather than allowing a hard reset
- to occur.
-plugin: shell
-command:
-  kill -9 $(ps -C watchdog -o pid=) && sleep 5 && ps -C wd_keepalive -o pid=
+id: watchdog/systemd-config
+_summary: Check if systemd properly configured the hardware watchdog
+command: journalctl | grep -i 'hardware watchdog'
 user: root
-estimated_duration: 1s
 category_id: power
-flags: preserve-locale
+flags: simple
 
 id: watchdog/trigger-system-reset
-depends: watchdog/daemon_keepalive
+depends: watchdog/systemd-config
 _summary: Test that the watchdog module can trigger a system reset
 _purpose:
  The watchdog module should be capable of issuing a hard reset of the SUT.
 _steps:
- 1. Commence the test to kill (SIGKILL) the watchdog daemon.
- 2. Once the watchdog timeout has expired the SUT should reset itself.
+ 1. Commence the test to trigger a SysRq.
+ 2. Once the watchdog timeout has expired (10s) the SUT should reset itself.
  3. The board will reboot and the user should resume the test session.
 _verification:
  Did the board reset itself?
 command:
-  kill -9 $(ps -C wd_keepalive -o pid=)
+  echo 0 > /proc/sys/kernel/panic
+  echo c > /proc/sysrq-trigger
 flags: noreturn preserve-locale
 user: root
 plugin: user-interact-verify
