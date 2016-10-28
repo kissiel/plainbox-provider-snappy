@@ -1,5 +1,5 @@
 id: watchdog/systemd-config
-_summary: Check if systemd properly configured the hardware watchdog
+_summary: Check if the hardware watchdog is properly configured
 command: journalctl | grep -i 'hardware watchdog'
 user: root
 category_id: power
