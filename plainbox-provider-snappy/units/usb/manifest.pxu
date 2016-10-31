@@ -1,0 +1,5 @@
+unit: manifest entry
+id: has_usb_type_c
+_name: USB Type-C Support
+value-type: bool
+

@@ -21,8 +21,9 @@ include:
     ethernet/.*
     led/.*
     monitor/.*
-    usb2/.*
+    usb/.*
     usb3/.*
+    usb-c/.*
     watchdog/.*
     rtc/.*
     serial/.*
