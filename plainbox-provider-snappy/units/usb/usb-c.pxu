@@ -16,7 +16,6 @@ requires: manifest.has_usb_type_c == 'True'
 estimated_duration: 60
 
 id: usb-c/c-to-a-adapter/insert
-_summary: USB 3.0 storage device insertion detected on USB Type-C port using a "USB Type-C to Type-A" adapter
 _purpose:
      This test will check that the system correctly detects the insertion of
      a USB 3 storage device in a USB Type-C connector using a "Type-C to Type-A"
@@ -39,7 +38,6 @@ requires:
 estimated_duration: 30
 
 id: usb-c/c-to-a-adapter/storage-automated
-_summary: USB 3.0 storage device read & write works on USB Type-C port using a "USB Type-C to Type-A" adapter
 _description:
  This test is automated and executes after the usb-c/c-to-a-adapter/insert test
  is run.
@@ -54,7 +52,6 @@ depends: usb-c/c-to-a-adapter/insert
 estimated_duration: 60 
 
 id: usb-c/c-to-a-adapter/remove
-_summary: USB 3.0 storage device removal detected on USB Type-C port using a "USB Type-C to Type-A" adapter
 _purpose:
      This test will check that the system correctly detects the removal of
      a USB 3 storage device connected to a USB Type-C port using a "USB Type-C
