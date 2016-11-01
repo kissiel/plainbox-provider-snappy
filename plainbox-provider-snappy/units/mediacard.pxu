@@ -3,6 +3,7 @@ category_id: 2013.com.canonical.plainbox::mediacard
 id: mediacard/sd-insert
 estimated_duration: 30.0
 command: removable_storage_watcher --unmounted --memorycard insert sdio usb scsi
+requires: snap.name == 'udisks2'
 _description:
  PURPOSE:
      This test will check that the systems media card reader can
@@ -50,6 +51,7 @@ id: mediacard/sd-preinserted
 estimated_duration: 30.0
 user: root
 command: removable_storage_test -s 268400000 --memorycard -l sdio usb scsi && removable_storage_test --memorycard sdio usb scsi
+requires: snap.name == 'udisks2'
 _description:
  This is a fully automated version of mediacard/sd-automated and assumes that the
  system under test has a memory card device plugged in prior to checkbox execution.
