@@ -32,6 +32,7 @@ include:
     disk/.*
     i2c/.*
     stress/stress-ng.*
+    mediacard/.*
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
@@ -102,6 +103,7 @@ include:
     2016.com.intel.ipdt::ipdt/.*
     audio/detect-capture-devices
     audio/detect-playback-devices
+    mediacard/sd-preinserted
 mandatory_include:
     2013.com.canonical.plainbox::manifest
     package
