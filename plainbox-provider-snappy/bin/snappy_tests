@@ -19,7 +19,7 @@ class SnappyList(Command):
         """Snappy list should show the ubuntu-core package is installed."""
         cmd = ['snap', 'list']
         output = subprocess.check_output(cmd)
-        if 'ubuntu-core' not in str(output):
+        if 'core' not in str(output):
             print("String not found")
             return 1
 
