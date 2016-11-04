@@ -5,6 +5,7 @@ estimated_duration: 30.0
 command: removable_storage_watcher --unmounted --memorycard insert sdio usb scsi
 requires: snap.name == 'udisks2'
 user: root
+environ: LD_LIBRARY_PATH GI_TYPELIB_PATH
 _description:
  PURPOSE:
      This test will check that the systems media card reader can
@@ -25,6 +26,7 @@ estimated_duration: 30.0
 depends: mediacard/sd-insert
 user: root
 command: removable_storage_test -s 268400000 --memorycard sdio usb scsi
+environ: LD_LIBRARY_PATH GI_TYPELIB_PATH
 _description:
  This test is automated and executes after the mediacard/sd-insert
  test is run. It tests reading and writing to the SD card.
@@ -36,6 +38,7 @@ estimated_duration: 30.0
 depends: mediacard/sd-insert
 command: removable_storage_watcher --unmounted --memorycard remove sdio usb scsi
 user: root
+environ: LD_LIBRARY_PATH GI_TYPELIB_PATH
 _description:
  PURPOSE:
      This test will check that the system correctly detects
@@ -53,6 +56,7 @@ id: mediacard/sd-preinserted
 estimated_duration: 30.0
 user: root
 command: removable_storage_test -s 268400000 --memorycard -l sdio usb scsi && removable_storage_test --memorycard sdio usb scsi
+environ: LD_LIBRARY_PATH GI_TYPELIB_PATH
 requires: snap.name == 'udisks2'
 _description:
  This is a fully automated version of mediacard/sd-automated and assumes that the
