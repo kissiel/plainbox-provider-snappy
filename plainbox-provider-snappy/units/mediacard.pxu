@@ -4,6 +4,7 @@ id: mediacard/sd-insert
 estimated_duration: 30.0
 command: removable_storage_watcher --unmounted --memorycard insert sdio usb scsi
 requires: snap.name == 'udisks2'
+user: root
 _description:
  PURPOSE:
      This test will check that the systems media card reader can
@@ -34,6 +35,7 @@ id: mediacard/sd-remove
 estimated_duration: 30.0
 depends: mediacard/sd-insert
 command: removable_storage_watcher --unmounted --memorycard remove sdio usb scsi
+user: root
 _description:
  PURPOSE:
      This test will check that the system correctly detects
