@@ -234,9 +234,9 @@ class TestPlanReport(ManageCommand):
 
 
 @manage_py_extension
-class InstallKernSec(InstallCommand):
+class InstallSpecials(InstallCommand):
     """
-    Extension that copies over required files for kernel-security-tests.
+    Extension that copies over additional stuff required by the provider.
 
     @EPILOG@
     -
@@ -246,6 +246,9 @@ class InstallKernSec(InstallCommand):
 
     def invoked(self, ns):
         super().invoked(ns)
+        self._install_kernel_security_specials(ns)
+
+    def _install_kernel_security_specials(self, ns):
         dest_map = self._get_dest_map(ns.layout, ns.prefix)
         provider = self.get_provider()
         kern_sec_path = os.path.join(
