@@ -247,6 +247,7 @@ class InstallSpecials(InstallCommand):
     def invoked(self, ns):
         super().invoked(ns)
         self._install_kernel_security_specials(ns)
+        self._install_bt_helper(ns)
 
     def _install_kernel_security_specials(self, ns):
         dest_map = self._get_dest_map(ns.layout, ns.prefix)
@@ -264,6 +265,13 @@ class InstallSpecials(InstallCommand):
         shutil.copy(
             os.path.join(provider.bin_dir, 'test_kernel_security.py'),
             ns.root + os.path.join(dest_map['data'], 'test_kernel_security.py'))
+
+    def _install_bt_helper(self, ns):
+        dest_map = self._get_dest_map(ns.layout, ns.prefix)
+        provider = self.get_provider()
+        shutil.copy(
+            os.path.join(provider.bin_dir, 'bt_helper.py'),
+            ns.root + dest_map['bin'])
 
 
 def _copytree(src, dst):
