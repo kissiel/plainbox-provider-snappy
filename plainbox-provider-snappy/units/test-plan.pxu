@@ -32,7 +32,9 @@ include:
     disk/.*
     i2c/.*
     stress/stress-ng.*
-    mediacard/.*
+    mediacard/sd-insert
+    mediacard/sd-storage
+    mediacard/sd-remove
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
