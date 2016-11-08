@@ -3,7 +3,7 @@ id: snappy
 _name: Snappy Ubuntu Core
 
 
-id: snappy/test-list
+id: snappy/snap-list
 _summary: Test that the snap list command is working.
 _purpose: If snap list command is working then should at least find the
  ubuntu-core package.
@@ -13,7 +13,7 @@ category_id: snappy
 estimated_duration: 10s
 flags: preserve-locale
 
-id: snappy/test-search
+id: snappy/snap-search
 _summary: Test that the snap find command is working.
 _purpose: If snap find command is working then should find hello-world
  in the store.
@@ -23,7 +23,7 @@ category_id: snappy
 estimated_duration: 10s
 flags: preserve-locale
 
-id: snappy/test-install
+id: snappy/snap-install
 _summary: Test the snap install command is able to install hello-world snap.
 _purpose:
  The store should contain the basic hello-world snap makes sure this
@@ -34,96 +34,133 @@ category_id: snappy
 estimated_duration: 10s
 flags: preserve-locale
 
-id: snappy/test-remove
+id: snappy/snap-remove
 _summary: Test the snap remove command is able to remove the hello-world snap.
 _purpose: After having installed the hello-world snap, check it can removed.
 plugin: shell
 command: snappy_tests remove
 category_id: snappy
 estimated_duration: 10s
-depends: snappy/test-install
+depends: snappy/snap-install
 flags: preserve-locale
 
-id: snappy/update
-_summary: Update the system using the "snappy" tool
+id: snappy/snap-refresh
+_summary: Test the snap refresh command is able to update the hello snap.
 _purpose:
- Check ubuntu-core can be updated by snappy update
+ Check hello snap can be refreshed by snap refresh
 _steps:
- 1. sudo mount -o remount,rw /
- 2. sudo vi /etc/system-image/channel.ini
- 3. Check version number in both build_number and version_detail, assume it's N
- 4. Modify version number in both build_number and version_detail to N-1
- 5. Reboot the system and log in
- 6. sudo snappy update
- 7. Reboot the system and log in
- 8. snappy list -v
+ 1. Install
+    snap install hello
+ 2. Check version number
+    snap list hello
+ 3. Update
+    snap refresh hello --beta
+ 4. Check version number
+    snap list hello
 _verification:
- Check ubuntu-core version in the list
- 1. System is currently boot the ubuntu-core version N (With a ""*"" at the end of line)
- 2. Another ubuntu-core version is N-1
+ Check hello version is newer using the beta channel
 plugin: manual
+after: snappy/snap-remove
 category_id: snappy
-estimated_duration: 600
+estimated_duration: 60
 
-id: snappy/rollback
-_summary: Rollback system update using the "snappy" tool
+id: snappy/snap-revert
+_summary: Test the snap revert command is able to revert the hello snap.
 _purpose:
- Check ubuntu-core can be reverted by snappy rollback
+ Check hello snap can be reverted by snap revert
 _steps:
- 1. Follow the steps in case snappy/update to update ubuntu-core
- 2. sudo snappy rollback ubuntu-core
+ 1. Revert
+    snap revert hello
+ 2. Check version number
+    snap list hello
+_verification:
+ Check hello version is back to its stable version
+plugin: manual
+depends: snappy/snap-refresh
+category_id: snappy
+estimated_duration: 60
+
+id: snappy/snap-reupdate
+_summary: Test the snap refresh command is able to refresh again the hello snap.
+_purpose:
+ Check hello snap can be refreshed after removal of the blacklisted revision
+_steps:
+ 1. Remove reverted version (and associated data)
+    snap remove hello --revision=<beta_revision>
+ 2. Reupdate
+    snap refresh hello --beta
+ 3. Check version number
+    snap list hello
+_verification:
+ Check hello version is again the one from the beta channel
+plugin: manual
+depends: snappy/snap-revert
+category_id: snappy
+estimated_duration: 60
+
+id: snappy/os-refresh
+_summary: Refresh the system using the snap tool
+_purpose:
+ Check "core" can be refreshed by snap refresh
+_steps:
+ 1. Check version number
+    snap list core
+ 2. Update
+    snap refresh core --edge
  3. Reboot the system and log in
- 4. snappy list -v
+    sudo reboot
+ 4. Check version number
+    snap list core
 _verification:
- Check ubuntu-core version in the list
- 1. System is currently boot the ubuntu-core version N-1 (With a ""*"" at the end of line)
- 2. Another ubuntu-core version is N
+ Check core version is newer using the edge channel
 plugin: manual
+after: snappy/snap-reupdate
 category_id: snappy
-estimated_duration: 600
+estimated_duration: 400
 
-id: snappy/re-update
-_summary: Re-apply the update after rollback using the "snappy" tool
+id: snappy/os-revert
+_summary: Rollback system update using the snap tool
 _purpose:
- Check ubuntu-core can be updated again by snappy update after rollback
+ Check core can be reverted by snap revert
 _steps:
- 1. Follow the steps in case snappy/rollback to update ubuntu-core and rollback
- 2. sudo snappy update
+ 1. Check version number
+    snap list core
+ 2. Revert
+    snap revert core
  3. Reboot the system and log in
- 4. snappy list -v
+    sudo reboot
+ 4. Check version number
+    snap list core
 _verification:
- Check ubuntu-core version in the list
- 1. System is currently boot the ubuntu-core version N (With a ""*"" at the end of line)
- 2. Another ubuntu-core version is N-1
+ Check core version is back to its stable version
 plugin: manual
+depends: snappy/os-refresh
 category_id: snappy
-estimated_duration: 1200
+estimated_duration: 400
 
-id: snappy/fail-boot
+id: snappy/os-fail-boot
 _summary: Automatically rollback after failed boot after upgrade
 _purpose:
- Check system will rollback to original ubuntu-core if failed to boot the updated one
+ Check system will rollback to original core snap if failed to boot the updated one
 _steps:
- 1. Follow the steps in case snappy/update to update ubuntu-core
- 2. Download following systemd unit and copy it to user home:
-     http://people.canonical.com/~jhunt/systemd/conf/deadlock.service
- 3. sudo mount -o remount,rw /writable/cache/system
- 4. sudo cp deadlock.service /writable/cache/system/lib/systemd/system/
- 5. sudo mkdir -p /writable/cache/system/lib/systemd/system/sysinit.target.requires/
- 6. sudo chroot /writable/cache/system
- 7. ln -s /lib/systemd/system/deadlock.service /lib/systemd/system/sysinit.target.requires/deadlock.service
- 8. exit
- 9. sudo snappy rollback ubuntu-core
- 10. sudo reboot
- 11. The boot will hang before reaching a getty login prompt due to deadlock.service
- 12. Power-cycle the device
- 13. snappy list -v
+ 1. Remove reverted version (and associated data)
+    snap remove core --revision=<edge_revision>
+ 2. Check that the edge revision is back in the refresh list
+    snap refresh --list core
+ 3. Update
+    snap refresh core --edge
+ 4. Modify the GRUB Environment Block to simulate a failed boot
+    sudo /usr/bin/grub-editenv /boot/grub/grubenv set snap_mode=trying
+ 5. Reboot the system and log in
+    sudo reboot
+ 6. Check version number
+    snap list core
 _verification:
- 1. Check system can boot at step 12
- 2. Check system is currently boot the ubuntu-core version N (With a ""*"" at the end of line)
+ Check system is currently booting the stable core version
 plugin: manual
 category_id: snappy
-estimated_duration: 1600
+depends: snappy/os-revert
+estimated_duration: 500
 
 id: snappy/sshd
 _summary: SSH is enabled and operational
