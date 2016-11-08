@@ -4,6 +4,7 @@
 # Written by:
 #   Jonathan Cave <jonathan.cave@canonical.com>
 #   Pierre Equoy <pierre.equoy@canonical.com>
+#   Sylvain Pineau <sylvain.pineau@canonical.com>
 
 id: snappy-generic
 unit: test plan
@@ -72,10 +73,10 @@ _description:
  Snappy Ubuntu Core devices.
 estimated_duration: 1h
 include:
-    snappy/test-list
-    snappy/test-search
-    snappy/test-install
-    snappy/test-remove
+    snappy/snap-list
+    snappy/snap-search
+    snappy/snap-install
+    snappy/snap-remove
     wireless/wireless_scanning_.*
     wireless/wireless_connection_open_ac_nm_.*
     wireless/wireless_connection_open_bg_nm_.*
