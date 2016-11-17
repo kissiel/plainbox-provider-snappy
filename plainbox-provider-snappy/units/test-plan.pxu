@@ -33,9 +33,38 @@ include:
     disk/.*
     i2c/.*
     stress/stress-ng.*
+    mediacard/mmc-insert
+    mediacard/mmc-storage
+    mediacard/mmc-remove
     mediacard/sd-insert
     mediacard/sd-storage
     mediacard/sd-remove
+    mediacard/sdhc-insert
+    mediacard/sdhc-storage
+    mediacard/sdhc-remove
+    mediacard/cf-insert
+    mediacard/cf-storage
+    mediacard/cf-remove
+    mediacard/sdxc-insert
+    mediacard/sdxc-storage
+    mediacard/sdxc-remove
+    mediacard/ms-insert
+    mediacard/ms-storage
+    mediacard/ms-remove
+    mediacard/msp-insert
+    mediacard/msp-storage
+    mediacard/msp-remove
+    mediacard/xd-insert
+    mediacard/xd-storage
+    mediacard/xd-remove
+    mediacard/sd-performance-manual
+    mediacard/sdhc-performance-manual
+    mediacard/mmc-performance-manual
+    mediacard/cf-performance-manual
+    mediacard/sdxc-performance-manual
+    mediacard/ms-performance-manual
+    mediacard/msp-performance-manual
+    mediacard/xd-performance-manual
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
