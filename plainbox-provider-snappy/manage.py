@@ -237,11 +237,11 @@ class TestPlanReport(ManageCommand):
 class InstallKernSec(InstallCommand):
     """
     Extension that copies over required files for kernel-security-tests.
-    
+
     @EPILOG@
     -
     """
-    
+
     name = 'install'
 
     def invoked(self, ns):
@@ -264,17 +264,16 @@ class InstallKernSec(InstallCommand):
 
 
 def _copytree(src, dst):
-	"""Simple copytree that always overwrites."""
-	for name in os.listdir(src):
-		srcname = os.path.join(src, name)
-		dstname = os.path.join(dst, name)
-		if os.path.isdir(srcname):
-			if not os.path.exists(dstname):
-				os.mkdir(dstname)
-			_copytree(srcname, dstname)
-		else:
-			shutil.copy2(srcname, dstname)
-
+    """Simple copytree that always overwrites."""
+    for name in os.listdir(src):
+        srcname = os.path.join(src, name)
+        dstname = os.path.join(dst, name)
+        if os.path.isdir(srcname):
+            if not os.path.exists(dstname):
+                os.mkdir(dstname)
+            _copytree(srcname, dstname)
+        else:
+            shutil.copy2(srcname, dstname)
 
 
 setup(

@@ -24,9 +24,9 @@ estimated_duration: 10s
 flags: preserve-locale
 
 id: snappy/snap-install
-_summary: Test the snap install command is able to install hello-world snap.
+_summary: Test the snap install command is able to install test-snapd-tools snap.
 _purpose:
- The store should contain the basic hello-world snap makes sure this
+ The store should contain the basic test-snapd-tools snap makes sure this
  can be downloaded and installed on the system.
 plugin: shell
 command: snappy_tests install
@@ -35,8 +35,8 @@ estimated_duration: 10s
 flags: preserve-locale
 
 id: snappy/snap-remove
-_summary: Test the snap remove command is able to remove the hello-world snap.
-_purpose: After having installed the hello-world snap, check it can removed.
+_summary: Test the snap remove command is able to remove the test-snapd-tools snap.
+_purpose: After having installed the test-snapd-tools snap, check it can removed.
 plugin: shell
 command: snappy_tests remove
 category_id: snappy
