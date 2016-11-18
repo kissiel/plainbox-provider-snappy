@@ -42,13 +42,13 @@ class SnappyInstall(Command):
     """snappy install sub-command."""
 
     def invoked(self, ctx):
-        """Test install of hello snap."""
-        cmd = ['sudo', 'snap', 'install', 'hello-world']
+        """Test install of test-snapd-tools snap."""
+        cmd = ['sudo', 'snap', 'install', 'test-snapd-tools']
         subprocess.check_call(cmd)
         cmd = ['snap', 'list']
         output = subprocess.check_output(cmd)
-        if 'hello-world' not in str(output):
-            print("Did't find package name")
+        if 'test-snapd-tools' not in str(output):
+            print("Didn't find package name")
             return 1
 
 
@@ -57,12 +57,12 @@ class SnappyRemove(Command):
     """snappy remove sub-command."""
 
     def invoked(self, ctx):
-        """Test remove of hello snap."""
-        cmd = ['sudo', 'snap', 'remove', 'hello-world']
+        """Test remove of test-snapd-tools snap."""
+        cmd = ['sudo', 'snap', 'remove', 'test-snapd-tools']
         subprocess.check_call(cmd)
         cmd = ['snap', 'list']
         output = subprocess.check_output(cmd)
-        if 'hello-world' in str(output):
+        if 'test-snapd-tools' in str(output):
             print("Found package name")
             return 1
 
