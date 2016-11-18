@@ -76,3 +76,22 @@ _verification:
 plugin: manual
 category_id: audio
 estimated_duration: 300
+
+id: audio/sound_playback
+_summary: Playback on default output
+_purpose:
+ Check if playback of sound files work with the default output
+_steps:
+ 1. Make sure you have speakers/headphones connected to the device
+ (skip if SUT has internal speakers)
+ 2. After starting the test 1khz sine should be hearable
+_verification:
+ Did you hear the sound?
+plugin: user-interact-verify
+command: pulseaudio.paplay $PLAINBOX_PROVIDER_DATA/one_killer_hurts.ogg
+user: root
+requires:
+ snap.name == 'pulseaudio'
+category_id: audio
+flags: preserve-cwd
+estimated_duration: 30
