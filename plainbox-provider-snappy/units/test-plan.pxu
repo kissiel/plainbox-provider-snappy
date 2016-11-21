@@ -113,10 +113,6 @@ include:
     wireless/wireless_connection_wpa_ac_nm_.*
     wireless/wireless_connection_wpa_bg_nm_.*
     wireless/wireless_connection_wpa_n_nm_.*
-    wireless/wifi_master_mode_auto_a_.*
-    wireless/wifi_master_mode_auto_b_.*
-    wireless/wifi_master_mode_auto_g_.*
-    wireless/wifi_master_mode_auto_ad_.*
     bluetooth/bluez-internal-rfcomm-tests_.*
     bluetooth/bluez-internal-hci-tests_.*
     bluetooth/bluez-internal-mgmt-tests_.*
