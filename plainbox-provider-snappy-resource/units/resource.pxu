@@ -104,6 +104,13 @@ command: udev_resource
 _description: Creates resource info from udev
 _summary: Collect information about hardware devices (udev)
 
+id: wifi_interface_mode
+estimated_duration: 0.1
+plugin: resource
+command:
+ iw list | grep -Pzo '(?s)Supported interface modes:\n\K(\s+\*\s.*?\n)+' | sed 's/.*\* \(.*\)/\1: supported/' | tr -d '\000'
+_description: Create resource info for supported wifi interface modes
+
 id: meminfo
 estimated_duration: 0.1
 plugin: resource
