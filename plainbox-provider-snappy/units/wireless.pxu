@@ -178,6 +178,7 @@ command:
         exit 1
     fi
     trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
     nmcli dev wifi rescan
     nmcli dev wifi connect $OPEN_AC_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
     iw dev {interface} link
@@ -207,6 +208,7 @@ command:
         exit 1
     fi
     trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
     nmcli dev wifi rescan
     nmcli dev wifi connect $OPEN_BG_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
     iw dev {interface} link
@@ -236,6 +238,7 @@ command:
         exit 1
     fi
     trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
     nmcli dev wifi rescan
     nmcli dev wifi connect $OPEN_N_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
     iw dev {interface} link
@@ -265,6 +268,7 @@ command:
         exit 1
     fi
     trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
     nmcli dev wifi rescan
     nmcli dev wifi connect $WPA_AC_SSID password $WPA_AC_PSK ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
     iw dev {interface} link
@@ -294,6 +298,7 @@ command:
         exit 1
     fi
     trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
     nmcli dev wifi rescan
     nmcli dev wifi connect $WPA_BG_SSID password $WPA_BG_PSK ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
     iw dev {interface} link
@@ -323,6 +328,7 @@ command:
         exit 1
     fi
     trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
     nmcli dev wifi rescan
     nmcli dev wifi connect $WPA_N_SSID password $WPA_N_PSK ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
     iw dev {interface} link
