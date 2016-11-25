@@ -18,6 +18,7 @@ id: snap
 estimated_duration: 1.1
 plugin: resource
 command:
+    unset PYTHONUSERBASE
     snap_resource
 _description: Generates a list of snap packages
 _summary: Collect information about installed snap packages
@@ -127,7 +128,7 @@ _description: Create resource info for supported sleep states
 id: rtc
 estimated_duration: 0.02
 plugin: resource
-command: 
+command:
   if [ -e /sys/class/rtc ]
   then
       echo "state: supported"
