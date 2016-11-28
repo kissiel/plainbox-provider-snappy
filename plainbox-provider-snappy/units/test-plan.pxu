@@ -27,7 +27,6 @@ include:
     rtc/.*
     serial/.*
     wwan/.*
-    memory/.*
     i2c/.*
     stress/stress-ng.*
     mediacard/mmc-insert
@@ -88,6 +87,7 @@ nested_part:
     cpu-automated
     disk-automated
     ethernet-full
+    memory-automated
     docker-full
     watchdog-full
 
@@ -101,8 +101,6 @@ estimated_duration: 1h
 include:
     wwan/detect
     wwan/gsm-connection-.*
-    memory/info
-    memory/check
     2016.com.intel.ipdt::ipdt/.*
     audio/detect-capture-devices
     audio/detect-playback-devices
@@ -132,6 +130,7 @@ nested_part:
     disk-automated
     docker-full
     ethernet-automated
+    memory-automated
     snappy-snap
     watchdog-automated
     wireless-connection-automated
