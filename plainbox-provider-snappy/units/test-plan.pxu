@@ -28,7 +28,6 @@ include:
     serial/.*
     wwan/.*
     memory/.*
-    disk/.*
     i2c/.*
     stress/stress-ng.*
     mediacard/mmc-insert
@@ -87,6 +86,7 @@ nested_part:
     2016.com.intel.ipdt::ipdt-plan
     bluez-automated
     cpu-automated
+    disk-automated
     ethernet-full
     docker-full
     watchdog-full
@@ -103,7 +103,6 @@ include:
     wwan/gsm-connection-.*
     memory/info
     memory/check
-    disk/.*
     2016.com.intel.ipdt::ipdt/.*
     audio/detect-capture-devices
     audio/detect-playback-devices
@@ -130,6 +129,7 @@ bootstrap_include:
 nested_part:
     bluez-automated
     cpu-automated
+    disk-automated
     docker-full
     ethernet-automated
     snappy-snap
