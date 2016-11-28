@@ -19,7 +19,6 @@ include:
     audio/.*
     bluetooth/.*
     cpu/.*
-    ethernet/.*
     led/.*
     monitor/.*
     usb/.*
@@ -89,6 +88,7 @@ bootstrap_include:
 nested_part:
     2016.com.intel.ipdt::ipdt-plan
     bluez-automated
+    ethernet-full
     docker-full
     watchdog-full
 
@@ -101,8 +101,6 @@ _description:
 estimated_duration: 1h
 include:
     cpu/.*
-    ethernet/detect
-    ethernet/ping_.*
     wwan/detect
     wwan/gsm-connection-.*
     memory/info
@@ -135,6 +133,7 @@ bootstrap_include:
 nested_part:
     bluez-automated
     docker-full
+    ethernet-automated
     snappy-snap
     watchdog-automated
     wireless-connection-automated
