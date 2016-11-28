@@ -6,6 +6,25 @@ unit: category
 id: bluetooth_bluez5_selftests
 _name: Bluetooth - BlueZ Self Tests
 
+id: bluez-automated
+unit: test plan
+_name: Automated tests for bluez
+_description:
+ Automated tests for bluez
+estimated_duration: 1m
+include:
+    bluetooth/bluez-internal-rfcomm-tests_.*
+    bluetooth/bluez-internal-hci-tests_.*
+    bluetooth/bluez-internal-mgmt-tests_.*
+    bluetooth/bluez-internal-uc-tests_.*
+    bluetooth/bluez-internal-bnep-tests_.*
+bootstrap_include:
+    bluez-internal-rfcomm-tests
+    bluez-internal-hci-tests
+    bluez-internal-mgmt-tests
+    bluez-internal-uc-tests
+    bluez-internal-bnep-tests
+
 
 id: bluetooth/hid
 _summary: Bluetooth input device works
