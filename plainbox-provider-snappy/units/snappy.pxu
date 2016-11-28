@@ -2,6 +2,30 @@ unit: category
 id: snappy
 _name: Snappy Ubuntu Core
 
+id: snappy-snap
+unit: test plan
+_name: Tests for snap command
+_description:
+ QA test plan that includes generic tests for the snap command for Snappy
+ Ubuntu Core devices.
+estimated_duration: 5m
+include:
+    snappy/.*
+mandatory_include:
+    snap
+
+id: snappy-snap-automated
+unit: test plan
+_name: Automated tests for snap command
+_description:
+ QA test plan that includes automated tests for the snap command for Snappy
+ Ubuntu Core devices.
+estimated_duration: 1m
+include:
+    snappy/snap-list
+    snappy/snap-search
+    snappy/snap-install
+    snappy/snap-remove
 
 id: snappy/snap-list
 _summary: Test that the snap list command is working.
