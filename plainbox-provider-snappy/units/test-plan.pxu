@@ -122,8 +122,6 @@ include:
     cpu/.*
     ethernet/detect
     ethernet/ping_.*
-    watchdog/daemon_boot
-    watchdog/daemon_keepalive
     wwan/detect
     wwan/gsm-connection-.*
     memory/info
