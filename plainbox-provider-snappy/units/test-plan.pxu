@@ -108,13 +108,6 @@ include:
     snappy/snap-search
     snappy/snap-install
     snappy/snap-remove
-    wireless/wireless_scanning_.*
-    wireless/wireless_connection_open_ac_nm_.*
-    wireless/wireless_connection_open_bg_nm_.*
-    wireless/wireless_connection_open_n_nm_.*
-    wireless/wireless_connection_wpa_ac_nm_.*
-    wireless/wireless_connection_wpa_bg_nm_.*
-    wireless/wireless_connection_wpa_n_nm_.*
     bluetooth/bluez-internal-rfcomm-tests_.*
     bluetooth/bluez-internal-hci-tests_.*
     bluetooth/bluez-internal-mgmt-tests_.*
@@ -160,3 +153,4 @@ bootstrap_include:
 nested_part:
     docker-full
     watchdog-automated
+    wireless-connection-automated
