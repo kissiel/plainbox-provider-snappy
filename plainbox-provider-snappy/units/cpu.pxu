@@ -6,6 +6,13 @@ unit: packaging meta-data
 os-id: snappy-ubuntu-core
 stage-packages: fwts
 
+id: cpu-automated
+unit: test plan
+_name: Automated CPU tests
+_description: Automated CPU tests for Snappy Ubuntu Core devices
+include:
+    cpu/.*
+
 plugin: shell
 category_id: cpu
 id: cpu/scaling_test
