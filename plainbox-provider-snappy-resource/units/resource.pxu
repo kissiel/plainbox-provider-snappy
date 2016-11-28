@@ -23,6 +23,15 @@ command:
 _description: Generates a list of snap packages
 _summary: Collect information about installed snap packages
 
+id: interface
+estimated_duration: 1.1
+plugin: resource
+command:
+    unset PYTHONUSERBASE
+    interface_resource
+_description: Generates a list of interface declarations on the device
+_summary: Collect information about interfaces and connections
+
 id: uname
 estimated_duration: 0.09
 plugin: resource

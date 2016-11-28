@@ -70,6 +70,7 @@ mandatory_include:
     2013.com.canonical.plainbox::manifest
     package
     snap
+    interface
     uname
     lsb
     cpuinfo
@@ -136,6 +137,7 @@ mandatory_include:
     2013.com.canonical.plainbox::manifest
     package
     snap
+    interface
     uname
     lsb
     cpuinfo
