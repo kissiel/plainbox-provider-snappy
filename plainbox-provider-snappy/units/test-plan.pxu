@@ -93,6 +93,7 @@ bootstrap_include:
     stress-ng-classes
 nested_part:
     2016.com.intel.ipdt::ipdt-plan
+    bluez-automated
     docker-full
     watchdog-full
 
@@ -104,11 +105,6 @@ _description:
  Snappy Ubuntu Core devices.
 estimated_duration: 1h
 include:
-    bluetooth/bluez-internal-rfcomm-tests_.*
-    bluetooth/bluez-internal-hci-tests_.*
-    bluetooth/bluez-internal-mgmt-tests_.*
-    bluetooth/bluez-internal-uc-tests_.*
-    bluetooth/bluez-internal-bnep-tests_.*
     cpu/.*
     ethernet/detect
     ethernet/ping_.*
@@ -140,13 +136,9 @@ mandatory_include:
     alsa_resource
 bootstrap_include:
     device
-    bluez-internal-rfcomm-tests
-    bluez-internal-hci-tests
-    bluez-internal-mgmt-tests
-    bluez-internal-uc-tests
-    bluez-internal-bnep-tests
     wwan_resource
 nested_part:
+    bluez-automated
     docker-full
     snappy-snap
     watchdog-automated
