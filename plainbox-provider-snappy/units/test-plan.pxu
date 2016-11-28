@@ -94,6 +94,7 @@ bootstrap_include:
 nested_part:
     2016.com.intel.ipdt::ipdt-plan
     docker-full
+    watchdog-full
 
 id: snappy-generic-automated
 unit: test plan
@@ -158,3 +159,4 @@ bootstrap_include:
     wwan_resource
 nested_part:
     docker-full
+    watchdog-automated
