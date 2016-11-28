@@ -2,6 +2,16 @@ unit: category
 id: disk
 _name: Disk
 
+id: disk-automated
+unit: test plan
+_name: Automated disk tests
+_description: Automated disk tests for Ubuntu Core devices
+estimated_duration: 1h30m
+include:
+    disk/.*
+bootstrap_include:
+    device
+
 id: disk/detect
 category_id: disk
 _summary: Gathers information about each disk detected
