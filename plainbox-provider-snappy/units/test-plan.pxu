@@ -104,10 +104,6 @@ _description:
  Snappy Ubuntu Core devices.
 estimated_duration: 1h
 include:
-    snappy/snap-list
-    snappy/snap-search
-    snappy/snap-install
-    snappy/snap-remove
     bluetooth/bluez-internal-rfcomm-tests_.*
     bluetooth/bluez-internal-hci-tests_.*
     bluetooth/bluez-internal-mgmt-tests_.*
@@ -152,5 +148,6 @@ bootstrap_include:
     wwan_resource
 nested_part:
     docker-full
+    snappy-snap
     watchdog-automated
     wireless-connection-automated
