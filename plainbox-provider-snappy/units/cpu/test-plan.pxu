@@ -1,0 +1,23 @@
+id: cpu-full
+unit: test plan
+_name: CPU tests
+_description: QA CPU tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    cpu-automated
+
+id: cpu-automated
+unit: test plan
+_name: Automated CPU tests
+_description: Automated CPU tests for Snappy Ubuntu Core devices
+include:
+    cpu/scaling_test
+    cpu/scaling_test-log-attach
+    cpu/maxfreq_test
+    cpu/maxfreq_test-log-attach
+    cpu/clocktest
+    cpu/offlining_test
+    cpu/topology
+    cpu/arm_vfp_support
+    cpu/cstates
+    cpu/cstates_results.log
