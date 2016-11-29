@@ -1,0 +1,9 @@
+id: wireless_resource
+plugin: resource
+category_id: wifi
+_summary: Resource job to identify Wi-Fi devices
+_description: Job to scan for the presence of Wi-Fi network adapters which
+ should then have the following collection of tests run against them.
+command: wifi_resources
+estimated_duration: 0.5
+flags: preserve-locale
