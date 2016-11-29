@@ -1,30 +1,3 @@
-unit: category
-id: bluetooth
-_name: Bluetooth
-
-unit: category
-id: bluetooth_bluez5_selftests
-_name: Bluetooth - BlueZ Self Tests
-
-id: bluez-automated
-unit: test plan
-_name: Automated tests for bluez
-_description:
- Automated tests for bluez
-estimated_duration: 1m
-include:
-    bluetooth/bluez-internal-rfcomm-tests_.*
-    bluetooth/bluez-internal-hci-tests_.*
-    bluetooth/bluez-internal-mgmt-tests_.*
-    bluetooth/bluez-internal-uc-tests_.*
-    bluetooth/bluez-internal-bnep-tests_.*
-bootstrap_include:
-    bluez-internal-rfcomm-tests
-    bluez-internal-hci-tests
-    bluez-internal-mgmt-tests
-    bluez-internal-uc-tests
-    bluez-internal-bnep-tests
-
 
 id: bluetooth/hid
 _summary: Bluetooth input device works
@@ -63,23 +36,6 @@ category_id: bluetooth
 requires: device.category == 'BLUETOOTH'
 estimated_duration: 5m
 
-
-unit: job
-id: bluez-internal-rfcomm-tests
-plugin: resource
-_summary: Gather list of tests provided by bluez rfcomm test binary
-_description:
- Bluez includes some internal test that exercise the stack. This resource
- collects a list of the provided rfcomm tests.
-command:
- rfcomm-tester -l | while read i
- do
-   echo "bluez-internal-rfcomm-test: $i"
-   echo
- done
-estimated_duration: 2s
-flags: preserve-locale
-
 unit: template
 template-resource: bluez-internal-rfcomm-tests
 template-unit: job
@@ -94,22 +50,6 @@ command:
  rfcomm-tester -p "{bluez-internal-rfcomm-test}"
 requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
-
-unit: job
-id: bluez-internal-hci-tests
-plugin: resource
-_summary: Gather list of tests provided by bluez hci test binary
-_description:
- Bluez includes some internal test that exercise the stack. This resource
- collects a list of the provided hci tests.
-command:
- hci-tester -l | while read i
- do
-   echo "bluez-internal-hci-test: $i"
-   echo
- done
-estimated_duration: 2s
-flags: preserve-locale
 
 unit: template
 template-resource: bluez-internal-hci-tests
@@ -126,22 +66,6 @@ command:
 requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
 
-unit: job
-id: bluez-internal-mgmt-tests
-plugin: resource
-_summary: Gather list of tests provided by bluez mgmt test binary
-_description:
- Bluez includes some internal test that exercise the stack. This resource
- collects a list of the provided mgmt tests.
-command:
- mgmt-tester -l | while read i
- do
-   echo "bluez-internal-mgmt-test: $i"
-   echo
- done
-estimated_duration: 2s
-flags: preserve-locale
-
 unit: template
 template-resource: bluez-internal-mgmt-tests
 template-unit: job
@@ -157,22 +81,6 @@ command:
 requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
 
-unit: job
-id: bluez-internal-uc-tests
-plugin: resource
-_summary: Gather list of tests provided by bluez user channel test binary
-_description:
- Bluez includes some internal test that exercise the stack. This resource
- collects a list of the provided user channel tests.
-command:
- userchan-tester -l | while read i
- do
-   echo "bluez-internal-uc-test: $i"
-   echo
- done
-estimated_duration: 2s
-flags: preserve-locale
-
 unit: template
 template-resource: bluez-internal-uc-tests
 template-unit: job
@@ -187,22 +95,6 @@ command:
  userchan-tester -p "{bluez-internal-uc-test}"
 requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
-
-unit: job
-id: bluez-internal-bnep-tests
-plugin: resource
-_summary: Gather list of tests provided by bluez bnep test binary
-_description:
- Bluez includes some internal test that exercise the stack. This resource
- collects a list of the provided bnep tests.
-command:
- bnep-tester -l | while read i
- do
-   echo "bluez-internal-bnep-test: $i"
-   echo
- done
-estimated_duration: 2s
-flags: preserve-locale
 
 unit: template
 template-resource: bluez-internal-bnep-tests
