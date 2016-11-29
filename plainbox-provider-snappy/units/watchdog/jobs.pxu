@@ -1,22 +1,3 @@
-id: watchdog-full
-unit: test plan
-_name: Watchdog tests
-_description:
- QA test plan that includes watchdog tests
-estimated_duration: 1m
-include:
- watchdog/systemd-config
- watchdog/trigger-system-reset
-
-id: watchdog-automated
-unit: test plan
-_name: Automated watchdog tests
-_description:
- QA test plan that includes automated watchdog tests
-estimated_duration: 1s
-include:
- watchdog/systemd-config
-
 id: watchdog/systemd-config
 _summary: Check if the hardware watchdog is properly configured
 command: journalctl | grep -i 'hardware watchdog'

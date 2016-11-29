@@ -1,0 +1,18 @@
+id: watchdog-full
+unit: test plan
+_name: Watchdog tests
+_description:
+ QA test plan that includes watchdog tests
+estimated_duration: 1m
+include:
+nested_part:
+    watchdog-automated
+
+id: watchdog-automated
+unit: test plan
+_name: Automated watchdog tests
+_description:
+ QA test plan that includes automated watchdog tests
+estimated_duration: 1s
+include:
+    watchdog/systemd-config
