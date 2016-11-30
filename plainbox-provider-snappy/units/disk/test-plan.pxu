@@ -1,0 +1,21 @@
+id: disk-full
+unit: test plan
+_name: Disks tests
+_description: QA disk tests for Ubuntu Core devices
+include:
+nested_part:
+    disk-automated
+
+id: disk-automated
+unit: test plan
+_name: Automated disk tests
+_description: Automated disk tests for Ubuntu Core devices
+estimated_duration: 1h30m
+include:
+    disk/detect
+    disk/stats_.*
+    disk/read_performance_.*
+    disk/storage_device_.*
+    disk/disk_stress_ng_.*
+bootstrap_include:
+    device
