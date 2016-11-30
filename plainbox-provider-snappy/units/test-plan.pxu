@@ -14,7 +14,6 @@ _description:
  devices.
 estimated_duration: 1h
 include:
-    watchdog/.*
     wwan/.*
     i2c/.*
 mandatory_include:
