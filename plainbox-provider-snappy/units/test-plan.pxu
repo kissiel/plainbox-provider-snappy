@@ -14,7 +14,6 @@ _description:
  devices.
 estimated_duration: 1h
 include:
-    snappy/.*
     wireless/.*
     bluetooth/.*
     watchdog/.*
@@ -52,6 +51,7 @@ nested_part:
     monitor-full
     rtc-full
     serial-full
+    snappy-snap-full
     stress-automated
     usb-full
     usb3-full
@@ -98,6 +98,6 @@ nested_part:
     ethernet-automated
     mediacard-automated
     memory-automated
-    snappy-snap
+    snappy-snap-automated
     watchdog-automated
     wireless-connection-automated
