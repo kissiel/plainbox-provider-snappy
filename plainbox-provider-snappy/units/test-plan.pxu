@@ -17,7 +17,6 @@ include:
     snappy/.*
     wireless/.*
     bluetooth/.*
-    monitor/.*
     usb/.*
     usb3/.*
     usb-c/.*
@@ -55,6 +54,7 @@ nested_part:
     led-full
     mediacard-full
     memory-automated
+    monitor-full
     stress-automated
     docker-full
     watchdog-full
