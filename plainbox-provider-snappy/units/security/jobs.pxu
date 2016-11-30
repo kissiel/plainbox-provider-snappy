@@ -4,30 +4,6 @@
 # Written by:
 #   Maciej Kisielewski <maciej.kisielewski@canonical.com>
 
-id: kernel-security
-unit: test plan
-_name: Kernel Security Tests
-_description:
- Collection of tests from QA Regression Testing repository
-estimated_duration: 900s
-bootstrap_include:
- security_resource
-mandatory_include:
- security_setup
-include:
- security/.*
-
-unit: category
-id: security
-_name: Security
-
-id: security_resource
-plugin: resource
-_summary: Gather all kernel-security-tests
-_description: Generate list of test cases from test_security_kernel module
-command: kernel_security_resource.py
-flags: preserve-locale
-
 id: security_setup
 plugin: shell
 command:

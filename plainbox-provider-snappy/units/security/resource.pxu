@@ -1,0 +1,6 @@
+id: security_resource
+plugin: resource
+_summary: Gather all kernel-security-tests
+_description: Generate list of test cases from test_security_kernel module
+command: kernel_security_resource.py
+flags: preserve-locale
