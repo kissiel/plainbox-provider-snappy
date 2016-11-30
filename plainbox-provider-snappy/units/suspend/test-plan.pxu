@@ -1,0 +1,47 @@
+id: suspend-full
+unit: test plan
+_name: Suspend tests
+_description: QA suspend tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    suspend-manual
+    suspend-automated
+
+id: suspend-manual
+unit: test plan
+_name: Manual suspend tests
+_description: Manual suspend tests for Snappy Ubuntu Core devices
+include:
+    suspend/suspend-manual
+    suspend/audio-after-suspend/headphone
+    suspend/audio-after-suspend/microphone
+    suspend/bluetooth-after-suspend/hid
+    suspend/ethernet/eth0/after-suspend/ping
+    suspend/ethernet/eth1/after-suspend/ping
+    suspend/ethernet/eth1/after-suspend/ping
+    suspend/led-after-suspend/power
+    suspend/monitor-after-suspend/dvi
+    suspend/monitor-after-suspend/hdmi
+    suspend/monitor-after-suspend/dvi-to-vga
+    suspend/monitor-after-suspend/hdmi-to-vga
+    suspend/serial-after-suspend/rs232-console
+    suspend/usb-after-suspend/hid
+    suspend/usb-after-suspend/insert
+    suspend/usb-after-suspend/remove
+    suspend/usb3-after-suspend/insert
+    suspend/usb3-after-suspend/remove
+    suspend/wireless-after-suspend/wireless_scanning
+    suspend/wireless-after-suspend/wireless_connection_open_ac
+    suspend/wireless-after-suspend/wireless_connection_open_bg
+    suspend/wireless-after-suspend/wireless_connection_open_n
+    suspend/wireless-after-suspend/wireless_connection_wpa_ac
+    suspend/wireless-after-suspend/wireless_connection_wpa_bg
+    suspend/wireless-after-suspend/wireless_connection_wpa_n
+
+id: suspend-automated
+unit: test plan
+_name: Automated suspend tests
+_description: Automated suspend tests for Snappy Ubuntu Core devices
+include:
+    suspend/usb-after-suspend/storage-automated
+    suspend/usb3-after-suspend/storage-automated
