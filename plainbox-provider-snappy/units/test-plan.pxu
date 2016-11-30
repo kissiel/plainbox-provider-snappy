@@ -27,7 +27,6 @@ include:
     serial/.*
     wwan/.*
     i2c/.*
-    stress/stress-ng.*
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
@@ -47,7 +46,6 @@ mandatory_include:
 bootstrap_include:
     device
     wwan_resource
-    stress-ng-classes
 nested_part:
     2016.com.intel.ipdt::ipdt-plan
     audio-full
@@ -57,6 +55,7 @@ nested_part:
     ethernet-full
     mediacard-full
     memory-automated
+    stress-automated
     docker-full
     watchdog-full
 
