@@ -21,7 +21,6 @@ include:
     usb3/.*
     usb-c/.*
     watchdog/.*
-    serial/.*
     wwan/.*
     i2c/.*
 mandatory_include:
@@ -55,6 +54,7 @@ nested_part:
     memory-automated
     monitor-full
     rtc-full
+    serial-full
     stress-automated
     docker-full
     watchdog-full
