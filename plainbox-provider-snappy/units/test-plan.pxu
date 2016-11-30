@@ -17,7 +17,6 @@ include:
     snappy/.*
     wireless/.*
     bluetooth/.*
-    led/.*
     monitor/.*
     usb/.*
     usb3/.*
@@ -53,6 +52,7 @@ nested_part:
     cpu-automated
     disk-automated
     ethernet-full
+    led-full
     mediacard-full
     memory-automated
     stress-automated
