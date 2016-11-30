@@ -1,0 +1,17 @@
+id: led-full
+unit: test plan
+_name: Led tests
+_description: QA LED tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    led-manual
+
+id: led-manual
+unit: test plan
+_name: Manual LED tests
+_description: Manual LED tests for Snappy Ubuntu Core devices
+include:
+    led/power
+    led/power-blink-suspend
+    led/bluetooth
+    led/serial
