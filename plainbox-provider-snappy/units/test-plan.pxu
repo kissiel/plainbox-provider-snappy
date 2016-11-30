@@ -14,7 +14,6 @@ _description:
  devices.
 estimated_duration: 1h
 include:
-    wireless/.*
     bluetooth/.*
     watchdog/.*
     wwan/.*
@@ -58,6 +57,7 @@ nested_part:
     usb-c-full
     docker-full
     watchdog-full
+    wireless-full
 
 id: snappy-generic-automated
 unit: test plan
