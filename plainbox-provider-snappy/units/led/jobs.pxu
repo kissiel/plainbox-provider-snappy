@@ -1,8 +1,3 @@
-unit: category
-id: led
-_name: LEDs
-
-
 id: led/power
 _summary: Power LED behavior when powered
 _purpose:
