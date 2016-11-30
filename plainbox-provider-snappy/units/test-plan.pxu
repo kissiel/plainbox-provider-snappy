@@ -17,9 +17,6 @@ include:
     snappy/.*
     wireless/.*
     bluetooth/.*
-    usb/.*
-    usb3/.*
-    usb-c/.*
     watchdog/.*
     wwan/.*
     i2c/.*
@@ -56,6 +53,9 @@ nested_part:
     rtc-full
     serial-full
     stress-automated
+    usb-full
+    usb3-full
+    usb-c-full
     docker-full
     watchdog-full
 
