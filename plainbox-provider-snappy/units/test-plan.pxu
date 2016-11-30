@@ -21,7 +21,6 @@ include:
     usb3/.*
     usb-c/.*
     watchdog/.*
-    rtc/.*
     serial/.*
     wwan/.*
     i2c/.*
@@ -55,6 +54,7 @@ nested_part:
     mediacard-full
     memory-automated
     monitor-full
+    rtc-full
     stress-automated
     docker-full
     watchdog-full
