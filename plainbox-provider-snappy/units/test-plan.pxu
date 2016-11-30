@@ -14,7 +14,6 @@ _description:
  devices.
 estimated_duration: 1h
 include:
-    bluetooth/.*
     watchdog/.*
     wwan/.*
     i2c/.*
@@ -40,7 +39,7 @@ bootstrap_include:
 nested_part:
     2016.com.intel.ipdt::ipdt-plan
     audio-full
-    bluez-automated
+    bluetooth-full
     cpu-automated
     disk-automated
     ethernet-full
