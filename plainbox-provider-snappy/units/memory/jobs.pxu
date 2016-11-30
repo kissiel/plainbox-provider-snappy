@@ -1,11 +1,3 @@
-id: memory-automated
-unit: test plan
-_name: Automated memory tests
-_description: Automated memory tests for Ubuntu Core devices
-include:
-    memory/info
-    memory/check
-
 plugin: shell
 category_id: 2013.com.canonical.plainbox::memory
 id: memory/info
