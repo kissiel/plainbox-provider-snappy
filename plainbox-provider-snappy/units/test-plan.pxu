@@ -14,7 +14,6 @@ _description:
  devices.
 estimated_duration: 1h
 include:
-    wwan/.*
     i2c/.*
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
@@ -34,7 +33,6 @@ mandatory_include:
     meminfo
 bootstrap_include:
     device
-    wwan_resource
 nested_part:
     2016.com.intel.ipdt::ipdt-plan
     audio-full
@@ -56,6 +54,7 @@ nested_part:
     docker-full
     watchdog-full
     wireless-full
+    wwan-full
 
 id: snappy-generic-automated
 unit: test plan
@@ -65,8 +64,6 @@ _description:
  Snappy Ubuntu Core devices.
 estimated_duration: 1h
 include:
-    wwan/detect
-    wwan/gsm-connection-.*
     2016.com.intel.ipdt::ipdt/.*
 mandatory_include:
     2013.com.canonical.plainbox::manifest
@@ -86,7 +83,6 @@ mandatory_include:
     alsa_resource
 bootstrap_include:
     device
-    wwan_resource
 nested_part:
     audio-automated
     bluez-automated
@@ -99,3 +95,4 @@ nested_part:
     snappy-snap-automated
     watchdog-automated
     wireless-connection-automated
+    wwan-automated
