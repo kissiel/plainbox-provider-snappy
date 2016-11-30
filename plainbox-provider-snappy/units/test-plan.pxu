@@ -17,19 +17,19 @@ include:
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
-    package
-    snap
-    interface
-    uname
-    lsb
-    dpkg
+    dmi
     dmi_attachment
-    sysfs_attachment
-    udev_attachment
+    dpkg
+    interface
+    lsb
     lspci_attachment
     lsusb_attachment
-    dmi
     meminfo
+    package
+    snap
+    sysfs_attachment
+    udev_attachment
+    uname
 bootstrap_include:
     device
 nested_part:
@@ -38,6 +38,7 @@ nested_part:
     bluetooth-full
     cpu-automated
     disk-automated
+    docker-full
     ethernet-full
     i2c-full
     led-full
@@ -48,10 +49,9 @@ nested_part:
     serial-full
     snappy-snap-full
     stress-automated
+    usb-c-full
     usb-full
     usb3-full
-    usb-c-full
-    docker-full
     watchdog-full
     wireless-full
     wwan-full
@@ -66,23 +66,24 @@ estimated_duration: 1h
 include:
 mandatory_include:
     2013.com.canonical.plainbox::manifest
-    package
-    snap
-    interface
-    uname
-    lsb
-    dpkg
+    alsa_resource
+    dmi
     dmi_attachment
-    sysfs_attachment
-    udev_attachment
+    dpkg
+    interface
+    lsb
     lspci_attachment
     lsusb_attachment
-    dmi
     meminfo
-    alsa_resource
+    package
+    snap
+    sysfs_attachment
+    udev_attachment
+    uname
 bootstrap_include:
     device
 nested_part:
+    2016.com.intel.ipdt::ipdt-plan
     audio-automated
     bluez-automated
     cpu-automated
@@ -90,7 +91,6 @@ nested_part:
     docker-full
     ethernet-automated
     i2c-automated
-    2016.com.intel.ipdt::ipdt-plan
     mediacard-automated
     memory-automated
     snappy-snap-automated
