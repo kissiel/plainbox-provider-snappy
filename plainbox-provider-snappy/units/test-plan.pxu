@@ -64,7 +64,6 @@ _description:
  Snappy Ubuntu Core devices.
 estimated_duration: 1h
 include:
-    2016.com.intel.ipdt::ipdt/.*
 mandatory_include:
     2013.com.canonical.plainbox::manifest
     package
@@ -91,6 +90,7 @@ nested_part:
     docker-full
     ethernet-automated
     i2c-automated
+    2016.com.intel.ipdt::ipdt-plan
     mediacard-automated
     memory-automated
     snappy-snap-automated
