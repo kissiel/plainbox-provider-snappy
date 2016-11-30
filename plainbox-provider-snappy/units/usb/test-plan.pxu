@@ -1,0 +1,56 @@
+id: usb-full
+unit: test plan
+_name: USB tests
+_description: QA USB tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    usb-manual
+
+id: usb-manual
+unit: test plan
+_name: Manual USB tests
+_description: Manual USB tests for Snappy Ubuntu Core devices
+include:
+    usb/hid
+    usb/insert
+    usb/storage-automated # depends on manual one, so not automated
+    usb/remove
+
+id: usb3-full
+unit: test plan
+_name: USB3 tests
+_description: QA USB3 tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    usb3-manual
+
+id: usb3-manual
+unit: test plan
+_name: Manual USB3 tests
+_description: Manual USB3 tests for Snappy Ubuntu Core devices
+include:
+    usb3/insert
+    usb3/storage-automated # depends on manual one, so not automated
+    usb3/remove
+
+id: usb-c-full
+unit: test plan
+_name: USB-C tests
+_description: QA USB-C tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    usb-c-manual
+
+id: usb-c-manual
+unit: test plan
+_name: Manual USB-C tests
+_description: Manual USB-C tests for Snappy Ubuntu Core devices
+include:
+    usb-c/c-to-a-adapter/hid
+    usb-c/c-to-a-adapter/insert
+    usb-c/c-to-a-adapter/storage-automated
+    usb-c/c-to-a-adapter/remove
+    usb-c/hid
+    usb-c/insert
+    usb-c/storage-automated
+    usb-c/remove
