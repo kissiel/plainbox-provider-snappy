@@ -1,0 +1,15 @@
+id: power-full
+unit: test plan
+_name: Power tests
+_description: QA power tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    power-manual
+
+id: power-manual
+unit: test plan
+_name: Manual power tests
+_description: Manual power tests for Snappy Ubuntu Core devices
+include:
+    power-management/poweroff
+    power-management/reboot
