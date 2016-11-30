@@ -16,7 +16,6 @@ estimated_duration: 1h
 include:
     snappy/.*
     wireless/.*
-    audio/.*
     bluetooth/.*
     led/.*
     monitor/.*
@@ -83,6 +82,7 @@ bootstrap_include:
     stress-ng-classes
 nested_part:
     2016.com.intel.ipdt::ipdt-plan
+    audio-full
     bluez-automated
     cpu-automated
     disk-automated
@@ -102,8 +102,6 @@ include:
     wwan/detect
     wwan/gsm-connection-.*
     2016.com.intel.ipdt::ipdt/.*
-    audio/detect-capture-devices
-    audio/detect-playback-devices
     mediacard/sd-preinserted
 mandatory_include:
     2013.com.canonical.plainbox::manifest
@@ -125,6 +123,7 @@ bootstrap_include:
     device
     wwan_resource
 nested_part:
+    audio-automated
     bluez-automated
     cpu-automated
     disk-automated
