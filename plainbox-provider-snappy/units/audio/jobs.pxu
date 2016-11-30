@@ -1,18 +1,3 @@
-unit: category
-id: audio
-_name: Audio
-
-
-unit: job
-id: alsa_resource
-category_id: audio
-plugin: resource
-_summary: Gather device info about alsa sound devices
-_description: Gather device info about alsa sound devices
-command: alsa_pcm_info
-estimated_duration: 1s
-flags: preserve-locale
-
 id: audio/detect-playback-devices
 _summary: Check that at least one audio playback device exits
 plugin: shell
