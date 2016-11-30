@@ -1,8 +1,3 @@
-unit: category
-id: rtc_category
-_name: Real Time Clock (RTC)
-
-
 id: rtc/battery
 _summary: RTC battery tracks the time
 _purpose:
