@@ -14,7 +14,6 @@ _description:
  devices.
 estimated_duration: 1h
 include:
-    i2c/.*
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
@@ -40,6 +39,7 @@ nested_part:
     cpu-automated
     disk-automated
     ethernet-full
+    i2c-full
     led-full
     mediacard-full
     memory-automated
@@ -90,6 +90,7 @@ nested_part:
     disk-automated
     docker-full
     ethernet-automated
+    i2c-automated
     mediacard-automated
     memory-automated
     snappy-snap-automated
