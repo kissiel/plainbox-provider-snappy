@@ -1,0 +1,58 @@
+id: led/power
+_summary: Power LED behavior when powered
+_purpose:
+ Check power led is on when system is powered on
+_steps:
+ 1. Check power led when system is powered on
+_verification:
+ Power led is on when system is powered on
+plugin: manual
+category_id: led
+estimated_duration: 30
+
+id: led/power-blink-suspend
+_summary: Power LED behavior when suspended
+_purpose:
+ Check power led is blinking when system is in suspend
+_steps:
+ 1. Suspend the system
+ 2. Check power led when system is in suspend
+_verification:
+ Power led is blinking when system is in suspend
+plugin: manual
+category_id: led
+estimated_duration: 180
+
+id: led/bluetooth
+_summary: Bluetooth LED behavior
+_purpose:
+ Check bluetooth LED behavior is correct
+_steps:
+ 1. Run following command to start bluetoothctl console:
+  bluetoothctl -a
+ ***Following steps are run in bluetoothctl console***
+ 2. Power on the device:
+  power on
+ 3. Power off the device:
+  power off
+ 4. Quit bluetoothctl console
+  quit
+_verification:
+ Bluetooth LED is turned on in step 2, and turned off in step 3.
+plugin: manual
+category_id: led
+estimated_duration: 3m
+
+id: led/serial
+_summary: Serial ports LED behavior
+_purpose:
+ Check serial ports LED behavior is correct
+_steps:
+ 1. Start the test to send data to all serial ports (/dev/ttyS*)
+_verification:
+ All serial ports LED are on for a few seconds (3-4s)
+plugin: user-interact-verify
+command: echo {0..1024} | tee /dev/ttyS{0..100} &> /dev/null
+user: root
+category_id: led
+estimated_duration: 15

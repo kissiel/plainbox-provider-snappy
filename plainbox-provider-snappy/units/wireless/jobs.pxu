@@ -1,0 +1,793 @@
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_scanning_{interface}
+_summary: System can discover Wi-Fi networks on {interface}
+command:
+ nmcli dev wifi rescan
+ AP_COUNT=$(nmcli dev wifi list ifname {interface} | wc -l)
+ if [ $AP_COUNT -gt 1 ]; then
+   echo "Wireless access points discovered: $AP_COUNT"
+   exit 0
+ fi
+ echo "No wireless access points discovered."
+ exit 1
+user: root
+environ: LD_LIBRARY_PATH
+plugin: shell
+category_id: wifi
+estimated_duration: 6
+_description:
+ Check system can find a wireless network AP nearby
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_open_ac_{interface}
+_summary: Connect to unencrypted 802.11ac Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to insecure 802.11ac AP
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i {interface} -s $OPEN_AC_SSID
+environ: OPEN_AC_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_open_bg_{interface}
+_summary: Connect to unencrypted 802.11b/g Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to insecure 802.11b/g AP
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i {interface} -s $OPEN_BG_SSID
+environ: OPEN_BG_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_open_n_{interface}
+_summary: Connect to unencrypted 802.11n Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to insecure 802.11n AP
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i {interface} -s $OPEN_N_SSID
+environ: OPEN_N_SSID
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_wpa_ac_{interface}
+_summary: Connect to WPA-encrypted 802.11ac Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to 802.11ac AP with wpa security
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i {interface} -s $WPA_AC_SSID -k $WPA_AC_PSK
+environ: WPA_AC_SSID WPA_AC_PSK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_wpa_bg_{interface}
+_summary: Connect to WPA-encrypted 802.11b/g Wi-Fi network {interface}
+_purpose:
+ Check system can connect to 802.11b/g AP with wpa security
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i {interface} -s $WPA_BG_SSID -k $WPA_BG_PSK
+environ: WPA_BG_SSID WPA_BG_PSK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_wpa_n_{interface}
+_summary: Connect to WPA-encrypted 802.11n Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to 802.11n AP with wpa security
+_steps:
+ 1. Remove all wireless configuration in /etc/network/interfaces and /etc/network/interfaces.d
+ 2. Commence the test
+_verification:
+ If there's "Connection test passed" message in result, mark the test as passed.
+plugin: user-interact
+command: wifi_client_test -i {interface} -s $WPA_N_SSID -k $WPA_N_PSK
+environ: WPA_N_SSID WPA_N_PSK
+user: root
+category_id: wifi
+estimated_duration: 90
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_open_ac_nm_{interface}
+_summary: Connect to unencrypted 802.11ac Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to insecure 802.11ac AP
+plugin: shell
+command:
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $OPEN_AC_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH OPEN_AC_SSID
+user: root
+category_id: wifi
+estimated_duration: 5.0
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_open_bg_nm_{interface}
+_summary: Connect to unencrypted 802.11b/g Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to insecure 802.11b/g AP
+plugin: shell
+command:
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $OPEN_BG_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH OPEN_BG_SSID
+user: root
+category_id: wifi
+estimated_duration: 5.0
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_open_n_nm_{interface}
+_summary: Connect to unencrypted 802.11n Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to insecure 802.11n AP
+plugin: shell
+command:
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $OPEN_N_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH OPEN_N_SSID
+user: root
+category_id: wifi
+estimated_duration: 5.0
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_wpa_ac_nm_{interface}
+_summary: Connect to WPA-encrypted 802.11ac Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to 802.11ac AP with wpa security
+plugin: shell
+command:
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $WPA_AC_SSID password $WPA_AC_PSK ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WPA_AC_SSID WPA_AC_PSK
+user: root
+category_id: wifi
+estimated_duration: 5.0
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_wpa_bg_nm_{interface}
+_summary: Connect to WPA-encrypted 802.11b/g Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to 802.11b/g AP with wpa security
+plugin: shell
+command:
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $WPA_BG_SSID password $WPA_BG_PSK ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WPA_BG_SSID WPA_BG_PSK
+user: root
+category_id: wifi
+estimated_duration: 5.0
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wireless_connection_wpa_n_nm_{interface}
+_summary: Connect to WPA-encrypted 802.11n Wi-Fi network on {interface}
+_purpose:
+ Check system can connect to 802.11n AP with wpa security
+plugin: shell
+command:
+    nmcli g > /dev/null
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    trap "nmcli dev disconnect {interface}; nmcli con delete id WIFI_TEST_CREATED_BY_CHECKBOX" EXIT
+    nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs nmcli c delete
+    nmcli dev wifi rescan
+    nmcli dev wifi connect $WPA_N_SSID password $WPA_N_PSK ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+    iw dev {interface} link
+    COUNT=$(iw dev {interface} link | wc -l)
+    if [ $COUNT -gt 1 ]; then
+        exit 0
+    fi
+    exit 1
+environ: LD_LIBRARY_PATH WPA_N_SSID WPA_N_PSK
+user: root
+category_id: wifi
+estimated_duration: 5.0
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_open_a_no_sta_{interface}
+category_id: wifi
+_summary: Create open 802.11a Wi-Fi Access Point on {interface} with no STA
+plugin: manual
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+estimated_duration: 120.0
+_purpose:
+  Check that the system can create an open 802.11a Access Point without any STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode a
+    $ wifi-ap.config set wifi.interface-mode direct
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security open
+  4. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  6. Attempt to connect to the AP
+  7. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_open_b_no_sta_{interface}
+category_id: wifi
+_summary: Create open 802.11b Wi-Fi Access Point on {interface} with no STA
+plugin: manual
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+estimated_duration: 120.0
+_purpose:
+  Check that the system can create an open 802.11b Access Point without any STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode b
+    $ wifi-ap.config set wifi.interface-mode direct
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security open
+  4. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  6. Attempt to connect to the AP
+  7. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_open_g_no_sta_{interface}
+category_id: wifi
+_summary: Create open 802.11g Wi-Fi Access Point on {interface} with no STA
+plugin: manual
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+estimated_duration: 120.0
+_purpose:
+  Check that the system can create an open 802.11g Access Point without any STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode g
+    $ wifi-ap.config set wifi.interface-mode direct
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security open
+  4. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  6. Attempt to connect to the AP
+  7. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_open_ad_no_sta_{interface}
+category_id: wifi
+_summary: Create open 802.11ad Wi-Fi Access Point on {interface} with no STA
+plugin: manual
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+estimated_duration: 120.0
+_purpose:
+  Check that the system can create an open 802.11ad Access Point without any STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode ad
+    $ wifi-ap.config set wifi.interface-mode direct
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security open
+  4. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  6. Attempt to connect to the AP
+  7. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_wpa_a_no_sta_{interface}
+category_id: wifi
+_summary: Create WPA2 802.11a Wi-Fi Access Point on {interface} with no STA
+plugin: manual
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+estimated_duration: 120.0
+_purpose:
+  Check that the system can create a WPA2 802.11a Access Point without any STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode a
+    $ wifi-ap.config set wifi.interface-mode direct
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security wpa2
+    $ wifi-ap.config set wifi.security-passphrase Test1234
+  4. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  6. Attempt to connect to the AP using password "Test1234"
+  7. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_wpa_b_no_sta_{interface}
+category_id: wifi
+_summary: Create WPA2 802.11b Wi-Fi Access Point on {interface} with no STA
+plugin: manual
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+estimated_duration: 120.0
+_purpose:
+  Check that the system can create a WPA2 802.11b Access Point without any STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode b
+    $ wifi-ap.config set wifi.interface-mode direct
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security wpa2
+    $ wifi-ap.config set wifi.security-passphrase Test1234
+  4. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  6. Attempt to connect to the AP using password "Test1234"
+  7. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_wpa_g_no_sta_{interface}
+category_id: wifi
+_summary: Create WPA2 802.11g Wi-Fi Access Point on {interface} with no STA
+plugin: manual
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+estimated_duration: 120.0
+_purpose:
+  Check that the system can create a WPA2 802.11g Access Point without any STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode g
+    $ wifi-ap.config set wifi.interface-mode direct
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security wpa2
+    $ wifi-ap.config set wifi.security-passphrase Test1234
+  4. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  6. Attempt to connect to the AP using password "Test1234"
+  7. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_wpa_ad_no_sta_{interface}
+category_id: wifi
+_summary: Create WPA2 802.11ad Wi-Fi Access Point on {interface} with no STA
+plugin: manual
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+estimated_duration: 120.0
+_purpose:
+  Check that the system can create a WPA2 802.11ad Access Point without any STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode ad
+    $ wifi-ap.config set wifi.interface-mode direct
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security wpa2
+    $ wifi-ap.config set wifi.security-passphrase Test1234
+  4. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  6. Attempt to connect to the AP using password "Test1234"
+  7. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_wpa_a_with_sta_{interface}
+category_id: wifi
+_summary: Create WPA2 802.11a Wi-Fi Access Point on {interface} with active STA
+plugin: user-interact-verify
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+depends: wireless/wireless_connection_wpa_bg_nm_{interface}
+estimated_duration: 120.0
+environ: LD_LIBRARY_PATH WPA_BG_SSID WPA_BG_PSK
+command:
+ nmcli dev wifi rescan
+ nmcli dev wifi connect $OPEN_BG_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+user: root
+_purpose:
+  Check that the system can create a WPA2 802.11a Access Point with an already active STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Connect to an 802.11b/g AP with wpa security:
+    Press Enter to continue
+  4. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode a
+    $ wifi-ap.config set wifi.interface-mode virtual
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security wpa2
+    $ wifi-ap.config set wifi.security-passphrase Test1234
+    $ wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
+  5. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  6. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  7. Attempt to connect to the AP using password "Test1234"
+  8. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_wpa_b_with_sta_{interface}
+category_id: wifi
+_summary: Create WPA2 802.11b Wi-Fi Access Point on {interface} with active STA
+plugin: user-interact-verify
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+depends: wireless/wireless_connection_wpa_bg_nm_{interface}
+estimated_duration: 120.0
+environ: LD_LIBRARY_PATH WPA_BG_SSID WPA_BG_PSK
+command:
+ nmcli dev wifi rescan
+ nmcli dev wifi connect $OPEN_BG_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+user: root
+_purpose:
+  Check that the system can create a WPA2 802.11b Access Point with an already active STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Connect to an 802.11b/g AP with wpa security:
+    Press Enter to continue
+  4. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode b
+    $ wifi-ap.config set wifi.interface-mode virtual
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security wpa2
+    $ wifi-ap.config set wifi.security-passphrase Test1234
+    $ wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
+  5. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  6. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  7. Attempt to connect to the AP using password "Test1234"
+  8. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_wpa_g_with_sta_{interface}
+category_id: wifi
+_summary: Create WPA2 802.11g Wi-Fi Access Point on {interface} with active STA
+plugin: user-interact-verify
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+depends: wireless/wireless_connection_wpa_bg_nm_{interface}
+estimated_duration: 120.0
+environ: LD_LIBRARY_PATH WPA_BG_SSID WPA_BG_PSK
+command:
+ nmcli dev wifi rescan
+ nmcli dev wifi connect $OPEN_BG_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+user: root
+_purpose:
+  Check that the system can create a WPA2 802.11g Access Point with an already active STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Connect to an 802.11b/g AP with wpa security:
+    Press Enter to continue
+  4. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode g
+    $ wifi-ap.config set wifi.interface-mode virtual
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security wpa2
+    $ wifi-ap.config set wifi.security-passphrase Test1234
+    $ wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
+  5. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  6. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  7. Attempt to connect to the AP using password "Test1234"
+  8. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale
+
+unit: template
+template-resource: device
+template-filter: device.category == 'WIRELESS'
+template-unit: job
+id: wireless/wifi_ap_wpa_ad_with_sta_{interface}
+category_id: wifi
+_summary: Create WPA2 802.11ad Wi-Fi Access Point on {interface} with active STA
+plugin: user-interact-verify
+requires:
+ wifi_interface_mode.AP == 'supported'
+ snap.name == 'wifi-ap'
+depends: wireless/wireless_connection_wpa_bg_nm_{interface}
+estimated_duration: 120.0
+environ: LD_LIBRARY_PATH WPA_BG_SSID WPA_BG_PSK
+command:
+ nmcli dev wifi rescan
+ nmcli dev wifi connect $OPEN_BG_SSID ifname {interface} name WIFI_TEST_CREATED_BY_CHECKBOX
+user: root
+_purpose:
+  Check that the system can create a WPA2 802.11ad Access Point with an already active STA connection
+_steps:
+  1. Ensure no Soft AP is running prior running this test:
+    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Delete existing wireless connections known to Network Manager:
+    $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
+  3. Connect to an 802.11b/g AP with wpa security:
+    Press Enter to continue
+  4. Configure the wifi-ap snap:
+    $ wifi-ap.config set wifi.interface {interface}
+    $ wifi-ap.config set wifi.operation-mode ad
+    $ wifi-ap.config set wifi.interface-mode virtual
+    $ wifi-ap.config set disabled 0
+    $ wifi-ap.config set wifi.security wpa2
+    $ wifi-ap.config set wifi.security-passphrase Test1234
+    $ wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
+  5. Start the wifi-ap service:
+    $ sudo systemctl start snap.wifi-ap.backend
+  6. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  7. Attempt to connect to the AP using password "Test1234"
+  8. Stop the wifi-ap service:
+    $ sudo systemctl stop snap.wifi-ap.backend
+_verification:
+  Did the client connect?
+flags: preserve-locale

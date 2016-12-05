@@ -1,0 +1,25 @@
+# Copyright 2016 Canonical Ltd.
+# All rights reserved.
+#
+# Written by:
+#   Maciej Kisielewski <maciej.kisielewski@canonical.com>
+
+id: security_setup
+plugin: shell
+command:
+ cp -r $PLAINBOX_PROVIDER_DATA/kernel-security $PLAINBOX_SESSION_SHARE/
+ cp -r $PLAINBOX_PROVIDER_DATA/test_kernel_security.py $PLAINBOX_SESSION_SHARE/
+ cp -r $PLAINBOX_PROVIDER_DATA/testlib.py $PLAINBOX_SESSION_SHARE/
+ chown -R root:root $PLAINBOX_SESSION_SHARE/kernel-security/proc-maps/*
+user: root
+
+unit: template
+template-resource: security_resource
+template-unit: job
+id: security/{name}
+command: export PATH=$PLAINBOX_PROVIDER_DATA/kernel-security/_mocks:$PATH && cd $PLAINBOX_SESSION_SHARE && python3 -m unittest {pyobj}
+plugin: shell
+requires: cpuinfo.platform == 'i386' or cpuinfo.platform == 'x86_64'
+user: root
+category_id: security
+_description: {name}

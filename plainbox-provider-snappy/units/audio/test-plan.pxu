@@ -1,0 +1,24 @@
+id: audio-full
+unit: test plan
+_name: Audio tests
+_description: QA audio tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    audio-manual
+    audio-automated
+
+id: audio-manual
+unit: test plan
+_name: Manual audio tests
+_description: Manual audio tests for Snappy Ubuntu Core devices
+include:
+    audio/external-microphone
+    audio/headphone
+
+id: audio-automated
+unit: test plan
+_name: Automated audio tests
+_description: Automated audio tests for Snappy Ubuntu Core devices
+include:
+    audio/detect-playback-devices
+    audio/detect-capture-devices

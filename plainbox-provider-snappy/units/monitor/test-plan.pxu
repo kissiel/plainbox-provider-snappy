@@ -1,0 +1,18 @@
+id: monitor-full
+unit: test plan
+_name: Monitor tests
+_description: QA monitor tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    monitor-manual
+
+id: monitor-manual
+unit: test plan
+_name: Manual monitor tests
+_description: Manual monitor tests for Snappy Ubuntu Core devices
+include:
+    monitor/dvi
+    monitor/hdmi
+    monitor/dvi-to-vga
+    monitor/hdmi-to-vga
+    monitor/displayport_hotplug

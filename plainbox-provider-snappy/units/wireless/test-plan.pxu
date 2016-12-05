@@ -1,0 +1,52 @@
+id: wireless-full
+unit: test plan
+_name: Wireless tests
+_description: QA tests for wireless connections
+estimated_duration: 30m
+include:
+nested_part:
+    wireless-manual
+    wireless-automated
+
+id: wireless-manual
+unit: test plan
+_name: Manual tests for wireless
+_description: Manual tests wireless
+include:
+    # following matchers may also include some automated jobs, this could be
+    # fixed with some regex magic, but the lesser evil seems to be just to 
+    # include them as well; XXX: the test plan is not really manual-only
+    wireless/wireless_connection_open_ac_.*
+    wireless/wireless_connection_open_bg_.*
+    wireless/wireless_connection_open_n_.*
+    wireless/wireless_connection_wpa_ac_.*
+    wireless/wireless_connection_wpa_bg_.*
+    wireless/wireless_connection_wpa_n_.*
+    wireless/wifi_ap_.*
+
+id: wireless-automated
+unit: test plan
+_name: Automated tests for wireless
+_description:
+ Automated connection tests for unencrypted or WPA-encrypted 802.11 bg, n, ac
+ networks.
+include:
+    wireless/wireless_scanning_.*
+    wireless/wireless_connection_open_ac_nm_.*
+    wireless/wireless_connection_open_bg_nm_.*
+    wireless/wireless_connection_open_n_nm_.*
+    wireless/wireless_connection_wpa_ac_nm_.*
+    wireless/wireless_connection_wpa_bg_nm_.*
+    wireless/wireless_connection_wpa_n_nm_.*
+bootstrap_include:
+    device
+
+id: wireless-wifi-master-mode
+unit: test plan
+_name: QA tests for wifi master mode
+_description:
+ System as Access Point tests
+include:
+    wireless/wifi_ap_.*
+bootstrap_include:
+    device

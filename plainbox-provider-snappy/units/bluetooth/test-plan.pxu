@@ -1,0 +1,36 @@
+id: bluetooth-full
+unit: test plan
+_name: Bluetooth tests
+_description: QA tests for Bluetooth
+estimated_duration: 6m
+include:
+nested_part:
+    bluetooth-manual
+    bluez-automated
+
+id: bluetooth-manual
+unit: test plan
+_name: Manual Bluetooth tests
+_description: Manual QA tests for Bluetooth
+estimated_duration: 5m
+include:
+    bluetooth/hid
+
+id: bluez-automated
+unit: test plan
+_name: Automated tests for bluez
+_description:
+ Automated tests for bluez
+estimated_duration: 1m
+include:
+    bluetooth/bluez-internal-rfcomm-tests_.*
+    bluetooth/bluez-internal-hci-tests_.*
+    bluetooth/bluez-internal-mgmt-tests_.*
+    bluetooth/bluez-internal-uc-tests_.*
+    bluetooth/bluez-internal-bnep-tests_.*
+bootstrap_include:
+    bluez-internal-rfcomm-tests
+    bluez-internal-hci-tests
+    bluez-internal-mgmt-tests
+    bluez-internal-uc-tests
+    bluez-internal-bnep-tests

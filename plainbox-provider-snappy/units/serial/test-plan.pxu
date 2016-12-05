@@ -1,0 +1,14 @@
+id: serial-full
+unit: test plan
+_name: Serial tests
+_description: QA serial tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    serial-manual
+
+id: serial-manual
+unit: test plan
+_name: Manual serial tests
+_description: Manual serial tests for Snappy Ubuntu Core devices
+include:
+    serial/rs232-console

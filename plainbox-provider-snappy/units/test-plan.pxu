@@ -14,86 +14,47 @@ _description:
  devices.
 estimated_duration: 1h
 include:
-    snappy/.*
-    wireless/.*
-    audio/.*
-    bluetooth/.*
-    cpu/.*
-    ethernet/.*
-    led/.*
-    monitor/.*
-    usb/.*
-    usb3/.*
-    usb-c/.*
-    watchdog/.*
-    rtc/.*
-    serial/.*
-    wwan/.*
-    memory/.*
-    disk/.*
-    i2c/.*
-    stress/stress-ng.*
-    mediacard/mmc-insert
-    mediacard/mmc-storage
-    mediacard/mmc-remove
-    mediacard/sd-insert
-    mediacard/sd-storage
-    mediacard/sd-remove
-    mediacard/sdhc-insert
-    mediacard/sdhc-storage
-    mediacard/sdhc-remove
-    mediacard/cf-insert
-    mediacard/cf-storage
-    mediacard/cf-remove
-    mediacard/sdxc-insert
-    mediacard/sdxc-storage
-    mediacard/sdxc-remove
-    mediacard/ms-insert
-    mediacard/ms-storage
-    mediacard/ms-remove
-    mediacard/msp-insert
-    mediacard/msp-storage
-    mediacard/msp-remove
-    mediacard/xd-insert
-    mediacard/xd-storage
-    mediacard/xd-remove
-    mediacard/sd-performance-manual
-    mediacard/sdhc-performance-manual
-    mediacard/mmc-performance-manual
-    mediacard/cf-performance-manual
-    mediacard/sdxc-performance-manual
-    mediacard/ms-performance-manual
-    mediacard/msp-performance-manual
-    mediacard/xd-performance-manual
 mandatory_include:
     2013.com.canonical.plainbox::collect-manifest
     2013.com.canonical.plainbox::manifest
-    package
-    snap
-    interface
-    uname
-    lsb
-    cpuinfo
-    dpkg
+    dmi
     dmi_attachment
-    sysfs_attachment
-    udev_attachment
+    dpkg
+    interface
+    lsb
     lspci_attachment
     lsusb_attachment
-    dmi
     meminfo
+    package
+    snap
+    sysfs_attachment
+    udev_attachment
+    uname
 bootstrap_include:
     device
-    bluez-internal-rfcomm-tests
-    bluez-internal-hci-tests
-    bluez-internal-mgmt-tests
-    bluez-internal-uc-tests
-    bluez-internal-bnep-tests
-    wwan_resource
-    stress-ng-classes
 nested_part:
     2016.com.intel.ipdt::ipdt-plan
+    audio-full
+    bluetooth-full
+    cpu-automated
+    disk-automated
     docker-full
+    ethernet-full
+    i2c-full
+    led-full
+    mediacard-full
+    memory-automated
+    monitor-full
+    rtc-full
+    serial-full
+    snappy-snap-full
+    stress-automated
+    usb-c-full
+    usb-full
+    usb3-full
+    watchdog-full
+    wireless-full
+    wwan-full
 
 id: snappy-generic-automated
 unit: test plan
@@ -103,60 +64,36 @@ _description:
  Snappy Ubuntu Core devices.
 estimated_duration: 1h
 include:
-    snappy/snap-list
-    snappy/snap-search
-    snappy/snap-install
-    snappy/snap-remove
-    wireless/wireless_scanning_.*
-    wireless/wireless_connection_open_ac_nm_.*
-    wireless/wireless_connection_open_bg_nm_.*
-    wireless/wireless_connection_open_n_nm_.*
-    wireless/wireless_connection_wpa_ac_nm_.*
-    wireless/wireless_connection_wpa_bg_nm_.*
-    wireless/wireless_connection_wpa_n_nm_.*
-    bluetooth/bluez-internal-rfcomm-tests_.*
-    bluetooth/bluez-internal-hci-tests_.*
-    bluetooth/bluez-internal-mgmt-tests_.*
-    bluetooth/bluez-internal-uc-tests_.*
-    bluetooth/bluez-internal-bnep-tests_.*
-    cpu/.*
-    ethernet/detect
-    ethernet/ping_.*
-    watchdog/daemon_boot
-    watchdog/daemon_keepalive
-    wwan/detect
-    wwan/gsm-connection-.*
-    memory/info
-    memory/check
-    disk/.*
-    2016.com.intel.ipdt::ipdt/.*
-    audio/detect-capture-devices
-    audio/detect-playback-devices
-    mediacard/sd-preinserted
 mandatory_include:
     2013.com.canonical.plainbox::manifest
-    package
-    snap
-    interface
-    uname
-    lsb
-    cpuinfo
-    dpkg
+    alsa_resource
+    dmi
     dmi_attachment
-    sysfs_attachment
-    udev_attachment
+    dpkg
+    interface
+    lsb
     lspci_attachment
     lsusb_attachment
-    dmi
     meminfo
-    alsa_resource
+    package
+    snap
+    sysfs_attachment
+    udev_attachment
+    uname
 bootstrap_include:
     device
-    bluez-internal-rfcomm-tests
-    bluez-internal-hci-tests
-    bluez-internal-mgmt-tests
-    bluez-internal-uc-tests
-    bluez-internal-bnep-tests
-    wwan_resource
 nested_part:
+    2016.com.intel.ipdt::ipdt-plan
+    audio-automated
+    bluez-automated
+    cpu-automated
+    disk-automated
     docker-full
+    ethernet-automated
+    i2c-automated
+    mediacard-automated
+    memory-automated
+    snappy-snap-automated
+    watchdog-automated
+    wireless-connection-automated
+    wwan-automated

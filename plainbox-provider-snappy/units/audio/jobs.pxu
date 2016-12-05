@@ -1,0 +1,63 @@
+id: audio/detect-playback-devices
+_summary: Check that at least one audio playback device exits
+plugin: shell
+category_id: audio
+command:
+ COUNT=$(alsa_pcm_info | grep Playback | wc -l)
+ echo "Count: $COUNT"
+ if [ $COUNT -eq 0 ]; then
+  exit 1
+ fi
+estimated_duration: 1s
+
+id: audio/detect-capture-devices
+_summary: Check that at least one audio capture device exists
+plugin: shell
+category_id: audio
+command:
+ COUNT=$(alsa_pcm_info | grep Capture | wc -l)
+ echo "Count: $COUNT"
+ if [ $COUNT -eq 0 ]; then
+   exit 1
+ fi
+esimated_duration: 1s
+
+id: audio/external-microphone
+_summary: External microphone works
+_purpose:
+ Check that an external microphone works
+_steps:
+ 1. Plug headset to headset port
+ 2. Execute following command:
+  alsamixer
+ 3. Use arrow key to adjust volume, m key to mute/unmute
+ 4. Make sure all channels are not muted and have an appropriate volume
+ 5. Press q to exit alsamixer
+ 6. Execute following command:
+  arecord | aplay
+ 7. Speak in to microphone on headset
+_verification:
+ Verify that your voice is reproduced through the headphones clearly
+plugin: manual
+category_id: audio
+estimated_duration: 300
+
+id: audio/headphone
+_summary: Headphones work
+_purpose:
+ Check headphones work
+_steps:
+ 1. Plug headset to headset port
+ 2. Execute following command:
+  alsamixer
+ 3. Use arrow key to adjust volume, m key to mute/unmute
+ 4. Make sure all channels are not muted and have an appropriate volume
+ 5. Press q to exit alsamixer
+ 6. Execute following command:
+  arecord | aplay
+ 7. Speak in to microphone on headset
+_verification:
+ Verify that your voice is reproduced through the headphones clearly
+plugin: manual
+category_id: audio
+estimated_duration: 300

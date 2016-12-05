@@ -1,0 +1,25 @@
+id: power-management/poweroff
+_summary: System can be powered off
+_purpose:
+ Check system can poweroff successfully
+_steps:
+ 1. Execute following command:
+  sudo poweroff
+_verification:
+ System poweroff successfully
+plugin: manual
+category_id: power
+estimated_duration: 300
+
+id: power-management/reboot
+_summary: System can be rebooted
+_purpose:
+ Check system can reboot
+_steps:
+ 1. Execute following command:
+  sudo reboot
+_verification:
+     System reboot into system successfully
+plugin: manual
+category_id: power
+estimated_duration: 300

@@ -1,0 +1,19 @@
+id: kernel-security-full
+unit: test plan
+_name: Kernel-security tests
+_description: Collection of tests from QA Regression Testing repository
+include:
+nested_part:
+    kernel-security-automated
+
+id: kernel-security-automated
+unit: test plan
+_name: Automated kernel-security tests
+_description: Automated kernel-security tests for Snappy Ubuntu Core devices
+estimated_duration: 900s
+include:
+ security/.*
+bootstrap_include:
+ security_resource
+mandatory_include:
+ security_setup
