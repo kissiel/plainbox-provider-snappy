@@ -51,6 +51,31 @@ flags: preserve-locale
 
 unit: template
 template-resource: device
+template-filter: device.category == 'NETWORK' and device.mac != 'UNKNOWN'
+id: ethernet/wol_S3_{interface}
+_summary: Wake on LAN (WOL) test from S3 - {interface}
+_purpose:
+ Check that another system can wake up from S3 the SUT using ethernet port {interface} WOL function.
+_steps:
+ 1. Ensure there is an ethernet cable attached to port {interface}.
+ 2. Press Enter to suspend the system.
+ 3. From another computer on the same network run the following command:
+    $ wakeonlan {mac}
+    If wakeonlan tool is not installed run:
+    $ sudo apt install wakeonlan
+_verification:
+  Did the SUT wake up from S3?
+plugin: user-interact-verify
+requires:
+  sleep.mem == 'supported'
+command: systemctl suspend
+user: root
+category_id: ethernet
+estimated_duration: 120
+flags: preserve-locale
+
+unit: template
+template-resource: device
 template-filter: device.category == 'NETWORK'
 template-engine: jinja2
 id: ethernet/hotplug-{{ interface }}-check-disconnected

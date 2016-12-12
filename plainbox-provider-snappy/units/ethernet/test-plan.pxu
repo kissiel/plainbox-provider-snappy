@@ -14,6 +14,7 @@ _name: Manual ethernet tests
 _description: Manual tests for ethernet connections
 include:
     ethernet/wol_S5_.*
+    ethernet/wol_S3_.*
     ethernet/hotplug-.*
 
 id: ethernet-automated
