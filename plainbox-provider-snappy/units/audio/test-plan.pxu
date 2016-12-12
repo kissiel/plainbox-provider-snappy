@@ -14,6 +14,7 @@ _description: Manual audio tests for Snappy Ubuntu Core devices
 include:
     audio/external-microphone
     audio/headphone
+    audio/alsa-playback
 
 id: audio-automated
 unit: test plan
