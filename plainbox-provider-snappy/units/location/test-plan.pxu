@@ -1,0 +1,24 @@
+id: location-full
+unit: test plan
+_name: Location Service tests
+_description: QA location service tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    location-automated
+    location-manual
+
+id: location-automated
+unit: test plan
+_name: Automated location service tests
+_description: Automated location service tests for Snappy Ubuntu Core devices
+include:
+    location/status
+    location/monitor
+
+id: location-manual
+unit: test plan
+_name: Manual location service tests
+_description: Automated location service tests for Snappy Ubuntu Core devices
+include:
+    location/status-manual
+    location/monitor-manual

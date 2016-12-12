@@ -42,6 +42,7 @@ nested_part:
     ethernet-full
     i2c-full
     led-full
+    location-full
     mediacard-full
     memory-automated
     monitor-full
@@ -91,6 +92,7 @@ nested_part:
     docker-full
     ethernet-automated
     i2c-automated
+    location-automated
     mediacard-automated
     memory-automated
     snappy-snap-automated
