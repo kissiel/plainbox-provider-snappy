@@ -23,3 +23,4 @@ _description: Automated audio tests for Snappy Ubuntu Core devices
 include:
     audio/detect-playback-devices
     audio/detect-capture-devices
+    audio/alsa-loopback

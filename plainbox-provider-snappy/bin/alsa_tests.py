@@ -8,14 +8,25 @@
 
 import alsaaudio
 import argparse
+import cmath
 import math
-import numpy
 import struct
 import sys
 import threading
 
 RATE = 44100
 PERIOD = 441  # chunk size (in samples) that will be used when talking to alsa
+
+
+def fft(x):
+    N = len(x)
+    if N <= 1:
+        return x
+    even = fft(x[0::2])
+    odd = fft(x[1::2])
+    T = [cmath.exp(-2j*cmath.pi*k/N) * odd[k] for k in range(N//2)]
+    return ([even[k] + T[k] for k in range(N//2)] +
+            [even[k] - T[k] for k in range(N//2)])
 
 
 def sine(freq, length, period_len, amplitude=0.5):
@@ -72,7 +83,7 @@ def playback_test(seconds):
         player.play(chunk)
 
 
-def loopback_test(seconds, freq = 455.5):
+def loopback_test(seconds, freq=455.5):
     def generator():
         player = Player()
         for chunk in sine(freq, seconds * RATE, PERIOD):
@@ -85,9 +96,15 @@ def loopback_test(seconds, freq = 455.5):
     rec = Recorder()
     samples = rec.record(seconds * RATE)
 
-    Y = numpy.fft.fft(samples)
+    # fft requires len(samples) to be a  power of 2.
+    # let's trim samples to match that
+    real_len = 2 ** math.floor(math.floor(math.log2(len(samples))))
+    real_seconds = seconds * (real_len / len(samples))
+    samples = samples[0:real_len]
+
+    Y = fft(samples)
     freqs = [abs(y) for y in Y[:int(RATE/2)]]
-    dominant = freqs.index(max(freqs)) / seconds
+    dominant = freqs.index(max(freqs)) / real_seconds
     print("Dominant frequency is {}, expected {}".format(dominant, freq))
 
     epsilon = 1.0
