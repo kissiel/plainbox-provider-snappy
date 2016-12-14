@@ -30,7 +30,7 @@ _verification:
      automatically selected result.
 plugin: user-interact
 user: root
-command: run_watcher.py insertion usb3
+command: checkbox-support-run_watcher insertion usb3
 category_id: 2013.com.canonical.plainbox::usb
 imports: from 2013.com.canonical.plainbox import manifest
 requires:
@@ -65,7 +65,7 @@ _verification:
      automatically selected result.
 plugin: user-interact
 user: root
-command: run_watcher.py removal usb3
+command: checkbox-support-run_watcher removal usb3
 category_id: 2013.com.canonical.plainbox::usb
 depends: usb-c/c-to-a-adapter/insert
 imports: from 2013.com.canonical.plainbox import manifest
@@ -104,7 +104,7 @@ _verification:
      automatically selected result.
 plugin: user-interact
 user: root
-command: run_watcher.py insertion usb3
+command: checkbox-support-run_watcher insertion usb3
 category_id: 2013.com.canonical.plainbox::usb
 imports: from 2013.com.canonical.plainbox import manifest
 requires:
@@ -139,7 +139,7 @@ _verification:
      automatically selected result.
 plugin: user-interact
 user: root
-command: run_watcher.py removal usb3
+command: checkbox-support-run_watcher removal usb3
 category_id: 2013.com.canonical.plainbox::usb
 depends: usb-c/insert
 imports: from 2013.com.canonical.plainbox import manifest
