@@ -230,7 +230,7 @@ _verification:
  Can find new USB storage device messages in /var/log/syslog
 plugin: user-interact
 user: root
-command: run_watcher.py insertion usb2
+command: checkbox-support-run_watcher insertion usb2
 category_id: usb2
 estimated_duration: 10
 
@@ -259,7 +259,7 @@ _verification:
  Can find USB storage device removed messages in /var/log/syslog
 plugin: user-interact
 user: root
-command: run_watcher.py removal usb2
+command: checkbox-support-run_watcher removal usb2
 category_id: usb2
 estimated_duration: 10
 
@@ -274,7 +274,7 @@ _verification:
  Can find new USB3 storage device messages in /var/log/syslog
 plugin: user-interact
 user: root
-command: run_watcher.py insertion usb3
+command: checkbox-support-run_watcher insertion usb3
 category_id: usb3
 estimated_duration: 10
 
@@ -303,7 +303,7 @@ _verification:
  Can find USB3 storage device removed messages in /var/log/syslog
 plugin: user-interact
 user: root
-command: run_watcher.py removal usb3
+command: checkbox-support-run_watcher removal usb3
 category_id: usb3
 estimated_duration: 10
 
