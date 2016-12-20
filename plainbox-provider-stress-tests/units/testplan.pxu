@@ -1,0 +1,125 @@
+# Copyright 2015-2016 Canonical Ltd.
+# All rights reserved.
+#
+# Written by:
+#   Jonathan Cave <jonathan.cave@canonical.com>
+#   Sylvain Pineau <sylvain.pineau@canonical.com>
+
+
+unit: test plan
+id: warm-boot-stress-test
+_name: Warm boot stress test
+_description:
+ Reboots the machine a pre-defined number of times and on
+ resumption of OS performs a hardware check to ensure all
+ items are still present. Reboot is immediate.
+estimated_duration: 25h
+bootstrap_include:
+  reboot-run-generator
+include:
+  warm-boot-loop-.*
+mandatory_include:
+    2013.com.canonical.plainbox::manifest
+    2013.com.canonical.certification::package
+    2013.com.canonical.certification::snap
+    2013.com.canonical.certification::uname
+    2013.com.canonical.certification::lsb
+    2013.com.canonical.certification::cpuinfo
+    2013.com.canonical.certification::dpkg
+    2013.com.canonical.certification::dmi_attachment
+    2013.com.canonical.certification::sysfs_attachment
+    2013.com.canonical.certification::udev_attachment
+    2013.com.canonical.certification::lspci_attachment
+    2013.com.canonical.certification::lsusb_attachment
+    2013.com.canonical.certification::dmi
+    2013.com.canonical.certification::meminfo
+    2013.com.canonical.certification::interface
+
+unit: test plan
+id: cold-boot-stress-test
+_name: Cold boot stress test
+_description:
+ Reboots the machine a pre-defined number of times and on
+ resumption of OS performs a hardware check to ensure all
+ items are still present. The reboot is delayed by 2 minutes
+ by the RTC to allow hardware to cool.
+estimated_duration: 42h
+bootstrap_include:
+  reboot-run-generator
+include:
+  cold-boot-loop-.*
+mandatory_include:
+    2013.com.canonical.plainbox::manifest
+    2013.com.canonical.certification::package
+    2013.com.canonical.certification::snap
+    2013.com.canonical.certification::uname
+    2013.com.canonical.certification::lsb
+    2013.com.canonical.certification::cpuinfo
+    2013.com.canonical.certification::dpkg
+    2013.com.canonical.certification::dmi_attachment
+    2013.com.canonical.certification::sysfs_attachment
+    2013.com.canonical.certification::udev_attachment
+    2013.com.canonical.certification::lspci_attachment
+    2013.com.canonical.certification::lsusb_attachment
+    2013.com.canonical.certification::dmi
+    2013.com.canonical.certification::meminfo
+    2013.com.canonical.certification::interface
+
+
+unit: test plan
+id: suspend-stress-test
+_name: Suspend (S3) stress test
+_description:
+ Suspends the machine a pre-defined number of times and on
+ resume of OS performs a hardware check to ensure all
+ items are still present.
+estimated_duration: 42h
+bootstrap_include:
+  stress_s3_iterations
+include:
+  stress-tests/suspend.*
+mandatory_include:
+    2013.com.canonical.plainbox::manifest
+    2013.com.canonical.certification::package
+    2013.com.canonical.certification::snap
+    2013.com.canonical.certification::uname
+    2013.com.canonical.certification::lsb
+    2013.com.canonical.certification::cpuinfo
+    2013.com.canonical.certification::dpkg
+    2013.com.canonical.certification::dmi_attachment
+    2013.com.canonical.certification::sysfs_attachment
+    2013.com.canonical.certification::udev_attachment
+    2013.com.canonical.certification::lspci_attachment
+    2013.com.canonical.certification::lsusb_attachment
+    2013.com.canonical.certification::dmi
+    2013.com.canonical.certification::meminfo
+    2013.com.canonical.certification::interface
+
+unit: test plan
+id: hibernate-stress-test
+_name: Hibernate (S4) stress test
+_description:
+ Hibernates the machine a pre-defined number of times and on
+ resume of OS performs a hardware check to ensure all
+ items are still present.
+estimated_duration: 42h
+bootstrap_include:
+  stress_s4_iterations
+include:
+  stress-tests/hibernate.*
+mandatory_include:
+    2013.com.canonical.plainbox::manifest
+    2013.com.canonical.certification::package
+    2013.com.canonical.certification::snap
+    2013.com.canonical.certification::uname
+    2013.com.canonical.certification::lsb
+    2013.com.canonical.certification::cpuinfo
+    2013.com.canonical.certification::dpkg
+    2013.com.canonical.certification::dmi_attachment
+    2013.com.canonical.certification::sysfs_attachment
+    2013.com.canonical.certification::udev_attachment
+    2013.com.canonical.certification::lspci_attachment
+    2013.com.canonical.certification::lsusb_attachment
+    2013.com.canonical.certification::dmi
+    2013.com.canonical.certification::meminfo
+    2013.com.canonical.certification::interface
