@@ -20,20 +20,20 @@ include:
   warm-boot-loop-.*
 mandatory_include:
     2013.com.canonical.plainbox::manifest
-    2013.com.canonical.certification::package
-    2013.com.canonical.certification::snap
-    2013.com.canonical.certification::uname
-    2013.com.canonical.certification::lsb
-    2013.com.canonical.certification::cpuinfo
-    2013.com.canonical.certification::dpkg
-    2013.com.canonical.certification::dmi_attachment
-    2013.com.canonical.certification::sysfs_attachment
-    2013.com.canonical.certification::udev_attachment
-    2013.com.canonical.certification::lspci_attachment
-    2013.com.canonical.certification::lsusb_attachment
-    2013.com.canonical.certification::dmi
-    2013.com.canonical.certification::meminfo
-    2013.com.canonical.certification::interface
+    package
+    snap
+    uname
+    lsb
+    cpuinfo
+    dpkg
+    dmi_attachment
+    sysfs_attachment
+    udev_attachment
+    lspci_attachment
+    lsusb_attachment
+    dmi
+    meminfo
+    interface
 
 unit: test plan
 id: cold-boot-stress-test
@@ -50,20 +50,20 @@ include:
   cold-boot-loop-.*
 mandatory_include:
     2013.com.canonical.plainbox::manifest
-    2013.com.canonical.certification::package
-    2013.com.canonical.certification::snap
-    2013.com.canonical.certification::uname
-    2013.com.canonical.certification::lsb
-    2013.com.canonical.certification::cpuinfo
-    2013.com.canonical.certification::dpkg
-    2013.com.canonical.certification::dmi_attachment
-    2013.com.canonical.certification::sysfs_attachment
-    2013.com.canonical.certification::udev_attachment
-    2013.com.canonical.certification::lspci_attachment
-    2013.com.canonical.certification::lsusb_attachment
-    2013.com.canonical.certification::dmi
-    2013.com.canonical.certification::meminfo
-    2013.com.canonical.certification::interface
+    package
+    snap
+    uname
+    lsb
+    cpuinfo
+    dpkg
+    dmi_attachment
+    sysfs_attachment
+    udev_attachment
+    lspci_attachment
+    lsusb_attachment
+    dmi
+    meminfo
+    interface
 
 
 unit: test plan
@@ -80,20 +80,20 @@ include:
   stress-tests/suspend.*
 mandatory_include:
     2013.com.canonical.plainbox::manifest
-    2013.com.canonical.certification::package
-    2013.com.canonical.certification::snap
-    2013.com.canonical.certification::uname
-    2013.com.canonical.certification::lsb
-    2013.com.canonical.certification::cpuinfo
-    2013.com.canonical.certification::dpkg
-    2013.com.canonical.certification::dmi_attachment
-    2013.com.canonical.certification::sysfs_attachment
-    2013.com.canonical.certification::udev_attachment
-    2013.com.canonical.certification::lspci_attachment
-    2013.com.canonical.certification::lsusb_attachment
-    2013.com.canonical.certification::dmi
-    2013.com.canonical.certification::meminfo
-    2013.com.canonical.certification::interface
+    package
+    snap
+    uname
+    lsb
+    cpuinfo
+    dpkg
+    dmi_attachment
+    sysfs_attachment
+    udev_attachment
+    lspci_attachment
+    lsusb_attachment
+    dmi
+    meminfo
+    interface
 
 unit: test plan
 id: hibernate-stress-test
@@ -109,17 +109,17 @@ include:
   stress-tests/hibernate.*
 mandatory_include:
     2013.com.canonical.plainbox::manifest
-    2013.com.canonical.certification::package
-    2013.com.canonical.certification::snap
-    2013.com.canonical.certification::uname
-    2013.com.canonical.certification::lsb
-    2013.com.canonical.certification::cpuinfo
-    2013.com.canonical.certification::dpkg
-    2013.com.canonical.certification::dmi_attachment
-    2013.com.canonical.certification::sysfs_attachment
-    2013.com.canonical.certification::udev_attachment
-    2013.com.canonical.certification::lspci_attachment
-    2013.com.canonical.certification::lsusb_attachment
-    2013.com.canonical.certification::dmi
-    2013.com.canonical.certification::meminfo
-    2013.com.canonical.certification::interface
+    package
+    snap
+    uname
+    lsb
+    cpuinfo
+    dpkg
+    dmi_attachment
+    sysfs_attachment
+    udev_attachment
+    lspci_attachment
+    lsusb_attachment
+    dmi
+    meminfo
+    interface
