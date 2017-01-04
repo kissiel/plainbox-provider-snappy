@@ -6,7 +6,7 @@ from time import time
 from argparse import ArgumentParser, RawTextHelpFormatter, REMAINDER
 from subprocess import Popen, PIPE
 from syslog import *
-from distutils.spawn import find_executable
+from shutil import which
 import os
 
 # These tests require user interaction and need either special handling
@@ -76,7 +76,7 @@ TESTS = sorted(QA_TESTS + NON_CERT_TESTS + HWE_TESTS)
 
 def get_sleep_times(start_marker, end_marker, sleep_time, resume_time):
     logfile = '/var/log/syslog'
-    log_fh = open(logfile, 'r')
+    log_fh = open(logfile, 'r', encoding='UTF-8')
     line = ''
     run = 'FAIL'
     sleep_start_time = 0.0
@@ -140,12 +140,12 @@ def detect_progress_indicator():
     # Return zenity if installed and DISPLAY (--auto-close)
     # return dialog if installed and no DISPLAY (width height)
     display = os.environ.get('DISPLAY')
-    if display and find_executable('zenity'):
+    if display and which('zenity'):
         return ["zenity", "--progress", "--text", "Progress", "--auto-close"]
-    if not display and find_executable('dialog'):
+    if not display and which('dialog'):
         return ["dialog", "--gauge", "Progress", "20", "70"]
-    # Return None if no progress indicator is to be used
-    return None
+    # Return empty list if no progress indicator is to be used
+    return []
 
 
 def main():
@@ -389,7 +389,8 @@ def main():
                     progress_indicator.stdin.flush()
                 else:
                     print(progress_string)
-        progress_indicator.terminate()
+        if detect_progress_indicator():
+            progress_indicator.terminate()
 
         if 's4' not in args.sleep:
             average_times(iteration_results)
