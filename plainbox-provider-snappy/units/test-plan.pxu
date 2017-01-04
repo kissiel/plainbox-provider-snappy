@@ -99,3 +99,4 @@ nested_part:
     watchdog-automated
     wireless-connection-automated
     wwan-automated
+    stress-automated
