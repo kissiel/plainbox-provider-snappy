@@ -6,7 +6,7 @@ _purpose:
  Since there's only CLI with ubuntu-core, test keyboard only
 _steps:
  1. Run following command to start bluetoothctl console:
-  bluetoothctl -a
+  sudo bluez.bluetoothctl -a
  ***Following steps are run in bluetoothctl console***
  2. Power on the device:
   power on
