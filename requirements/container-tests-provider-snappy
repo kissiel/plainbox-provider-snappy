@@ -17,4 +17,6 @@ python3 ./plainbox-provider-docker/manage.py develop --force
 
 ./plainbox-provider-snappy-resource/manage.py validate
 ./plainbox-provider-snappy-resource/manage.py develop --force
+./plainbox-provider-stress-tests/manage.py validate
+./plainbox-provider-stress-tests/manage.py develop --force
 ./plainbox-provider-snappy/manage.py validate
