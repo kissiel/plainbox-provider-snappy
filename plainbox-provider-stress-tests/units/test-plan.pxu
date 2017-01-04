@@ -5,6 +5,27 @@
 #   Jonathan Cave <jonathan.cave@canonical.com>
 #   Sylvain Pineau <sylvain.pineau@canonical.com>
 
+id: stress-full
+unit: test plan
+_name: Stress tests
+_description: QA stress tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    stress-automated
+
+id: stress-automated
+unit: test plan
+_name: Automated stress tests
+_description: Automated stress tests for Snappy Ubuntu Core devices
+include:
+    stress/stress-ng-test-for-class-.*
+nested_part:
+    warm-boot-stress-test
+    cold-boot-stress-test
+    suspend-stress-test
+    hibernate-stress-test
+bootstrap_include:
+    stress-ng-classes
 
 unit: test plan
 id: warm-boot-stress-test

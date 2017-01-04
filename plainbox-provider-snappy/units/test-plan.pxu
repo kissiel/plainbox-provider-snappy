@@ -49,13 +49,13 @@ nested_part:
     rtc-full
     serial-full
     snappy-snap-full
-    stress-automated
     usb-c-full
     usb-full
     usb3-full
     watchdog-full
     wireless-full
     wwan-full
+    stress-full
 
 id: snappy-generic-automated
 unit: test plan
