@@ -29,7 +29,7 @@ _purpose:
  Check bluetooth LED behavior is correct
 _steps:
  1. Run following command to start bluetoothctl console:
-  bluetoothctl -a
+  sudo bluez.bluetoothctl -a
  ***Following steps are run in bluetoothctl console***
  2. Power on the device:
   power on
