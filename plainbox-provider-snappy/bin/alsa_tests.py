@@ -9,6 +9,7 @@
 import alsaaudio
 import argparse
 import cmath
+import contextlib
 import math
 import struct
 import sys
@@ -60,6 +61,22 @@ class Player:
         buff = b''.join([struct.pack("<f", x) for x in chunk])
         self.pcm.write(buff)
 
+    @contextlib.contextmanager
+    def changed_volume(self):
+        """Change volume to 50% and unmute the output while in the context"""
+        mixer = alsaaudio.Mixer(device=self.pcm.cardname())
+        stored_mute = mixer.getmute()
+        stored_volume = mixer.getvolume()
+        mixer.setmute(0)
+        mixer.setvolume(50)
+        yield
+        # the getters returned lists of volumes/mutes per channel, setters
+        # require scalars so we need to set it one by one
+        for ch, mute in enumerate(stored_mute):
+            mixer.setmute(mute, ch)
+        for ch, vol in enumerate(stored_volume):
+            mixer.setvolume(vol, ch)
+
 
 class Recorder:
     def __init__(self):
@@ -79,15 +96,17 @@ class Recorder:
 
 def playback_test(seconds):
     player = Player()
-    for chunk in sine(440, seconds * RATE, PERIOD):
-        player.play(chunk)
+    with player.changed_volume():
+        for chunk in sine(440, seconds * RATE, PERIOD):
+            player.play(chunk)
 
 
 def loopback_test(seconds, freq=455.5):
     def generator():
         player = Player()
-        for chunk in sine(freq, seconds * RATE, PERIOD):
-            player.play(chunk)
+        with player.changed_volume():
+            for chunk in sine(freq, seconds * RATE, PERIOD):
+                player.play(chunk)
 
     plr_thread = threading.Thread(target=generator)
     plr_thread.daemon = True
