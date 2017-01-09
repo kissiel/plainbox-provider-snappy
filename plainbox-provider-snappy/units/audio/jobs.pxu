@@ -61,3 +61,30 @@ _verification:
 plugin: manual
 category_id: audio
 estimated_duration: 300
+
+id: audio/alsa-playback
+_summary: Playback works
+_purpose:
+ Check if sound is played through ALSA on the default output
+_steps:
+ 1. Make sure speakers or headphones are connect to the device
+ 2. Commence the test
+_verification:
+ Did you hear the sound?
+plugin: user-interact-verify
+user: root
+environ: ALSA_CONFIG_PATH
+command: alsa_tests.py playback
+category_id: audio
+estimated_duration: 10
+
+id: audio/alsa-loopback
+_summary: Captured sound matches played one
+_purpose:
+ Check if sound that is 'hearable' by capture device
+plugin: shell
+user: root
+environ: ALSA_CONFIG_PATH
+command: alsa_tests.py loopback
+category_id: audio
+estimated_duration: 5
