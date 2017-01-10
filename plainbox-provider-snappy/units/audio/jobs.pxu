@@ -38,8 +38,8 @@ command: alsa_tests.py playback
 category_id: audio
 estimated_duration: 10
 
-id: audio/alsa-loopback
-_summary: Captured sound matches played one
+id: audio/alsa-loopback-automated
+_summary: Captured sound matches played one (automated)
 _purpose:
  Check if sound that is 'hearable' by capture device
 plugin: shell
