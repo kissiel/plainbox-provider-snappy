@@ -13,6 +13,7 @@ _purpose:
  Tests that there is a WWAN module present and indicates that testing of it
  should follow.
 plugin: shell
+user: root
 command:
   COUNT=$(wwan_tests count)
   if [ $COUNT -eq 0 ]; then
