@@ -48,3 +48,19 @@ environ: ALSA_CONFIG_PATH
 command: alsa_tests.py loopback
 category_id: audio
 estimated_duration: 5
+
+id: audio/alsa-loopback
+_summary: Captured sound matches played one
+_purpose:
+ Check if sound that is 'hearable' by capture device
+_steps:
+ 1. Connect line-out to line-in (plug the loop-back cable)
+ 2. Commence the test
+ 3. Observe command's output
+ 3. Check if the recorded frequency matched generated one
+plugin: user-interact-verify
+user: root
+environ: ALSA_CONFIG_PATH
+command: alsa_tests.py loopback
+category_id: audio
+estimated_duration: 30
