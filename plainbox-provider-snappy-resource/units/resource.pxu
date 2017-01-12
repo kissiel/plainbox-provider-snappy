@@ -30,7 +30,16 @@ command:
     unset PYTHONUSERBASE
     interface_resource
 _description: Generates a list of interface declarations on the device
-_summary: Collect information about interfaces and connections
+_summary: Collect information about interfaces
+
+id: connections
+estimated_duration: 1.1
+plugin: resource
+command:
+    unset PYTHONUSERBASE
+    interface_connections_resource
+_description: Generates a list of plug and slot connections on the device
+_summary: Collect information about connections
 
 id: uname
 estimated_duration: 0.09
