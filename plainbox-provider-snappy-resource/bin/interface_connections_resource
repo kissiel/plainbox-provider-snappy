@@ -21,9 +21,10 @@ def get(path):
 
 data = get('/v2/interfaces').json()
 
-for plug in data['result']['plugs']:
-    if 'connections' in plug:
-        for con in plug['connections']:
-            print('slot: {}:{}'.format(con['snap'], con['slot']))
-            print('plug: {}:{}'.format(plug['snap'], plug['plug']))
-            print()
+if data['result']['plugs'] is not None:
+    for plug in data['result']['plugs']:
+        if 'connections' in plug:
+            for con in plug['connections']:
+                print('slot: {}:{}'.format(con['snap'], con['slot']))
+                print('plug: {}:{}'.format(plug['snap'], plug['plug']))
+                print()
