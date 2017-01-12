@@ -22,30 +22,25 @@ def get(path):
 data = get('/v2/interfaces').json()
 
 for plug in data['result']['plugs']:
-    print('type: plug')
-    print('name: {}'.format(plug['plug']))
-
     def print_field(key):
         val = plug[key]
         if val != '':
             print('%s: %s' % (key, val))
-    keys = ['interface', 'snap']
+    keys = ['snap', 'interface']
     for f in keys:
         print_field(f)
-    if 'connections' in plug:
-        for con in plug['connections']:
-            print('connected-to: {}'.format(con['snap']))
+    print('type: plug')
+    print('name: {}'.format(plug['plug']))
     print()
 
 for slot in data['result']['slots']:
-    print('type: slot')
-    print('name: {}'.format(slot['slot']))
-
     def print_field(key):
         val = slot[key]
         if val != '':
             print('%s: %s' % (key, val))
-    keys = ['interface', 'snap']
+    keys = ['snap', 'interface']
     for f in keys:
         print_field(f)
+    print('type: slot')
+    print('name: {}'.format(slot['slot']))
     print()

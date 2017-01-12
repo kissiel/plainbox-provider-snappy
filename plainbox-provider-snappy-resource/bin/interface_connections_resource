@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+
+import logging
+import requests
+import requests_unixsocket
+import sys
+
+SNAPD_BASE_URL = 'http+unix://%2Frun%2Fsnapd.socket'
+
+session = requests_unixsocket.Session()
+
+
+def get(path):
+    r = session.get(SNAPD_BASE_URL + path)
+    if r.status_code != requests.codes.ok:
+        logging.error("Got error %i attempting to access %s",
+                      r.status_code, path)
+        sys.exit(1)
+    return r
+
+
+data = get('/v2/interfaces').json()
+
+for plug in data['result']['plugs']:
+    if 'connections' in plug:
+        for con in plug['connections']:
+            print('slot: {}:{}'.format(con['snap'], con['slot']))
+            print('plug: {}:{}'.format(plug['snap'], plug['plug']))
+            print()
