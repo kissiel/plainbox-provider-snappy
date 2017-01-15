@@ -13,22 +13,16 @@ estimated_duration: 120.0
 _purpose:
   Check that the system can create an open 802.11a Access Point without any STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode a
-    $ wifi-ap.config set wifi.interface-mode direct
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security open
-  4. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  6. Attempt to connect to the AP
-  7. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode a
+    $ sudo wifi-ap.config set wifi.interface-mode direct
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security open
+  3. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  4. Attempt to connect to the AP
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -48,22 +42,16 @@ estimated_duration: 120.0
 _purpose:
   Check that the system can create an open 802.11b Access Point without any STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode b
-    $ wifi-ap.config set wifi.interface-mode direct
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security open
-  4. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  6. Attempt to connect to the AP
-  7. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode b
+    $ sudo wifi-ap.config set wifi.interface-mode direct
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security open
+  3. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  4. Attempt to connect to the AP
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -83,22 +71,16 @@ estimated_duration: 120.0
 _purpose:
   Check that the system can create an open 802.11g Access Point without any STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode g
-    $ wifi-ap.config set wifi.interface-mode direct
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security open
-  4. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  6. Attempt to connect to the AP
-  7. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode g
+    $ sudo wifi-ap.config set wifi.interface-mode direct
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security open
+  3. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  4. Attempt to connect to the AP
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -118,22 +100,16 @@ estimated_duration: 120.0
 _purpose:
   Check that the system can create an open 802.11ad Access Point without any STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode ad
-    $ wifi-ap.config set wifi.interface-mode direct
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security open
-  4. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  6. Attempt to connect to the AP
-  7. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode ad
+    $ sudo wifi-ap.config set wifi.interface-mode direct
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security open
+  3. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  4. Attempt to connect to the AP
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -153,23 +129,17 @@ estimated_duration: 120.0
 _purpose:
   Check that the system can create a WPA2 802.11a Access Point without any STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode a
-    $ wifi-ap.config set wifi.interface-mode direct
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security wpa2
-    $ wifi-ap.config set wifi.security-passphrase Test1234
-  4. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  6. Attempt to connect to the AP using password "Test1234"
-  7. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode a
+    $ sudo wifi-ap.config set wifi.interface-mode direct
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security wpa2
+    $ sudo wifi-ap.config set wifi.security-passphrase Test1234
+  3. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  4. Attempt to connect to the AP using password "Test1234"
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -189,23 +159,17 @@ estimated_duration: 120.0
 _purpose:
   Check that the system can create a WPA2 802.11b Access Point without any STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode b
-    $ wifi-ap.config set wifi.interface-mode direct
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security wpa2
-    $ wifi-ap.config set wifi.security-passphrase Test1234
-  4. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  6. Attempt to connect to the AP using password "Test1234"
-  7. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode b
+    $ sudo wifi-ap.config set wifi.interface-mode direct
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security wpa2
+    $ sudo wifi-ap.config set wifi.security-passphrase Test1234
+  3. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  4. Attempt to connect to the AP using password "Test1234"
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -225,23 +189,17 @@ estimated_duration: 120.0
 _purpose:
   Check that the system can create a WPA2 802.11g Access Point without any STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode g
-    $ wifi-ap.config set wifi.interface-mode direct
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security wpa2
-    $ wifi-ap.config set wifi.security-passphrase Test1234
-  4. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  6. Attempt to connect to the AP using password "Test1234"
-  7. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode g
+    $ sudo wifi-ap.config set wifi.interface-mode direct
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security wpa2
+    $ sudo wifi-ap.config set wifi.security-passphrase Test1234
+  3. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  4. Attempt to connect to the AP using password "Test1234"
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -261,23 +219,17 @@ estimated_duration: 120.0
 _purpose:
   Check that the system can create a WPA2 802.11ad Access Point without any STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode ad
-    $ wifi-ap.config set wifi.interface-mode direct
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security wpa2
-    $ wifi-ap.config set wifi.security-passphrase Test1234
-  4. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  5. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  6. Attempt to connect to the AP using password "Test1234"
-  7. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  2. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode ad
+    $ sudo wifi-ap.config set wifi.interface-mode direct
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security wpa2
+    $ sudo wifi-ap.config set wifi.security-passphrase Test1234
+  3. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  4. Attempt to connect to the AP using password "Test1234"
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -303,26 +255,20 @@ user: root
 _purpose:
   Check that the system can create a WPA2 802.11a Access Point with an already active STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Connect to an 802.11b/g AP with wpa security:
+  2. Connect to an 802.11b/g AP with wpa security:
     Press Enter to continue
-  4. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode a
-    $ wifi-ap.config set wifi.interface-mode virtual
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security wpa2
-    $ wifi-ap.config set wifi.security-passphrase Test1234
-    $ wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
-  5. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  6. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  7. Attempt to connect to the AP using password "Test1234"
-  8. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  3. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode a
+    $ sudo wifi-ap.config set wifi.interface-mode virtual
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security wpa2
+    $ sudo wifi-ap.config set wifi.security-passphrase Test1234
+    $ sudo wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
+  4. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  5. Attempt to connect to the AP using password "Test1234"
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -348,26 +294,20 @@ user: root
 _purpose:
   Check that the system can create a WPA2 802.11b Access Point with an already active STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Connect to an 802.11b/g AP with wpa security:
+  2. Connect to an 802.11b/g AP with wpa security:
     Press Enter to continue
-  4. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode b
-    $ wifi-ap.config set wifi.interface-mode virtual
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security wpa2
-    $ wifi-ap.config set wifi.security-passphrase Test1234
-    $ wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
-  5. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  6. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  7. Attempt to connect to the AP using password "Test1234"
-  8. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  3. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode b
+    $ sudo wifi-ap.config set wifi.interface-mode virtual
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security wpa2
+    $ sudo wifi-ap.config set wifi.security-passphrase Test1234
+    $ sudo wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
+  4. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  5. Attempt to connect to the AP using password "Test1234"
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -393,26 +333,20 @@ user: root
 _purpose:
   Check that the system can create a WPA2 802.11g Access Point with an already active STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Connect to an 802.11b/g AP with wpa security:
+  2. Connect to an 802.11b/g AP with wpa security:
     Press Enter to continue
-  4. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode g
-    $ wifi-ap.config set wifi.interface-mode virtual
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security wpa2
-    $ wifi-ap.config set wifi.security-passphrase Test1234
-    $ wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
-  5. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  6. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  7. Attempt to connect to the AP using password "Test1234"
-  8. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  3. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode g
+    $ sudo wifi-ap.config set wifi.interface-mode virtual
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security wpa2
+    $ sudo wifi-ap.config set wifi.security-passphrase Test1234
+    $ sudo wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
+  4. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  5. Attempt to connect to the AP using password "Test1234"
 _verification:
   Did the client connect?
 flags: preserve-locale
@@ -438,26 +372,20 @@ user: root
 _purpose:
   Check that the system can create a WPA2 802.11ad Access Point with an already active STA connection
 _steps:
-  1. Ensure no Soft AP is running prior running this test:
-    $ sudo systemctl stop snap.wifi-ap.backend
-  2. Delete existing wireless connections known to Network Manager:
+  1. Delete existing wireless connections known to Network Manager:
     $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP "(?<=^802-11-wireless:).*" | xargs network-manager.nmcli c delete
-  3. Connect to an 802.11b/g AP with wpa security:
+  2. Connect to an 802.11b/g AP with wpa security:
     Press Enter to continue
-  4. Configure the wifi-ap snap:
-    $ wifi-ap.config set wifi.interface {interface}
-    $ wifi-ap.config set wifi.operation-mode ad
-    $ wifi-ap.config set wifi.interface-mode virtual
-    $ wifi-ap.config set disabled 0
-    $ wifi-ap.config set wifi.security wpa2
-    $ wifi-ap.config set wifi.security-passphrase Test1234
-    $ wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
-  5. Start the wifi-ap service:
-    $ sudo systemctl start snap.wifi-ap.backend
-  6. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
-  7. Attempt to connect to the AP using password "Test1234"
-  8. Stop the wifi-ap service:
-    $ sudo systemctl stop snap.wifi-ap.backend
+  3. Configure the wifi-ap snap:
+    $ sudo wifi-ap.config set wifi.interface {interface}
+    $ sudo wifi-ap.config set wifi.operation-mode ad
+    $ sudo wifi-ap.config set wifi.interface-mode virtual
+    $ sudo wifi-ap.config set disabled 0
+    $ sudo wifi-ap.config set wifi.security wpa2
+    $ sudo wifi-ap.config set wifi.security-passphrase Test1234
+    $ sudo wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -oP 'channel\s+\K\d+')
+  4. Using a suitable Wi-Fi client try to detect the presence of the AP called "Ubuntu"
+  5. Attempt to connect to the AP using password "Test1234"
 _verification:
   Did the client connect?
 flags: preserve-locale
