@@ -18,3 +18,26 @@ bootstrap_include:
  security_resource
 mandatory_include:
  security_setup
+
+id: tainted-kernel-security-full
+unit: test plan
+_name: Kernel-security tests (tainted)
+_description: Kernel-security from QA Regression Testing (ignoring tainting)
+include:
+nested_part:
+    tainted-kernel-security-automated
+estimated_duration: 870s
+
+id: tainted-kernel-security-automated
+unit: test plan
+_name: Automated kernel-security tests (tainted)
+_description: Automated kernel-security tests (ignoring tainting)
+include:
+ security/.*
+exclude:
+ security/test_140_kernel_modules_not_tainted
+bootstrap_include:
+ security_resource
+mandatory_include:
+ security_setup
+estimated_duration: 870s
