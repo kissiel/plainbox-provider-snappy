@@ -5,6 +5,7 @@ _description: Collection of tests from QA Regression Testing repository
 include:
 nested_part:
     kernel-security-automated
+estimated_duration: 900s
 
 id: kernel-security-automated
 unit: test plan
