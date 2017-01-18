@@ -1869,12 +1869,13 @@ class KernelSecurityTest(testlib.TestlibCase):
     def test_152_sysctl_disables_apparmor_unpriv_userns(self):
         '''unprivileged_userns_apparmor_policy sysctl supported'''
 
-        expected = 0
+        expected = 1
         exists = True
         if not self.kernel_at_least('4.4'):
             self._skipped("unprivileged apparmor disable sysctl did not exist before xenial")
-            expected = 1
             exists = False
+        elif self.lsb_release['Release'] == 16.04 and not self.kernel_at_least('4.4.0-46'):
+            expected = 0
 
         self._test_sysctl_value('kernel/unprivileged_userns_apparmor_policy', expected, exists=exists)
 
