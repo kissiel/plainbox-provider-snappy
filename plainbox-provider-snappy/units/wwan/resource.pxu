@@ -12,5 +12,6 @@ plugin: resource
 _summary: Gather device info about WWAN modems
 _description: Gather device info about WWAN modems
 command: wwan_tests resources
+user: root
 estimated_duration: 3s
 flags: preserve-locale
