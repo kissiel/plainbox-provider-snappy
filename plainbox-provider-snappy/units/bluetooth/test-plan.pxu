@@ -24,6 +24,7 @@ _description:
  Automated tests for bluez
 estimated_duration: 1m
 include:
+    bluetooth/file_transfer_stress
     bluetooth/bluez-internal-rfcomm-tests_.*
     bluetooth/bluez-internal-hci-tests_.*
     bluetooth/bluez-internal-mgmt-tests_.*
