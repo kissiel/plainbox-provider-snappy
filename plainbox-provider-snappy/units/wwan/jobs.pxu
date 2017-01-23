@@ -44,3 +44,45 @@ imports: from 2013.com.canonical.plainbox import manifest
 requires:
   manifest.has_wwan_module == 'True'
   wwan_resource.gsm_umts == 'supported'
+
+unit: template
+template-resource: wwan_resource
+template-unit: job
+id: wwan/check-sim-present-{manufacturer}-{model}-{hw_id}
+_summary:  Check if a SIM card is present in a slot connected to the modem
+_description:
+ Check if a SIM card is present in a slot connected to the modem
+plugin: shell
+command: wwan_tests sim-present {hw_id}
+environ: LD_LIBRARY_PATH
+user: root
+estimated_duration: 10.0
+category_id: wwan
+flags: preserve-locale
+imports: from 2013.com.canonical.plainbox import manifest
+requires:
+  manifest.has_wwan_module == 'True'
+
+unit: template
+template-resource: wwan_resource
+template-unit: job
+id: wwan/verify-sim-info-{manufacturer}-{model}-{hw_id}
+depends: wwan/check-sim-present-{manufacturer}-{model}-{hw_id}
+_summary: Verify that the information retrieved from a SIM card is valid
+_description:
+ Attempt to retrieve as much information as possible from a SIM present. The
+ user is required to verify if the output is valid.
+plugin: user-interact-verify
+_steps:
+ 1. Start the test to automatically retrieve information from the SIM card
+_verification:
+ Check the output, if as expected then mark the test as passed.
+command: wwan_tests sim-info {hw_id}
+environ: LD_LIBRARY_PATH
+user: root
+estimated_duration: 5s
+category_id: wwan
+flags: preserve-locale
+imports: from 2013.com.canonical.plainbox import manifest
+requires:
+  manifest.has_wwan_module == 'True'

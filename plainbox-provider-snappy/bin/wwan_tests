@@ -29,6 +29,7 @@ DBUS_MM1_IF_MODEM = 'org.freedesktop.ModemManager1.Modem'
 DBUS_MM1_IF_MODEM_SIMPLE = 'org.freedesktop.ModemManager1.Modem.Simple'
 DBUS_MM1_IF_MODEM_3GPP = 'org.freedesktop.ModemManager1.Modem.Modem3gpp'
 DBUS_MM1_IF_MODEM_CDMA = 'org.freedesktop.ModemManager1.Modem.ModemCdma'
+DBUS_MM1_IF_SIM = 'org.freedesktop.ModemManager1.Sim'
 
 MMModemCapability = {
     'MM_MODEM_CAPABILITY_NONE': 0,
@@ -59,10 +60,16 @@ class MMDbus():
                 logging.error(excp.get_dbus_message())
             return
 
-    def _modem_by_id(self, id):
+    def _modem_by_id(self, mm_id):
         for m in self._modems:
-            if id == (int(os.path.basename(m))):
+            if mm_id == (int(os.path.basename(m))):
                 return m
+
+    def _modem_props_iface(self, mm_id):
+        m = self._modem_by_id(mm_id)
+        if m is not None:
+            proxy = self._bus.get_object(DBUS_MM1_SERVICE, m)
+            return dbus.Interface(proxy, dbus_interface=DBUS_PROPERTIES)
 
     def get_modem_ids(self):
         modem_ids = []
@@ -76,32 +83,57 @@ class MMDbus():
                 return mm_id
 
     def get_rat_support(self, mm_id):
-        m = self._modem_by_id(mm_id)
-        if m is not None:
-            proxy = self._bus.get_object(DBUS_MM1_SERVICE, m)
-            props_iface = dbus.Interface(proxy, dbus_interface=DBUS_PROPERTIES)
-            return props_iface.Get(DBUS_MM1_IF_MODEM, 'CurrentCapabilities')
+        pi = self._modem_props_iface(mm_id)
+        return pi.Get(DBUS_MM1_IF_MODEM, 'CurrentCapabilities')
 
     def get_equipment_id(self, mm_id):
-        m = self._modem_by_id(mm_id)
-        if m is not None:
-            proxy = self._bus.get_object(DBUS_MM1_SERVICE, m)
-            props_iface = dbus.Interface(proxy, dbus_interface=DBUS_PROPERTIES)
-            return props_iface.Get(DBUS_MM1_IF_MODEM, "EquipmentIdentifier")
+        pi = self._modem_props_iface(mm_id)
+        return pi.Get(DBUS_MM1_IF_MODEM, "EquipmentIdentifier")
 
     def get_manufacturer(self, mm_id):
-        m = self._modem_by_id(mm_id)
-        if m is not None:
-            proxy = self._bus.get_object(DBUS_MM1_SERVICE, m)
-            props_iface = dbus.Interface(proxy, dbus_interface=DBUS_PROPERTIES)
-            return props_iface.Get(DBUS_MM1_IF_MODEM, 'Manufacturer')
+        pi = self._modem_props_iface(mm_id)
+        return pi.Get(DBUS_MM1_IF_MODEM, 'Manufacturer')
 
     def get_model_name(self, mm_id):
-        m = self._modem_by_id(mm_id)
-        if m is not None:
-            proxy = self._bus.get_object(DBUS_MM1_SERVICE, m)
-            props_iface = dbus.Interface(proxy, dbus_interface=DBUS_PROPERTIES)
-            return props_iface.Get(DBUS_MM1_IF_MODEM, 'Model')
+        pi = self._modem_props_iface(mm_id)
+        return pi.Get(DBUS_MM1_IF_MODEM, 'Model')
+
+    def sim_present(self, mm_id):
+        pi = self._modem_props_iface(mm_id)
+        if pi.Get(DBUS_MM1_IF_MODEM, 'Sim') != '/':
+            return True
+        return False
+
+    def _get_sim_pi(self, mm_id):
+        pi = self._modem_props_iface(mm_id)
+        sim_path = pi.Get(DBUS_MM1_IF_MODEM, 'Sim')
+        if sim_path != '/':
+            sim_proxy = self._bus.get_object(DBUS_MM1_SERVICE, sim_path)
+            return dbus.Interface(sim_proxy, dbus_interface=DBUS_PROPERTIES)
+
+    def get_sim_operatorname(self, mm_id):
+        sim_pi = self._get_sim_pi(mm_id)
+        if sim_pi is None:
+            return 'No card'
+        return sim_pi.Get(DBUS_MM1_IF_SIM, 'OperatorName')
+
+    def get_sim_operatoridentifier(self, mm_id):
+        sim_pi = self._get_sim_pi(mm_id)
+        if sim_pi is None:
+            return 'No card'
+        return sim_pi.Get(DBUS_MM1_IF_SIM, 'OperatorIdentifier')
+
+    def get_sim_imsi(self, mm_id):
+        sim_pi = self._get_sim_pi(mm_id)
+        if sim_pi is None:
+            return 'No card'
+        return sim_pi.Get(DBUS_MM1_IF_SIM, 'Imsi')
+
+    def get_sim_simidentifier(self, mm_id):
+        sim_pi = self._get_sim_pi(mm_id)
+        if sim_pi is None:
+            return 'No card'
+        return sim_pi.Get(DBUS_MM1_IF_SIM, 'SimIdentifier')
 
 
 def _create_3gpp_connection(wwan_if, apn):
@@ -135,7 +167,7 @@ def _ping_test(if_name):
     return ret_code
 
 
-class _3gppConnection(Command):
+class ThreeGppConnection(Command):
 
     def register_arguments(self, parser):
         parser.add_argument('wwan_control_if',  type=str,
@@ -196,12 +228,44 @@ class Resources(Command):
             print("model: {}".format(mmdbus.get_model_name(m)))
 
 
+class SimPresent(Command):
+
+    def register_arguments(self, parser):
+        parser.add_argument('hw_id',  type=str,
+                            help='The hardware ID of the modem whose attached'
+                            'SIM we want to query')
+
+    def invoked(self, ctx):
+        mmdbus = MMDbus()
+        mm_id = mmdbus.equipment_id_to_mm_id(ctx.args.hw_id)
+        if not mmdbus.sim_present(mm_id):
+            return 1
+
+
+class SimInfo(Command):
+
+    def register_arguments(self, parser):
+        parser.add_argument('hw_id',  type=str,
+                            help='The hardware ID of the modem whose attached'
+                            'SIM we want to query')
+
+    def invoked(self, ctx):
+        mmdbus = MMDbus()
+        mm_id = mmdbus.equipment_id_to_mm_id(ctx.args.hw_id)
+        print("Operator: {}".format(mmdbus.get_sim_operatorname(mm_id)))
+        print("IMSI: {}".format(mmdbus.get_sim_imsi(mm_id)))
+        print("MCC/MNC: {}".format(mmdbus.get_sim_operatoridentifier(mm_id)))
+        print("ICCID: {}".format(mmdbus.get_sim_simidentifier(mm_id)))
+
+
 class WWANTests(Command):
 
     sub_commands = (
         ('count', CountModems),
         ('resources', Resources),
-        ('3gpp-connection', _3gppConnection)
+        ('3gpp-connection', ThreeGppConnection),
+        ('sim-present', SimPresent),
+        ('sim-info', SimInfo)
     )
 
 
