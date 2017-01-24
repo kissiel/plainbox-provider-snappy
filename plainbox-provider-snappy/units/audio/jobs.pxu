@@ -44,7 +44,7 @@ _purpose:
  Check if sound that is 'hearable' by capture device
 plugin: shell
 user: root
-environ: ALSA_CONFIG_PATH
+environ: ALSA_CONFIG_PATH LD_LIBRARY_PATH
 command: alsa_tests.py loopback
 category_id: audio
 estimated_duration: 5
@@ -60,7 +60,7 @@ _steps:
  3. Check if the recorded frequency matched generated one
 plugin: user-interact-verify
 user: root
-environ: ALSA_CONFIG_PATH
+environ: ALSA_CONFIG_PATH LD_LIBRARY_PATH
 command: alsa_tests.py loopback
 category_id: audio
 estimated_duration: 30
