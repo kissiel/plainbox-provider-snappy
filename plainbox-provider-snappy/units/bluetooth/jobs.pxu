@@ -110,3 +110,15 @@ command:
  bnep-tester -p "{bluez-internal-bnep-test}"
 requires: device.category == 'BLUETOOTH'
 estimated_duration: 2.0
+
+id: bluetooth/keyboard
+_summary: Bluetooth keyboard works
+_purpose:
+ Check if bluetooth keyboard works
+_verification:
+ Did the keyboard work?
+plugin: user-verify
+user: root
+command: test_bt_keyboard
+category_id: bluetooth
+estimated_duration: 1m

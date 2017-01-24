@@ -15,6 +15,7 @@ _description: Manual QA tests for Bluetooth
 estimated_duration: 5m
 include:
     bluetooth/hid
+    bluetooth/keyboard
 
 id: bluez-automated
 unit: test plan
