@@ -56,16 +56,3 @@ user: root
 _summary: Disk I/O stress test for {product}
 _description: Take the path of the storage device and test is it a block device
 command: storage_test {name}
-
-unit: template
-template-resource: device
-template-filter: device.category == 'DISK'
-plugin: shell
-category_id: disk
-id: disk/disk_stress_ng_{name}
-estimated_duration: 4560.0
-user: root
-environ: LD_LIBRARY_PATH
-_summary: Disk stress_ng test for {product}
-_description: Disk stress_ng test for {product}
-command: disk_stress_ng {name} --base-time 240 --really-run
