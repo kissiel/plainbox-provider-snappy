@@ -13,6 +13,8 @@ _name: Manual suspend tests
 _description: Manual suspend tests for Snappy Ubuntu Core devices
 include:
     suspend/suspend-manual
+    suspend/suspend_advanced
+    suspend/hibernate_advanced
     suspend/audio-after-suspend/headphone
     suspend/audio-after-suspend/microphone
     suspend/bluetooth-after-suspend/hid
@@ -45,3 +47,5 @@ _description: Automated suspend tests for Snappy Ubuntu Core devices
 include:
     suspend/usb-after-suspend/storage-automated
     suspend/usb3-after-suspend/storage-automated
+    suspend/suspend_advanced_auto
+    suspend/hibernate_advanced_auto
