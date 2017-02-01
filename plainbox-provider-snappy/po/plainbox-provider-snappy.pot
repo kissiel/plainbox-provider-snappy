@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-27 11:17+0800\n"
+"POT-Creation-Date: 2017-02-01 11:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,135 +17,212 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../manage.py:94
+#: ../manage.py:102
 msgid "Test Definitions (Jobs)"
 msgstr ""
 
 #. Create a section with static information
-#: ../manage.py:110
+#: ../manage.py:118
 msgid "Test Descriptions"
 msgstr ""
 
 #. Add columns: category, id and description
-#: ../manage.py:121
+#: ../manage.py:129
 msgid "Category"
 msgstr ""
 
 #. Add columns: id
-#: ../manage.py:122 ../manage.py:201
+#: ../manage.py:130 ../manage.py:210
 msgid "Test Case ID"
 msgstr ""
 
-#: ../manage.py:123
+#: ../manage.py:131
 msgid "Description"
 msgstr ""
 
-#: ../manage.py:124
+#: ../manage.py:132
 msgid "Command"
 msgstr ""
 
-#: ../manage.py:125
+#: ../manage.py:133
 msgid "Duration"
 msgstr ""
 
-#: ../manage.py:167
+#: ../manage.py:176
 msgid "{}"
 msgstr ""
 
 #. Create a section with static information
-#: ../manage.py:183
+#: ../manage.py:192
 msgid "Test Plan Name"
 msgstr ""
 
-#: ../manage.py:185
+#: ../manage.py:194
 msgid "Test Plan ID"
 msgstr ""
 
-#: ../manage.py:202
+#: ../manage.py:211
 msgid "Summary"
 msgstr ""
 
-#: ../manage.py:223
+#: ../manage.py:232
 msgid "FILE"
 msgstr ""
 
-#: ../manage.py:224
+#: ../manage.py:233
 msgid "path of the .xlsx file to write"
 msgstr ""
 
-#: ../manage.py:231
+#: ../manage.py:294
 msgid "Plainbox Provider for Snappy devices"
 msgstr ""
 
 #. name
-#: ../units/audio.pxu:3
+#: ../units/test-plan.pxu:11
+msgid "QA tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. description
+#: ../units/test-plan.pxu:12
+msgid ""
+"QA test plan that includes all generic, reusable tests for Snappy Ubuntu "
+"Core devices."
+msgstr ""
+
+#. name
+#: ../units/test-plan.pxu:63
+msgid "Automated QA tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. description
+#: ../units/test-plan.pxu:64
+msgid ""
+"QA test plan that includes all generic, reusable and automated tests for "
+"Snappy Ubuntu Core devices."
+msgstr ""
+
+#. name
+#: ../units/audio/category.pxu:3
 msgid "Audio"
 msgstr ""
 
 #. summary
-#: ../units/audio.pxu:7
-msgid "External microphone works"
-msgstr ""
-
-#. purpose
-#: ../units/audio.pxu:8
-msgid "Check that an external microphone works"
+#: ../units/audio/jobs.pxu:2
+msgid "Check that at least one audio playback device exits"
 msgstr ""
 
 #. summary
-#: ../units/audio.pxu:27
-msgid "Headphones work"
+#: ../units/audio/jobs.pxu:14
+msgid "Check that at least one audio capture device exists"
+msgstr ""
+
+#. summary
+#: ../units/audio/jobs.pxu:26
+msgid "Playback works"
 msgstr ""
 
 #. purpose
-#: ../units/audio.pxu:28
-msgid "Check headphones work"
+#: ../units/audio/jobs.pxu:27
+msgid "Check if sound is played through ALSA on the default output"
 msgstr ""
 
 #. steps
-#: ../units/audio.pxu:30
+#: ../units/audio/jobs.pxu:29
 msgid ""
-"1. Plug headset to headset port 2. Execute following command:\n"
-" alsamixer\n"
-"3. Use arrow key to adjust volume, m key to mute/unmute 4. Make sure all "
-"channels are not muted and have an appropriate volume 5. Press q to exit "
-"alsamixer 6. Execute following command:\n"
-" arecord | aplay\n"
-"7. Speak in to microphone on headset"
+"1. Make sure speakers or headphones are connect to the device 2. Commence "
+"the test"
 msgstr ""
 
 #. verification
-#: ../units/audio.pxu:40 ../units/suspend.pxu:52
-msgid "Verify that your voice is reproduced through the headphones clearly"
+#: ../units/audio/jobs.pxu:32
+msgid "Did you hear the sound?"
+msgstr ""
+
+#. summary
+#: ../units/audio/jobs.pxu:42
+msgid "Captured sound matches played one (automated)"
+msgstr ""
+
+#. summary
+#: ../units/audio/jobs.pxu:53
+msgid "Captured sound matches played one"
+msgstr ""
+
+#. purpose
+#: ../units/audio/jobs.pxu:54
+msgid "Check if sound that is 'hearable' by capture device"
+msgstr ""
+
+#. steps
+#: ../units/audio/jobs.pxu:56
+msgid ""
+"1. Connect line-out to line-in (plug the loop-back cable) 2. Commence the "
+"test 3. Observe command's output 3. Check if the recorded frequency matched "
+"generated one"
+msgstr ""
+
+#. description
+#: ../units/audio/resource.pxu:6
+msgid "Gather device info about alsa sound devices"
 msgstr ""
 
 #. name
-#: ../units/bluetooth.pxu:3
+#: ../units/audio/test-plan.pxu:3
+msgid "Audio tests"
+msgstr ""
+
+#. description
+#: ../units/audio/test-plan.pxu:4
+msgid "QA audio tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/audio/test-plan.pxu:12
+msgid "Manual audio tests"
+msgstr ""
+
+#. description
+#: ../units/audio/test-plan.pxu:13
+msgid "Manual audio tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/audio/test-plan.pxu:20
+msgid "Automated audio tests"
+msgstr ""
+
+#. description
+#: ../units/audio/test-plan.pxu:21
+msgid "Automated audio tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/bluetooth/category.pxu:3
 msgid "Bluetooth"
 msgstr ""
 
 #. name
-#: ../units/bluetooth.pxu:7
+#: ../units/bluetooth/category.pxu:7
 msgid "Bluetooth - BlueZ Self Tests"
 msgstr ""
 
 #. summary
-#: ../units/bluetooth.pxu:11
+#: ../units/bluetooth/jobs.pxu:3
 msgid "Bluetooth input device works"
 msgstr ""
 
 #. purpose
-#: ../units/bluetooth.pxu:12
+#: ../units/bluetooth/jobs.pxu:4
 msgid ""
 "Check bluetooth input device work Since there's only CLI with ubuntu-core, "
 "test keyboard only"
 msgstr ""
 
 #. steps
-#: ../units/bluetooth.pxu:15
+#: ../units/bluetooth/jobs.pxu:7
 msgid ""
 "1. Run following command to start bluetoothctl console:\n"
-" bluetoothctl -a\n"
+" sudo bluez.bluetoothctl -a\n"
 "***Following steps are run in bluetoothctl console*** 2. Power on the "
 "device:\n"
 " power on\n"
@@ -171,259 +248,319 @@ msgid ""
 msgstr ""
 
 #. verification
-#: ../units/bluetooth.pxu:40
+#: ../units/bluetooth/jobs.pxu:32
 msgid "Can input from bluetooth input device"
 msgstr ""
 
 #. summary
-#: ../units/bluetooth.pxu:50
+#: ../units/bluetooth/jobs.pxu:44
+msgid "{bluez-internal-rfcomm-test}"
+msgstr ""
+
+#. description
+#: ../units/bluetooth/jobs.pxu:45
+msgid "Runs a specific test from the rfcomm test suite"
+msgstr ""
+
+#. summary
+#: ../units/bluetooth/jobs.pxu:59
+msgid "{bluez-internal-hci-test}"
+msgstr ""
+
+#. description
+#: ../units/bluetooth/jobs.pxu:60
+msgid "Runs a specific test from the hci test suite"
+msgstr ""
+
+#. summary
+#: ../units/bluetooth/jobs.pxu:74
+msgid "{bluez-internal-mgmt-test}"
+msgstr ""
+
+#. description
+#: ../units/bluetooth/jobs.pxu:75
+msgid "Runs a specific test from the mgmt test suite"
+msgstr ""
+
+#. summary
+#: ../units/bluetooth/jobs.pxu:89
+msgid "{bluez-internal-uc-test}"
+msgstr ""
+
+#. description
+#: ../units/bluetooth/jobs.pxu:90
+msgid "Runs a specific test from the user channel test suite"
+msgstr ""
+
+#. summary
+#: ../units/bluetooth/jobs.pxu:104
+msgid "{bluez-internal-bnep-test}"
+msgstr ""
+
+#. description
+#: ../units/bluetooth/jobs.pxu:105
+msgid "Runs a specific test from the bnep test suite"
+msgstr ""
+
+#. summary
+#: ../units/bluetooth/jobs.pxu:115
+msgid "Bluetooth keyboard works"
+msgstr ""
+
+#. purpose
+#: ../units/bluetooth/jobs.pxu:116
+msgid "Check if bluetooth keyboard works"
+msgstr ""
+
+#. verification
+#: ../units/bluetooth/jobs.pxu:118
+msgid "Did the keyboard work?"
+msgstr ""
+
+#. summary
+#: ../units/bluetooth/resource.pxu:4
 msgid "Gather list of tests provided by bluez rfcomm test binary"
 msgstr ""
 
 #. description
-#: ../units/bluetooth.pxu:51
+#: ../units/bluetooth/resource.pxu:5
 msgid ""
 "Bluez includes some internal test that exercise the stack. This resource "
 "collects a list of the provided rfcomm tests."
 msgstr ""
 
 #. summary
-#: ../units/bluetooth.pxu:68
-msgid "{bluez-internal-rfcomm-test}"
-msgstr ""
-
-#. description
-#: ../units/bluetooth.pxu:69
-msgid "Runs a specific test from the rfcomm test suite"
-msgstr ""
-
-#. summary
-#: ../units/bluetooth.pxu:80
+#: ../units/bluetooth/resource.pxu:20
 msgid "Gather list of tests provided by bluez hci test binary"
 msgstr ""
 
 #. description
-#: ../units/bluetooth.pxu:81
+#: ../units/bluetooth/resource.pxu:21
 msgid ""
 "Bluez includes some internal test that exercise the stack. This resource "
 "collects a list of the provided hci tests."
 msgstr ""
 
 #. summary
-#: ../units/bluetooth.pxu:98
-msgid "{bluez-internal-hci-test}"
-msgstr ""
-
-#. description
-#: ../units/bluetooth.pxu:99
-msgid "Runs a specific test from the hci test suite"
-msgstr ""
-
-#. summary
-#: ../units/bluetooth.pxu:110
+#: ../units/bluetooth/resource.pxu:36
 msgid "Gather list of tests provided by bluez mgmt test binary"
 msgstr ""
 
 #. description
-#: ../units/bluetooth.pxu:111
+#: ../units/bluetooth/resource.pxu:37
 msgid ""
 "Bluez includes some internal test that exercise the stack. This resource "
 "collects a list of the provided mgmt tests."
 msgstr ""
 
 #. summary
-#: ../units/bluetooth.pxu:128
-msgid "{bluez-internal-mgmt-test}"
-msgstr ""
-
-#. description
-#: ../units/bluetooth.pxu:129
-msgid "Runs a specific test from the mgmt test suite"
-msgstr ""
-
-#. summary
-#: ../units/bluetooth.pxu:140
+#: ../units/bluetooth/resource.pxu:52
 msgid "Gather list of tests provided by bluez user channel test binary"
 msgstr ""
 
 #. description
-#: ../units/bluetooth.pxu:141
+#: ../units/bluetooth/resource.pxu:53
 msgid ""
 "Bluez includes some internal test that exercise the stack. This resource "
 "collects a list of the provided user channel tests."
 msgstr ""
 
 #. summary
-#: ../units/bluetooth.pxu:158
-msgid "{bluez-internal-uc-test}"
-msgstr ""
-
-#. description
-#: ../units/bluetooth.pxu:159
-msgid "Runs a specific test from the user channel test suite"
-msgstr ""
-
-#. summary
-#: ../units/bluetooth.pxu:170
+#: ../units/bluetooth/resource.pxu:68
 msgid "Gather list of tests provided by bluez bnep test binary"
 msgstr ""
 
 #. description
-#: ../units/bluetooth.pxu:171
+#: ../units/bluetooth/resource.pxu:69
 msgid ""
 "Bluez includes some internal test that exercise the stack. This resource "
 "collects a list of the provided bnep tests."
 msgstr ""
 
-#. summary
-#: ../units/bluetooth.pxu:188
-msgid "{bluez-internal-bnep-test}"
+#. name
+#: ../units/bluetooth/test-plan.pxu:3
+msgid "Bluetooth tests"
 msgstr ""
 
 #. description
-#: ../units/bluetooth.pxu:189
-msgid "Runs a specific test from the bnep test suite"
+#: ../units/bluetooth/test-plan.pxu:4
+msgid "QA tests for Bluetooth"
 msgstr ""
 
 #. name
-#: ../units/cpu.pxu:3
+#: ../units/bluetooth/test-plan.pxu:13
+msgid "Manual Bluetooth tests"
+msgstr ""
+
+#. description
+#: ../units/bluetooth/test-plan.pxu:14
+msgid "Manual QA tests for Bluetooth"
+msgstr ""
+
+#. description
+#: ../units/bluetooth/test-plan.pxu:23
+msgid "Automated tests for bluez"
+msgstr ""
+
+#. name
+#: ../units/cpu/category.pxu:3
 msgid "CPU"
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:20
+#: ../units/cpu/jobs.pxu:12
 msgid "Test the CPU scaling capabilities"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:22
+#: ../units/cpu/jobs.pxu:14
 msgid ""
 "Use Firmware Test Suite (fwts cpufreq) to test the scaling capabilities of "
 "the CPU."
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:32
+#: ../units/cpu/jobs.pxu:24
 msgid "Attach CPU scaling capabilities log"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:34
+#: ../units/cpu/jobs.pxu:26
 msgid ""
 "Attaches the log generated by cpu/scaling_test to the results submission."
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:49
+#: ../units/cpu/jobs.pxu:40
 msgid "Test that the CPU can run at its max frequency"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:51
+#: ../units/cpu/jobs.pxu:42
 msgid ""
 "Use the Firmware Test Suite (fwts cpufreq) to ensure that the CPU can run at "
 "its maximum frequency."
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:61
+#: ../units/cpu/jobs.pxu:52
 msgid "Attach CPU max frequency log"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:63
+#: ../units/cpu/jobs.pxu:54
 msgid ""
 "Attaches the log generated by cpu/maxfreq_test to the results submission."
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:71
+#: ../units/cpu/jobs.pxu:62
 msgid "Tests the CPU for clock jitter"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:73
+#: ../units/cpu/jobs.pxu:64
 msgid "Runs a test for clock jitter on SMP machines."
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:82
+#: ../units/cpu/jobs.pxu:73
 msgid "Test offlining of each CPU core"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:84
+#: ../units/cpu/jobs.pxu:75
 msgid "Attempts to offline each core in a multicore system."
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:94
+#: ../units/cpu/jobs.pxu:84
 msgid "Check CPU topology for accuracy between proc and sysfs"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:96
+#: ../units/cpu/jobs.pxu:86
 msgid ""
 "Parses information about CPU topology provided by proc and sysfs and checks "
 "that they are consistent."
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:107
+#: ../units/cpu/jobs.pxu:96
 msgid "Validate that the Vector Floating Point Unit is running on ARM device"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:109
+#: ../units/cpu/jobs.pxu:98
 msgid "Validate that the Vector Floating Point Unit is running on ARM device."
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:119
+#: ../units/cpu/jobs.pxu:108
 msgid "Run C-States tests"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:121
+#: ../units/cpu/jobs.pxu:110
 msgid ""
 "Uses the Firmware Test Suite (fwts) to test the power saving states of the "
 "CPU."
 msgstr ""
 
 #. summary
-#: ../units/cpu.pxu:134
+#: ../units/cpu/jobs.pxu:123
 msgid "Attach C-States test log"
 msgstr ""
 
 #. description
-#: ../units/cpu.pxu:136
+#: ../units/cpu/jobs.pxu:125
 msgid "Attaches the FWTS desktop diagnosis results log to the submission."
 msgstr ""
 
 #. name
-#: ../units/disk.pxu:3
+#: ../units/cpu/test-plan.pxu:3
+msgid "CPU tests"
+msgstr ""
+
+#. description
+#: ../units/cpu/test-plan.pxu:4
+msgid "QA CPU tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/cpu/test-plan.pxu:11
+msgid "Automated CPU tests"
+msgstr ""
+
+#. description
+#: ../units/cpu/test-plan.pxu:12
+msgid "Automated CPU tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/disk/category.pxu:3
 msgid "Disk"
 msgstr ""
 
 #. summary
-#: ../units/disk.pxu:7
+#: ../units/disk/jobs.pxu:3
 msgid "Gathers information about each disk detected"
 msgstr ""
 
 #. description
-#: ../units/disk.pxu:8
+#: ../units/disk/jobs.pxu:4
 msgid ""
 "Uses lsblk to gather information about each disk detected on the system "
 "under test."
 msgstr ""
 
 #. summary
-#: ../units/disk.pxu:26
+#: ../units/disk/jobs.pxu:22
 msgid "Disk statistics for {product}"
 msgstr ""
 
 #. description
-#: ../units/disk.pxu:27
+#: ../units/disk/jobs.pxu:23
 msgid ""
 "This test checks disk stats, generates some activity and rechecks stats to "
 "verify they've changed. It also verifies that disks appear in the various "
@@ -431,12 +568,12 @@ msgid ""
 msgstr ""
 
 #. description
-#: ../units/disk.pxu:27
+#: ../units/disk/jobs.pxu:23
 msgid "This test will inspect the following disk:"
 msgstr ""
 
 #. description
-#: ../units/disk.pxu:27
+#: ../units/disk/jobs.pxu:23
 msgid ""
 "    product name: {product}\n"
 "    sysfs path: {path}\n"
@@ -444,78 +581,154 @@ msgid ""
 msgstr ""
 
 #. summary
-#: ../units/disk.pxu:46
+#: ../units/disk/jobs.pxu:42
 msgid "Disk performance test for {product}"
 msgstr ""
 
 #. description
-#: ../units/disk.pxu:47
+#: ../units/disk/jobs.pxu:43
 msgid "Verify that disk storage performs at or above baseline performance"
 msgstr ""
 
 #. summary
-#: ../units/disk.pxu:60
+#: ../units/disk/jobs.pxu:56
 msgid "Disk I/O stress test for {product}"
 msgstr ""
 
 #. description
-#: ../units/disk.pxu:61
+#: ../units/disk/jobs.pxu:57
 msgid "Take the path of the storage device and test is it a block device"
 msgstr ""
 
 #. name
-#: ../units/ethernet.pxu:3
+#: ../units/disk/test-plan.pxu:3
+msgid "Disks tests"
+msgstr ""
+
+#. description
+#: ../units/disk/test-plan.pxu:4
+msgid "QA disk tests for Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/disk/test-plan.pxu:11
+msgid "Automated disk tests"
+msgstr ""
+
+#. description
+#: ../units/disk/test-plan.pxu:12
+msgid "Automated disk tests for Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/ethernet/category.pxu:3
 msgid "Ethernet"
 msgstr ""
 
 #. summary
-#: ../units/ethernet.pxu:7
+#: ../units/ethernet/jobs.pxu:2
 msgid "Report info about available network devices"
 msgstr ""
 
 #. description
-#: ../units/ethernet.pxu:9
+#: ../units/ethernet/jobs.pxu:4
 msgid ""
 "Test to detect and return information about available network controllers on "
 "the system under test."
 msgstr ""
 
 #. summary
-#: ../units/ethernet.pxu:25
+#: ../units/ethernet/jobs.pxu:20
 msgid "Can ping another machine over Ethernet port {interface}"
 msgstr ""
 
 #. description
-#: ../units/ethernet.pxu:26
+#: ../units/ethernet/jobs.pxu:21
 msgid "Check Ethernet works by pinging another machine"
 msgstr ""
 
 #. summary
-#: ../units/ethernet.pxu:38
-msgid "Ensure ethernet port {interface} is physically disconnected"
+#: ../units/ethernet/jobs.pxu:33
+msgid "Wake on LAN (WOL) test from S5 - {interface}"
 msgstr ""
 
 #. purpose
-#: ../units/ethernet.pxu:39
+#: ../units/ethernet/jobs.pxu:34
 msgid ""
-"Check that ethernet port {interface} is detected as being in the correct "
+"Check that another system can wake up from S5 the SUT using ethernet port "
+"{interface} WOL function."
+msgstr ""
+
+#. steps
+#: ../units/ethernet/jobs.pxu:36
+msgid ""
+"1. Ensure there is an ethernet cable attached to port {interface}. 2. Press "
+"Enter to power off the system. 3. From another computer on the same network "
+"run the following command:\n"
+"   $ wakeonlan {mac}\n"
+"   If wakeonlan tool is not installed run:\n"
+"   $ sudo apt install wakeonlan"
+msgstr ""
+
+#. verification
+#: ../units/ethernet/jobs.pxu:43
+msgid " Did the SUT wake up from S5?"
+msgstr ""
+
+#. summary
+#: ../units/ethernet/jobs.pxu:56
+msgid "Wake on LAN (WOL) test from S3 - {interface}"
+msgstr ""
+
+#. purpose
+#: ../units/ethernet/jobs.pxu:57
+msgid ""
+"Check that another system can wake up from S3 the SUT using ethernet port "
+"{interface} WOL function."
+msgstr ""
+
+#. steps
+#: ../units/ethernet/jobs.pxu:59
+msgid ""
+"1. Ensure there is an ethernet cable attached to port {interface}. 2. Press "
+"Enter to suspend the system. 3. From another computer on the same network "
+"run the following command:\n"
+"   $ wakeonlan {mac}\n"
+"   If wakeonlan tool is not installed run:\n"
+"   $ sudo apt install wakeonlan"
+msgstr ""
+
+#. verification
+#: ../units/ethernet/jobs.pxu:66
+msgid " Did the SUT wake up from S3?"
+msgstr ""
+
+#. summary
+#: ../units/ethernet/jobs.pxu:82
+msgid "Ensure ethernet port {{ interface }} is physically disconnected"
+msgstr ""
+
+#. purpose
+#: ../units/ethernet/jobs.pxu:83
+msgid ""
+"Check that ethernet port {{ interface }} is detected as being in the correct "
 "state to begin a hotplug connection test."
 msgstr ""
 
 #. steps
-#: ../units/ethernet.pxu:42
+#: ../units/ethernet/jobs.pxu:86
 msgid ""
-"1. Ensure there is no ethernet cable attached to port {interface}. 2. Begin "
-"test."
+"1. Ensure there is no ethernet cable attached to port {{ interface }}. 2. "
+"Begin test."
 msgstr ""
 
 #. summary
-#: ../units/ethernet.pxu:60
+#: ../units/ethernet/jobs.pxu:106
 msgid "Ethernet port {interface} hotplug detection test"
 msgstr ""
 
 #. purpose
-#: ../units/ethernet.pxu:61
+#: ../units/ethernet/jobs.pxu:107
 msgid ""
 "Check ethernet port {interface} connects when cable inserted. Assumes an IP "
 "address will be assigned by DHCP. Connection asserted by pinging the network "
@@ -523,7 +736,7 @@ msgid ""
 msgstr ""
 
 #. steps
-#: ../units/ethernet.pxu:65
+#: ../units/ethernet/jobs.pxu:111
 msgid ""
 "1. Begin the test. 2. Insert the ethernet cable in to ethernet port "
 "{interface}. 3. This test will timeout and fail if the insertion and "
@@ -532,19 +745,19 @@ msgid ""
 msgstr ""
 
 #. summary
-#: ../units/ethernet.pxu:113
+#: ../units/ethernet/jobs.pxu:159
 msgid "Ethernet port {interface} hotplug disconnect step"
 msgstr ""
 
 #. purpose
-#: ../units/ethernet.pxu:114
+#: ../units/ethernet/jobs.pxu:160
 msgid ""
 "Check that when cable removed from ethernet port {interface} the system "
 "detects this correctly."
 msgstr ""
 
 #. steps
-#: ../units/ethernet.pxu:117
+#: ../units/ethernet/jobs.pxu:163
 msgid ""
 "1. Depends on previous hotplug connection test passing. We will now test\n"
 " cable disconnection.\n"
@@ -555,65 +768,163 @@ msgid ""
 msgstr ""
 
 #. name
-#: ../units/led.pxu:3
+#: ../units/ethernet/test-plan.pxu:3
+msgid "QA tests for ethernet"
+msgstr ""
+
+#. description
+#: ../units/ethernet/test-plan.pxu:4
+msgid "Ethernet tests for Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/ethernet/test-plan.pxu:13
+msgid "Manual ethernet tests"
+msgstr ""
+
+#. description
+#: ../units/ethernet/test-plan.pxu:14
+msgid "Manual tests for ethernet connections"
+msgstr ""
+
+#. name
+#: ../units/ethernet/test-plan.pxu:22
+msgid "Automated ethernet tests"
+msgstr ""
+
+#. description
+#: ../units/ethernet/test-plan.pxu:23
+msgid "Automated ethernet tests for Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/i2c/category.pxu:9
+msgid "I2C (Inter-Integrated Circuit)"
+msgstr ""
+
+#. summary
+#: ../units/i2c/jobs.pxu:9
+msgid "Check number of detected I2C bus"
+msgstr ""
+
+#. purpose
+#: ../units/i2c/jobs.pxu:10
+msgid "Verify if number of detected I2C bus is as expected"
+msgstr ""
+
+#. steps
+#: ../units/i2c/jobs.pxu:12
+msgid ""
+"1. This task is fully automatic, when expected i2c bus "
+"number($I2C_BUS_NUMBER)\n"
+"   is set, this job will verify if detected number of i2c bus is as "
+"expected.\n"
+"2. If expected i2c bus number is not set, this job will pass if system\n"
+"   detected there's at least one i2c bus."
+msgstr ""
+
+#. summary
+#: ../units/i2c/jobs.pxu:33
+msgid "Check if any I2C device detected"
+msgstr ""
+
+#. purpose
+#: ../units/i2c/jobs.pxu:34
+msgid "Verify if there's any I2C device"
+msgstr ""
+
+#. steps
+#: ../units/i2c/jobs.pxu:36
+msgid ""
+"1. This task is fully automatic, test will pass if there's at least one\n"
+"   i2c device detected on any I2C bus."
+msgstr ""
+
+#. name
+#: ../units/i2c/manifest.pxu:9
+msgid "I2C"
+msgstr ""
+
+#. name
+#: ../units/i2c/test-plan.pxu:3
+msgid "I2c tests"
+msgstr ""
+
+#. description
+#: ../units/i2c/test-plan.pxu:4
+msgid "QA i2c tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/i2c/test-plan.pxu:11
+msgid "Automated i2c tests"
+msgstr ""
+
+#. description
+#: ../units/i2c/test-plan.pxu:12
+msgid "Automated i2c tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/led/category.pxu:3
 msgid "LEDs"
 msgstr ""
 
 #. summary
-#: ../units/led.pxu:7
+#: ../units/led/jobs.pxu:2
 msgid "Power LED behavior when powered"
 msgstr ""
 
 #. purpose
-#: ../units/led.pxu:8
+#: ../units/led/jobs.pxu:3
 msgid "Check power led is on when system is powered on"
 msgstr ""
 
 #. steps
-#: ../units/led.pxu:10
+#: ../units/led/jobs.pxu:5
 msgid "1. Check power led when system is powered on"
 msgstr ""
 
 #. verification
-#: ../units/led.pxu:12 ../units/suspend.pxu:116
+#: ../units/led/jobs.pxu:7 ../units/suspend/jobs.pxu:116
 msgid "Power led is on when system is powered on"
 msgstr ""
 
 #. summary
-#: ../units/led.pxu:19
+#: ../units/led/jobs.pxu:14
 msgid "Power LED behavior when suspended"
 msgstr ""
 
 #. purpose
-#: ../units/led.pxu:20
+#: ../units/led/jobs.pxu:15
 msgid "Check power led is blinking when system is in suspend"
 msgstr ""
 
 #. steps
-#: ../units/led.pxu:22
+#: ../units/led/jobs.pxu:17
 msgid "1. Suspend the system 2. Check power led when system is in suspend"
 msgstr ""
 
 #. verification
-#: ../units/led.pxu:25
+#: ../units/led/jobs.pxu:20
 msgid "Power led is blinking when system is in suspend"
 msgstr ""
 
 #. summary
-#: ../units/led.pxu:32
+#: ../units/led/jobs.pxu:27
 msgid "Bluetooth LED behavior"
 msgstr ""
 
 #. purpose
-#: ../units/led.pxu:33
+#: ../units/led/jobs.pxu:28
 msgid "Check bluetooth LED behavior is correct"
 msgstr ""
 
 #. steps
-#: ../units/led.pxu:35
+#: ../units/led/jobs.pxu:30
 msgid ""
 "1. Run following command to start bluetoothctl console:\n"
-" bluetoothctl -a\n"
+" sudo bluez.bluetoothctl -a\n"
 "***Following steps are run in bluetoothctl console*** 2. Power on the "
 "device:\n"
 " power on\n"
@@ -624,49 +935,571 @@ msgid ""
 msgstr ""
 
 #. verification
-#: ../units/led.pxu:45
+#: ../units/led/jobs.pxu:40
 msgid "Bluetooth LED is turned on in step 2, and turned off in step 3."
 msgstr ""
 
 #. summary
-#: ../units/led.pxu:52
+#: ../units/led/jobs.pxu:47
 msgid "Serial ports LED behavior"
 msgstr ""
 
 #. purpose
-#: ../units/led.pxu:53
+#: ../units/led/jobs.pxu:48
 msgid "Check serial ports LED behavior is correct"
 msgstr ""
 
 #. steps
-#: ../units/led.pxu:55
+#: ../units/led/jobs.pxu:50
 msgid "1. Start the test to send data to all serial ports (/dev/ttyS*)"
 msgstr ""
 
 #. verification
-#: ../units/led.pxu:57
+#: ../units/led/jobs.pxu:52
 msgid "All serial ports LED are on for a few seconds (3-4s)"
 msgstr ""
 
+#. name
+#: ../units/led/test-plan.pxu:3
+msgid "Led tests"
+msgstr ""
+
+#. description
+#: ../units/led/test-plan.pxu:4
+msgid "QA LED tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/led/test-plan.pxu:11
+msgid "Manual LED tests"
+msgstr ""
+
+#. description
+#: ../units/led/test-plan.pxu:12
+msgid "Manual LED tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/location/category.pxu:3
+msgid "Location Service"
+msgstr ""
+
+#. purpose
+#: ../units/location/jobs.pxu:19
+msgid "Queries the status of a service instance"
+msgstr ""
+
+#. steps
+#: ../units/location/jobs.pxu:21
+msgid ""
+"1. Type the following command in a second terminal to run the location "
+"service status:\n"
+"   $ locationd.status"
+msgstr ""
+
+#. verification
+#: ../units/location/jobs.pxu:24
+msgid " Did the command succeed?"
+msgstr ""
+
+#. purpose
+#: ../units/location/jobs.pxu:33
+msgid "Connects to a location service instance, monitoring its activity."
+msgstr ""
+
+#. steps
+#: ../units/location/jobs.pxu:35
+msgid ""
+"1. Type the following command in a second terminal to run the location "
+"service monitor:\n"
+"   $ timeout 15m bash -c 'locationd.monitor | grep -m1 --line-buffered \".*"
+"\"'"
+msgstr ""
+
+#. verification
+#: ../units/location/jobs.pxu:38
+msgid " Did the command succeed (it can take up to 15m from a cold start)?"
+msgstr ""
+
+#. name
+#: ../units/location/test-plan.pxu:3
+msgid "Location Service tests"
+msgstr ""
+
+#. description
+#: ../units/location/test-plan.pxu:4
+msgid "QA location service tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/location/test-plan.pxu:12
+msgid "Automated location service tests"
+msgstr ""
+
+#. name
+#: ../units/location/test-plan.pxu:20
+msgid "Manual location service tests"
+msgstr ""
+
+#. description
+#: ../units/location/test-plan.pxu:21
+msgid "Automated location service tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:11
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the systems media card reader can\n"
+"    detect the insertion of a Multimedia Card (MMC) media\n"
+"STEPS:\n"
+"    1. Commence the test and then insert an MMC card into the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"    2. Do not remove the device after this test.\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:31
+msgid ""
+"This test is automated and executes after the mediacard/mmc-insert test is "
+"run. It tests reading and writing to the MMC card."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:43
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the system correctly detects\n"
+"    the removal of the MMC card from the systems card reader.\n"
+"STEPS:\n"
+"    1. Commence the test and then remove the MMC card from the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:64
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the systems media card reader can\n"
+"    detect the insertion of an UNLOCKED Secure Digital (SD) media card\n"
+"STEPS:\n"
+"    1. Commence the test and then insert an UNLOCKED SD card into the "
+"reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"    2. Do not remove the device after this test.\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:84
+msgid ""
+"This test is automated and executes after the mediacard/sd-insert test is "
+"run. It tests reading and writing to the SD card."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:96
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the system correctly detects\n"
+"    the removal of an SD card from the systems card reader.\n"
+"STEPS:\n"
+"    1. Commence the test and then remove the SD card from the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:117
+msgid ""
+"This is a fully automated version of mediacard/sd-automated and assumes that "
+"the system under test has a memory card device plugged in prior to checkbox "
+"execution. It is intended for SRU automated testing."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:130
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the systems media card reader can\n"
+"    detect the insertion of a UNLOCKED Secure Digital High-Capacity\n"
+"    (SDHC) media card\n"
+"STEPS:\n"
+"    1. Commence the test and then insert an UNLOCKED SDHC card into the "
+"reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"    2. Do not remove the device after this test.\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:151
+msgid ""
+"This test is automated and executes after the mediacard/sdhc-insert test is "
+"run. It tests reading and writing to the SDHC card."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:163
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the system correctly detects\n"
+"    the removal of an SDHC card from the systems card reader.\n"
+"STEPS:\n"
+"    1. Commence the test and then remove the SDHC card from the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:184
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the systems media card reader can\n"
+"    detect the insertion of a Compact Flash (CF) media card\n"
+"STEPS:\n"
+"    1. Commence the test and then insert a CF card into the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"    2. Do not remove the device after this test.\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:204
+msgid ""
+"This test is automated and executes after the mediacard/cf-insert test is "
+"run. It tests reading and writing to the CF card."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:216
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the system correctly detects\n"
+"    the removal of a CF card from the systems card reader.\n"
+"STEPS:\n"
+"    1. Commence the test and then remove the CF card from the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:237
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the systems media card reader can\n"
+"    detect the insertion of a Secure Digital Extended Capacity (SDXC) media "
+"card\n"
+"STEPS:\n"
+"    1. Commence the test and then insert an UNLOCKED SDXC card into the "
+"reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"    2. Do not remove the device after this test.\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:257
+msgid ""
+"This test is automated and executes after the mediacard/sdxc-insert test is "
+"run. It tests reading and writing to the SDXC card."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:269
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the system correctly detects\n"
+"    the removal of a SDXC card from the systems card reader.\n"
+"STEPS:\n"
+"    1. Commence the test and then remove the SDXC card from the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:290
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the systems media card reader can\n"
+"    detect the insertion of a Memory Stick (MS) media card\n"
+"STEPS:\n"
+"    1. Commence the test and then insert a MS card into the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"    2. Do not remove the device after this test.\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:310
+msgid ""
+"This test is automated and executes after the mediacard/ms-insert test is "
+"run. It tests reading and writing to the MS card."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:322
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the system correctly detects\n"
+"    the removal of a MS card from the systems card reader.\n"
+"STEPS:\n"
+"    1. Commence the test and then remove the MS card from the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:343
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the systems media card reader can\n"
+"    detect the insertion of a Memory Stick Pro (MSP) media card\n"
+"STEPS:\n"
+"    1. Commence the test and then insert a MSP card into the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"    2. Do not remove the device after this test.\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:363
+msgid ""
+"This test is automated and executes after the mediacard/msp-insert test is "
+"run. It tests reading and writing to the MSP card."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:375
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the system correctly detects\n"
+"    the removal of a MSP card from the systems card reader.\n"
+"STEPS:\n"
+"    1. Commence the test and remove the MSP card from the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:396
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the systems media card reader can\n"
+"    detect the insertion of a Extreme Digital (xD) media card\n"
+"STEPS:\n"
+"    1. Commence the test and then insert a xD card into the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"    2. Do not remove the device after this test.\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:416
+msgid ""
+"This test is automated and executes after the mediacard/xd-insert test is "
+"run. It tests reading and writing to the xD card."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:428
+msgid ""
+"PURPOSE:\n"
+"    This test will check that the system correctly detects\n"
+"    the removal of a xD card from the systems card reader.\n"
+"STEPS:\n"
+"    1. Commence the test and then remove the xD card from the reader.\n"
+"       (Note: this test will time-out after 20 seconds.)\n"
+"VERIFICATION:\n"
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:447
+msgid ""
+"PURPOSE:\n"
+"    This test will check your Media Card data transfer performance.\n"
+"STEPS:\n"
+"    1. Insert SD card into the reader slot on this computer.\n"
+"    2. Commence the test.\n"
+"VERIFICATION:\n"
+"    Did the results of the test match the expected performance of the "
+"inserted device?"
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:464
+msgid ""
+"PURPOSE:\n"
+"    This test will check your Media Card data transfer performance.\n"
+"STEPS:\n"
+"    1. Insert SDHC card into the reader slot on this computer.\n"
+"    2. Commence the test.\n"
+"VERIFICATION:\n"
+"    Did the results of the test match the expected performance of the "
+"inserted device?"
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:481
+msgid ""
+"PURPOSE:\n"
+"    This test will check your Media Card data transfer performance.\n"
+"STEPS:\n"
+"    1. Insert MMC card into the reader slot on this computer.\n"
+"    2. Commence the test.\n"
+"VERIFICATION:\n"
+"    Did the results of the test match the expected performance of the "
+"inserted device?"
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:498
+msgid ""
+"PURPOSE:\n"
+"    This test will check your Media Card data transfer performance.\n"
+"STEPS:\n"
+"    1. Insert CF card into the reader slot on this computer.\n"
+"    2. Commence the test.\n"
+"VERIFICATION:\n"
+"    Did the results of the test match the expected performance of the "
+"inserted device?"
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:515
+msgid ""
+"PURPOSE:\n"
+"    This test will check your Media Card data transfer performance.\n"
+"STEPS:\n"
+"    1. Insert SDXC card into the reader slot on this computer.\n"
+"    2. Commence the test.\n"
+"VERIFICATION:\n"
+"    Did the results of the test match the expected performance of the "
+"inserted device?"
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:532
+msgid ""
+"PURPOSE:\n"
+"    This test will check your Media Card data transfer performance.\n"
+"STEPS:\n"
+"    1. Insert MS card into the reader slot on this computer.\n"
+"    2. Commence the test.\n"
+"VERIFICATION:\n"
+"    Did the results of the test match the expected performance of the "
+"inserted device?"
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:549
+msgid ""
+"PURPOSE:\n"
+"    This test will check your Media Card data transfer performance.\n"
+"STEPS:\n"
+"    1. Insert MSP card into the reader slot on this computer.\n"
+"    2. Commence the test.\n"
+"VERIFICATION:\n"
+"    Did the results of the test match the expected performance of the "
+"inserted device?"
+msgstr ""
+
+#. description
+#: ../units/mediacard/jobs.pxu:566
+msgid ""
+"PURPOSE:\n"
+"    This test will check your Media Card data transfer performance.\n"
+"STEPS:\n"
+"    1. Insert xD card into the reader slot on this computer.\n"
+"    2. Commence the test.\n"
+"VERIFICATION:\n"
+"    Did the results of the test match the expected performance of the "
+"inserted device?"
+msgstr ""
+
+#. name
+#: ../units/mediacard/test-plan.pxu:3
+msgid "Mediacard tests"
+msgstr ""
+
+#. description
+#: ../units/mediacard/test-plan.pxu:4
+msgid "QA mediacard tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/mediacard/test-plan.pxu:13
+msgid "Manual mediacard tests"
+msgstr ""
+
+#. description
+#: ../units/mediacard/test-plan.pxu:14
+msgid "Manual mediacard tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/mediacard/test-plan.pxu:23
+msgid "Automated mediacard tests"
+msgstr ""
+
+#. description
+#: ../units/mediacard/test-plan.pxu:24
+msgid "Automated mediacard tests for Snappy Ubuntu Core devices"
+msgstr ""
+
 #. summary
-#: ../units/memory.pxu:7
+#: ../units/memory/jobs.pxu:7
 msgid "Check amount of memory reported by meminfo against DMI"
 msgstr ""
 
 #. description
-#: ../units/memory.pxu:9
+#: ../units/memory/jobs.pxu:9
 msgid ""
 "This test checks the amount of memory which is reporting in meminfo against "
 "the size of the memory modules detected by DMI."
 msgstr ""
 
 #. summary
-#: ../units/memory.pxu:21
+#: ../units/memory/jobs.pxu:21
 msgid "Run memory stress test including swapping to disk"
 msgstr ""
 
 #. description
-#: ../units/memory.pxu:23
+#: ../units/memory/jobs.pxu:23
 msgid ""
 "Test to perform some basic stress and exercise of system memory. This test "
 "also includes an over-commit function to force swapping to disk, thus SUTs "
@@ -675,166 +1508,326 @@ msgid ""
 msgstr ""
 
 #. name
-#: ../units/monitor.pxu:3
+#: ../units/memory/test-plan.pxu:3
+msgid "Memory tests"
+msgstr ""
+
+#. description
+#: ../units/memory/test-plan.pxu:4
+msgid "QA memory tests for Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/memory/test-plan.pxu:11
+msgid "Automated memory tests"
+msgstr ""
+
+#. description
+#: ../units/memory/test-plan.pxu:12
+msgid "Automated memory tests for Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/monitor/category.pxu:3
 msgid "Display"
 msgstr ""
 
 #. summary
-#: ../units/monitor.pxu:7
+#: ../units/monitor/jobs.pxu:2
 msgid "Monitor works (DVI)"
 msgstr ""
 
 #. purpose
-#: ../units/monitor.pxu:8
+#: ../units/monitor/jobs.pxu:3
 msgid "Check output to display through DVI port"
 msgstr ""
 
 #. steps
-#: ../units/monitor.pxu:10
+#: ../units/monitor/jobs.pxu:5
 msgid "1. Connect display to DVI port 2. Check the display"
 msgstr ""
 
 #. summary
-#: ../units/monitor.pxu:20
+#: ../units/monitor/jobs.pxu:15
 msgid "Monitor works (HDMI)"
 msgstr ""
 
 #. purpose
-#: ../units/monitor.pxu:21
+#: ../units/monitor/jobs.pxu:16
 msgid "Check output to display through HDMI port"
 msgstr ""
 
 #. steps
-#: ../units/monitor.pxu:23
+#: ../units/monitor/jobs.pxu:18
 msgid "1. Connect display to HDMI port 2. Check the display"
 msgstr ""
 
 #. summary
-#: ../units/monitor.pxu:33
+#: ../units/monitor/jobs.pxu:28
 msgid "Monitor works (DVI-to-VGA)"
 msgstr ""
 
 #. purpose
-#: ../units/monitor.pxu:34
+#: ../units/monitor/jobs.pxu:29
 msgid "Check output to display through VGA adaptor on DVI port"
 msgstr ""
 
 #. steps
-#: ../units/monitor.pxu:36
+#: ../units/monitor/jobs.pxu:31
 msgid "1. Connect display to VGA adaptor on DVI port 2. Check the display"
 msgstr ""
 
 #. summary
-#: ../units/monitor.pxu:46
+#: ../units/monitor/jobs.pxu:41
 msgid "Monitor works (HDMI-to-VGA)"
 msgstr ""
 
 #. purpose
-#: ../units/monitor.pxu:47
+#: ../units/monitor/jobs.pxu:42
 msgid "Check output to display through VGA adaptor on HDMI port"
 msgstr ""
 
 #. steps
-#: ../units/monitor.pxu:49
+#: ../units/monitor/jobs.pxu:44
 msgid "1. Connect display to VGA adaptor on HDMI port 2. Check the display"
 msgstr ""
 
 #. verification
-#: ../units/monitor.pxu:52 ../units/suspend.pxu:176
+#: ../units/monitor/jobs.pxu:47 ../units/suspend/jobs.pxu:176
 msgid "Output to display works"
 msgstr ""
 
+#. purpose
+#: ../units/monitor/jobs.pxu:56
+msgid ""
+"    This test will check the DisplayPort port and the ability to do "
+"hotplugging."
+msgstr ""
+
+#. steps
+#: ../units/monitor/jobs.pxu:58
+msgid ""
+"    Skip this test if your system does not have a DisplayPort port.\n"
+"    1. If a display is already connected, unplug it.\n"
+"    2. (Re-)Connect a display to the DisplayPort port on your system"
+msgstr ""
+
+#. verification
+#: ../units/monitor/jobs.pxu:62
+msgid "    Was the interface displayed correctly on the screen?"
+msgstr ""
+
 #. name
-#: ../units/power-management.pxu:3
+#: ../units/monitor/test-plan.pxu:3
+msgid "Monitor tests"
+msgstr ""
+
+#. description
+#: ../units/monitor/test-plan.pxu:4
+msgid "QA monitor tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/monitor/test-plan.pxu:11
+msgid "Manual monitor tests"
+msgstr ""
+
+#. description
+#: ../units/monitor/test-plan.pxu:12
+msgid "Manual monitor tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/power/category.pxu:3
 msgid "Power and Power Management"
 msgstr ""
 
 #. summary
-#: ../units/power-management.pxu:7
+#: ../units/power/jobs.pxu:2
 msgid "System can be powered off"
 msgstr ""
 
 #. purpose
-#: ../units/power-management.pxu:8
+#: ../units/power/jobs.pxu:3
 msgid "Check system can poweroff successfully"
 msgstr ""
 
 #. steps
-#: ../units/power-management.pxu:10
+#: ../units/power/jobs.pxu:5
 msgid ""
 "1. Execute following command:\n"
 " sudo poweroff"
 msgstr ""
 
 #. verification
-#: ../units/power-management.pxu:13
+#: ../units/power/jobs.pxu:8
 msgid "System poweroff successfully"
 msgstr ""
 
 #. summary
-#: ../units/power-management.pxu:20
+#: ../units/power/jobs.pxu:15
 msgid "System can be rebooted"
 msgstr ""
 
 #. purpose
-#: ../units/power-management.pxu:21
+#: ../units/power/jobs.pxu:16
 msgid "Check system can reboot"
 msgstr ""
 
 #. steps
-#: ../units/power-management.pxu:23
+#: ../units/power/jobs.pxu:18
 msgid ""
 "1. Execute following command:\n"
 " sudo reboot"
 msgstr ""
 
 #. verification
-#: ../units/power-management.pxu:26
+#: ../units/power/jobs.pxu:21
 msgid "    System reboot into system successfully"
 msgstr ""
 
 #. name
-#: ../units/rtc.pxu:3
+#: ../units/power/test-plan.pxu:3
+msgid "Power tests"
+msgstr ""
+
+#. description
+#: ../units/power/test-plan.pxu:4
+msgid "QA power tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/power/test-plan.pxu:11
+msgid "Manual power tests"
+msgstr ""
+
+#. description
+#: ../units/power/test-plan.pxu:12
+msgid "Manual power tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/rtc/category.pxu:3
 msgid "Real Time Clock (RTC)"
 msgstr ""
 
 #. summary
-#: ../units/rtc.pxu:7
+#: ../units/rtc/jobs.pxu:2
 msgid "RTC battery tracks the time"
 msgstr ""
 
 #. purpose
-#: ../units/rtc.pxu:8
+#: ../units/rtc/jobs.pxu:3
 msgid "RTC battery backup power can send system wakeup event"
 msgstr ""
 
 #. steps
-#: ../units/rtc.pxu:10
+#: ../units/rtc/jobs.pxu:5
 msgid "1. Start the test to poweroff the system (wakeup scheduled in 30s)"
 msgstr ""
 
 #. verification
-#: ../units/rtc.pxu:12
+#: ../units/rtc/jobs.pxu:7
 msgid "RTC can wake up the system successfully"
 msgstr ""
 
 #. name
-#: ../units/serial.pxu:3
+#: ../units/rtc/test-plan.pxu:3
+msgid "RTC tests"
+msgstr ""
+
+#. description
+#: ../units/rtc/test-plan.pxu:4
+msgid "QA RTC tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/rtc/test-plan.pxu:11
+msgid "Manual RTC tests"
+msgstr ""
+
+#. description
+#: ../units/rtc/test-plan.pxu:12
+msgid "Manual RTC tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/security/category.pxu:3
+msgid "Security"
+msgstr ""
+
+#. description
+#: ../units/security/jobs.pxu:25
+msgid "{name}"
+msgstr ""
+
+#. summary
+#: ../units/security/resource.pxu:3
+msgid "Gather all kernel-security-tests"
+msgstr ""
+
+#. description
+#: ../units/security/resource.pxu:4
+msgid "Generate list of test cases from test_security_kernel module"
+msgstr ""
+
+#. name
+#: ../units/security/test-plan.pxu:3
+msgid "Kernel-security tests"
+msgstr ""
+
+#. description
+#: ../units/security/test-plan.pxu:4
+msgid "Collection of tests from QA Regression Testing repository"
+msgstr ""
+
+#. name
+#: ../units/security/test-plan.pxu:12
+msgid "Automated kernel-security tests"
+msgstr ""
+
+#. description
+#: ../units/security/test-plan.pxu:13
+msgid "Automated kernel-security tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/security/test-plan.pxu:24
+msgid "Kernel-security tests (tainted)"
+msgstr ""
+
+#. description
+#: ../units/security/test-plan.pxu:25
+msgid "Kernel-security from QA Regression Testing (ignoring tainting)"
+msgstr ""
+
+#. name
+#: ../units/security/test-plan.pxu:33
+msgid "Automated kernel-security tests (tainted)"
+msgstr ""
+
+#. description
+#: ../units/security/test-plan.pxu:34
+msgid "Automated kernel-security tests (ignoring tainting)"
+msgstr ""
+
+#. name
+#: ../units/serial/category.pxu:3
 msgid "Serial Port"
 msgstr ""
 
 #. summary
-#: ../units/serial.pxu:7
+#: ../units/serial/jobs.pxu:2
 msgid "Serial debugging console is enabled and operational"
 msgstr ""
 
 #. purpose
-#: ../units/serial.pxu:8
+#: ../units/serial/jobs.pxu:3
 msgid "Check user can log into system through serial port from another machine"
 msgstr ""
 
 #. steps
-#: ../units/serial.pxu:10
+#: ../units/serial/jobs.pxu:5
 msgid ""
 "1. Connect USB to db9 null modem adapter cable to serial port of test "
 "machine 2. Connect the cable to USB port of another ubuntu machine (client) "
@@ -847,187 +1840,271 @@ msgid ""
 msgstr ""
 
 #. verification
-#: ../units/serial.pxu:19
+#: ../units/serial/jobs.pxu:14
 msgid ""
 "1. Output to client is fine after getty service started 2. Log into test "
 "machine from terminal on client successfully"
 msgstr ""
 
 #. name
-#: ../units/snappy.pxu:3
+#: ../units/serial/test-plan.pxu:3
+msgid "Serial tests"
+msgstr ""
+
+#. description
+#: ../units/serial/test-plan.pxu:4
+msgid "QA serial tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/serial/test-plan.pxu:11
+msgid "Manual serial tests"
+msgstr ""
+
+#. description
+#: ../units/serial/test-plan.pxu:12
+msgid "Manual serial tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/snappy/category.pxu:3
 msgid "Snappy Ubuntu Core"
 msgstr ""
 
 #. summary
-#: ../units/snappy.pxu:7
-msgid "Test that the snappy list command is working."
+#: ../units/snappy/snappy.pxu:2
+msgid "Test that the snap list command is working."
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:8
-msgid "If snappy list command is working then should at least find the"
+#: ../units/snappy/snappy.pxu:3
+msgid "If snap list command is working then should at least find the"
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:8
+#: ../units/snappy/snappy.pxu:3
 msgid "ubuntu-core package."
 msgstr ""
 
 #. summary
-#: ../units/snappy.pxu:17
-msgid "Test that the snappy search command is working."
+#: ../units/snappy/snappy.pxu:12
+msgid "Test that the snap find command is working."
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:18
-msgid "If snappy search command is working then should find hello-dbus-fwk"
+#: ../units/snappy/snappy.pxu:13
+msgid "If snap find command is working then should find hello-world"
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:18
+#: ../units/snappy/snappy.pxu:13
 msgid "in the store."
 msgstr ""
 
 #. summary
-#: ../units/snappy.pxu:27
-msgid "Test the snappy install command is able to install hello-world snap."
+#: ../units/snappy/snappy.pxu:22
+msgid "Test the snap install command is able to install test-snapd-tools snap."
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:28
+#: ../units/snappy/snappy.pxu:23
 msgid ""
-"The store should contain the basic hello-world snap makes sure this can be "
-"downloaded and installed on the system."
+"The store should contain the basic test-snapd-tools snap makes sure this can "
+"be downloaded and installed on the system."
 msgstr ""
 
 #. summary
-#: ../units/snappy.pxu:38
-msgid "Test the snappy remove command is able to remove the hello-world snap."
+#: ../units/snappy/snappy.pxu:33
+msgid ""
+"Test the snap remove command is able to remove the test-snapd-tools snap."
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:39
-msgid "After having installed the hello-world snap, check it can removed."
+#: ../units/snappy/snappy.pxu:34
+msgid "After having installed the test-snapd-tools snap, check it can removed."
 msgstr ""
 
 #. summary
-#: ../units/snappy.pxu:48
-msgid "Update the system using the \"snappy\" tool"
+#: ../units/snappy/snappy.pxu:43
+msgid "Test the snap refresh command is able to update the hello snap."
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:49
-msgid "Check ubuntu-core can be updated by snappy update"
+#: ../units/snappy/snappy.pxu:44
+msgid "Check hello snap can be refreshed by snap refresh"
 msgstr ""
 
 #. steps
-#: ../units/snappy.pxu:51
+#: ../units/snappy/snappy.pxu:46
 msgid ""
-"1. sudo mount -o remount,rw / 2. sudo vi /etc/system-image/channel.ini 3. "
-"Check version number in both build_number and version_detail, assume it's N "
-"4. Modify version number in both build_number and version_detail to N-1 5. "
-"Reboot the system and log in 6. sudo snappy update 7. Reboot the system and "
-"log in 8. snappy list -v"
-msgstr ""
-
-#. summary
-#: ../units/snappy.pxu:69
-msgid "Rollback system update using the \"snappy\" tool"
-msgstr ""
-
-#. purpose
-#: ../units/snappy.pxu:70
-msgid "Check ubuntu-core can be reverted by snappy rollback"
-msgstr ""
-
-#. steps
-#: ../units/snappy.pxu:72
-msgid ""
-"1. Follow the steps in case snappy/update to update ubuntu-core 2. sudo "
-"snappy rollback ubuntu-core 3. Reboot the system and log in 4. snappy list -v"
+"1. Install\n"
+"   snap install hello\n"
+"2. Check version number\n"
+"   snap list hello\n"
+"3. Update\n"
+"   snap refresh hello --beta\n"
+"4. Check version number\n"
+"   snap list hello"
 msgstr ""
 
 #. verification
-#: ../units/snappy.pxu:77
-msgid ""
-"Check ubuntu-core version in the list 1. System is currently boot the ubuntu-"
-"core version N-1 (With a \"\"*\"\" at the end of line) 2. Another ubuntu-"
-"core version is N"
+#: ../units/snappy/snappy.pxu:55
+msgid "Check hello version is newer using the beta channel"
 msgstr ""
 
 #. summary
-#: ../units/snappy.pxu:86
-msgid "Re-apply the update after rollback using the \"snappy\" tool"
+#: ../units/snappy/snappy.pxu:63
+msgid "Test the snap revert command is able to revert the hello snap."
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:87
-msgid "Check ubuntu-core can be updated again by snappy update after rollback"
+#: ../units/snappy/snappy.pxu:64
+msgid "Check hello snap can be reverted by snap revert"
 msgstr ""
 
 #. steps
-#: ../units/snappy.pxu:89
+#: ../units/snappy/snappy.pxu:66
 msgid ""
-"1. Follow the steps in case snappy/rollback to update ubuntu-core and "
-"rollback 2. sudo snappy update 3. Reboot the system and log in 4. snappy "
-"list -v"
+"1. Revert\n"
+"   snap revert hello\n"
+"2. Check version number\n"
+"   snap list hello"
 msgstr ""
 
 #. verification
-#: ../units/snappy.pxu:94
-msgid ""
-"Check ubuntu-core version in the list 1. System is currently boot the ubuntu-"
-"core version N (With a \"\"*\"\" at the end of line) 2. Another ubuntu-core "
-"version is N-1"
+#: ../units/snappy/snappy.pxu:71
+msgid "Check hello version is back to its stable version"
 msgstr ""
 
 #. summary
-#: ../units/snappy.pxu:103
+#: ../units/snappy/snappy.pxu:79
+msgid "Test the snap refresh command is able to refresh again the hello snap."
+msgstr ""
+
+#. purpose
+#: ../units/snappy/snappy.pxu:80
+msgid ""
+"Check hello snap can be refreshed after removal of the blacklisted revision"
+msgstr ""
+
+#. steps
+#: ../units/snappy/snappy.pxu:82
+msgid ""
+"1. Remove reverted version (and associated data)\n"
+"   snap remove hello --revision=<beta_revision>\n"
+"2. Reupdate\n"
+"   snap refresh hello --beta\n"
+"3. Check version number\n"
+"   snap list hello"
+msgstr ""
+
+#. verification
+#: ../units/snappy/snappy.pxu:89
+msgid "Check hello version is again the one from the beta channel"
+msgstr ""
+
+#. summary
+#: ../units/snappy/snappy.pxu:97
+msgid "Refresh the system using the snap tool"
+msgstr ""
+
+#. purpose
+#: ../units/snappy/snappy.pxu:98
+msgid "Check \"core\" can be refreshed by snap refresh"
+msgstr ""
+
+#. steps
+#: ../units/snappy/snappy.pxu:100
+msgid ""
+"1. Check version number\n"
+"   snap list core\n"
+"2. Update\n"
+"   snap refresh core --edge\n"
+"3. Reboot the system and log in\n"
+"   sudo reboot\n"
+"4. Check version number\n"
+"   snap list core"
+msgstr ""
+
+#. verification
+#: ../units/snappy/snappy.pxu:109
+msgid "Check core version is newer using the edge channel"
+msgstr ""
+
+#. summary
+#: ../units/snappy/snappy.pxu:117
+msgid "Rollback system update using the snap tool"
+msgstr ""
+
+#. purpose
+#: ../units/snappy/snappy.pxu:118
+msgid "Check core can be reverted by snap revert"
+msgstr ""
+
+#. steps
+#: ../units/snappy/snappy.pxu:120
+msgid ""
+"1. Check version number\n"
+"   snap list core\n"
+"2. Revert\n"
+"   snap revert core\n"
+"3. Reboot the system and log in\n"
+"   sudo reboot\n"
+"4. Check version number\n"
+"   snap list core"
+msgstr ""
+
+#. verification
+#: ../units/snappy/snappy.pxu:129
+msgid "Check core version is back to its stable version"
+msgstr ""
+
+#. summary
+#: ../units/snappy/snappy.pxu:137
 msgid "Automatically rollback after failed boot after upgrade"
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:104
+#: ../units/snappy/snappy.pxu:138
 msgid ""
-"Check system will rollback to original ubuntu-core if failed to boot the "
+"Check system will rollback to original core snap if failed to boot the "
 "updated one"
 msgstr ""
 
 #. steps
-#: ../units/snappy.pxu:106
+#: ../units/snappy/snappy.pxu:140
 msgid ""
-"1. Follow the steps in case snappy/update to update ubuntu-core 2. Download "
-"following systemd unit and copy it to user home:\n"
-"    http://people.canonical.com/~jhunt/systemd/conf/deadlock.service\n"
-"3. sudo mount -o remount,rw /writable/cache/system 4. sudo cp deadlock."
-"service /writable/cache/system/lib/systemd/system/ 5. sudo mkdir -p /"
-"writable/cache/system/lib/systemd/system/sysinit.target.requires/ 6. sudo "
-"chroot /writable/cache/system 7. ln -s /lib/systemd/system/deadlock.service /"
-"lib/systemd/system/sysinit.target.requires/deadlock.service 8. exit 9. sudo "
-"snappy rollback ubuntu-core 10. sudo reboot 11. The boot will hang before "
-"reaching a getty login prompt due to deadlock.service 12. Power-cycle the "
-"device 13. snappy list -v"
+"1. Remove reverted version (and associated data)\n"
+"   snap remove core --revision=<edge_revision>\n"
+"2. Check that the edge revision is back in the refresh list\n"
+"   snap refresh --list core\n"
+"3. Update\n"
+"   snap refresh core --edge\n"
+"4. Modify the GRUB Environment Block to simulate a failed boot\n"
+"   sudo /usr/bin/grub-editenv /boot/grub/grubenv set snap_mode=trying\n"
+"5. Reboot the system and log in\n"
+"   sudo reboot\n"
+"6. Check version number\n"
+"   snap list core"
 msgstr ""
 
 #. verification
-#: ../units/snappy.pxu:121
-msgid ""
-"1. Check system can boot at step 12 2. Check system is currently boot the "
-"ubuntu-core version N (With a \"\"*\"\" at the end of line)"
+#: ../units/snappy/snappy.pxu:153
+msgid "Check system is currently booting the stable core version"
 msgstr ""
 
 #. summary
-#: ../units/snappy.pxu:129
+#: ../units/snappy/snappy.pxu:161
 msgid "SSH is enabled and operational"
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:130
+#: ../units/snappy/snappy.pxu:162
 msgid "Check if user can access the system through ssh from other machine"
 msgstr ""
 
 #. steps
-#: ../units/snappy.pxu:132
+#: ../units/snappy/snappy.pxu:164
 msgid ""
 "1. Execute following command on other machine in same network\n"
 "    ssh [user id]@[ip address of the testing system]\n"
@@ -1035,22 +2112,22 @@ msgid ""
 msgstr ""
 
 #. verification
-#: ../units/snappy.pxu:136
+#: ../units/snappy/snappy.pxu:168
 msgid "Can log into system through ssh from other machine"
 msgstr ""
 
 #. summary
-#: ../units/snappy.pxu:143
-msgid "WebDM (Device Manager) is enabled and operational"
+#: ../units/snappy/snappy.pxu:175
+msgid "snapweb is enabled"
 msgstr ""
 
 #. purpose
-#: ../units/snappy.pxu:144
-msgid "Check user can access webdm from other machine"
+#: ../units/snappy/snappy.pxu:176
+msgid "Check user can access snapweb from other machine"
 msgstr ""
 
 #. steps
-#: ../units/snappy.pxu:146
+#: ../units/snappy/snappy.pxu:178
 msgid ""
 "1. Connect Ethernet cable before boot 2. Boot into system 3. Browse "
 "following url with browser from other machine in same network\n"
@@ -1058,113 +2135,130 @@ msgid ""
 msgstr ""
 
 #. verification
-#: ../units/snappy.pxu:151
-msgid "Can access webdm interface"
+#: ../units/snappy/snappy.pxu:183
+msgid "Can access snapweb interface"
 msgstr ""
 
 #. summary
-#: ../units/stress.pxu:3
-msgid "System can be suspended 30 times"
+#: ../units/snappy/snappy.pxu:190
+msgid "User is able to search the store from snapweb interface"
 msgstr ""
 
 #. purpose
-#: ../units/stress.pxu:4
-msgid "Check system can suspend 30 times successfully"
+#: ../units/snappy/snappy.pxu:191
+msgid ""
+"Check that the user is able to search the store for snaps to install from "
+"the snapweb interface"
 msgstr ""
 
 #. steps
-#: ../units/stress.pxu:6
+#: ../units/snappy/snappy.pxu:194
 msgid ""
-"1. Execute following command:\n"
-"    sudo systemctl suspend\n"
-"2. Resume the system 3. Repeat steps 1~2 30 times."
+"1. Browse following url with browser from other machine in same network\n"
+"    http://[ip address of the testing system]:4200\n"
+"2. Click on the store link 3. Use the search box to find snaps"
 msgstr ""
 
 #. verification
-#: ../units/stress.pxu:11
-msgid "System suspend and resume successfully each time"
+#: ../units/snappy/snappy.pxu:199
+msgid "A list of snaps available for install is presented."
 msgstr ""
 
 #. summary
-#: ../units/stress.pxu:18
-msgid "System can be rebooted 30 times"
+#: ../units/snappy/snappy.pxu:207
+msgid "User is able to install a snap using snapweb interface"
 msgstr ""
 
 #. purpose
-#: ../units/stress.pxu:19
-msgid "Check system can reboot 30 times successfully"
+#: ../units/snappy/snappy.pxu:208
+msgid ""
+"Check that the user is able to install a snap from the snapweb interface"
 msgstr ""
 
 #. steps
-#: ../units/stress.pxu:21
+#: ../units/snappy/snappy.pxu:210
 msgid ""
-"1. Log into system 2. Execute following command:\n"
-"    sudo reboot\n"
-"3. Repeat steps 1~2 30 times."
+"1. Click on the \"Install\" button for a snap in the search ouput. 2. Check "
+"the button changes to \"Remove\""
 msgstr ""
 
 #. verification
-#: ../units/stress.pxu:26
-msgid "System reboot successfully each time"
-msgstr ""
-
-#. summary
-#: ../units/stress.pxu:33
-msgid "System can be powered off (and on) 30 times"
-msgstr ""
-
-#. purpose
-#: ../units/stress.pxu:34
-msgid "Check system can poweroff 30 times successfully"
-msgstr ""
-
-#. steps
-#: ../units/stress.pxu:36
+#: ../units/snappy/snappy.pxu:213
 msgid ""
-"1. Log into system 2. Execute following command:\n"
-"    sudo poweroff\n"
-"3. Boot the system 4. Repeat steps 1~3 30 times."
+"Use the command line to list installed snaps. Verify the new snap is "
+"installed."
 msgstr ""
 
-#. verification
-#: ../units/stress.pxu:42
-msgid "System poweroff successfully each time"
+#. name
+#: ../units/snappy/test-plan.pxu:3
+msgid "Tests for snap command"
+msgstr ""
+
+#. description
+#: ../units/snappy/test-plan.pxu:4
+msgid ""
+"QA test plan that includes generic tests for the snap command for Snappy "
+"Ubuntu Core devices."
+msgstr ""
+
+#. name
+#: ../units/snappy/test-plan.pxu:15
+msgid "QA tests for snap command"
+msgstr ""
+
+#. description
+#: ../units/snappy/test-plan.pxu:16
+msgid ""
+"QA test that includes manual tests for the snap command for Snappy Ubuntu "
+"Core devices."
+msgstr ""
+
+#. name
+#: ../units/snappy/test-plan.pxu:35
+msgid "Automated tests for snap command"
+msgstr ""
+
+#. description
+#: ../units/snappy/test-plan.pxu:36
+msgid ""
+"QA test plan that includes automated tests for the snap command for Snappy "
+"Ubuntu Core devices."
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:2
+#: ../units/suspend/jobs.pxu:2
 msgid "System can be suspended"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:3
+#: ../units/suspend/jobs.pxu:3
 msgid "Check the system can suspend successfully"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:5
+#: ../units/suspend/jobs.pxu:5
 msgid ""
 "1. Execute the following command:\n"
 " sudo systemctl suspend"
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:8
+#: ../units/suspend/jobs.pxu:8
 msgid "System suspends successfully"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:15
+#: ../units/suspend/jobs.pxu:15
 msgid "Headphones work (after suspend)"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:16
+#: ../units/suspend/jobs.pxu:16
 msgid "Check that headphones work after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:18
+#: ../units/suspend/jobs.pxu:18
 msgid ""
 "1. Plug in headset to headset port 2. Execute the following command:\n"
 " alsamixer\n"
@@ -1177,17 +2271,17 @@ msgid ""
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:37
+#: ../units/suspend/jobs.pxu:37
 msgid "External microphone works (after suspend)"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:38
+#: ../units/suspend/jobs.pxu:38
 msgid "Check that an external microphone works after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:40
+#: ../units/suspend/jobs.pxu:40
 msgid ""
 "1. Plug headset to headset port 2. Execute following command:\n"
 " alsamixer\n"
@@ -1199,20 +2293,25 @@ msgid ""
 "9. Speak in to microphone on headset"
 msgstr ""
 
+#. verification
+#: ../units/suspend/jobs.pxu:52
+msgid "Verify that your voice is reproduced through the headphones clearly"
+msgstr ""
+
 #. summary
-#: ../units/suspend.pxu:59
+#: ../units/suspend/jobs.pxu:59
 msgid "After suspend, bluetooth keyboard works"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:60
+#: ../units/suspend/jobs.pxu:60
 msgid ""
 "Check a bluetooth input device works after suspending the system. Given "
 "Ubuntu is CLI only, this implies a keyboard test."
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:63
+#: ../units/suspend/jobs.pxu:63
 msgid ""
 "1. Scan nearby devices:\n"
 "    hcitool scan\n"
@@ -1224,143 +2323,143 @@ msgid ""
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:72
+#: ../units/suspend/jobs.pxu:72
 msgid "Can input from input device"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:79
+#: ../units/suspend/jobs.pxu:79
 msgid "After suspend, can ping another machine over first Ethernet port"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:82
+#: ../units/suspend/jobs.pxu:82
 msgid ""
 "1. Make sure Ethernet cable is connected and can access internet 2. Suspend "
 "the device 3. Resume the device 4. ping -I eth0 google.com"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:94
+#: ../units/suspend/jobs.pxu:94
 msgid "After suspend, can ping another machine over second Ethernet port"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:95
+#: ../units/suspend/jobs.pxu:95
 msgid "Check Ethernet works after suspend by pinging another machine"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:97
+#: ../units/suspend/jobs.pxu:97
 msgid ""
 "1. Make sure Ethernet cable is connected and can access internet 2. Suspend "
 "the device 3. Resume the device 4. ping -I eth1 google.com"
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:102
+#: ../units/suspend/jobs.pxu:102
 msgid "Can successfully get ping responses from google.com"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:109
+#: ../units/suspend/jobs.pxu:109
 msgid "After suspend, Power LED behaves correctly"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:110
+#: ../units/suspend/jobs.pxu:110
 msgid "Check power LED is on when system is powered on after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:112
+#: ../units/suspend/jobs.pxu:112
 msgid ""
 "1. Suspend the device 2. Resume the device 3. Check power led when system is "
 "powered on"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:123
+#: ../units/suspend/jobs.pxu:123
 msgid "After suspend, a Monitor works when connected by DVI"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:124
+#: ../units/suspend/jobs.pxu:124
 msgid "Check output to display through DVI port after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:126
+#: ../units/suspend/jobs.pxu:126
 msgid ""
 "1. Connect display to DVI port 2. Check the display 3. Suspend the device 4. "
 "Resume the device"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:138
+#: ../units/suspend/jobs.pxu:138
 msgid "After suspend , a Monitor works when connected by HDMI"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:139
+#: ../units/suspend/jobs.pxu:139
 msgid "Check output to display through HDMI port after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:141
+#: ../units/suspend/jobs.pxu:141
 msgid ""
 "1. Connect display to HDMI port 2. Check the display 3. Suspend the device "
 "4. Resume the device"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:153
+#: ../units/suspend/jobs.pxu:153
 msgid "After suspend, a Monitor works when connected by DVI-to-VGA"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:154
+#: ../units/suspend/jobs.pxu:154
 msgid "Check output to display through VGA adaptor on DVI port after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:156
+#: ../units/suspend/jobs.pxu:156
 msgid ""
 "1. Connect display to VGA adaptor on DVI port 2. Check the display 3. "
 "Suspend the device 4. Resume the device"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:168
+#: ../units/suspend/jobs.pxu:168
 msgid "After suspend, a Monitor works when connected by HDMI-to-VGA"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:169
+#: ../units/suspend/jobs.pxu:169
 msgid "Check output to display through VGA adaptor on HDMI port after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:171
+#: ../units/suspend/jobs.pxu:171
 msgid ""
 "1. Connect display to VGA adaptor on HDMI port 2. Check the display 3. "
 "Suspend the device 4. Resume the device"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:183
+#: ../units/suspend/jobs.pxu:183
 msgid "After suspend, the serial debugging console is enabled and operational"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:184
+#: ../units/suspend/jobs.pxu:184
 msgid ""
 "Check user can still access the test machine through serial port from "
 "another machine"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:187
+#: ../units/suspend/jobs.pxu:187
 msgid ""
 "1. Connect USB to db9 null modem adapter cable to serial port of test "
 "machine 2. Connect the cable to USB port of another ubuntu machine (client) "
@@ -1376,22 +2475,22 @@ msgid ""
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:200
+#: ../units/suspend/jobs.pxu:200
 msgid "Can still run commands in terminal on client after suspend"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:207
+#: ../units/suspend/jobs.pxu:207
 msgid "After suspend, USB keyboard works"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:208
+#: ../units/suspend/jobs.pxu:208
 msgid "Check USB input device works after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:210
+#: ../units/suspend/jobs.pxu:210
 msgid ""
 "1. Connect USB keyboard 2. Input some characters with the USB keyboard 3. "
 "Suspend the device 4. Wake the device 5. Input some characters with the USB "
@@ -1399,650 +2498,260 @@ msgid ""
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:216
+#: ../units/suspend/jobs.pxu:216
 msgid "Confirm the characters are displayed correctly"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:223
+#: ../units/suspend/jobs.pxu:223
 msgid "After suspend, USB storage device insertion detected"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:224
+#: ../units/suspend/jobs.pxu:224
 msgid "Check system can detect USB storage when inserted after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:226
+#: ../units/suspend/jobs.pxu:226
 msgid "1. Press continue 2. Connect USB storage device"
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:229
+#: ../units/suspend/jobs.pxu:229
 msgid "Can find new USB storage device messages in /var/log/syslog"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:238
+#: ../units/suspend/jobs.pxu:238
 msgid "After suspend, USB storage device read & write works"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:239
+#: ../units/suspend/jobs.pxu:239
 msgid "Check system can read/write to USB storage correctly after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:241
+#: ../units/suspend/jobs.pxu:241
 msgid ""
 "1. This task is fully automatic and need USB insertion test was applied "
 "first."
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:252
+#: ../units/suspend/jobs.pxu:252
 msgid "After suspend, USB storage removal works"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:253
+#: ../units/suspend/jobs.pxu:253
 msgid "Check system can detect removal of a USB storage device after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:255
+#: ../units/suspend/jobs.pxu:255
 msgid "1. Press continue 2. Disconnect USB storage device"
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:258
+#: ../units/suspend/jobs.pxu:258
 msgid "Can find USB storage device removed messages in /var/log/syslog"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:267
+#: ../units/suspend/jobs.pxu:267
 msgid "After suspend, USB3 storage device insertion detected"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:268
+#: ../units/suspend/jobs.pxu:268
 msgid ""
 "Check system can detect insertion of a USB3 storage device after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:270
+#: ../units/suspend/jobs.pxu:270
 msgid "1. Press continue 2. Connect USB3 storage device"
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:273
+#: ../units/suspend/jobs.pxu:273
 msgid "Can find new USB3 storage device messages in /var/log/syslog"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:282
+#: ../units/suspend/jobs.pxu:282
 msgid "After suspend, USB3 storage device read & write works"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:283
+#: ../units/suspend/jobs.pxu:283
 msgid ""
 "Check system can read/write to USB3 storage devices correctly after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:285
+#: ../units/suspend/jobs.pxu:285
 msgid ""
 "1. This task is fully automatic and need USB3 insertion test was applied "
 "first."
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:287 ../units/usb.pxu:90
+#: ../units/suspend/jobs.pxu:287 ../units/usb/usb.pxu:81
 msgid "This task is fully automatic and will verify the result for you."
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:296
+#: ../units/suspend/jobs.pxu:296
 msgid "After suspend, USB3 storage removal works"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:297
+#: ../units/suspend/jobs.pxu:297
 msgid "Check system can detect USB3 storage removal after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:299
+#: ../units/suspend/jobs.pxu:299
 msgid "1. Press continue 2. Disconnect USB3 storage device"
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:302
+#: ../units/suspend/jobs.pxu:302
 msgid "Can find USB3 storage device removed messages in /var/log/syslog"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:311
+#: ../units/suspend/jobs.pxu:311
 msgid "After suspend, System can discover Wi-Fi networks"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:312
+#: ../units/suspend/jobs.pxu:312
 msgid "Check system can find a wireless network AP nearby after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:314
+#: ../units/suspend/jobs.pxu:314
 msgid ""
 "1. sudo iw dev mlan0 scan 2. Suspend the device 3. Resume the device 4. sudo "
 "iw dev mlan0 scan"
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:319
+#: ../units/suspend/jobs.pxu:319
 msgid "In step 4, can see nearby wireless network AP"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:326
+#: ../units/suspend/jobs.pxu:326
 msgid "After suspend, system can connect to unencrypted 802.11ac Wi-Fi network"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:327
+#: ../units/suspend/jobs.pxu:327
 msgid "Check system can connect to insecure 802.11ac AP after suspend"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:343
+#: ../units/suspend/jobs.pxu:343
 msgid ""
 "After suspend, system can connect to unencrypted 802.11b/g Wi-Fi network"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:344
+#: ../units/suspend/jobs.pxu:344
 msgid "Check system can connect to insecure 802.11b/g AP after suspend"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:360
+#: ../units/suspend/jobs.pxu:360
 msgid "After suspend, system can connect to unencrypted 802.11n Wi-Fi network"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:361
+#: ../units/suspend/jobs.pxu:361
 msgid "Check system can connect to insecure 802.11n AP after suspend"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:377
+#: ../units/suspend/jobs.pxu:377
 msgid ""
 "After suspend, system can connect to WPA-encrypted 802.11ac Wi-Fi network"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:378
+#: ../units/suspend/jobs.pxu:378
 msgid "Check system can connect to 802.11ac AP with wpa security after suspend"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:394
+#: ../units/suspend/jobs.pxu:394
 msgid ""
 "After suspend, system can connect to WPA-encrypted 802.11b/g Wi-Fi network"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:395
+#: ../units/suspend/jobs.pxu:395
 msgid ""
 "Check system can connect to 802.11b/g AP with wpa security after suspend"
 msgstr ""
 
 #. summary
-#: ../units/suspend.pxu:411
+#: ../units/suspend/jobs.pxu:411
 msgid ""
 "After suspend, system can connect to WPA-encrypted 802.11n Wi-Fi network"
 msgstr ""
 
 #. purpose
-#: ../units/suspend.pxu:412
+#: ../units/suspend/jobs.pxu:412
 msgid "Check system can connect to 802.11n AP with wpa security after suspend"
 msgstr ""
 
 #. steps
-#: ../units/suspend.pxu:414 ../units/wireless.pxu:125
+#: ../units/suspend/jobs.pxu:414 ../units/wireless/jobs.pxu:138
 msgid ""
 "1. Remove all wireless configuration in /etc/network/interfaces and /etc/"
 "network/interfaces.d 2. Commence the test"
 msgstr ""
 
 #. verification
-#: ../units/suspend.pxu:417 ../units/wireless.pxu:128
+#: ../units/suspend/jobs.pxu:417 ../units/wireless/jobs.pxu:141
 msgid ""
 "If there's \"Connection test passed\" message in result, mark the test as "
 "passed."
 msgstr ""
 
 #. name
-#: ../units/test-plan.pxu:9
-msgid "QA tests for Snappy Ubuntu Core devices"
+#: ../units/suspend/test-plan.pxu:3
+msgid "Suspend tests"
 msgstr ""
 
 #. description
-#: ../units/test-plan.pxu:10
-msgid ""
-"QA test plan that includes all generic, reusable tests for Snappy Ubuntu "
-"Core devices."
+#: ../units/suspend/test-plan.pxu:4
+msgid "QA suspend tests for Snappy Ubuntu Core devices"
 msgstr ""
 
 #. name
-#: ../units/usb.pxu:3
-msgid "USB 2.0"
+#: ../units/suspend/test-plan.pxu:12
+msgid "Manual suspend tests"
+msgstr ""
+
+#. description
+#: ../units/suspend/test-plan.pxu:13
+msgid "Manual suspend tests for Snappy Ubuntu Core devices"
 msgstr ""
 
 #. name
-#: ../units/usb.pxu:7
-msgid "USB 3.0"
-msgstr ""
-
-#. summary
-#: ../units/usb.pxu:11
-msgid "USB keyboard works"
-msgstr ""
-
-#. purpose
-#: ../units/usb.pxu:12
-msgid "Check USB input device works"
-msgstr ""
-
-#. steps
-#: ../units/usb.pxu:14
-msgid "1. Connect USB keyboard 2. Input somethings with USB keyboard"
-msgstr ""
-
-#. verification
-#: ../units/usb.pxu:17
-msgid "What just input is displayed correctly"
-msgstr ""
-
-#. summary
-#: ../units/usb.pxu:24
-msgid "USB 2.0 storage device insertion detected"
-msgstr ""
-
-#. purpose
-#: ../units/usb.pxu:25
-msgid "Check system can detect USB 2.0 storage when inserted"
-msgstr ""
-
-#. steps
-#: ../units/usb.pxu:27
-msgid "1. Press continue 2. Connect USB 2.0 storage device"
-msgstr ""
-
-#. verification
-#: ../units/usb.pxu:30
-msgid "Can find new USB 2.0 storage device messages in /var/log/syslog"
-msgstr ""
-
-#. summary
-#: ../units/usb.pxu:39
-msgid "USB 2.0 storage device read & write works"
-msgstr ""
-
-#. purpose
-#: ../units/usb.pxu:40
-msgid "Check system can read/write to USB 2.0 storage correctly"
-msgstr ""
-
-#. steps
-#: ../units/usb.pxu:42
-msgid ""
-"1. This task is fully automatic and need USB 2.0 insertion test was applied "
-"first."
-msgstr ""
-
-#. summary
-#: ../units/usb.pxu:54
-msgid "USB 2.0 storage device removal detected"
-msgstr ""
-
-#. purpose
-#: ../units/usb.pxu:55
-msgid "Check system can detect removal of a USB 2.0 storage device"
-msgstr ""
-
-#. steps
-#: ../units/usb.pxu:57
-msgid "1. Press continue 2. Disconnect USB 2.0 storage device"
-msgstr ""
-
-#. verification
-#: ../units/usb.pxu:60
-msgid "Can find USB 2.0 storage device removed messages in /var/log/syslog"
-msgstr ""
-
-#. summary
-#: ../units/usb.pxu:70
-msgid "USB 3.0 storage device insertion detected"
-msgstr ""
-
-#. purpose
-#: ../units/usb.pxu:71
-msgid "Check system can detect insertion of a USB 3.0 storage device"
-msgstr ""
-
-#. steps
-#: ../units/usb.pxu:73
-msgid "1. Press continue 2. Connect USB 3.0 storage device"
-msgstr ""
-
-#. verification
-#: ../units/usb.pxu:76
-msgid "Can find new USB 3.0 storage device messages in /var/log/syslog"
-msgstr ""
-
-#. summary
-#: ../units/usb.pxu:85
-msgid "USB 3.0 storage device read & write works"
-msgstr ""
-
-#. purpose
-#: ../units/usb.pxu:86
-msgid "Check system can read/write to USB 3.0 storage devices correctly"
-msgstr ""
-
-#. steps
-#: ../units/usb.pxu:88
-msgid ""
-"1. This task is fully automatic and need USB 3.0 insertion test was applied "
-"first."
-msgstr ""
-
-#. summary
-#: ../units/usb.pxu:100
-msgid "USB 3.0 storage device removal detected"
-msgstr ""
-
-#. purpose
-#: ../units/usb.pxu:101
-msgid "Check system can detect removal of a USB 3.0 storage device"
-msgstr ""
-
-#. steps
-#: ../units/usb.pxu:103
-msgid "1. Press continue 2. Disconnect USB 3.0 storage device"
-msgstr ""
-
-#. verification
-#: ../units/usb.pxu:106
-msgid "Can find USB 3.0 storage device removed messages in /var/log/syslog"
-msgstr ""
-
-#. summary
-#: ../units/usb.pxu:121
-msgid "Attach output of lsusb"
+#: ../units/suspend/test-plan.pxu:43
+msgid "Automated suspend tests"
 msgstr ""
 
 #. description
-#: ../units/usb.pxu:122
-msgid "Attaches a list of detected USB devices."
-msgstr ""
-
-#. summary
-#: ../units/watchdog.pxu:2
-msgid "Load watchdog kernel module when boot"
-msgstr ""
-
-#. purpose
-#: ../units/watchdog.pxu:3
-msgid "Verify watchdog kernel module is loaded when boot"
-msgstr ""
-
-#. steps
-#: ../units/watchdog.pxu:4
-msgid ""
-"1. Make sure you didn't load watchdog kernel module manually after boot, if "
-"you did, reboot the system and then run this test. 2. Commence the test"
-msgstr ""
-
-#. summary
-#: ../units/watchdog.pxu:19
-msgid "Verify watchdog daemon is started during boot"
-msgstr ""
-
-#. description
-#: ../units/watchdog.pxu:20
-msgid ""
-"The watchdog deamon should be started by the init process during boot to "
-"ensure the system resets in extreme circumstances."
-msgstr ""
-
-#. summary
-#: ../units/watchdog.pxu:32
-msgid ""
-"Verify the watchdog keepalive daemon is up once watchdog daemon is killed"
-msgstr ""
-
-#. description
-#: ../units/watchdog.pxu:33
-msgid ""
-"If the system is in a responsive state the keepalive daemon will provide "
-"time for a the init process to do a managed reboot rather than allowing a "
-"hard reset to occur."
-msgstr ""
-
-#. summary
-#: ../units/watchdog.pxu:47
-msgid "Test that the watchdog module can trigger a system reset"
-msgstr ""
-
-#. purpose
-#: ../units/watchdog.pxu:48
-msgid ""
-"The watchdog module should be capable of issuing a hard reset of the SUT."
-msgstr ""
-
-#. steps
-#: ../units/watchdog.pxu:50
-msgid ""
-"1. Commence the test to kill (SIGKILL) the watchdog daemon. 2. Once the "
-"watchdog timeout has expired the SUT should reset itself. 3. The board will "
-"reboot and the user should resume the test session."
-msgstr ""
-
-#. verification
-#: ../units/watchdog.pxu:54
-msgid "Did the board reset itself?"
-msgstr ""
-
-#. name
-#: ../units/wireless.pxu:3
-msgid "Wi-Fi"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:9
-msgid "Resource job to identify Wi-Fi devices"
-msgstr ""
-
-#. description
-#: ../units/wireless.pxu:10
-msgid "Job to scan for the presence of Wi-Fi network adapters which"
-msgstr ""
-
-#. description
-#: ../units/wireless.pxu:10
-msgid "should then have the following collection of tests run against them."
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:17
-msgid "System can discover Wi-Fi networks"
-msgstr ""
-
-#. description
-#: ../units/wireless.pxu:32
-msgid "Check system can find a wireless network AP nearby"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:139
-msgid "System can connect to unencrypted 802.11ac Wi-Fi network"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:140
-msgid "Check system can connect to insecure 802.11ac AP"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:161
-msgid "System can connect to unencrypted 802.11b/g Wi-Fi network"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:162
-msgid "Check system can connect to insecure 802.11b/g AP"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:183
-msgid "System can connect to unencrypted 802.11n Wi-Fi network"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:184
-msgid "Check system can connect to insecure 802.11n AP"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:205
-msgid "System can connect to WPA-encrypted 802.11ac Wi-Fi network"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:206
-msgid "Check system can connect to 802.11ac AP with wpa security"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:227
-msgid "System can connect to WPA-encrypted 802.11b/g Wi-Fi network"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:228
-msgid "Check system can connect to 802.11b/g AP with wpa security"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:249
-msgid "System can connect to WPA-encrypted 802.11n Wi-Fi network"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:250
-msgid "Check system can connect to 802.11n AP with wpa security"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:272
-msgid "System can act as an 802.11a Wi-Fi Access Point"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:280
-msgid " Check that the system can create an 802.11a Access Point"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:292
-msgid "System can act as an 802.11b Wi-Fi Access Point"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:300
-msgid " Check that the system can create an 802.11b Access Point"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:312
-msgid "System can act as an 802.11g Wi-Fi Access Point"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:320
-msgid " Check that the system can create an 802.11g Access Point"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:332
-msgid "System can act as an 802.11ad Wi-Fi Access Point"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:340
-msgid " Check that the system can create an 802.11ad Access Point"
-msgstr ""
-
-#. steps
-#: ../units/wireless.pxu:342
-msgid ""
-" 1. Using a suitable Wi-Fi client try to detect the presence of the AP\n"
-"  called \"UbuntuCoreTest\"\n"
-" 2. Attempt to connect to the AP using password \"snappyubuntucore\""
-msgstr ""
-
-#. verification
-#: ../units/wireless.pxu:346
-msgid " Did the client connect?"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:353
-msgid "System can act as an 802.11a Wi-Fi Access Point (automated test)"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:361
-msgid ""
-" Check that the system can create an 802.11a Access Point (automated test)"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:367
-msgid "System can act as an 802.11b Wi-Fi Access Point (automated test)"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:375
-msgid ""
-" Check that the system can create an 802.11b Access Point (automated test)"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:381
-msgid "System can act as an 802.11g Wi-Fi Access Point (automated test)"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:389
-msgid ""
-" Check that the system can create an 802.11g Access Point (automated test)"
-msgstr ""
-
-#. summary
-#: ../units/wireless.pxu:395
-msgid "System can act as an 802.11ad Wi-Fi Access Point (automated test)"
-msgstr ""
-
-#. purpose
-#: ../units/wireless.pxu:403
-msgid ""
-" Check that the system can create an 802.11ad Access Point (automated test)"
+#: ../units/suspend/test-plan.pxu:44
+msgid "Automated suspend tests for Snappy Ubuntu Core devices"
 msgstr ""
 
 #. name
@@ -2283,123 +2992,1063 @@ msgid ""
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:159
+#: ../units/tpm/tpm.pxu:160
 msgid "Collect the output of tpm_selftest"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:160
+#: ../units/tpm/tpm.pxu:161
 msgid ""
 "This job collects the output of \"tpm_selftest\" for inspection by the "
 "Certification engineer."
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:171
+#: ../units/tpm/tpm.pxu:173
 msgid "Collect the output of tpm_setactive --status --well-known"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:172
+#: ../units/tpm/tpm.pxu:174
 msgid ""
 "This simply collects the output of \"tpm_setactive --status --well-known\" "
 "for inspection by a Certification engineer."
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:183
+#: ../units/tpm/tpm.pxu:186
 msgid "Collect the output of tpm_nvinfo"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:184
+#: ../units/tpm/tpm.pxu:187
 msgid ""
 "This simply collects the output of \"tpm_nvinfo\" for inspection by a "
 "Certification engineer."
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:194
+#: ../units/tpm/tpm.pxu:199
 msgid "Collect the output of tpm_restrictpubek --status --well-known"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:195
+#: ../units/tpm/tpm.pxu:200
 msgid ""
 "This simply collects the output of \"tpm_restrictpubek --status --well-known"
 "\" for inspection by a Certification engineer."
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:205
+#: ../units/tpm/tpm.pxu:212
 msgid "Collect the output of tpm_restrictsrk --status --well-known"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:206
+#: ../units/tpm/tpm.pxu:213
 msgid ""
 "This simply collects the output of \"tpm_restrictsrk --status --well-known\" "
 "for inspection by a Certification engineer."
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:216
+#: ../units/tpm/tpm.pxu:225
 msgid "Collect the output of tpm_setclearable--status --well-known"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:217
+#: ../units/tpm/tpm.pxu:226
 msgid ""
 "This simply collects the output of \"tpm_setclearable --status --well-known"
 "\" for inspection by a Certification engineer."
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:227
+#: ../units/tpm/tpm.pxu:238
 msgid "Collect the output of tpm_setenable --status --well-known"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:228
+#: ../units/tpm/tpm.pxu:239
 msgid ""
 "This simply collects the output of \"tpm_setenable --status --well-known\" "
 "for inspection by a Certification engineer."
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:238
+#: ../units/tpm/tpm.pxu:251
 msgid "Collect the output of tpm_setownable --status --well-known"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:239
+#: ../units/tpm/tpm.pxu:252
 msgid ""
 "This simply collects the output of \"tpm_setownable --status --well-known\" "
 "for inspection by a Certification engineer."
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:249
+#: ../units/tpm/tpm.pxu:264
 msgid "Collect the output of tpm_setpresence --status --well-known"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:250
+#: ../units/tpm/tpm.pxu:265
 msgid ""
 "This simply collects the output of \"tpm_setpresence --status --well-known\" "
 "for inspection by a Certification engineer."
 msgstr ""
 
 #. summary
-#: ../units/tpm/tpm.pxu:260
+#: ../units/tpm/tpm.pxu:277
 msgid "Collect the output of tpm_getpubek --well-known"
 msgstr ""
 
 #. description
-#: ../units/tpm/tpm.pxu:261
+#: ../units/tpm/tpm.pxu:278
 msgid ""
 "This simply collects the output of \"tpm_getpubek --well-known\" for "
 "inspection by a Certification engineer."
+msgstr ""
+
+#. name
+#: ../units/usb/category.pxu:3
+msgid "USB 2.0"
+msgstr ""
+
+#. name
+#: ../units/usb/category.pxu:7
+msgid "USB 3.0"
+msgstr ""
+
+#. name
+#: ../units/usb/manifest.pxu:3
+msgid "USB Type-C Support"
+msgstr ""
+
+#. name
+#: ../units/usb/test-plan.pxu:3
+msgid "USB tests"
+msgstr ""
+
+#. description
+#: ../units/usb/test-plan.pxu:4
+msgid "QA USB tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/usb/test-plan.pxu:11
+msgid "Manual USB tests"
+msgstr ""
+
+#. description
+#: ../units/usb/test-plan.pxu:12
+msgid "Manual USB tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/usb/test-plan.pxu:21
+msgid "USB3 tests"
+msgstr ""
+
+#. description
+#: ../units/usb/test-plan.pxu:22
+msgid "QA USB3 tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/usb/test-plan.pxu:29
+msgid "Manual USB3 tests"
+msgstr ""
+
+#. description
+#: ../units/usb/test-plan.pxu:30
+msgid "Manual USB3 tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/usb/test-plan.pxu:38
+msgid "USB-C tests"
+msgstr ""
+
+#. description
+#: ../units/usb/test-plan.pxu:39
+msgid "QA USB-C tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/usb/test-plan.pxu:46
+msgid "Manual USB-C tests"
+msgstr ""
+
+#. description
+#: ../units/usb/test-plan.pxu:47
+msgid "Manual USB-C tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. summary
+#: ../units/usb/usb-c.pxu:2
+msgid ""
+"USB HID work on USB Type-C port using a \"USB Type-C to Type-A\" adapter"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb-c.pxu:3
+msgid ""
+"    This test will check that you can use a USB HID device plugged in a USB\n"
+"    Type-C port using a \"USB Type-C to Type-A\" adapter"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb-c.pxu:6
+msgid ""
+"    1. Enable either a USB mouse or keyboard by plugging it in the USB Type-"
+"C port using a \"USB Type-C to Type-A\" adapter\n"
+"    2. For mice, perform actions such as moving the pointer, right and left "
+"button clicks and double clicks\n"
+"    3. For keyboards, switch to another tty and type some text"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb-c.pxu:19
+msgid ""
+"    This test will check that the system correctly detects the insertion of\n"
+"    a USB 3 storage device in a USB Type-C connector using a \"Type-C to "
+"Type-A\"\n"
+"    adapter"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb-c.pxu:23
+msgid ""
+"    1. Commence the test\n"
+"    2. Connect a USB 3 storage device to a USB Type-C port using a\n"
+"       \"Type-C to Type-A\" adapter\n"
+"    3. Do not unplug the device after the test."
+msgstr ""
+
+#. description
+#: ../units/usb/usb-c.pxu:41
+msgid ""
+"This test is automated and executes after the usb-c/c-to-a-adapter/insert "
+"test is run."
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb-c.pxu:55
+msgid ""
+"    This test will check that the system correctly detects the removal of\n"
+"    a USB 3 storage device connected to a USB Type-C port using a \"USB Type-"
+"C\n"
+"    to Type-A\" adapter."
+msgstr ""
+
+#. steps
+#: ../units/usb/usb-c.pxu:59
+msgid ""
+"    1. Commence the test\n"
+"    2. Disconnect a USB 3 storage device to a USB Type-C port using a\n"
+"       \"Type-C to Type-A\" adapter"
+msgstr ""
+
+#. summary
+#: ../units/usb/usb-c.pxu:77
+msgid "USB HID work on USB Type-C port"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb-c.pxu:78
+msgid ""
+"    This test will check that you can use a USB HID device plugged in a USB\n"
+"    Type-C port"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb-c.pxu:81
+msgid ""
+"    1. Enable either a USB mouse or keyboard by plugging it in the USB Type-"
+"C port\n"
+"    2. For mice, perform actions such as moving the pointer, right and left "
+"button clicks and double clicks\n"
+"    3. For keyboards, switch to another tty and type some text"
+msgstr ""
+
+#. verification
+#: ../units/usb/usb-c.pxu:85
+msgid "    Did the device work as expected?"
+msgstr ""
+
+#. summary
+#: ../units/usb/usb-c.pxu:94
+msgid "USB 3.0 storage device insertion detected on USB Type-C port"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb-c.pxu:95
+msgid ""
+"    This test will check that the system correctly detects the insertion of\n"
+"    a USB 3 storage device in a USB Type-C connector"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb-c.pxu:98
+msgid ""
+"    1. Commence the test\n"
+"    2. Connect a USB 3 storage device to a USB Type-C port\n"
+"    3. Do not unplug the device after the test."
+msgstr ""
+
+#. summary
+#: ../units/usb/usb-c.pxu:115
+msgid "USB 3.0 storage device read & write works on USB Type-C port"
+msgstr ""
+
+#. description
+#: ../units/usb/usb-c.pxu:116
+msgid "This test is automated and executes after the usb-c/insert test is run."
+msgstr ""
+
+#. summary
+#: ../units/usb/usb-c.pxu:130
+msgid "USB 3.0 storage device removal detected on USB Type-C port"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb-c.pxu:131
+msgid ""
+"    This test will check that the system correctly detects the removal of\n"
+"    a USB 3 storage device connected to a USB Type-C port."
+msgstr ""
+
+#. steps
+#: ../units/usb/usb-c.pxu:134
+msgid ""
+"    1. Commence the test\n"
+"    2. Disconnect a USB 3 storage device to a USB Type-C port"
+msgstr ""
+
+#. verification
+#: ../units/usb/usb-c.pxu:137
+msgid ""
+"    The verification of this test is automated. Do not change the\n"
+"    automatically selected result."
+msgstr ""
+
+#. summary
+#: ../units/usb/usb.pxu:2
+msgid "USB keyboard works"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb.pxu:3
+msgid "Check USB input device works"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb.pxu:5
+msgid "1. Connect USB keyboard 2. Input somethings with USB keyboard"
+msgstr ""
+
+#. verification
+#: ../units/usb/usb.pxu:8
+msgid "What just input is displayed correctly"
+msgstr ""
+
+#. summary
+#: ../units/usb/usb.pxu:15
+msgid "USB 2.0 storage device insertion detected"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb.pxu:16
+msgid "Check system can detect USB 2.0 storage when inserted"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb.pxu:18
+msgid "1. Press continue 2. Connect USB 2.0 storage device"
+msgstr ""
+
+#. verification
+#: ../units/usb/usb.pxu:21
+msgid "Can find new USB 2.0 storage device messages in /var/log/syslog"
+msgstr ""
+
+#. summary
+#: ../units/usb/usb.pxu:30
+msgid "USB 2.0 storage device read & write works"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb.pxu:31
+msgid "Check system can read/write to USB 2.0 storage correctly"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb.pxu:33
+msgid ""
+"1. This task is fully automatic and need USB 2.0 insertion test was applied "
+"first."
+msgstr ""
+
+#. summary
+#: ../units/usb/usb.pxu:45
+msgid "USB 2.0 storage device removal detected"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb.pxu:46
+msgid "Check system can detect removal of a USB 2.0 storage device"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb.pxu:48
+msgid "1. Press continue 2. Disconnect USB 2.0 storage device"
+msgstr ""
+
+#. verification
+#: ../units/usb/usb.pxu:51
+msgid "Can find USB 2.0 storage device removed messages in /var/log/syslog"
+msgstr ""
+
+#. summary
+#: ../units/usb/usb.pxu:61
+msgid "USB 3.0 storage device insertion detected"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb.pxu:62
+msgid "Check system can detect insertion of a USB 3.0 storage device"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb.pxu:64
+msgid "1. Press continue 2. Connect USB 3.0 storage device"
+msgstr ""
+
+#. verification
+#: ../units/usb/usb.pxu:67
+msgid "Can find new USB 3.0 storage device messages in /var/log/syslog"
+msgstr ""
+
+#. summary
+#: ../units/usb/usb.pxu:76
+msgid "USB 3.0 storage device read & write works"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb.pxu:77
+msgid "Check system can read/write to USB 3.0 storage devices correctly"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb.pxu:79
+msgid ""
+"1. This task is fully automatic and need USB 3.0 insertion test was applied "
+"first."
+msgstr ""
+
+#. summary
+#: ../units/usb/usb.pxu:91
+msgid "USB 3.0 storage device removal detected"
+msgstr ""
+
+#. purpose
+#: ../units/usb/usb.pxu:92
+msgid "Check system can detect removal of a USB 3.0 storage device"
+msgstr ""
+
+#. steps
+#: ../units/usb/usb.pxu:94
+msgid "1. Press continue 2. Disconnect USB 3.0 storage device"
+msgstr ""
+
+#. verification
+#: ../units/usb/usb.pxu:97
+msgid "Can find USB 3.0 storage device removed messages in /var/log/syslog"
+msgstr ""
+
+#. summary
+#: ../units/usb/usb.pxu:112
+msgid "Attach output of lsusb"
+msgstr ""
+
+#. description
+#: ../units/usb/usb.pxu:113
+msgid "Attaches a list of detected USB devices."
+msgstr ""
+
+#. summary
+#: ../units/watchdog/jobs.pxu:2
+msgid "Check if the hardware watchdog is properly configured"
+msgstr ""
+
+#. summary
+#: ../units/watchdog/jobs.pxu:10
+msgid "Test that the watchdog module can trigger a system reset"
+msgstr ""
+
+#. purpose
+#: ../units/watchdog/jobs.pxu:11
+msgid ""
+"The watchdog module should be capable of issuing a hard reset of the SUT."
+msgstr ""
+
+#. steps
+#: ../units/watchdog/jobs.pxu:13
+msgid ""
+"1. Commence the test to trigger a SysRq. 2. Once the watchdog timeout has "
+"expired (10s) the SUT should reset itself. 3. The board will reboot and the "
+"user should resume the test session."
+msgstr ""
+
+#. verification
+#: ../units/watchdog/jobs.pxu:17
+msgid "Did the board reset itself?"
+msgstr ""
+
+#. name
+#: ../units/watchdog/test-plan.pxu:3
+msgid "Watchdog tests"
+msgstr ""
+
+#. description
+#: ../units/watchdog/test-plan.pxu:4
+msgid "QA test plan that includes watchdog tests"
+msgstr ""
+
+#. name
+#: ../units/watchdog/test-plan.pxu:14
+msgid "Manual watchdog tests"
+msgstr ""
+
+#. description
+#: ../units/watchdog/test-plan.pxu:15
+msgid "Manual watchdog tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/watchdog/test-plan.pxu:21
+msgid "Automated watchdog tests"
+msgstr ""
+
+#. description
+#: ../units/watchdog/test-plan.pxu:22
+msgid "QA test plan that includes automated watchdog tests"
+msgstr ""
+
+#. name
+#: ../units/wireless/category.pxu:3
+msgid "Wi-Fi"
+msgstr ""
+
+#. summary
+#: ../units/wireless/jobs.pxu:6
+msgid "System can discover Wi-Fi networks on {interface}"
+msgstr ""
+
+#. description
+#: ../units/wireless/jobs.pxu:21
+msgid "Check system can find a wireless network AP nearby"
+msgstr ""
+
+#. summary
+#: ../units/wireless/jobs.pxu:114
+msgid "Connect to WPA-encrypted 802.11b/g Wi-Fi network {interface}"
+msgstr ""
+
+#. summary
+#: ../units/wireless/jobs.pxu:156
+msgid "Connect to unencrypted 802.11ac Wi-Fi network on {interface}"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/jobs.pxu:157
+msgid "Check system can connect to insecure 802.11ac AP"
+msgstr ""
+
+#. summary
+#: ../units/wireless/jobs.pxu:186
+msgid "Connect to unencrypted 802.11b/g Wi-Fi network on {interface}"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/jobs.pxu:187
+msgid "Check system can connect to insecure 802.11b/g AP"
+msgstr ""
+
+#. summary
+#: ../units/wireless/jobs.pxu:216
+msgid "Connect to unencrypted 802.11n Wi-Fi network on {interface}"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/jobs.pxu:217
+msgid "Check system can connect to insecure 802.11n AP"
+msgstr ""
+
+#. summary
+#: ../units/wireless/jobs.pxu:246
+msgid "Connect to WPA-encrypted 802.11ac Wi-Fi network on {interface}"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/jobs.pxu:247
+msgid "Check system can connect to 802.11ac AP with wpa security"
+msgstr ""
+
+#. summary
+#: ../units/wireless/jobs.pxu:276
+msgid "Connect to WPA-encrypted 802.11b/g Wi-Fi network on {interface}"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/jobs.pxu:277
+msgid "Check system can connect to 802.11b/g AP with wpa security"
+msgstr ""
+
+#. summary
+#: ../units/wireless/jobs.pxu:306
+msgid "Connect to WPA-encrypted 802.11n Wi-Fi network on {interface}"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/jobs.pxu:307
+msgid "Check system can connect to 802.11n AP with wpa security"
+msgstr ""
+
+#. summary
+#: ../units/wireless/resource.pxu:4
+msgid "Resource job to identify Wi-Fi devices"
+msgstr ""
+
+#. description
+#: ../units/wireless/resource.pxu:5
+msgid "Job to scan for the presence of Wi-Fi network adapters which"
+msgstr ""
+
+#. description
+#: ../units/wireless/resource.pxu:5
+msgid "should then have the following collection of tests run against them."
+msgstr ""
+
+#. name
+#: ../units/wireless/test-plan.pxu:3
+msgid "Wireless tests"
+msgstr ""
+
+#. description
+#: ../units/wireless/test-plan.pxu:4
+msgid "QA tests for wireless connections"
+msgstr ""
+
+#. name
+#: ../units/wireless/test-plan.pxu:13
+msgid "Manual tests for wireless"
+msgstr ""
+
+#. description
+#: ../units/wireless/test-plan.pxu:14
+msgid "Manual tests wireless"
+msgstr ""
+
+#. name
+#: ../units/wireless/test-plan.pxu:29
+msgid "Automated tests for wireless"
+msgstr ""
+
+#. description
+#: ../units/wireless/test-plan.pxu:30
+msgid ""
+"Automated connection tests for unencrypted or WPA-encrypted 802.11 bg, n, ac "
+"networks."
+msgstr ""
+
+#. name
+#: ../units/wireless/test-plan.pxu:46
+msgid "QA tests for wifi master mode"
+msgstr ""
+
+#. description
+#: ../units/wireless/test-plan.pxu:47
+msgid "System as Access Point tests"
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:7
+msgid "Create open 802.11a Wi-Fi Access Point on {interface} with no STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:13
+msgid ""
+" Check that the system can create an open 802.11a Access Point without any "
+"STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:15
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode a\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode direct\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security open\n"
+" 3. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 4. Attempt to connect to the AP"
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:36
+msgid "Create open 802.11b Wi-Fi Access Point on {interface} with no STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:42
+msgid ""
+" Check that the system can create an open 802.11b Access Point without any "
+"STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:44
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode b\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode direct\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security open\n"
+" 3. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 4. Attempt to connect to the AP"
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:65
+msgid "Create open 802.11g Wi-Fi Access Point on {interface} with no STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:71
+msgid ""
+" Check that the system can create an open 802.11g Access Point without any "
+"STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:73
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode g\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode direct\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security open\n"
+" 3. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 4. Attempt to connect to the AP"
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:94
+msgid "Create open 802.11ad Wi-Fi Access Point on {interface} with no STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:100
+msgid ""
+" Check that the system can create an open 802.11ad Access Point without any "
+"STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:102
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode ad\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode direct\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security open\n"
+" 3. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 4. Attempt to connect to the AP"
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:123
+msgid "Create WPA2 802.11a Wi-Fi Access Point on {interface} with no STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:129
+msgid ""
+" Check that the system can create a WPA2 802.11a Access Point without any "
+"STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:131
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode a\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode direct\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security wpa2\n"
+"   $ sudo wifi-ap.config set wifi.security-passphrase Test1234\n"
+" 3. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 4. Attempt to connect to the AP using password \"Test1234\""
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:153
+msgid "Create WPA2 802.11b Wi-Fi Access Point on {interface} with no STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:159
+msgid ""
+" Check that the system can create a WPA2 802.11b Access Point without any "
+"STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:161
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode b\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode direct\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security wpa2\n"
+"   $ sudo wifi-ap.config set wifi.security-passphrase Test1234\n"
+" 3. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 4. Attempt to connect to the AP using password \"Test1234\""
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:183
+msgid "Create WPA2 802.11g Wi-Fi Access Point on {interface} with no STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:189
+msgid ""
+" Check that the system can create a WPA2 802.11g Access Point without any "
+"STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:191
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode g\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode direct\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security wpa2\n"
+"   $ sudo wifi-ap.config set wifi.security-passphrase Test1234\n"
+" 3. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 4. Attempt to connect to the AP using password \"Test1234\""
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:213
+msgid "Create WPA2 802.11ad Wi-Fi Access Point on {interface} with no STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:219
+msgid ""
+" Check that the system can create a WPA2 802.11ad Access Point without any "
+"STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:221
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode ad\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode direct\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security wpa2\n"
+"   $ sudo wifi-ap.config set wifi.security-passphrase Test1234\n"
+" 3. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 4. Attempt to connect to the AP using password \"Test1234\""
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:243
+msgid "Create WPA2 802.11a Wi-Fi Access Point on {interface} with active STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:255
+msgid ""
+" Check that the system can create a WPA2 802.11a Access Point with an "
+"already active STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:257
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Connect to an 802.11b/g AP with wpa security:\n"
+"   Press Enter to continue\n"
+" 3. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode a\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode virtual\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security wpa2\n"
+"   $ sudo wifi-ap.config set wifi.security-passphrase Test1234\n"
+"   $ sudo wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -"
+"oP 'channel\\s+\\K\\d+')\n"
+" 4. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 5. Attempt to connect to the AP using password \"Test1234\""
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:282
+msgid "Create WPA2 802.11b Wi-Fi Access Point on {interface} with active STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:294
+msgid ""
+" Check that the system can create a WPA2 802.11b Access Point with an "
+"already active STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:296
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Connect to an 802.11b/g AP with wpa security:\n"
+"   Press Enter to continue\n"
+" 3. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode b\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode virtual\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security wpa2\n"
+"   $ sudo wifi-ap.config set wifi.security-passphrase Test1234\n"
+"   $ sudo wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -"
+"oP 'channel\\s+\\K\\d+')\n"
+" 4. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 5. Attempt to connect to the AP using password \"Test1234\""
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:321
+msgid "Create WPA2 802.11g Wi-Fi Access Point on {interface} with active STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:333
+msgid ""
+" Check that the system can create a WPA2 802.11g Access Point with an "
+"already active STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:335
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Connect to an 802.11b/g AP with wpa security:\n"
+"   Press Enter to continue\n"
+" 3. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode g\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode virtual\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security wpa2\n"
+"   $ sudo wifi-ap.config set wifi.security-passphrase Test1234\n"
+"   $ sudo wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -"
+"oP 'channel\\s+\\K\\d+')\n"
+" 4. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 5. Attempt to connect to the AP using password \"Test1234\""
+msgstr ""
+
+#. summary
+#: ../units/wireless/wifi-ap.pxu:360
+msgid "Create WPA2 802.11ad Wi-Fi Access Point on {interface} with active STA"
+msgstr ""
+
+#. purpose
+#: ../units/wireless/wifi-ap.pxu:372
+msgid ""
+" Check that the system can create a WPA2 802.11ad Access Point with an "
+"already active STA connection"
+msgstr ""
+
+#. steps
+#: ../units/wireless/wifi-ap.pxu:374
+msgid ""
+" 1. Delete existing wireless connections known to Network Manager:\n"
+"   $ network-manager.nmcli -t -f TYPE,UUID c | grep -oP \"(?<=^802-11-"
+"wireless:).*\" | xargs network-manager.nmcli c delete\n"
+" 2. Connect to an 802.11b/g AP with wpa security:\n"
+"   Press Enter to continue\n"
+" 3. Configure the wifi-ap snap:\n"
+"   $ sudo wifi-ap.config set wifi.interface {interface}\n"
+"   $ sudo wifi-ap.config set wifi.operation-mode ad\n"
+"   $ sudo wifi-ap.config set wifi.interface-mode virtual\n"
+"   $ sudo wifi-ap.config set disabled 0\n"
+"   $ sudo wifi-ap.config set wifi.security wpa2\n"
+"   $ sudo wifi-ap.config set wifi.security-passphrase Test1234\n"
+"   $ sudo wifi-ap.config set wifi.channel $(iw dev {interface} info | grep -"
+"oP 'channel\\s+\\K\\d+')\n"
+" 4. Using a suitable Wi-Fi client try to detect the presence of the AP "
+"called \"Ubuntu\"\n"
+" 5. Attempt to connect to the AP using password \"Test1234\""
+msgstr ""
+
+#. verification
+#: ../units/wireless/wifi-ap.pxu:389
+msgid " Did the client connect?"
 msgstr ""
 
 #. name
@@ -2420,12 +4069,12 @@ msgid ""
 msgstr ""
 
 #. summary
-#: ../units/wwan/jobs.pxu:31
+#: ../units/wwan/jobs.pxu:32
 msgid "Verify a GSM broadband modem can create a data connection"
 msgstr ""
 
 #. description
-#: ../units/wwan/jobs.pxu:32
+#: ../units/wwan/jobs.pxu:33
 msgid ""
 "Any modems discovered by the resource job that list GSM support will be "
 "tested to ensure a data connection can be made."
@@ -2439,4 +4088,24 @@ msgstr ""
 #. description
 #: ../units/wwan/resource.pxu:13
 msgid "Gather device info about WWAN modems"
+msgstr ""
+
+#. name
+#: ../units/wwan/test-plan.pxu:3
+msgid "Wwan tests"
+msgstr ""
+
+#. description
+#: ../units/wwan/test-plan.pxu:4
+msgid "QA wwan tests for Snappy Ubuntu Core devices"
+msgstr ""
+
+#. name
+#: ../units/wwan/test-plan.pxu:11
+msgid "Automated wwan tests"
+msgstr ""
+
+#. description
+#: ../units/wwan/test-plan.pxu:12
+msgid "Automated wwan tests for Snappy Ubuntu Core devices"
 msgstr ""
