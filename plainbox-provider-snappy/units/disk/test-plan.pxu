@@ -16,6 +16,5 @@ include:
     disk/stats_.*
     disk/read_performance_.*
     disk/storage_device_.*
-    disk/disk_stress_ng_.*
 bootstrap_include:
     device
