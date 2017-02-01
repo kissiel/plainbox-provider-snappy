@@ -18,14 +18,12 @@ unit: test plan
 _name: Automated stress tests
 _description: Automated stress tests for Snappy Ubuntu Core devices
 include:
-    stress/stress-ng-test-for-class-.*
 nested_part:
     warm-boot-stress-test
     cold-boot-stress-test
     suspend-stress-test
     hibernate-stress-test
-bootstrap_include:
-    stress-ng-classes
+    stress-ng-automated
 
 unit: test plan
 id: warm-boot-stress-test
@@ -144,3 +142,14 @@ mandatory_include:
     dmi
     meminfo
     interface
+
+id: stress-ng-automated
+unit: test plan
+_name: Automated stress-ng tests
+_description: Automated stress-ng tests for Snappy Ubuntu Core devices
+include:
+    stress/stress-ng-test-for-class-.*
+    disk/disk_stress_ng_.*
+bootstrap_include:
+    device
+    stress-ng-classes
