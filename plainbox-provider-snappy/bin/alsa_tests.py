@@ -11,6 +11,7 @@ import argparse
 import cmath
 import contextlib
 import math
+import os
 import struct
 import sys
 import threading
@@ -159,7 +160,13 @@ def main():
     parser.add_argument('--duration', type=int, default=5)
     parser.add_argument('--device', type=str)
     args = parser.parse_args()
-    return(actions[args.action](args.duration, args.device))
+    if args.device:
+        device = args.device
+    elif 'ALSADEVICE' in os.environ:
+        device = os.environ['ALSADEVICE']
+    else:
+        device = None
+    return(actions[args.action](args.duration, device))
 
 if __name__ == '__main__':
     sys.exit(main())
