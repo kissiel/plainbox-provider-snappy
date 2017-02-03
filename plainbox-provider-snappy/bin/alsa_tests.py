@@ -64,7 +64,17 @@ class Player:
     @contextlib.contextmanager
     def changed_volume(self):
         """Change volume to 50% and unmute the output while in the context"""
-        mixer = alsaaudio.Mixer(device=self.pcm.cardname())
+        available_mixers = alsaaudio.mixers()
+        if not available_mixers:
+            # no mixers available - silently ignore change_volume request
+            yield
+            return
+        try:
+            # get default mixer - this may fail on some systems
+            mixer = alsaaudio.Mixer()
+        except alsaaudio.ALSAAudioError:
+            # pick the first mixer available
+            mixer = alsaaudio.Mixer(available_mixers[0])
         stored_mute = mixer.getmute()
         stored_volume = mixer.getvolume()
         mixer.setmute(0)
