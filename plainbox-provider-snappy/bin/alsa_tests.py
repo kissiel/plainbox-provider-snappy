@@ -11,6 +11,7 @@ import argparse
 import cmath
 import contextlib
 import math
+import os
 import struct
 import sys
 import threading
@@ -48,8 +49,14 @@ def sine(freq, length, period_len, amplitude=0.5):
 
 
 class Player:
-    def __init__(self):
-        self.pcm = alsaaudio.PCM()
+    def __init__(self, device=None):
+        if not device:
+            available_pcms = alsaaudio.pcms(alsaaudio.PCM_PLAYBACK)
+            if not available_pcms:
+                raise SystemExit('No PCMs detected')
+            self.pcm = alsaaudio.PCM(device=available_pcms[0])
+        else:
+            self.pcm = alsaaudio.PCM(device=device)
         self.pcm.setchannels(1)
         self.pcm.setformat(alsaaudio.PCM_FORMAT_FLOAT_LE)
         self.pcm.setperiodsize(PERIOD)
@@ -64,7 +71,17 @@ class Player:
     @contextlib.contextmanager
     def changed_volume(self):
         """Change volume to 50% and unmute the output while in the context"""
-        mixer = alsaaudio.Mixer(device=self.pcm.cardname())
+        available_mixers = alsaaudio.mixers()
+        if not available_mixers:
+            # no mixers available - silently ignore change_volume request
+            yield
+            return
+        try:
+            # get default mixer - this may fail on some systems
+            mixer = alsaaudio.Mixer()
+        except alsaaudio.ALSAAudioError:
+            # pick the first mixer available
+            mixer = alsaaudio.Mixer(available_mixers[0])
         stored_mute = mixer.getmute()
         stored_volume = mixer.getvolume()
         mixer.setmute(0)
@@ -94,16 +111,16 @@ class Recorder:
         return samples
 
 
-def playback_test(seconds):
-    player = Player()
+def playback_test(seconds, device):
+    player = Player(device)
     with player.changed_volume():
         for chunk in sine(440, seconds * RATE, PERIOD):
             player.play(chunk)
 
 
-def loopback_test(seconds, freq=455.5):
+def loopback_test(seconds, device, freq=455.5):
     def generator():
-        player = Player()
+        player = Player(device)
         with player.changed_volume():
             for chunk in sine(freq, seconds * RATE, PERIOD):
                 player.play(chunk)
@@ -141,8 +158,15 @@ def main():
     parser = argparse.ArgumentParser(description='Sound testing using ALSA')
     parser.add_argument('action', metavar='ACTION', choices=actions.keys())
     parser.add_argument('--duration', type=int, default=5)
+    parser.add_argument('--device', type=str)
     args = parser.parse_args()
-    return(actions[args.action](args.duration))
+    if args.device:
+        device = args.device
+    elif 'ALSADEVICE' in os.environ:
+        device = os.environ['ALSADEVICE']
+    else:
+        device = None
+    return(actions[args.action](args.duration, device))
 
 if __name__ == '__main__':
     sys.exit(main())
