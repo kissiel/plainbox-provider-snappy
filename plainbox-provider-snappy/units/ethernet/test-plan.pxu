@@ -25,5 +25,6 @@ estimated_duration: 1m
 include:
     ethernet/detect
     ethernet/ping_.*
+    ethernet/iperf3_.*
 bootstrap_include:
     device
