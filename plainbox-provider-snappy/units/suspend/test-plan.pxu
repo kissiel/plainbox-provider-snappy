@@ -1,18 +1,17 @@
-id: suspend-full
+id: after-suspend-full
 unit: test plan
-_name: Suspend tests
-_description: QA suspend tests for Snappy Ubuntu Core devices
+_name: After-suspend tests
+_description: QA tests performed after the device has been suspended
 include:
 nested_part:
-    suspend-manual
-    suspend-automated
+    after-suspend-manual
+    after-suspend-automated
 
-id: suspend-manual
+id: after-suspend-manual
 unit: test plan
-_name: Manual suspend tests
-_description: Manual suspend tests for Snappy Ubuntu Core devices
+_name: Manual after-suspend tests
+_description: Manual tests performed after the device has been suspended
 include:
-    suspend/suspend-manual
     suspend/audio-after-suspend/headphone
     suspend/audio-after-suspend/microphone
     suspend/bluetooth-after-suspend/hid
@@ -38,10 +37,32 @@ include:
     suspend/wireless-after-suspend/wireless_connection_wpa_bg
     suspend/wireless-after-suspend/wireless_connection_wpa_n
 
-id: suspend-automated
+id: after-suspend-automated
 unit: test plan
-_name: Automated suspend tests
-_description: Automated suspend tests for Snappy Ubuntu Core devices
+_name: Automated after-suspend tests
+_description: Automated tests performed after the device has been suspended
 include:
     suspend/usb-after-suspend/storage-automated
     suspend/usb3-after-suspend/storage-automated
+
+id: suspend-tp
+unit: test plan
+_name: Suspend the system
+_description:
+ This test plan should be nested in other test plans that require tests to be
+ rerun after suspending the SUT. It's a full-blown TP to help manage the
+ execution order, by placing it between before-suspend-tp and after-suspend-tp
+ in the nested_part section of the surrounding test plan.
+include:
+ suspend/suspend_advanced_auto
+
+id: hibernate-tp
+unit: test plan
+_name: Hibernate the system
+_description:
+ This test plan should be nested in other test plans that require tests to be
+ rerun after hibernating the SUT. It's a full-blown TP to help manage the
+ execution order, by placing it between before-hibernate-tp and
+ after-hibernate-tp in the nested_part section of the surrounding test plan.
+include:
+ suspend/hibernate_advanced_auto
