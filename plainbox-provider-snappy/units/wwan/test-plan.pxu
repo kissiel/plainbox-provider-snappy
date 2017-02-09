@@ -15,3 +15,21 @@ include:
     wwan/gsm-connection-.*
 bootstrap_include:
     wwan_resource
+
+id: after-suspend-wwan-full
+unit: test plan
+_name: Wwan tests (after suspend)
+_description: QA wwan tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    after-suspend-wwan-automated
+
+id: after-suspend-wwan-automated
+unit: test plan
+_name: Automated wwan tests (after suspend)
+_description: Automated wwan tests for Snappy Ubuntu Core devices
+include:
+    after-suspend-wwan/detect
+    after-suspend-wwan/gsm-connection-.*
+bootstrap_include:
+    after-suspend-wwan_resource

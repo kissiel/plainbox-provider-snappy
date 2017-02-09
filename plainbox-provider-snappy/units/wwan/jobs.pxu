@@ -20,7 +20,7 @@ command:
     exit 1
   fi
 estimated_duration: 2.0
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 imports: from 2013.com.canonical.plainbox import manifest
 requires:
   manifest.has_wwan_module == 'True'
@@ -39,7 +39,7 @@ environ: LD_LIBRARY_PATH WWAN_CONTROL_IF WWAN_NET_IF WWAN_APN
 user: root
 estimated_duration: 10.0
 category_id: wwan
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 imports: from 2013.com.canonical.plainbox import manifest
 requires:
   manifest.has_wwan_module == 'True'
