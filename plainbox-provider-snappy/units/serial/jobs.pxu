@@ -15,5 +15,6 @@ _verification:
  1. Output to client is fine after getty service started
  2. Log into test machine from terminal on client successfully
 plugin: manual
+flags: also-after-suspend
 category_id: serial
 estimated_duration: 600

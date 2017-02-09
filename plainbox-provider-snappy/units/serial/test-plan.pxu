@@ -12,3 +12,18 @@ _name: Manual serial tests
 _description: Manual serial tests for Snappy Ubuntu Core devices
 include:
     serial/rs232-console
+
+id: after-suspend-serial-full
+unit: test plan
+_name: Serial tests (after suspend)
+_description: QA serial tests for Snappy Ubuntu Core devices
+include:
+nested_part:
+    after-suspend-serial-manual
+
+id: after-suspend-serial-manual
+unit: test plan
+_name: Manual serial tests (after suspend)
+_description: Manual serial tests for Snappy Ubuntu Core devices
+include:
+    after-suspend-serial/rs232-console
