@@ -10,6 +10,7 @@ requires:
  device.category == 'NETWORK' or device.category == 'WIRELESS'
 # package.name == 'kmod' or package.name == 'module-init-tools'
 # package.name == 'pciutils'
+flags: also-after-suspend
 command: network_device_info
 estimated_duration: 2s
 
@@ -24,7 +25,7 @@ command:
   gateway_ping_test -v --interface {interface}
 category_id: ethernet
 estimated_duration: 4.0
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -47,7 +48,7 @@ command: poweroff
 user: root
 category_id: ethernet
 estimated_duration: 120
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -72,7 +73,7 @@ command: systemctl suspend
 user: root
 category_id: ethernet
 estimated_duration: 120
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -95,7 +96,7 @@ command:
   exit 0
 category_id: ethernet
 estimated_duration: 1.0
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 after:
  {%- if __index__ > 1 %}ethernet/hotplug-{{ __index__ - 1 }}-end-cycle{%- endif %}
 
@@ -114,6 +115,7 @@ _steps:
  3. This test will timeout and fail if the insertion and connection
     establishment has not been detected (10 second timeout for each check).
 plugin: user-interact
+flags: also-after-suspend
 command:
  LOOP=0
  CABLE_DETECT=0
@@ -168,6 +170,7 @@ _steps:
  4. This test will timeout and fail if the removal has not been detected and
   interface marked as down (10 second timeout for each check).
 plugin: user-interact
+flags: also-after-suspend
 command:
  LOOP=0
  CABLE_DETECT=1
@@ -206,4 +209,4 @@ template-filter: device.category == 'NETWORK'
 id: ethernet/hotplug-{__index__}-end-cycle
 after: ethernet/hotplug-{interface}-disconnect
 command: true
-flags: simple
+flags: simple also-after-suspend

@@ -27,3 +27,33 @@ include:
     ethernet/ping_.*
 bootstrap_include:
     device
+
+id: after-suspend-ethernet-full
+unit: test plan
+_name: QA tests for ethernet (after suspend)
+_description: Ethernet tests for Ubuntu Core devices
+estimated_duration: 1m
+include:
+nested_part:
+    after-suspend-ethernet-manual
+    after-suspend-ethernet-automated
+
+id: after-suspend-ethernet-manual
+unit: test plan
+_name: Manual ethernet tests (after suspend)
+_description: Manual tests for ethernet connections
+include:
+    after-suspend-ethernet/wol_S5_.*
+    after-suspend-ethernet/wol_S3_.*
+    after-suspend-ethernet/hotplug-.*
+
+id: after-suspend-ethernet-automated
+unit: test plan
+_name: Automated ethernet tests (after suspend)
+_description: Automated ethernet tests for Ubuntu Core devices
+estimated_duration: 1m
+include:
+    after-suspend-ethernet/detect
+    after-suspend-ethernet/ping_.*
+bootstrap_include:
+    device
