@@ -32,6 +32,7 @@ _steps:
 _verification:
  Can input from bluetooth input device
 plugin: manual
+flags: also-after-suspend
 category_id: bluetooth
 requires: device.category == 'BLUETOOTH'
 estimated_duration: 5m
@@ -46,6 +47,7 @@ _description:
  Runs a specific test from the rfcomm test suite
 plugin: shell
 user: root
+flags: also-after-suspend
 command:
  rfcomm-tester -p "{bluez-internal-rfcomm-test}"
 requires: device.category == 'BLUETOOTH'
@@ -61,6 +63,7 @@ _description:
  Runs a specific test from the hci test suite
 plugin: shell
 user: root
+flags: also-after-suspend
 command:
  hci-tester -p "{bluez-internal-hci-test}"
 requires: device.category == 'BLUETOOTH'
@@ -76,6 +79,7 @@ _description:
  Runs a specific test from the mgmt test suite
 plugin: shell
 user: root
+flags: also-after-suspend
 command:
  mgmt-tester -p "{bluez-internal-mgmt-test}"
 requires: device.category == 'BLUETOOTH'
@@ -91,6 +95,7 @@ _description:
  Runs a specific test from the user channel test suite
 plugin: shell
 user: root
+flags: also-after-suspend
 command:
  userchan-tester -p "{bluez-internal-uc-test}"
 requires: device.category == 'BLUETOOTH'
@@ -106,6 +111,7 @@ _description:
  Runs a specific test from the bnep test suite
 plugin: shell
 user: root
+flags: also-after-suspend
 command:
  bnep-tester -p "{bluez-internal-bnep-test}"
 requires: device.category == 'BLUETOOTH'
@@ -119,6 +125,7 @@ _verification:
  Did the keyboard work?
 plugin: user-verify
 user: root
+flags: also-after-suspend
 command: test_bt_keyboard
 category_id: bluetooth
 estimated_duration: 1m

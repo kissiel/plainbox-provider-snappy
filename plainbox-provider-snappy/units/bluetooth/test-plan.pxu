@@ -35,3 +35,41 @@ bootstrap_include:
     bluez-internal-mgmt-tests
     bluez-internal-uc-tests
     bluez-internal-bnep-tests
+
+id: after-suspend-bluetooth-full
+unit: test plan
+_name: Bluetooth tests (after suspend)
+_description: QA tests for Bluetooth
+estimated_duration: 6m
+include:
+nested_part:
+    after-suspend-bluetooth-manual
+    after-suspend-bluez-automated
+
+id: after-suspend-bluetooth-manual
+unit: test plan
+_name: Manual Bluetooth tests
+_description: Manual QA tests for Bluetooth
+estimated_duration: 5m
+include:
+    after-suspend-bluetooth/hid
+    after-suspend-bluetooth/keyboard
+
+id: after-suspend-bluez-automated
+unit: test plan
+_name: Automated tests for bluez
+_description:
+ Automated tests for bluez
+estimated_duration: 1m
+include:
+    after-suspend-bluetooth/bluez-internal-rfcomm-tests_.*
+    after-suspend-bluetooth/bluez-internal-hci-tests_.*
+    after-suspend-bluetooth/bluez-internal-mgmt-tests_.*
+    after-suspend-bluetooth/bluez-internal-uc-tests_.*
+    after-suspend-bluetooth/bluez-internal-bnep-tests_.*
+bootstrap_include:
+    after-suspend-bluez-internal-rfcomm-tests
+    after-suspend-bluez-internal-hci-tests
+    after-suspend-bluez-internal-mgmt-tests
+    after-suspend-bluez-internal-uc-tests
+    after-suspend-bluez-internal-bnep-tests
