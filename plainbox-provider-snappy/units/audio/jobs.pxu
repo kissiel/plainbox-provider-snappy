@@ -2,6 +2,7 @@ id: audio/detect-playback-devices
 _summary: Check that at least one audio playback device exits
 plugin: shell
 category_id: audio
+flags: also-after-suspend
 command:
  COUNT=$(alsa_pcm_info | grep Playback | wc -l)
  echo "Count: $COUNT"
@@ -14,6 +15,7 @@ id: audio/detect-capture-devices
 _summary: Check that at least one audio capture device exists
 plugin: shell
 category_id: audio
+flags: also-after-suspend
 command:
  COUNT=$(alsa_pcm_info | grep Capture | wc -l)
  echo "Count: $COUNT"
@@ -34,6 +36,7 @@ _verification:
 plugin: user-interact-verify
 user: root
 environ: ALSA_CONFIG_PATH ALSADEVICE
+flags: also-after-suspend
 command: alsa_tests.py playback
 category_id: audio
 estimated_duration: 10
@@ -45,6 +48,7 @@ _purpose:
 plugin: shell
 user: root
 environ: ALSA_CONFIG_PATH LD_LIBRARY_PATH ALSADEVICE
+flags: also-after-suspend
 command: alsa_tests.py loopback
 category_id: audio
 estimated_duration: 5
@@ -61,6 +65,7 @@ _steps:
 plugin: user-interact-verify
 user: root
 environ: ALSA_CONFIG_PATH LD_LIBRARY_PATH ALSADEVICE
+flags: also-after-suspend
 command: alsa_tests.py loopback
 category_id: audio
 estimated_duration: 30
