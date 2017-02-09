@@ -20,7 +20,7 @@ category_id: wifi
 estimated_duration: 6
 _description:
  Check system can find a wireless network AP nearby
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -41,7 +41,7 @@ environ: OPEN_AC_SSID
 user: root
 category_id: wifi
 estimated_duration: 90
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -62,7 +62,7 @@ environ: OPEN_BG_SSID
 user: root
 category_id: wifi
 estimated_duration: 90
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -83,7 +83,7 @@ environ: OPEN_N_SSID
 user: root
 category_id: wifi
 estimated_duration: 90
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -104,7 +104,7 @@ environ: WPA_AC_SSID WPA_AC_PSK
 user: root
 category_id: wifi
 estimated_duration: 90
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -125,7 +125,7 @@ environ: WPA_BG_SSID WPA_BG_PSK
 user: root
 category_id: wifi
 estimated_duration: 90
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -146,7 +146,7 @@ environ: WPA_N_SSID WPA_N_PSK
 user: root
 category_id: wifi
 estimated_duration: 90
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -176,7 +176,7 @@ environ: LD_LIBRARY_PATH OPEN_AC_SSID
 user: root
 category_id: wifi
 estimated_duration: 5.0
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -206,7 +206,7 @@ environ: LD_LIBRARY_PATH OPEN_BG_SSID
 user: root
 category_id: wifi
 estimated_duration: 5.0
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -236,7 +236,7 @@ environ: LD_LIBRARY_PATH OPEN_N_SSID
 user: root
 category_id: wifi
 estimated_duration: 5.0
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -266,7 +266,7 @@ environ: LD_LIBRARY_PATH WPA_AC_SSID WPA_AC_PSK
 user: root
 category_id: wifi
 estimated_duration: 5.0
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -296,7 +296,7 @@ environ: LD_LIBRARY_PATH WPA_BG_SSID WPA_BG_PSK
 user: root
 category_id: wifi
 estimated_duration: 5.0
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
 
 unit: template
 template-resource: device
@@ -326,4 +326,4 @@ environ: LD_LIBRARY_PATH WPA_N_SSID WPA_N_PSK
 user: root
 category_id: wifi
 estimated_duration: 5.0
-flags: preserve-locale
+flags: preserve-locale also-after-suspend
