@@ -3,6 +3,7 @@ unit: test plan
 _name: Wwan tests
 _description: QA wwan tests for Snappy Ubuntu Core devices
 include:
+    wwan/verify-sim-info-.*
 nested_part:
     wwan-automated
 
@@ -13,5 +14,6 @@ _description: Automated wwan tests for Snappy Ubuntu Core devices
 include:
     wwan/detect
     wwan/gsm-connection-.*
+    wwan/check-sim-present-.*
 bootstrap_include:
     wwan_resource
