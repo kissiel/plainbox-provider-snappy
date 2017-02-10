@@ -66,7 +66,7 @@ plugin: shell
 flags: preserve-locale
 category_id: stress-tests/suspend
 id: stress-tests/suspend-{s3_iterations}-cycles-log-check
-depends: stress-tests/suspend_{s3_iterations}_cycles
+after: stress-tests/suspend_{s3_iterations}_cycles
 estimated_duration: 1.0
 command: [ -e $PLAINBOX_SESSION_SHARE/suspend_{s3_iterations}_cycles.log ] && sleep_test_log_check -v s3 $PLAINBOX_SESSION_SHARE/suspend_{s3_iterations}_cycles.log
 _description:
@@ -80,7 +80,7 @@ flags: preserve-locale
 category_id: stress-tests/suspend
 id: stress-tests/suspend-{s3_iterations}-cycles-log-attach
 estimated_duration: 1.0
-depends: stress-tests/suspend_{s3_iterations}_cycles
+after: stress-tests/suspend_{s3_iterations}_cycles
 command: [ -e $PLAINBOX_SESSION_SHARE/suspend_{s3_iterations}_cycles.log ] && cat $PLAINBOX_SESSION_SHARE/suspend_{s3_iterations}_cycles.log
 _description:
  Attaches the log from the {s3_iterations} cycles Suspend/Resume test if it exists
@@ -116,6 +116,7 @@ plugin: shell
 flags: preserve-locale
 category_id: stress-tests/hibernate
 id: stress-tests/hibernate-{s4_iterations}-cycles-log-check
+after: stress-tests/hibernate_{s4_iterations}_cycles
 estimated_duration: 1.0
 command: [ -e $PLAINBOX_SESSION_SHARE/hibernate_{s4_iterations}_cycles.log ] && sleep_test_log_check -v s4 $PLAINBOX_SESSION_SHARE/hibernate_{s4_iterations}_cycles.log
 _description:
@@ -129,6 +130,7 @@ flags: preserve-locale
 category_id: stress-tests/hibernate
 id: stress-tests/hibernate-{s4_iterations}-cycles-log-attach
 estimated_duration: 1.0
+after: stress-tests/hibernate_{s4_iterations}_cycles
 command: [ -e $PLAINBOX_SESSION_SHARE/hibernate_{s4_iterations}_cycles.log ] && cat $PLAINBOX_SESSION_SHARE/hibernate_{s4_iterations}_cycles.log
 _description:
  Attaches the log from the {s4_iterations} cycles Hibernate/Resume test if it exists
