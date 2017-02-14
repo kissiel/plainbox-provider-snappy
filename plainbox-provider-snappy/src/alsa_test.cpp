@@ -75,7 +75,7 @@ struct Pcm {
             SND_PCM_ACCESS_RW_INTERLEAVED) < 0) {
             throw AlsaError("Failed to set access mode");
         }
-        if (snd_pcm_hw_params_set_channels(this->pcm_handle, params, 1) < 0) {
+        if (snd_pcm_hw_params_set_channels(this->pcm_handle, params, 2) < 0) {
             throw AlsaError("Failed to set the number of channels");
         }
         if (snd_pcm_hw_params_set_format(this->pcm_handle, params,
@@ -109,10 +109,15 @@ struct Pcm {
         const void *ugly_ptr = static_cast<const void*>(buff);
         unsigned t = 0;
         while (t < float(this->rate) * duration) {
-            for (int i=0; i < this->period; i++) {
-                buff[i] = amplitude * sin(2 * M_PI *((t + i) / (this->rate / freq)));
+            for (int i=0; i < this->period * 2; i+=2) {
+                buff[i] = amplitude * sin(2 * M_PI *((t + i/2) / (this->rate / freq)));
+                buff[i+1] = buff[i]; // the other channel
             }
             auto res = snd_pcm_writei(this->pcm_handle, ugly_ptr, this->period);
+            if (res == -EPIPE) {
+                logger.info() << "Buffer underrun" << std::endl;
+                snd_pcm_prepare(this->pcm_handle);
+            }
             t += this->period;
         }
         delete[] buff;
