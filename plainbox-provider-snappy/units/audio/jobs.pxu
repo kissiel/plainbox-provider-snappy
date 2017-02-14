@@ -34,7 +34,7 @@ _verification:
 plugin: user-interact-verify
 user: root
 environ: ALSA_CONFIG_PATH ALSADEVICE
-command: alsa_tests.py playback
+command: alsa_test playback -d 5
 category_id: audio
 estimated_duration: 10
 
@@ -45,7 +45,7 @@ _purpose:
 plugin: shell
 user: root
 environ: ALSA_CONFIG_PATH LD_LIBRARY_PATH ALSADEVICE
-command: alsa_tests.py loopback
+command: alsa_test loopback -d 5
 category_id: audio
 estimated_duration: 5
 
@@ -61,6 +61,6 @@ _steps:
 plugin: user-interact-verify
 user: root
 environ: ALSA_CONFIG_PATH LD_LIBRARY_PATH ALSADEVICE
-command: alsa_tests.py loopback
+command: alsa_test loopback -d 5
 category_id: audio
 estimated_duration: 30
