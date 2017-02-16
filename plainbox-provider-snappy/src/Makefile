@@ -1,5 +1,5 @@
 .PHONY:
-all: clocktest threaded_memtest kernel-security
+all: clocktest threaded_memtest kernel-security alsa_test
 
 .PHONY: clean
 clean:
@@ -14,5 +14,7 @@ threaded_memtest: CFLAGS += -pthread
 threaded_memtest: CFLAGS += -Wno-unused-but-set-variable
 clocktest: CFLAGS += -D_POSIX_C_SOURCE=199309L
 clocktest: LDLIBS += -lrt
+alsa_test: CXXFLAGS += -std=c++11
+alsa_test: LDLIBS += -lasound -pthread
 
 CFLAGS += -Wall
