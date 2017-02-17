@@ -35,6 +35,8 @@ _description: Automated kernel-security tests (ignoring tainting)
 include:
  security/.*
 exclude:
+ security/test_072_strict_devmem
+ security/test_120_smep_works
  security/test_140_kernel_modules_not_tainted
 bootstrap_include:
  security_resource
