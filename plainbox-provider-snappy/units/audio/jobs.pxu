@@ -57,7 +57,8 @@ _steps:
  1. Connect line-out to line-in (plug the loop-back cable)
  2. Commence the test
  3. Observe command's output
- 3. Check if the recorded frequency matched generated one
+_verification
+ Is the reported frequency in the 438 - 442 range
 plugin: user-interact-verify
 user: root
 environ: ALSA_CONFIG_PATH LD_LIBRARY_PATH ALSADEVICE
